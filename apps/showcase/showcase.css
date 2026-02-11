@@ -1,27 +1,48 @@
 :root {
   font-family: var(--ui-font-family, system-ui);
-  background: #f8f9fb;
+  background: radial-gradient(circle at top, #f7f9ff 0%, #f4f6fb 40%, #eef1f8 100%);
   color: var(--ui-text);
 }
 
 body {
   margin: 0;
-  padding: 40px;
+  padding: 48px 24px 80px;
+  background: transparent;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  gap: 32px;
 }
 
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 32px;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.hero {
+  display: grid;
+  gap: 24px;
+}
+
+.hero__stats {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
 .section {
-  margin-bottom: 40px;
+  display: grid;
+  gap: 16px;
 }
 
 .section h2 {
-  margin-bottom: 16px;
+  margin: 0;
 }
 
 .grid {
@@ -54,4 +75,14 @@ body {
 
 .hidden {
   display: none;
+}
+
+@media (max-width: 720px) {
+  body {
+    padding: 32px 16px 64px;
+  }
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

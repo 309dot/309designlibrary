@@ -48,3 +48,35 @@ Spacing 변수:
 - Navbar, Sidebar, NavItem
 - List, ListItem, Stat, KpiCard
 - Snackbar, LoadingOverlay, ProgressRing
+
+## 간단 예시
+
+```tsx
+import "@309design/ui/src/styles.css";
+import { Form, Label, Input, HelperText, ErrorText, Button } from "@309design/ui/src";
+
+export function ProfileForm() {
+  return (
+    <Form>
+      <Label htmlFor="name">이름</Label>
+      <Input id="name" placeholder="이름" />
+      <HelperText>실명을 입력하세요.</HelperText>
+      <ErrorText>오류 메시지</ErrorText>
+      <Button>저장</Button>
+    </Form>
+  );
+}
+```
+
+```tsx
+import { Navbar, NavItem } from "@309design/ui/src";
+
+export function TopNav() {
+  return (
+    <Navbar brand="Brand">
+      <NavItem active>대시보드</NavItem>
+      <NavItem>리포트</NavItem>
+    </Navbar>
+  );
+}
+```
