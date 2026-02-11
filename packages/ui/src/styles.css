@@ -8,13 +8,172 @@
   --ui-radius-sm: calc(var(--primitive-numbers8, 8) * 1px);
   --ui-radius-md: calc(var(--primitive-numbers12, 12) * 1px);
   --ui-radius-lg: calc(var(--primitive-numbers16, 16) * 1px);
+  --ui-space-0: calc(var(--primitive-numbers0, 0) * 1px);
   --ui-space-1: calc(var(--primitive-numbers4, 4) * 1px);
   --ui-space-2: calc(var(--primitive-numbers8, 8) * 1px);
   --ui-space-3: calc(var(--primitive-numbers12, 12) * 1px);
   --ui-space-4: calc(var(--primitive-numbers16, 16) * 1px);
+  --ui-space-5: calc(var(--primitive-numbers20, 20) * 1px);
+  --ui-space-6: calc(var(--primitive-numbers24, 24) * 1px);
+  --ui-space-8: calc(var(--primitive-numbers32, 32) * 1px);
+  --ui-space-10: calc(var(--primitive-numbers40, 40) * 1px);
+  --ui-space-12: calc(var(--primitive-numbers48, 48) * 1px);
   --ui-border: var(--theme-border-action-hover, var(--primitive-colors-gray4));
   --ui-focus: var(--theme-border-action-focus, var(--primitive-colors-blue7));
   --ui-text: var(--theme-text-base-primary, #141519ff);
+
+  --ui-type-display-size: calc(var(--device-typography-size-display, 40) * 1px);
+  --ui-type-display-line: calc(var(--device-typography-line-height-display, 48) * 1px);
+  --ui-type-display-letter: calc(var(--device-typography-letter-spacing-display, 0) * 1px);
+  --ui-type-h1-size: calc(var(--device-typography-size-h1, 32) * 1px);
+  --ui-type-h1-line: calc(var(--device-typography-line-height-h1, 40) * 1px);
+  --ui-type-h1-letter: calc(var(--device-typography-letter-spacing-h1, 0) * 1px);
+  --ui-type-h2-size: calc(var(--device-typography-size-h2, 28) * 1px);
+  --ui-type-h2-line: calc(var(--device-typography-line-height-h2, 36) * 1px);
+  --ui-type-h2-letter: calc(var(--device-typography-letter-spacing-h2, 0) * 1px);
+  --ui-type-h3-size: calc(var(--device-typography-size-h3, 24) * 1px);
+  --ui-type-h3-line: calc(var(--device-typography-line-height-h3, 32) * 1px);
+  --ui-type-h3-letter: calc(var(--device-typography-letter-spacing-h3, 0) * 1px);
+  --ui-type-h4-size: calc(var(--device-typography-size-h4, 20) * 1px);
+  --ui-type-h4-line: calc(var(--device-typography-line-height-h4, 28) * 1px);
+  --ui-type-h4-letter: calc(var(--device-typography-letter-spacing-h4, 0) * 1px);
+  --ui-type-h5-size: calc(var(--device-typography-size-h5, 18) * 1px);
+  --ui-type-h5-line: calc(var(--device-typography-line-height-h5, 24) * 1px);
+  --ui-type-h5-letter: calc(var(--device-typography-letter-spacing-h5, 0) * 1px);
+  --ui-type-h6-size: calc(var(--device-typography-size-h6, 16) * 1px);
+  --ui-type-h6-line: calc(var(--device-typography-line-height-h6, 22) * 1px);
+  --ui-type-h6-letter: calc(var(--device-typography-letter-spacing-h6, 0) * 1px);
+  --ui-type-body-l-size: calc(var(--device-typography-size-body-l, 16) * 1px);
+  --ui-type-body-l-line: calc(var(--device-typography-line-height-body-l, 24) * 1px);
+  --ui-type-body-l-letter: calc(var(--device-typography-letter-spacing-body-l, 0) * 1px);
+  --ui-type-body-m-size: calc(var(--device-typography-size-body-m, 14) * 1px);
+  --ui-type-body-m-line: calc(var(--device-typography-line-height-body-m, 22) * 1px);
+  --ui-type-body-m-letter: calc(var(--device-typography-letter-spacing-body-m, 0) * 1px);
+  --ui-type-body-s-size: calc(var(--device-typography-size-body-s, 12) * 1px);
+  --ui-type-body-s-line: calc(var(--device-typography-line-height-body-s, 18) * 1px);
+  --ui-type-body-s-letter: calc(var(--device-typography-letter-spacing-body-s, 0) * 1px);
+  --ui-type-caption-l-size: calc(var(--device-typography-size-caption-l, 12) * 1px);
+  --ui-type-caption-l-line: calc(var(--device-typography-line-height-caption-l, 16) * 1px);
+  --ui-type-caption-l-letter: calc(var(--device-typography-letter-spacing-caption-l, 0) * 1px);
+  --ui-type-caption-m-size: calc(var(--device-typography-size-caption-m, 11) * 1px);
+  --ui-type-caption-m-line: calc(var(--device-typography-line-height-caption-m, 16) * 1px);
+  --ui-type-caption-m-letter: calc(var(--device-typography-letter-spacing-caption-m, 0) * 1px);
+  --ui-type-caption-s-size: calc(var(--device-typography-size-caption-s, 10) * 1px);
+  --ui-type-caption-s-line: calc(var(--device-typography-line-height-caption-s, 14) * 1px);
+  --ui-type-caption-s-letter: calc(var(--device-typography-letter-spacing-caption-s, 0) * 1px);
+  --ui-weight-light: var(--device-typography-weight-light, 300);
+  --ui-weight-regular: var(--device-typography-weight-regular, 400);
+  --ui-weight-medium: var(--device-typography-weight-medium, 500);
+  --ui-weight-semibold: var(--device-typography-weight-semi-bold, 600);
+  --ui-weight-bold: var(--device-typography-weight-bold, 700);
+}
+
+.ui-text-display,
+.ui-text-h1,
+.ui-text-h2,
+.ui-text-h3,
+.ui-text-h4,
+.ui-text-h5,
+.ui-text-h6,
+.ui-text-body-l,
+.ui-text-body-m,
+.ui-text-body-s,
+.ui-text-caption-l,
+.ui-text-caption-m,
+.ui-text-caption-s {
+  font-family: var(--ui-font-family);
+  color: var(--ui-text);
+}
+
+.ui-text-display {
+  font-size: var(--ui-type-display-size);
+  line-height: var(--ui-type-display-line);
+  letter-spacing: var(--ui-type-display-letter);
+  font-weight: var(--ui-weight-bold);
+}
+
+.ui-text-h1 {
+  font-size: var(--ui-type-h1-size);
+  line-height: var(--ui-type-h1-line);
+  letter-spacing: var(--ui-type-h1-letter);
+  font-weight: var(--ui-weight-bold);
+}
+
+.ui-text-h2 {
+  font-size: var(--ui-type-h2-size);
+  line-height: var(--ui-type-h2-line);
+  letter-spacing: var(--ui-type-h2-letter);
+  font-weight: var(--ui-weight-semibold);
+}
+
+.ui-text-h3 {
+  font-size: var(--ui-type-h3-size);
+  line-height: var(--ui-type-h3-line);
+  letter-spacing: var(--ui-type-h3-letter);
+  font-weight: var(--ui-weight-semibold);
+}
+
+.ui-text-h4 {
+  font-size: var(--ui-type-h4-size);
+  line-height: var(--ui-type-h4-line);
+  letter-spacing: var(--ui-type-h4-letter);
+  font-weight: var(--ui-weight-medium);
+}
+
+.ui-text-h5 {
+  font-size: var(--ui-type-h5-size);
+  line-height: var(--ui-type-h5-line);
+  letter-spacing: var(--ui-type-h5-letter);
+  font-weight: var(--ui-weight-medium);
+}
+
+.ui-text-h6 {
+  font-size: var(--ui-type-h6-size);
+  line-height: var(--ui-type-h6-line);
+  letter-spacing: var(--ui-type-h6-letter);
+  font-weight: var(--ui-weight-medium);
+}
+
+.ui-text-body-l {
+  font-size: var(--ui-type-body-l-size);
+  line-height: var(--ui-type-body-l-line);
+  letter-spacing: var(--ui-type-body-l-letter);
+  font-weight: var(--ui-weight-regular);
+}
+
+.ui-text-body-m {
+  font-size: var(--ui-type-body-m-size);
+  line-height: var(--ui-type-body-m-line);
+  letter-spacing: var(--ui-type-body-m-letter);
+  font-weight: var(--ui-weight-regular);
+}
+
+.ui-text-body-s {
+  font-size: var(--ui-type-body-s-size);
+  line-height: var(--ui-type-body-s-line);
+  letter-spacing: var(--ui-type-body-s-letter);
+  font-weight: var(--ui-weight-regular);
+}
+
+.ui-text-caption-l {
+  font-size: var(--ui-type-caption-l-size);
+  line-height: var(--ui-type-caption-l-line);
+  letter-spacing: var(--ui-type-caption-l-letter);
+  font-weight: var(--ui-weight-medium);
+}
+
+.ui-text-caption-m {
+  font-size: var(--ui-type-caption-m-size);
+  line-height: var(--ui-type-caption-m-line);
+  letter-spacing: var(--ui-type-caption-m-letter);
+  font-weight: var(--ui-weight-medium);
+}
+
+.ui-text-caption-s {
+  font-size: var(--ui-type-caption-s-size);
+  line-height: var(--ui-type-caption-s-line);
+  letter-spacing: var(--ui-type-caption-s-letter);
+  font-weight: var(--ui-weight-medium);
 }
 
 .ui-button {
