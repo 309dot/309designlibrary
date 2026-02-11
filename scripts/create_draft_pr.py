@@ -31,7 +31,9 @@ def ensure_origin(repo_info):
 
 
 def ensure_pushed(branch: str, token: str):
-    script = tempfile.NamedTemporaryFile(prefix="git-askpass-", delete=False, mode="w", dir="/tmp")
+    askpass_dir = "/workspace/.openclaw/tmp"
+    os.makedirs(askpass_dir, exist_ok=True)
+    script = tempfile.NamedTemporaryFile(prefix="git-askpass-", delete=False, mode="w", dir=askpass_dir)
     try:
         script.write("#!/bin/sh\n")
         script.write('case "$1" in\n')
