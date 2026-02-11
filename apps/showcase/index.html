@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="ko" data-theme="light" data-device="desktop">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>309 Design Library Showcase</title>
+    <link rel="stylesheet" href="../../packages/ui/src/styles.css" />
+    <link rel="stylesheet" href="./showcase.css" />
+  </head>
+  <body>
+    <div class="header">
+      <div>
+        <div class="ui-text-h2">309 Design Library</div>
+        <div class="ui-text-body-m">토큰 + 컴포넌트 미리보기</div>
+      </div>
+      <div class="stack">
+        <button id="themeToggle" class="ui-button ui-button--secondary">테마 전환</button>
+        <button id="deviceToggle" class="ui-button ui-button--ghost">디바이스 전환</button>
+      </div>
+    </div>
+
+    <section class="section">
+      <h2 class="ui-text-h4">Typography</h2>
+      <div class="surface">
+        <div class="ui-text-display">Display / 309 Design</div>
+        <div class="ui-text-h1">Heading 1</div>
+        <div class="ui-text-h2">Heading 2</div>
+        <div class="ui-text-h3">Heading 3</div>
+        <div class="ui-text-body-l">Body Large</div>
+        <div class="ui-text-body-m">Body Medium</div>
+        <div class="ui-text-body-s">Body Small</div>
+        <div class="ui-text-caption-m">Caption</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="ui-text-h4">Buttons</h2>
+      <div class="surface stack">
+        <button class="ui-button ui-button--primary">Primary</button>
+        <button class="ui-button ui-button--secondary">Secondary</button>
+        <button class="ui-button ui-button--ghost">Ghost</button>
+        <button class="ui-button ui-button--danger">Danger</button>
+        <button class="ui-icon-button ui-icon-button--primary">◎</button>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="ui-text-h4">Inputs</h2>
+      <div class="grid">
+        <div class="surface">
+          <input class="ui-input" placeholder="Input" />
+        </div>
+        <div class="surface">
+          <textarea class="ui-textarea" placeholder="Textarea"></textarea>
+        </div>
+        <div class="surface">
+          <select class="ui-select">
+            <option>Option 1</option>
+            <option>Option 2</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="ui-text-h4">Checks</h2>
+      <div class="surface stack">
+        <label class="ui-checkbox">
+          <input class="ui-checkbox__input" type="checkbox" checked />
+          <span class="ui-checkbox__box"></span>
+          <span class="ui-checkbox__label">Checkbox</span>
+        </label>
+        <label class="ui-radio">
+          <input class="ui-radio__input" type="radio" checked />
+          <span class="ui-radio__dot"></span>
+          <span class="ui-radio__label">Radio</span>
+        </label>
+        <label class="ui-switch">
+          <input class="ui-switch__input" type="checkbox" checked />
+          <span class="ui-switch__track"><span class="ui-switch__thumb"></span></span>
+          <span class="ui-switch__label">Switch</span>
+        </label>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="ui-text-h4">Badges & Tags</h2>
+      <div class="surface stack">
+        <span class="ui-badge ui-badge--blue">Badge</span>
+        <span class="ui-badge ui-badge--green">Success</span>
+        <span class="ui-tag ui-tag--blue ui-tag--outline">Tag</span>
+        <span class="ui-tag ui-tag--red">Alert</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="ui-text-h4">Tabs</h2>
+      <div class="surface">
+        <div class="ui-tabs">
+          <div class="ui-tabs__list">
+            <button class="ui-tabs__trigger is-active" data-tab-trigger="a">탭 A</button>
+            <button class="ui-tabs__trigger" data-tab-trigger="b">탭 B</button>
+          </div>
+          <div class="ui-tabs__content">
+            <div class="ui-tabs__panel is-active" data-tab-panel="a">콘텐츠 A</div>
+            <div class="ui-tabs__panel" data-tab-panel="b">콘텐츠 B</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="ui-text-h4">Cards & Table</h2>
+      <div class="grid">
+        <div class="ui-card">
+          <div class="ui-card__header">Card Header</div>
+          <div class="ui-card__body">내용 영역</div>
+          <div class="ui-card__footer">Footer</div>
+        </div>
+        <table class="ui-table">
+          <thead>
+            <tr>
+              <th>이름</th>
+              <th>상태</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>프로젝트 A</td>
+              <td>진행 중</td>
+            </tr>
+            <tr>
+              <td>프로젝트 B</td>
+              <td>완료</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="ui-text-h4">Overlays</h2>
+      <div class="surface stack">
+        <button id="openModal" class="ui-button ui-button--primary">모달 열기</button>
+        <button id="showToast" class="ui-button ui-button--ghost">Toast</button>
+        <details class="ui-dropdown">
+          <summary class="ui-dropdown__trigger">Dropdown</summary>
+          <div class="ui-dropdown__menu">
+            <button class="ui-dropdown__item">Item A</button>
+            <button class="ui-dropdown__item">Item B</button>
+          </div>
+        </details>
+        <details class="ui-popover">
+          <summary class="ui-popover__trigger">Popover</summary>
+          <div class="ui-popover__content">Popover content</div>
+        </details>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="ui-text-h4">Misc</h2>
+      <div class="grid">
+        <div class="surface">
+          <div class="ui-progress">
+            <div class="ui-progress__bar" style="width: 65%"></div>
+          </div>
+          <input class="ui-slider" type="range" value="50" />
+        </div>
+        <div class="surface">
+          <div class="ui-alert ui-alert--info">
+            <div class="ui-alert__title">알림</div>
+            <div class="ui-alert__body">정보성 메시지</div>
+          </div>
+        </div>
+        <div class="surface">
+          <div class="ui-empty">
+            <div class="ui-empty__title">비어있음</div>
+            <div class="ui-empty__desc">새 항목을 추가하세요.</div>
+            <div class="ui-empty__action">
+              <button class="ui-button ui-button--secondary">추가</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="toastArea" class="toast-area"></div>
+
+    <div id="demoModal" class="ui-modal__overlay hidden">
+      <div class="ui-modal">
+        <div class="ui-modal__header">Modal Title</div>
+        <div class="ui-modal__body">내용을 확인하세요.</div>
+        <div class="ui-modal__footer">
+          <button class="ui-button ui-button--secondary" data-close-modal>닫기</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./showcase.js"></script>
+  </body>
+</html>
