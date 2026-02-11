@@ -41,3 +41,13 @@ python3 /Users/a309/Documents/Agent309/wOpenclaw/scripts/build_tokens.py
 
 경로:
 - `/Users/a309/Documents/Agent309/wOpenclaw/packages/ui/src`
+
+## Showcase
+
+```bash
+cd /Users/a309/Documents/Agent309/wOpenclaw
+python3 -m http.server 8000
+```
+
+브라우저:
+`http://localhost:8000/apps/showcase/index.html`
