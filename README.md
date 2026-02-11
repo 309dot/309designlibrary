@@ -21,3 +21,15 @@ This project is an AI agent designed to run locally on your machine. It handles 
 - The agent automatically processes new tasks
 - Each task is executed in isolation on a dedicated branch
 - Completed tasks are merged back into the main branch
+
+## 디자인 토큰 빌드
+
+`tokens.json`을 CSS 변수/TS 상수로 변환합니다.
+
+```bash
+python3 /Users/a309/Documents/Agent309/wOpenclaw/scripts/build_tokens.py
+```
+
+출력 경로:
+- `/Users/a309/Documents/Agent309/wOpenclaw/packages/tokens/src/tokens.css`
+- `/Users/a309/Documents/Agent309/wOpenclaw/packages/tokens/src/tokens.ts`
