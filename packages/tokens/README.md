@@ -10,6 +10,7 @@ python3 /Users/a309/Documents/Agent309/wOpenclaw/scripts/build_tokens.py
 ## 출력 파일
 - `/Users/a309/Documents/Agent309/wOpenclaw/packages/tokens/src/tokens.css`
 - `/Users/a309/Documents/Agent309/wOpenclaw/packages/tokens/src/tokens.ts`
+- `/Users/a309/Documents/Agent309/wOpenclaw/packages/tokens/src/tokens.cleaned.json`
 
 ## 사용 예시 (CSS)
 ```css

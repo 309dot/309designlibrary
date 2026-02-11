@@ -33,3 +33,11 @@ python3 /Users/a309/Documents/Agent309/wOpenclaw/scripts/build_tokens.py
 출력 경로:
 - `/Users/a309/Documents/Agent309/wOpenclaw/packages/tokens/src/tokens.css`
 - `/Users/a309/Documents/Agent309/wOpenclaw/packages/tokens/src/tokens.ts`
+- `/Users/a309/Documents/Agent309/wOpenclaw/packages/tokens/src/tokens.cleaned.json`
+
+## UI 컴포넌트
+
+기본 컴포넌트: Button, Badge, Tag
+
+경로:
+- `/Users/a309/Documents/Agent309/wOpenclaw/packages/ui/src`

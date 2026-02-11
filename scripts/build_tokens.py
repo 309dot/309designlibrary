@@ -8,6 +8,7 @@ TOKENS_PATH = ROOT / "tokens.json"
 OUT_DIR = ROOT / "packages" / "tokens" / "src"
 CSS_PATH = OUT_DIR / "tokens.css"
 TS_PATH = OUT_DIR / "tokens.ts"
+CLEANED_PATH = OUT_DIR / "tokens.cleaned.json"
 
 
 def load_tokens():
@@ -49,6 +50,38 @@ def emit_ts_object(name: str, mapping: dict):
         lines.append(f"  {json.dumps(str(key))}: {v},")
     lines.append("} as const;\n")
     return "\n".join(lines)
+
+
+def lower_first(value: str) -> str:
+    if not value:
+        return value
+    return value[0].lower() + value[1:]
+
+
+def normalize_section(mapping: dict):
+    colors = {}
+    numbers = {}
+    typography = {}
+    other = {}
+    for key, value in mapping.items():
+        if key.startswith("colors"):
+            colors[lower_first(key[len("colors"):])] = value
+        elif key.startswith("numbers"):
+            numbers[key[len("numbers"):]] = value
+        elif key.startswith("typography"):
+            typography[lower_first(key[len("typography"):])] = value
+        else:
+            other[lower_first(key)] = value
+    return {
+        "colors": colors,
+        "numbers": numbers,
+        "typography": typography,
+        "other": other,
+    }
+
+
+def normalize_flat(mapping: dict):
+    return {lower_first(str(k)): v for k, v in mapping.items()}
 
 
 def main():
@@ -121,8 +154,28 @@ def main():
 
     TS_PATH.write_text("\n".join(ts_parts) + "\n", encoding="utf-8")
 
+    cleaned = {
+        "meta": {
+            "source": "tokens.json",
+        },
+        "primitives": normalize_section(primitives_value),
+        "theme": {
+            "light": normalize_flat(light),
+            "dark": normalize_flat(dark),
+        },
+        "device": {
+            "desktop": normalize_section(desktop),
+            "mobile": normalize_section(mobile),
+        },
+    }
+    CLEANED_PATH.write_text(
+        json.dumps(cleaned, indent=2, ensure_ascii=False, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
     print(f"Wrote: {CSS_PATH}")
     print(f"Wrote: {TS_PATH}")
+    print(f"Wrote: {CLEANED_PATH}")
 
 
 if __name__ == "__main__":
