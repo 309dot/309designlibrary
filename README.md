@@ -21,3 +21,4 @@ This project is an AI agent designed to run locally on your machine. It handles 
 - The agent automatically processes new tasks
 - Each task is executed in isolation on a dedicated branch
 - Completed tasks are merged back into the main branch
+
