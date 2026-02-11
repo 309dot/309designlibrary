@@ -45,41 +45,55 @@
     </section>
 
     <section class="section">
-      <h2 class="ui-text-h4">Inputs</h2>
-      <div class="grid">
-        <div class="surface">
-          <input class="ui-input" placeholder="Input" />
-        </div>
-        <div class="surface">
-          <textarea class="ui-textarea" placeholder="Textarea"></textarea>
-        </div>
-        <div class="surface">
-          <select class="ui-select">
-            <option>Option 1</option>
-            <option>Option 2</option>
-          </select>
-        </div>
-      </div>
+      <h2 class="ui-text-h4">Form</h2>
+      <form class="surface ui-form">
+        <label class="ui-label" for="name">이름</label>
+        <input id="name" class="ui-input" placeholder="이름" />
+        <p class="ui-helper-text">실명을 입력하세요.</p>
+        <label class="ui-label" for="bio">소개</label>
+        <textarea id="bio" class="ui-textarea" placeholder="소개"></textarea>
+        <p class="ui-error-text">오류: 10자 이상 입력</p>
+        <fieldset class="ui-fieldset">
+          <legend class="ui-fieldset__legend">옵션</legend>
+          <label class="ui-checkbox">
+            <input class="ui-checkbox__input" type="checkbox" checked />
+            <span class="ui-checkbox__box"></span>
+            <span class="ui-checkbox__label">체크</span>
+          </label>
+          <label class="ui-radio">
+            <input class="ui-radio__input" type="radio" checked />
+            <span class="ui-radio__dot"></span>
+            <span class="ui-radio__label">라디오</span>
+          </label>
+          <label class="ui-switch">
+            <input class="ui-switch__input" type="checkbox" checked />
+            <span class="ui-switch__track"><span class="ui-switch__thumb"></span></span>
+            <span class="ui-switch__label">스위치</span>
+          </label>
+        </fieldset>
+      </form>
     </section>
 
     <section class="section">
-      <h2 class="ui-text-h4">Checks</h2>
+      <h2 class="ui-text-h4">Navigation</h2>
       <div class="surface stack">
-        <label class="ui-checkbox">
-          <input class="ui-checkbox__input" type="checkbox" checked />
-          <span class="ui-checkbox__box"></span>
-          <span class="ui-checkbox__label">Checkbox</span>
-        </label>
-        <label class="ui-radio">
-          <input class="ui-radio__input" type="radio" checked />
-          <span class="ui-radio__dot"></span>
-          <span class="ui-radio__label">Radio</span>
-        </label>
-        <label class="ui-switch">
-          <input class="ui-switch__input" type="checkbox" checked />
-          <span class="ui-switch__track"><span class="ui-switch__thumb"></span></span>
-          <span class="ui-switch__label">Switch</span>
-        </label>
+        <div class="ui-navbar">
+          <div class="ui-navbar__brand">Brand</div>
+          <nav class="ui-navbar__nav">
+            <a class="ui-nav-item is-active">대시보드</a>
+            <a class="ui-nav-item">리포트</a>
+          </nav>
+          <div class="ui-navbar__actions">
+            <button class="ui-button ui-button--secondary">로그인</button>
+          </div>
+        </div>
+        <div class="ui-sidebar">
+          <div class="ui-sidebar__header">Menu</div>
+          <div class="ui-sidebar__body">
+            <button class="ui-nav-item is-active">Overview</button>
+            <button class="ui-nav-item">Settings</button>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -139,6 +153,26 @@
     </section>
 
     <section class="section">
+      <h2 class="ui-text-h4">Data</h2>
+      <div class="grid">
+        <ul class="ui-list">
+          <li class="ui-list__item">Task A</li>
+          <li class="ui-list__item">Task B</li>
+        </ul>
+        <div class="ui-stat ui-stat--positive">
+          <div class="ui-stat__label">전환율</div>
+          <div class="ui-stat__value">24.2%</div>
+          <div class="ui-stat__change">+2.1%</div>
+        </div>
+        <div class="ui-kpi">
+          <div class="ui-kpi__title">MRR</div>
+          <div class="ui-kpi__value">$12,400</div>
+          <div class="ui-kpi__change">+4.8%</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
       <h2 class="ui-text-h4">Overlays</h2>
       <div class="surface stack">
         <button id="openModal" class="ui-button ui-button--primary">모달 열기</button>
@@ -158,19 +192,38 @@
     </section>
 
     <section class="section">
-      <h2 class="ui-text-h4">Misc</h2>
+      <h2 class="ui-text-h4">Feedback</h2>
       <div class="grid">
-        <div class="surface">
-          <div class="ui-progress">
-            <div class="ui-progress__bar" style="width: 65%"></div>
-          </div>
-          <input class="ui-slider" type="range" value="50" />
-        </div>
         <div class="surface">
           <div class="ui-alert ui-alert--info">
             <div class="ui-alert__title">알림</div>
             <div class="ui-alert__body">정보성 메시지</div>
           </div>
+          <div class="ui-progress" style="margin-top: 12px;">
+            <div class="ui-progress__bar" style="width: 65%"></div>
+          </div>
+          <svg class="ui-ring" width="60" height="60" viewBox="0 0 60 60" style="margin-top: 12px;">
+            <circle class="ui-ring__track" cx="30" cy="30" r="26" stroke-width="4"></circle>
+            <circle class="ui-ring__bar" cx="30" cy="30" r="26" stroke-width="4" stroke-dasharray="163" stroke-dashoffset="40"></circle>
+          </svg>
+        </div>
+        <div class="surface">
+          <div class="ui-snackbar ui-snackbar--top">
+            <div class="ui-snackbar__item ui-snackbar__item--success">저장 완료</div>
+            <div class="ui-snackbar__item ui-snackbar__item--error">실패</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="ui-text-h4">Misc</h2>
+      <div class="grid">
+        <div class="surface">
+          <div class="ui-skeleton" style="height: 32px;"></div>
+          <div class="ui-separator"></div>
+          <div class="ui-code"><code>npm run build</code></div>
+          <div style="margin-top: 12px;"><kbd class="ui-kbd">⌘K</kbd></div>
         </div>
         <div class="surface">
           <div class="ui-empty">
@@ -180,6 +233,10 @@
               <button class="ui-button ui-button--secondary">추가</button>
             </div>
           </div>
+          <ol class="ui-steps" style="margin-top: 12px;">
+            <li class="ui-steps__item is-done"><span class="ui-steps__dot"></span>준비</li>
+            <li class="ui-steps__item"><span class="ui-steps__dot"></span>진행</li>
+          </ol>
         </div>
       </div>
     </section>

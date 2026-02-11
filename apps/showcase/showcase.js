@@ -34,17 +34,3 @@ showToast?.addEventListener('click', () => {
   toastArea.appendChild(toast);
   setTimeout(() => toast.remove(), 2500);
 });
-
-const tabs = document.querySelectorAll('[data-tab-trigger]');
-const panels = document.querySelectorAll('[data-tab-panel]');
-
-tabs.forEach((tab) => {
-  tab.addEventListener('click', () => {
-    const target = tab.getAttribute('data-tab-trigger');
-    tabs.forEach((t) => t.classList.remove('is-active'));
-    tab.classList.add('is-active');
-    panels.forEach((panel) => {
-      panel.classList.toggle('is-active', panel.getAttribute('data-tab-panel') === target);
-    });
-  });
-});
