@@ -2,6 +2,7 @@
 import json
 import os
 import subprocess
+import tempfile
 import sys
 import urllib.request
 
@@ -29,11 +30,31 @@ def ensure_origin(repo_info):
     return origin
 
 
-def ensure_pushed(branch: str):
-    git("push", "-u", "origin", branch)
+def ensure_pushed(branch: str, token: str):
+    script = tempfile.NamedTemporaryFile(prefix="git-askpass-", delete=False, mode="w", dir="/tmp")
+    try:
+        script.write("#!/bin/sh\n")
+        script.write('case "$1" in\n')
+        script.write("  *Username*) echo x-access-token;;\n")
+        script.write("  *Password*) echo \"$GIT_TOKEN\";;\n")
+        script.write("  *) echo \"\";;\n")
+        script.write("esac\n")
+        script.close()
+        os.chmod(script.name, 0o700)
+        env = os.environ.copy()
+        env["GIT_ASKPASS"] = script.name
+        env["GIT_TERMINAL_PROMPT"] = "0"
+        env["GIT_TOKEN"] = token
+        subprocess.check_call(["git", "push", "-u", "origin", branch], cwd="/workspace", env=env)
+    finally:
+        try:
+            os.unlink(script.name)
+        except Exception:
+            pass
 
 
-if len(sys.argv) >= 6:
+auto_mode = len(sys.argv) < 6
+if not auto_mode:
     owner, repo, base, head, title = sys.argv[1:6]
     body = sys.argv[6] if len(sys.argv) > 6 else ""
 else:
@@ -49,7 +70,6 @@ else:
     body = os.environ.get("PR_BODY", "")
 
     ensure_origin(repo_info)
-    ensure_pushed(head)
 
 token_path = "/workspace/.secrets/github.token"
 
@@ -61,6 +81,9 @@ if not token and os.path.exists(token_path):
 if not token:
     print("Missing GitHub token", file=sys.stderr)
     sys.exit(1)
+
+if auto_mode:
+    ensure_pushed(head, token)
 
 url = f"https://api.github.com/repos/{owner}/{repo}/pulls"
 
