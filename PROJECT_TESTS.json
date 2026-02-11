@@ -1,0 +1,6 @@
+{
+  "default": "pnpm test",
+  "paths": {
+    "/workspace": "pnpm test"
+  }
+}

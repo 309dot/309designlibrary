@@ -1,0 +1,29 @@
+# secrets
+.secrets/
+tokens.json
+
+# local notes
+memory/
+
+# logs
+/tasks/logs/*.log
+/tasks/logs/*.json
+
+# task inbox runtime (keep README)
+/tasks/*
+!/tasks/README.md
+
+# runtime
+.openclaw-state/
+apps/ui/.data/
+
+# node
+node_modules/
+.pnpm-store/
+
+# builds
+**/dist/
+**/.next/
+
+# misc
+.DS_Store
