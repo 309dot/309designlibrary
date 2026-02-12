@@ -218,12 +218,6 @@ export default function App() {
   }, [debugEnabled, activeDrawerTab]);
 
   useEffect(() => {
-    if (sessionDetail?.pipeline?.phase !== "needs_approval") return;
-    if (approvalsNeededCount <= 0) return;
-    setApprovalModalOpen(true);
-  }, [sessionDetail?.pipeline?.phase, approvalsNeededCount]);
-
-  useEffect(() => {
     if (sessionDetail?.requiredApprovals) {
       setRequiredApprovals({ ...defaultApprovals, ...sessionDetail.requiredApprovals });
       return;
@@ -371,6 +365,12 @@ export default function App() {
       return acc + (approvals[key] ? 0 : 1);
     }, 0);
   }, [requiredApprovals, approvals]);
+
+  useEffect(() => {
+    if (sessionDetail?.pipeline?.phase !== "needs_approval") return;
+    if (approvalsNeededCount <= 0) return;
+    setApprovalModalOpen(true);
+  }, [sessionDetail?.pipeline?.phase, approvalsNeededCount]);
 
   const disabledControls =
     sessionDetail?.status === "running" || sessionDetail?.status === "planning";
