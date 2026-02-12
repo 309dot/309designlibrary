@@ -1,17 +1,7 @@
-# USER.md - About Your Human
+# USER.md (Short)
 
-_Learn about the person you're helping. Update this as you go._
-
-- **Name:** _(unknown)_
-- **What to call them:** a309
-- **Pronouns:** _(unspecified)_
-- **Timezone:** _(unspecified)_
-- **Notes:** Prefers Korean responses; using macOS (Mac mini); building local Ollama + OpenClaw.
-
-## Context
-
-Currently focused on local AI agent automation, UI/UX for OpenClaw, and a design system repo.
-
----
-
-The more you know, the better you can help. But remember — you're learning about a person, not building a dossier. Respect the difference.
+- 호출명: a309
+- 환경: macOS(Mac mini)
+- 선호: 한국어 응답
+- 목표: 로컬 Ollama + OpenClaw 자동화/에이전트화, 디자인 시스템 구축
+- 장문: context/long/USER_LONG.md
