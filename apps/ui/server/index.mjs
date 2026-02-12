@@ -452,7 +452,7 @@ const extractHumanAnswer = (raw) => {
     .replace(/<tool_call[^>]*>[\s\S]*?<\/tool_call>/g, "")
     .replace(/<tool_call[^>]*>/g, "")
     .replace(/<\/tool_call>/g, "")
-    .replace(/^\s*[_-]{2,}\s*$/gm, "")
+    .replace(/^\s*[_-]{1,}\s*$/gm, "")
     .trim();
 
   const upper = text.toUpperCase();
