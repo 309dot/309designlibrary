@@ -295,6 +295,7 @@ export default function App() {
 
   useEffect(() => {
     if (!activeRun || activeRun.status === "running") return;
+    if (sessionDetail?.pipeline?.phase !== "done") return;
     const loadArtifacts = async () => {
       try {
         const res = await fetch(`/api/runs/${activeRun.id}/artifacts`);
@@ -308,7 +309,7 @@ export default function App() {
       }
     };
     loadArtifacts();
-  }, [activeRun?.id, activeRun?.status]);
+  }, [activeRun?.id, activeRun?.status, sessionDetail?.pipeline?.phase]);
 
   useEffect(() => {
     if (!debugEnabled || !activeRun) {
