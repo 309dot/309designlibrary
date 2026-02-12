@@ -1,22 +1,29 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import AppShell from "./components/layout/AppShell.jsx";
+import SessionList from "./components/sessions/SessionList.jsx";
+import Inspector from "./components/inspector/Inspector.jsx";
+import ApprovalGate from "./components/approvals/ApprovalGate.jsx";
+import PromptComposer from "./components/composer/PromptComposer.jsx";
+import TopBarMinimal from "./components/topbar/TopBarMinimal.jsx";
+import ChatThread from "./components/chat/ChatThread.jsx";
+import RightDrawerTabs from "./components/drawer/RightDrawerTabs.jsx";
+import ExecutionSteps from "./components/drawer/ExecutionSteps.jsx";
+import ApproveModal from "./components/modals/ApproveModal.jsx";
 
-const statusLabels = {
-  running: "실행 중",
-  success: "완료",
-  failed: "실패"
+const defaultApprovals = {
+  mail: false,
+  deploy: false,
+  merge: false,
+  gitPush: false,
+  prCreate: false
 };
 
-const statusClass = (status) => {
-  if (status === "running") return "running";
-  if (status === "success") return "success";
-  if (status === "failed") return "failed";
-  return "idle";
-};
-
-const formatTime = (value) => {
-  if (!value) return "-";
-  const date = new Date(value);
-  return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+const approvalKeywords = {
+  mail: /메일|email|gmail|calendar|캘린더|보내|send/i,
+  deploy: /배포|deploy|release|prod|production/i,
+  merge: /머지|merge/i,
+  gitPush: /git\s*push|push origin/i,
+  prCreate: /\bPR\b|pull request|draft pr/i
 };
 
 const summarizeLog = (logText, lineCount = 6) => {
@@ -29,121 +36,241 @@ const summarizeLog = (logText, lineCount = 6) => {
   return lines.slice(-lineCount).join("\n");
 };
 
-export default function App() {
-  const [runs, setRuns] = useState([]);
-  const [activeId, setActiveId] = useState(null);
-  const [prompt, setPrompt] = useState("");
-  const [log, setLog] = useState("");
-  const [notice, setNotice] = useState("");
-  const [inspectorTab, setInspectorTab] = useState("log");
-  const [searchTerm, setSearchTerm] = useState("");
-  const [statusFilter, setStatusFilter] = useState("all");
-  const [chatLogMode, setChatLogMode] = useState("summary");
-  const [toneMode, setToneMode] = useState("friendly");
-  const [models, setModels] = useState([]);
-  const [selectedModel, setSelectedModel] = useState("");
-  const [runningSince, setRunningSince] = useState(null);
-  const [lastLogAt, setLastLogAt] = useState(null);
-  const [toolEvents, setToolEvents] = useState([]);
-  const logOffsetRef = useRef(0);
+const filterLogs = (logText, filters) => {
+  if (!logText) return "";
+  const activeFilters = Object.entries(filters).filter(([, value]) => value);
+  if (!activeFilters.length) return logText;
+  const lines = logText.split("\n");
+  return lines
+    .filter((line) => {
+      return activeFilters.some(([key]) => {
+        if (key === "error") return /error|failed|exception|err/i.test(line);
+        if (key === "warn") return /warn|warning/i.test(line);
+        if (key === "tool") return /tool start|tool end|tool=/i.test(line);
+        if (key === "agent") return /agent|payloads|plan|actions|verify/i.test(line);
+        return false;
+      });
+    })
+    .join("\n");
+};
 
-  const activeRun = useMemo(
-    () => runs.find((run) => run.id === activeId) || runs[0] || null,
-    [runs, activeId]
+const extractTerminal = (logText) => {
+  if (!logText) return "";
+  const lines = logText.split("\n");
+  const picked = lines.filter((line) =>
+    /stdout|stderr|\$|\bcommand\b|실행|exec/i.test(line)
   );
+  return picked.length ? picked.join("\n") : "";
+};
+
+const resolveParentPath = (currentPath) => {
+  if (!currentPath || currentPath === "/workspace") return "/workspace";
+  const trimmed = currentPath.replace(/\/$/, "");
+  const parent = trimmed.split("/").slice(0, -1).join("/");
+  return parent || "/workspace";
+};
+
+export default function App() {
+  const [config, setConfig] = useState(null);
+  const [models, setModels] = useState([]);
+  const [presets, setPresets] = useState({});
+  const [sessions, setSessions] = useState([]);
+  const [activeSessionId, setActiveSessionId] = useState(null);
+  const [sessionDetail, setSessionDetail] = useState(null);
+  const [draft, setDraft] = useState("");
+  const [plan, setPlan] = useState("");
+  const [planEdited, setPlanEdited] = useState(false);
+  const [mode, setMode] = useState("assistant");
+  const [selectedModel, setSelectedModel] = useState("");
+  const [approvals, setApprovals] = useState(defaultApprovals);
+  const [requiredApprovals, setRequiredApprovals] = useState(defaultApprovals);
+  const [notice, setNotice] = useState("");
+  const [inspectorTab, setInspectorTab] = useState("tools");
+  const [toolEvents, setToolEvents] = useState([]);
+  const [log, setLog] = useState("");
+  const [lastLogAt, setLastLogAt] = useState(null);
+  const [runningSince, setRunningSince] = useState(null);
+  const [diff, setDiff] = useState("");
+  const [changedFiles, setChangedFiles] = useState([]);
+  const [fsPath, setFsPath] = useState("/workspace");
+  const [fsEntries, setFsEntries] = useState([]);
+  const [filePreview, setFilePreview] = useState("");
+  const [logFilter, setLogFilter] = useState({
+    error: false,
+    warn: false,
+    tool: false,
+    agent: false
+  });
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [debugEnabled, setDebugEnabled] = useState(false);
+  const [advancedOpen, setAdvancedOpen] = useState(false);
+  const [runSummary, setRunSummary] = useState(null);
+  const [planExpanded, setPlanExpanded] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [activeDrawerTab, setActiveDrawerTab] = useState("steps"); // steps|approval|debug|settings
+  const [leftCollapsed, setLeftCollapsed] = useState(false);
+  const [planMode, setPlanMode] = useState(false);
+  const [showSessionMeta, setShowSessionMeta] = useState(false);
+  const [approvalModalOpen, setApprovalModalOpen] = useState(false);
+
+  const lastSessionIdRef = useRef(null);
+
+  const activeRun = useMemo(() => {
+    const runs = sessionDetail?.runs ?? [];
+    if (!runs.length) return null;
+    const activeId = sessionDetail?.pipeline?.activeRunId ?? null;
+    if (activeId) {
+      const found = runs.find((r) => r.id === activeId);
+      if (found) return found;
+    }
+    return [...runs].sort((a, b) =>
+      (b.createdAt || "").localeCompare(a.createdAt || "")
+    )[0];
+  }, [sessionDetail]);
 
   useEffect(() => {
-    let mounted = true;
-    const fetchRuns = async () => {
+    const loadConfig = async () => {
       try {
-        const res = await fetch("/api/runs");
+        const res = await fetch("/api/config");
         const data = await res.json();
-        if (!mounted) return;
-        setRuns(data);
-        if (!activeId && data.length) {
-          setActiveId(data[0].id);
+        setConfig(data);
+        setModels(data.models ?? []);
+        setPresets(data.presets ?? {});
+        if (!selectedModel && data.models?.length) {
+          setSelectedModel(data.models[0].id);
         }
       } catch {
         // ignore
       }
     };
 
-    fetchRuns();
-    const timer = setInterval(fetchRuns, 2000);
+    loadConfig();
+  }, [selectedModel]);
+
+  useEffect(() => {
+    let mounted = true;
+    const fetchSessions = async () => {
+      try {
+        const res = await fetch("/api/sessions");
+        const data = await res.json();
+        if (!mounted) return;
+        setSessions(data);
+        if (!activeSessionId && data.length) {
+          setActiveSessionId(data[0].id);
+        }
+      } catch {
+        // ignore
+      }
+    };
+    fetchSessions();
+    const timer = setInterval(fetchSessions, 2000);
     return () => {
       mounted = false;
       clearInterval(timer);
     };
-  }, [activeId]);
+  }, [activeSessionId]);
 
   useEffect(() => {
+    if (!activeSessionId) return;
     let mounted = true;
-    const loadModels = async () => {
+    const fetchSession = async () => {
       try {
-        const res = await fetch("/api/models");
+        const res = await fetch(`/api/sessions/${activeSessionId}`);
+        if (!res.ok) return;
         const data = await res.json();
         if (!mounted) return;
-        const list = data?.models ?? [];
-        setModels(list);
-        if (!selectedModel && list.length) {
-          setSelectedModel(list[0].id);
-        }
+        setSessionDetail(data);
       } catch {
         // ignore
       }
     };
-
-    loadModels();
+    fetchSession();
+    const timer = setInterval(fetchSession, 2000);
     return () => {
       mounted = false;
+      clearInterval(timer);
     };
-  }, [selectedModel]);
+  }, [activeSessionId]);
+
+  useEffect(() => {
+    if (!sessionDetail) return;
+    if (lastSessionIdRef.current !== sessionDetail.id) {
+      setDraft("");
+      setPlan(sessionDetail.plan || "");
+      setPlanEdited(false);
+      setMode(sessionDetail.modelPreset || "assistant");
+      setSelectedModel(sessionDetail.modelId || selectedModel);
+      setApprovals(sessionDetail.approvals || defaultApprovals);
+      setPlanExpanded(false);
+      setApprovalModalOpen(false);
+      lastSessionIdRef.current = sessionDetail.id;
+      return;
+    }
+    if (!planEdited) {
+      setPlan(sessionDetail.plan || "");
+    }
+  }, [sessionDetail, planEdited, selectedModel]);
+
+  useEffect(() => {
+    if (debugEnabled) return;
+    if (activeDrawerTab === "debug") setActiveDrawerTab("steps");
+  }, [debugEnabled, activeDrawerTab]);
+
+  useEffect(() => {
+    if (sessionDetail?.pipeline?.phase !== "needs_approval") return;
+    if (approvalsNeededCount <= 0) return;
+    setApprovalModalOpen(true);
+  }, [sessionDetail?.pipeline?.phase, approvalsNeededCount]);
+
+  useEffect(() => {
+    if (sessionDetail?.requiredApprovals) {
+      setRequiredApprovals({ ...defaultApprovals, ...sessionDetail.requiredApprovals });
+      return;
+    }
+    const base = sessionDetail?.request ?? "";
+    const text = `${base}\n${plan}`;
+    const nextRequired = { ...defaultApprovals };
+    Object.entries(approvalKeywords).forEach(([key, regex]) => {
+      nextRequired[key] = regex.test(text);
+    });
+    setRequiredApprovals(nextRequired);
+  }, [sessionDetail?.requiredApprovals, sessionDetail?.request, plan]);
 
   useEffect(() => {
     if (!activeRun) {
       setLog("");
-      logOffsetRef.current = 0;
-      setRunningSince(null);
       setLastLogAt(null);
-      setToolEvents([]);
+      setRunningSince(null);
       return;
     }
     setLog("");
-    logOffsetRef.current = 0;
-    if (!runningSince && activeRun.status === "running") {
+    setLastLogAt(null);
+    if (activeRun.status === "running") {
       setRunningSince(Date.now());
     }
 
-    let cancelled = false;
-    const poll = async () => {
-      if (cancelled) return;
-      try {
-        const res = await fetch(
-          `/api/runs/${activeRun.id}/log?offset=${logOffsetRef.current}`
-        );
-        if (!res.ok) return;
-        const data = await res.json();
-        if (data?.data) {
-          setLog((prev) => prev + data.data);
-          setLastLogAt(Date.now());
-        }
-        logOffsetRef.current = data?.nextOffset ?? logOffsetRef.current;
-      } catch {
-        // ignore
+    const es = new EventSource(`/api/runs/${activeRun.id}/stream`);
+    es.addEventListener("log", (event) => {
+      const payload = JSON.parse(event.data || "{}");
+      if (payload.data) {
+        setLog((prev) => prev + payload.data);
+        setLastLogAt(Date.now());
       }
-      if (!cancelled) {
-        setTimeout(poll, 1000);
-      }
+    });
+    es.addEventListener("done", () => {
+      es.close();
+    });
+    es.onerror = () => {
+      es.close();
     };
-
-    poll();
     return () => {
-      cancelled = true;
+      es.close();
     };
   }, [activeRun?.id]);
 
   useEffect(() => {
-    if (!activeRun) return;
+    if (!activeRun || !debugEnabled) return;
     let cancelled = false;
     const pollTools = async () => {
       if (cancelled) return;
@@ -164,381 +291,419 @@ export default function App() {
     return () => {
       cancelled = true;
     };
-  }, [activeRun?.id]);
+  }, [activeRun?.id, debugEnabled]);
 
-  const handleRun = async () => {
-    const trimmed = prompt.trim();
-    if (!trimmed) return;
-    const finalPrompt = buildPrompt(trimmed);
+  useEffect(() => {
+    if (!activeRun || activeRun.status === "running") return;
+    const loadArtifacts = async () => {
+      try {
+        const res = await fetch(`/api/runs/${activeRun.id}/artifacts`);
+        if (res.ok) {
+          const data = await res.json();
+          setDiff(data.diff || "");
+          setChangedFiles(data.files || []);
+        }
+      } catch {
+        // ignore
+      }
+    };
+    loadArtifacts();
+  }, [activeRun?.id, activeRun?.status]);
+
+  useEffect(() => {
+    if (!debugEnabled || !activeRun) {
+      setRunSummary(null);
+      return;
+    }
+    let cancelled = false;
+    const loadSummary = async () => {
+      try {
+        const res = await fetch(`/api/runs/${activeRun.id}/summary`);
+        if (res.ok) {
+          const data = await res.json();
+          if (!cancelled) setRunSummary(data);
+        }
+      } catch {
+        // ignore
+      }
+    };
+    loadSummary();
+    const timer = setInterval(loadSummary, 4000);
+    return () => {
+      cancelled = true;
+      clearInterval(timer);
+    };
+  }, [activeRun?.id, debugEnabled]);
+
+  useEffect(() => {
+    const loadFiles = async () => {
+      try {
+        const res = await fetch(`/api/fs/list?path=${encodeURIComponent(fsPath)}`);
+        if (!res.ok) return;
+        const data = await res.json();
+        setFsPath(data.path);
+        setFsEntries(data.entries || []);
+      } catch {
+        // ignore
+      }
+    };
+    if (debugEnabled) loadFiles();
+  }, [fsPath, debugEnabled]);
+
+  const filteredLog = useMemo(() => filterLogs(log, logFilter), [log, logFilter]);
+  const terminalText = useMemo(() => {
+    const extracted = extractTerminal(log);
+    return extracted || "터미널 로그가 없습니다.";
+  }, [log]);
+
+  const canRunAct = useMemo(() => {
+    if (!plan.trim()) return false;
+    return Object.entries(requiredApprovals).every(([key, required]) => {
+      if (!required) return true;
+      return Boolean(approvals[key]);
+    });
+  }, [requiredApprovals, approvals, plan]);
+
+  const approvalsNeededCount = useMemo(() => {
+    return Object.entries(requiredApprovals).reduce((acc, [key, needed]) => {
+      if (!needed) return acc;
+      return acc + (approvals[key] ? 0 : 1);
+    }, 0);
+  }, [requiredApprovals, approvals]);
+
+  const disabledControls =
+    sessionDetail?.status === "running" || sessionDetail?.status === "planning";
+
+  const handleNewChat = async () => {
     setNotice("");
     try {
-      const res = await fetch("/api/run", {
+      const res = await fetch("/api/chat/new", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: finalPrompt, modelId: selectedModel })
+        body: JSON.stringify({
+          mode,
+          modelId: selectedModel,
+          approvals
+        })
       });
-      if (res.status === 409) {
-        setNotice("이미 실행 중인 작업이 있습니다.");
-        return;
-      }
       if (!res.ok) {
-        setNotice("실행을 시작하지 못했습니다.");
+        setNotice("새 채팅을 만들지 못했습니다.");
         return;
       }
       const data = await res.json();
-      setPrompt("");
-      setActiveId(data.id);
-      setRunningSince(Date.now());
-      setNotice("실행을 시작했습니다.");
+      setActiveSessionId(data.session.id);
+      setPlanEdited(false);
+      setDraft("");
+      setNotice("");
     } catch {
       setNotice("서버에 연결할 수 없습니다.");
     }
   };
 
-  const running = Boolean(activeRun && activeRun.status === "running");
-  const logSummary = summarizeLog(log, 7);
-  const chatLog =
-    chatLogMode === "full"
-      ? log.trim() || "로그가 아직 없습니다."
-      : logSummary;
-  const elapsedSec = runningSince ? Math.floor((Date.now() - runningSince) / 1000) : 0;
-  const lastLogSec = lastLogAt ? Math.floor((Date.now() - lastLogAt) / 1000) : null;
-
-  const filteredRuns = useMemo(() => {
-    const query = searchTerm.trim().toLowerCase();
-    return runs.filter((run) => {
-      const statusMatch =
-        statusFilter === "all" ? true : run.status === statusFilter;
-      if (!statusMatch) return false;
-      if (!query) return true;
-      const promptText = (run.prompt || "").toLowerCase();
-      return run.id?.toLowerCase().includes(query) || promptText.includes(query);
-    });
-  }, [runs, searchTerm, statusFilter]);
-
-  const templates = [
-    {
-      label: "작업 1건 처리",
-      text: "항상 한국어로 설명해줘.\n/workspace/tasks/inbox에 있는 작업을 1건 처리해줘."
-    },
-    {
-      label: "메일 요약",
-      text: "항상 한국어로 설명해줘.\n/Users/a309/workspace/.openclaw/bin/run-email-summary.sh 를 실행해줘."
-    },
-    {
-      label: "일정 제안",
-      text: "항상 한국어로 설명해줘.\n/Users/a309/workspace/.openclaw/bin/run-calendar-suggest.sh 를 실행해줘."
+  const sendChat = async ({ planOnly }) => {
+    if (disabledControls) return;
+    setNotice("");
+    try {
+      const res = await fetch("/api/chat/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sessionId: sessionDetail?.id ?? null,
+          message: draft,
+          mode,
+          modelId: selectedModel,
+          planMode: Boolean(planOnly),
+          approvals
+        })
+      });
+      if (!res.ok) {
+        setNotice(
+          res.status === 409 ? "이미 실행 중입니다." : "요청을 시작하지 못했습니다."
+        );
+        return;
+      }
+      const data = await res.json();
+      if (data?.session?.id) setActiveSessionId(data.session.id);
+      setPlanEdited(false);
+      setDraft("");
+      setNotice(data.rewritten ? "경로가 workspace 기준으로 자동 변환되었습니다." : "");
+      openDrawer("steps");
+    } catch {
+      setNotice("서버에 연결할 수 없습니다.");
     }
-  ];
+  };
 
-  const buildPrompt = (rawPrompt) => {
-    if (toneMode === "plain") return rawPrompt;
-    const prefix =
-      "항상 한국어로 답해. 필요한 경우 반드시 tool을 사용하고 VERIFY에 stdout/stderr를 포함해.";
-    return `${prefix}\n\n요청: ${rawPrompt}`;
+  const handleContinue = async () => {
+    if (!sessionDetail) return;
+    if (disabledControls) return;
+    setNotice("");
+    try {
+      const res = await fetch("/api/chat/continue", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sessionId: sessionDetail.id,
+          plan,
+          modelId: selectedModel,
+          approvals
+        })
+      });
+      if (!res.ok) {
+        if (res.status === 409) {
+          setApprovalModalOpen(true);
+          return;
+        }
+        setNotice("실행을 시작하지 못했습니다.");
+        return;
+      }
+      setNotice("");
+      openDrawer("steps");
+    } catch {
+      setNotice("서버에 연결할 수 없습니다.");
+    }
+  };
+
+  const handleOpenFile = async (entry) => {
+    if (entry.type === "dir") {
+      setFsPath(entry.path);
+      return;
+    }
+    try {
+      const res = await fetch(`/api/fs/read?path=${encodeURIComponent(entry.path)}`);
+      if (!res.ok) return;
+      const data = await res.json();
+      setFilePreview(data.content || "");
+    } catch {
+      // ignore
+    }
+  };
+
+  const handleNavigate = (target) => {
+    if (target === "..") {
+      setFsPath(resolveParentPath(fsPath));
+    } else {
+      setFsPath(target);
+    }
+  };
+
+  const handleLogFilterChange = (key) => {
+    setLogFilter((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+
+  const actSummary = summarizeLog(log, 6);
+  const actLogPreview = summarizeLog(log, 80);
+
+  const openDrawer = (tab) => {
+    setDrawerOpen(true);
+    setActiveDrawerTab(tab);
+  };
+
+  const handleSend = async () => {
+    if (disabledControls) return;
+    if (!draft.trim()) return;
+    await sendChat({ planOnly: Boolean(planMode) });
+  };
+
+  const handleSendPlan = async () => {
+    if (disabledControls) return;
+    if (!draft.trim()) return;
+    await sendChat({ planOnly: true });
   };
 
   return (
-    <div className="app-shell">
-      <aside className="panel panel-left">
-        <div className="brand">
-          <div className="brand-title">OpenClaw Command</div>
-          <div className="brand-sub">로컬 에이전트 제어 콘솔</div>
-        </div>
-        <div className="sidebar-meta">
-          <span className="meta-pill">Workspace · wOpenclaw</span>
-          <span className="meta-pill">동시 실행 · 1</span>
-        </div>
-        <div className="search-box">
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={(event) => setSearchTerm(event.target.value)}
-            placeholder="세션 검색 (ID/프롬프트)"
-          />
-        </div>
-        <div className="filter-row">
-          {[
-            { key: "all", label: "전체" },
-            { key: "running", label: "실행 중" },
-            { key: "success", label: "완료" },
-            { key: "failed", label: "실패" }
-          ].map((item) => (
-            <button
-              key={item.key}
-              className={`filter-button ${
-                statusFilter === item.key ? "active" : ""
-              }`}
-              onClick={() => setStatusFilter(item.key)}
-            >
-              {item.label}
-            </button>
-          ))}
-        </div>
-        <div className="panel-section">
-          <div className="panel-title">Sessions</div>
-          <div className="run-list">
-            {filteredRuns.length === 0 && (
-              <div className="empty">아직 실행 기록이 없습니다.</div>
-            )}
-            {filteredRuns.map((run) => (
-              <button
-                key={run.id}
-                className={`run-card ${
-                  activeRun?.id === run.id ? "active" : ""
-                }`}
-                onClick={() => setActiveId(run.id)}
-              >
-                <div className="run-row">
-                  <span className="run-id">{run.id}</span>
-                  <span className={`status ${statusClass(run.status)}`}>
-                    {statusLabels[run.status] ?? "대기"}
-                  </span>
-                </div>
-                <div className="run-title">
-                  {run.prompt?.slice(0, 60) || "-"}
-                </div>
-                <div className="run-time">{formatTime(run.createdAt)}</div>
-              </button>
-            ))}
-          </div>
-        </div>
-      </aside>
-
-      <main className="panel panel-center">
-        <header className="center-header">
-          <div>
-            <div className="eyebrow">Conversation</div>
-            <h1>프롬프트 콘솔</h1>
-            <p>OpenClaw에 명령을 보내고 실행 로그를 확인하세요.</p>
-          </div>
-          <div className="header-status">
-            <div className="model-chip">
-              {selectedModel || "모델 없음"}
-            </div>
-            <div className="status-row">
-              <span className={`status ${statusClass(activeRun?.status)}`}>
-                {activeRun ? statusLabels[activeRun.status] ?? "대기" : "대기"}
-              </span>
-              {running && <span className="spinner" aria-label="running" />}
-            </div>
-            <div className="time">
-              {running ? `경과 ${elapsedSec}s` : formatTime(activeRun?.createdAt)}
-            </div>
-            {lastLogSec !== null && (
-              <div className="last-log">마지막 업데이트 {lastLogSec}s 전</div>
-            )}
-          </div>
-        </header>
-
-        <section className="chat-area">
-          {!activeRun && (
-            <div className="chat-empty">
-              아직 실행한 작업이 없습니다. 아래에 명령을 입력하세요.
-            </div>
-          )}
-          {activeRun && (
-            <>
-              <div className="message user">
-                <div className="message-meta">You</div>
-                <div className="bubble">{activeRun.prompt || "(프롬프트 없음)"}</div>
-              </div>
-              <div className="message assistant">
-                <div className="message-meta">OpenClaw</div>
-                <div className="bubble">
-                  <div className="assistant-header">
-                    <span className={`status ${statusClass(activeRun.status)}`}>
-                      {statusLabels[activeRun.status] ?? "대기"}
-                    </span>
-                    <span className="assistant-time">
-                      {formatTime(activeRun.completedAt || activeRun.createdAt)}
-                    </span>
-                  </div>
-                  <div className="assistant-toggle">
-                    <button
-                      className={`toggle ${
-                        chatLogMode === "summary" ? "active" : ""
-                      }`}
-                      onClick={() => setChatLogMode("summary")}
-                    >
-                      요약
-                    </button>
-                    <button
-                      className={`toggle ${
-                        chatLogMode === "full" ? "active" : ""
-                      }`}
-                      onClick={() => setChatLogMode("full")}
-                    >
-                      전체
-                    </button>
-                  </div>
-                  <pre className="assistant-log">{chatLog}</pre>
-                </div>
-              </div>
-            </>
-          )}
-        </section>
-
-        <section className="prompt-panel">
-          <div className="panel-title">Prompt</div>
-          <div className="model-select">
-            <span className="tone-label">모델 선택</span>
-            <select
-              value={selectedModel}
-              onChange={(event) => setSelectedModel(event.target.value)}
-              disabled={!models.length || running}
-            >
-              {models.length === 0 && <option value="">모델 없음</option>}
-              {models.map((model) => (
-                <option key={model.id} value={model.id}>
-                  {model.name || model.id}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="tone-toggle">
-            <span className="tone-label">답변 톤</span>
-            <div className="tone-buttons">
-              <button
-                className={`tone-button ${toneMode === "friendly" ? "active" : ""}`}
-                onClick={() => setToneMode("friendly")}
-                disabled={running}
-              >
-                친절
-              </button>
-              <button
-                className={`tone-button ${toneMode === "plain" ? "active" : ""}`}
-                onClick={() => setToneMode("plain")}
-                disabled={running}
-              >
-                간단
-              </button>
-            </div>
-          </div>
-          <div className="template-bar">
-            {templates.map((template) => (
-              <button
-                key={template.label}
-                className="template-button"
-                onClick={() => setPrompt(template.text)}
-                disabled={running}
-              >
-                {template.label}
-              </button>
-            ))}
-          </div>
-          <textarea
-            value={prompt}
-            onChange={(event) => setPrompt(event.target.value)}
-            placeholder="예: /workspace/tasks/inbox에 있는 작업을 한 건 처리해줘"
-            rows={4}
-            onKeyDown={(event) => {
-              if ((event.metaKey || event.ctrlKey) && event.key === "Enter") {
-                event.preventDefault();
-                handleRun();
+    <AppShell
+      left={
+        <SessionList
+          sessions={sessions}
+          activeId={activeSessionId}
+          searchTerm={searchTerm}
+          statusFilter={statusFilter}
+          onSearch={setSearchTerm}
+          onFilter={setStatusFilter}
+          onSelect={setActiveSessionId}
+          debugEnabled={debugEnabled}
+          onToggleDebug={() =>
+            setDebugEnabled((prev) => {
+              const next = !prev;
+              if (next) {
+                openDrawer("debug");
+              } else if (activeDrawerTab === "debug") {
+                setActiveDrawerTab("steps");
               }
+              return next;
+            })
+          }
+          mode={mode}
+          showMeta={showSessionMeta}
+        />
+      }
+      center={
+        <div className="main-chat">
+          <TopBarMinimal
+            title={sessionDetail?.title || "New chat"}
+            status={sessionDetail?.status || "idle"}
+            leftCollapsed={leftCollapsed}
+            onToggleLeft={() => setLeftCollapsed((prev) => !prev)}
+            onNewChat={handleNewChat}
+            approvalsNeededCount={approvalsNeededCount}
+            debugEnabled={debugEnabled}
+            drawerOpen={drawerOpen}
+            onOpenSteps={() => openDrawer("steps")}
+            onOpenApproval={() => openDrawer("approval")}
+            onOpenDebug={() => {
+              if (!debugEnabled) setDebugEnabled(true);
+              openDrawer("debug");
+            }}
+            onOpenSettings={() => openDrawer("settings")}
+            onCloseDrawer={() => setDrawerOpen(false)}
+          />
+
+          <div className="chat-scroll">
+            <ChatThread
+              title="OpenClaw"
+              status={sessionDetail?.status || "idle"}
+              phase={sessionDetail?.pipeline?.phase || "idle"}
+              messages={sessionDetail?.messages || []}
+              notice={notice}
+              onOpenSteps={() => openDrawer("steps")}
+            />
+          </div>
+
+          <div className="composer-sticky">
+            <PromptComposer
+              request={draft}
+              onChangeRequest={setDraft}
+              onSend={handleSend}
+              onSendPlan={handleSendPlan}
+              mode={mode}
+              onChangeMode={(nextMode) => {
+                setMode(nextMode);
+                if (presets[nextMode]) setSelectedModel(presets[nextMode]);
+              }}
+              models={models}
+              selectedModel={selectedModel}
+              onChangeModel={setSelectedModel}
+              planMode={planMode}
+              onTogglePlanMode={(next) => setPlanMode(Boolean(next))}
+              debugEnabled={debugEnabled}
+              onToggleDebug={(next) => setDebugEnabled(Boolean(next))}
+              disabled={disabledControls}
+            />
+          </div>
+
+          <ApproveModal
+            open={approvalModalOpen}
+            pendingCount={approvalsNeededCount}
+            onCancel={() => setApprovalModalOpen(false)}
+            onApprove={() => {
+              setApprovalModalOpen(false);
+              openDrawer("approval");
             }}
           />
-          <div className="prompt-actions">
-            <button
-              className="primary"
-              onClick={handleRun}
-              disabled={!prompt.trim() || running}
-            >
-              {running ? "실행 중" : "실행"}
-            </button>
-            <button
-              className="ghost"
-              onClick={() => setPrompt("")}
-              disabled={running}
-            >
-              비우기
-            </button>
-          </div>
-          {notice && <div className="notice">{notice}</div>}
-        </section>
-      </main>
-
-      <aside className="panel panel-right">
-        <div className="panel-title">Inspector</div>
-        <div className="tabs">
-          <button
-            className={`tab ${inspectorTab === "log" ? "active" : ""}`}
-            onClick={() => setInspectorTab("log")}
-          >
-            로그
-          </button>
-          <button
-            className={`tab ${inspectorTab === "tools" ? "active" : ""}`}
-            onClick={() => setInspectorTab("tools")}
-          >
-            Tools
-          </button>
-          <button
-            className={`tab ${inspectorTab === "info" ? "active" : ""}`}
-            onClick={() => setInspectorTab("info")}
-          >
-            실행 정보
-          </button>
         </div>
-        {inspectorTab === "log" && (
-          <div className="inspector-log">
-            <pre className="log">{log.trim() ? log : "로그가 아직 없습니다."}</pre>
+      }
+      right={
+        <div className="right-drawer">
+          <div className="right-drawer-header">
+            <div className="right-title">패널</div>
+            <button className="ghost tiny" onClick={() => setDrawerOpen(false)}>
+              닫기
+            </button>
           </div>
-        )}
-        {inspectorTab === "tools" && (
-          <div className="inspector-log">
-            {toolEvents.length === 0 ? (
-              <div className="empty">tool 이벤트가 아직 없습니다.</div>
-            ) : (
-              <div className="tool-events">
-                {toolEvents.map((event, index) => (
-                  <div className="tool-card" key={`${event.toolCallId}-${index}`}>
-                    <div className="tool-row">
-                      <span className={`tool-kind ${event.kind}`}>
-                        {event.kind}
-                      </span>
-                      <span className="tool-name">{event.tool || "-"}</span>
-                      <span className="tool-time">{event.at || "-"}</span>
-                    </div>
-                    <div className="tool-meta">
-                      <span className="mono">{event.toolCallId || "-"}</span>
-                    </div>
+
+          <RightDrawerTabs
+            active={activeDrawerTab}
+            onChange={setActiveDrawerTab}
+            debugEnabled={debugEnabled}
+          />
+
+          <div className="right-drawer-body">
+            {activeDrawerTab === "steps" && (
+              <ExecutionSteps
+                request={sessionDetail?.request || ""}
+                plan={plan}
+                planExpanded={planExpanded}
+                onTogglePlanExpanded={() => setPlanExpanded((prev) => !prev)}
+                onChangePlan={(value) => {
+                  setPlanEdited(true);
+                  setPlan(value);
+                }}
+                status={sessionDetail?.status}
+                phase={sessionDetail?.pipeline?.phase || "idle"}
+                pendingContinue={Boolean(sessionDetail?.pipeline?.pendingContinue)}
+                onContinue={handleContinue}
+                actSummary={actSummary}
+                actLogPreview={actLogPreview}
+                logs={log}
+                changedFiles={changedFiles}
+                diffText={diff}
+              />
+            )}
+
+            {activeDrawerTab === "approval" && (
+              <ApprovalGate
+                approvals={approvals}
+                required={requiredApprovals}
+                onToggle={(key) =>
+                  setApprovals((prev) => ({ ...prev, [key]: !prev[key] }))
+                }
+              />
+            )}
+
+            {activeDrawerTab === "debug" && debugEnabled ? (
+              <Inspector
+                activeTab={inspectorTab}
+                onTabChange={setInspectorTab}
+                toolEvents={toolEvents}
+                terminalText={terminalText}
+                diffText={diff}
+                files={changedFiles}
+                fsPath={fsPath}
+                fsEntries={fsEntries}
+                filePreview={filePreview}
+                onNavigate={handleNavigate}
+                onOpenFile={handleOpenFile}
+                logs={filteredLog}
+                logFilter={logFilter}
+                onLogFilterChange={handleLogFilterChange}
+                advancedOpen={advancedOpen}
+                onAdvancedToggle={() => setAdvancedOpen((prev) => !prev)}
+                config={config}
+                summary={runSummary}
+              />
+            ) : activeDrawerTab === "debug" ? (
+              <div className="empty">Debug가 꺼져 있습니다. 메뉴에서 켜세요.</div>
+            ) : null}
+
+            {activeDrawerTab === "settings" && (
+              <div className="settings-panel">
+                <div className="panel-title">Settings</div>
+                <div className="info-grid">
+                  <div className="meta-label">Plan 모드</div>
+                  <div>
+                    <input
+                      type="checkbox"
+                      checked={Boolean(planMode)}
+                      onChange={() => setPlanMode((prev) => !prev)}
+                    />
                   </div>
-                ))}
+                  <div className="meta-label">Debug</div>
+                  <div>
+                    <input
+                      type="checkbox"
+                      checked={Boolean(debugEnabled)}
+                      onChange={() => setDebugEnabled((prev) => !prev)}
+                    />
+                  </div>
+                </div>
               </div>
             )}
           </div>
-        )}
-        {inspectorTab === "info" && (
-          <div className="inspector-info">
-            <div className="info-row">
-              <span>상태</span>
-              <span>{activeRun ? statusLabels[activeRun.status] : "-"}</span>
-            </div>
-            <div className="info-row">
-              <span>모델</span>
-              <span>{activeRun?.modelId || selectedModel || "qwen2.5:14b"}</span>
-            </div>
-            <div className="info-row">
-              <span>설정 파일</span>
-              <span className="mono">{activeRun?.configPath || "-"}</span>
-            </div>
-            <div className="info-row">
-              <span>실행 시간</span>
-              <span>{activeRun?.durationMs ? `${activeRun.durationMs}ms` : "-"}</span>
-            </div>
-            <div className="info-row">
-              <span>시작</span>
-              <span>{formatTime(activeRun?.createdAt)}</span>
-            </div>
-            <div className="info-row">
-              <span>종료</span>
-              <span>{formatTime(activeRun?.completedAt)}</span>
-            </div>
-          </div>
-        )}
-      </aside>
-    </div>
+        </div>
+      }
+      mode={mode}
+      leftCollapsed={leftCollapsed}
+      drawerOpen={drawerOpen}
+    />
   );
 }
