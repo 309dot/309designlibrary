@@ -579,6 +579,56 @@ button.ghost {
   white-space: pre-wrap;
 }
 
+.tool-events {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tool-card {
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.tool-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 12px;
+}
+
+.tool-kind {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--text);
+  text-transform: uppercase;
+  font-size: 10px;
+}
+
+.tool-kind.end {
+  background: rgba(43, 138, 62, 0.15);
+  color: var(--success);
+}
+
+.tool-name {
+  font-weight: 600;
+}
+
+.tool-time {
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.tool-meta {
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
 .inspector-info {
   display: flex;
   flex-direction: column;

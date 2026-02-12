@@ -44,6 +44,7 @@ export default function App() {
   const [selectedModel, setSelectedModel] = useState("");
   const [runningSince, setRunningSince] = useState(null);
   const [lastLogAt, setLastLogAt] = useState(null);
+  const [toolEvents, setToolEvents] = useState([]);
   const logOffsetRef = useRef(0);
 
   const activeRun = useMemo(
@@ -104,6 +105,7 @@ export default function App() {
       logOffsetRef.current = 0;
       setRunningSince(null);
       setLastLogAt(null);
+      setToolEvents([]);
       return;
     }
     setLog("");
@@ -135,6 +137,30 @@ export default function App() {
     };
 
     poll();
+    return () => {
+      cancelled = true;
+    };
+  }, [activeRun?.id]);
+
+  useEffect(() => {
+    if (!activeRun) return;
+    let cancelled = false;
+    const pollTools = async () => {
+      if (cancelled) return;
+      try {
+        const res = await fetch(`/api/runs/${activeRun.id}/tools`);
+        if (res.ok) {
+          const data = await res.json();
+          setToolEvents(data?.events ?? []);
+        }
+      } catch {
+        // ignore
+      }
+      if (!cancelled) {
+        setTimeout(pollTools, 2000);
+      }
+    };
+    pollTools();
     return () => {
       cancelled = true;
     };
@@ -207,12 +233,8 @@ export default function App() {
 
   const buildPrompt = (rawPrompt) => {
     if (toneMode === "plain") return rawPrompt;
-    const prefix = [
-      "항상 한국어로 답해.",
-      "친절하고 단계적으로 설명해.",
-      "사용자가 이해하기 쉽게 요약과 다음 단계도 제시해.",
-      "불확실한 부분은 추측하지 말고 '확인이 필요하다'고 말해."
-    ].join(" ");
+    const prefix =
+      "항상 한국어로 답해. 필요한 경우 반드시 tool을 사용하고 VERIFY에 stdout/stderr를 포함해.";
     return `${prefix}\n\n요청: ${rawPrompt}`;
   };
 
@@ -447,6 +469,12 @@ export default function App() {
             로그
           </button>
           <button
+            className={`tab ${inspectorTab === "tools" ? "active" : ""}`}
+            onClick={() => setInspectorTab("tools")}
+          >
+            Tools
+          </button>
+          <button
             className={`tab ${inspectorTab === "info" ? "active" : ""}`}
             onClick={() => setInspectorTab("info")}
           >
@@ -456,6 +484,30 @@ export default function App() {
         {inspectorTab === "log" && (
           <div className="inspector-log">
             <pre className="log">{log.trim() ? log : "로그가 아직 없습니다."}</pre>
+          </div>
+        )}
+        {inspectorTab === "tools" && (
+          <div className="inspector-log">
+            {toolEvents.length === 0 ? (
+              <div className="empty">tool 이벤트가 아직 없습니다.</div>
+            ) : (
+              <div className="tool-events">
+                {toolEvents.map((event, index) => (
+                  <div className="tool-card" key={`${event.toolCallId}-${index}`}>
+                    <div className="tool-row">
+                      <span className={`tool-kind ${event.kind}`}>
+                        {event.kind}
+                      </span>
+                      <span className="tool-name">{event.tool || "-"}</span>
+                      <span className="tool-time">{event.at || "-"}</span>
+                    </div>
+                    <div className="tool-meta">
+                      <span className="mono">{event.toolCallId || "-"}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         )}
         {inspectorTab === "info" && (

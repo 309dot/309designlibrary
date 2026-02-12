@@ -76,6 +76,44 @@ const readTail = async (filePath, maxBytes = 2_000_000) => {
   return buffer.toString("utf-8");
 };
 
+const parseToolEvents = (raw, runIdFilter = null) => {
+  if (!raw) return [];
+  const lines = raw.split("\n").filter(Boolean);
+  const events = [];
+  for (const line of lines) {
+    if (!line.includes("tool start") && !line.includes("tool end")) {
+      continue;
+    }
+    const ts = line.match(/^(\d{4}-\d{2}-\d{2}T[^\s]+)/)?.[1] ?? null;
+    const kind = line.includes("tool start") ? "start" : "end";
+    const tool = line.match(/tool=([a-zA-Z0-9_-]+)/)?.[1] ?? null;
+    const toolCallId = line.match(/toolCallId=([^\s]+)/)?.[1] ?? null;
+    const runId = line.match(/runId=([^\s]+)/)?.[1] ?? null;
+    if (runIdFilter && runId && runId !== runIdFilter) continue;
+    events.push({
+      at: ts,
+      kind,
+      tool,
+      toolCallId,
+      runId,
+      raw: line
+    });
+  }
+  return events;
+};
+
+const findRunIdForSession = (raw, sessionId) => {
+  if (!raw) return null;
+  const lines = raw.split("\n").filter(Boolean);
+  for (const line of lines) {
+    if (!line.includes("embedded run start")) continue;
+    if (!line.includes(`sessionId=${sessionId}`)) continue;
+    const runId = line.match(/runId=([^\s]+)/)?.[1] ?? null;
+    if (runId) return runId;
+  }
+  return null;
+};
+
 const tryRecoverRun = async (metaPath, meta) => {
   if (meta.status !== "running") return meta;
   if (meta.recoveredFrom) return meta;
@@ -330,6 +368,37 @@ app.get("/api/runs/:id/log", async (req, res) => {
   const logPath = path.join(RUNS_DIR, `${req.params.id}.log`);
   const chunk = await readLogChunk(logPath, Number.isNaN(offset) ? 0 : offset);
   res.json(chunk);
+});
+
+app.get("/api/runs/:id/tools", async (req, res) => {
+  const metaPath = path.join(RUNS_DIR, `${req.params.id}.json`);
+  try {
+    const meta = await readJson(metaPath);
+    const logPath = meta.gatewayLogPath ?? path.join(RUNS_DIR, `${req.params.id}.gateway.log`);
+    const raw = await readTail(logPath, 2_000_000);
+    let events = parseToolEvents(raw);
+
+    if (!events.length) {
+      const openclawDir = "/tmp/openclaw";
+      const files = await fsp.readdir(openclawDir).catch(() => []);
+      const candidates = files
+        .filter((name) => name.startsWith("openclaw-") && name.endsWith(".log"))
+        .map((name) => path.join(openclawDir, name))
+        .sort();
+      const sessionId = `ui-${req.params.id}`;
+      for (const candidate of candidates.reverse()) {
+        const tail = await readTail(candidate, 2_000_000);
+        const runId = findRunIdForSession(tail, sessionId);
+        if (!runId) continue;
+        events = parseToolEvents(tail, runId);
+        if (events.length) break;
+      }
+    }
+
+    res.json({ events });
+  } catch {
+    res.status(404).json({ error: "not_found" });
+  }
 });
 
 app.post("/api/run", async (req, res) => {

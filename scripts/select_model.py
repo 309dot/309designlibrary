@@ -3,10 +3,10 @@ import re
 import sys
 from pathlib import Path
 
-# Dev loop requires tool-calling; qwen3-coder:30b passes tool-call tests.
-DEFAULT = "qwen3-coder:30b"
-DEV = "qwen3-coder:30b"
-LONG = "qwen3-coder:30b"
+# 기본은 가벼운 모델, 개발/원인 분석은 중간, 장문 설계는 큰 모델.
+DEFAULT = "qwen2.5:7b"
+DEV = "qwen2.5:14b"
+LONG = "qwen2.5:32b"
 
 KEYWORDS_DEV = {
     "bug",
@@ -54,6 +54,10 @@ def main() -> None:
         return
 
     task_path = Path(sys.argv[1])
+    # task inbox는 개발 루프 신뢰성이 중요하므로 coder 모델 우선
+    if "/tasks/inbox/" in str(task_path):
+        print("qwen3-coder:30b")
+        return
     content = read_task(task_path)
     if not content:
         print(DEFAULT)
