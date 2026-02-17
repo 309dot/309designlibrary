@@ -9,6 +9,12 @@ import ExecutionSteps from "./components/drawer/ExecutionSteps.jsx";
 const API_BASE = String(import.meta.env.VITE_API_BASE_URL ?? "")
   .trim()
   .replace(/\/$/, "");
+const IS_BROWSER = typeof window !== "undefined";
+const IS_LOCAL_HOST =
+  IS_BROWSER &&
+  (window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1");
+const API_CONFIGURED = Boolean(API_BASE) || IS_LOCAL_HOST;
 const apiUrl = (path) => (API_BASE ? `${API_BASE}${path}` : path);
 const apiFetch = (path, init) =>
   fetch(apiUrl(path), {
@@ -52,6 +58,8 @@ export default function App() {
 
   const lastSessionIdRef = useRef(null);
   const sessionsRef = useRef([]);
+  const missingApiNotice =
+    "웹 배포에서는 API 서버 주소가 필요합니다. Vercel 환경변수 VITE_API_BASE_URL을 설정하고 다시 배포하세요.";
 
   useEffect(() => {
     sessionsRef.current = sessions;
@@ -94,6 +102,14 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    if (!API_CONFIGURED) {
+      setHealth({ ok: false, running: false });
+      setNotice(missingApiNotice);
+    }
+  }, [missingApiNotice]);
+
+  useEffect(() => {
+    if (!API_CONFIGURED) return;
     let cancelled = false;
     let delayMs = 1000;
     const poll = async () => {
@@ -116,6 +132,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    if (!API_CONFIGURED) return;
     let mounted = true;
     let delayMs = 2000;
     const fetchSessions = async () => {
@@ -153,6 +170,7 @@ export default function App() {
   }, [activeSessionId]);
 
   useEffect(() => {
+    if (!API_CONFIGURED) return;
     if (!activeSessionId) return;
     let mounted = true;
     let delayMs = 2000;
@@ -242,6 +260,7 @@ export default function App() {
   }, [sessionDetail?.messages]);
 
   useEffect(() => {
+    if (!API_CONFIGURED) return;
     if (!activeRun) {
       setLog("");
       setLastLogAt(null);
@@ -272,6 +291,7 @@ export default function App() {
   }, [activeRun?.id]);
 
   useEffect(() => {
+    if (!API_CONFIGURED) return;
     if (!activeRun || activeRun.status === "running") return;
     if (sessionDetail?.pipeline?.phase !== "done") return;
     const loadArtifacts = async () => {
@@ -308,6 +328,10 @@ export default function App() {
   };
 
   const handleNewChat = async () => {
+    if (!API_CONFIGURED) {
+      setNotice(missingApiNotice);
+      return;
+    }
     setNotice("");
     if (disabledControls) return;
     try {
@@ -329,6 +353,10 @@ export default function App() {
   };
 
   const handleDeleteSession = async (sessionId) => {
+    if (!API_CONFIGURED) {
+      setNotice(missingApiNotice);
+      return;
+    }
     if (!sessionId) return;
     if (!confirm("이 세션을 삭제할까요?")) return;
     try {
@@ -351,6 +379,10 @@ export default function App() {
   };
 
   const sendChat = async () => {
+    if (!API_CONFIGURED) {
+      setNotice(missingApiNotice);
+      return;
+    }
     if (disabledControls) return;
     if (!draft.trim()) return;
     setNotice("");
@@ -379,6 +411,10 @@ export default function App() {
   };
 
   const handleContinue = async (permissionOverride = null) => {
+    if (!API_CONFIGURED) {
+      setNotice(missingApiNotice);
+      return;
+    }
     if (!sessionDetail) return;
     if (disabledControls) return;
     setNotice("");
@@ -403,6 +439,10 @@ export default function App() {
   };
 
   const handleStop = async () => {
+    if (!API_CONFIGURED) {
+      setNotice(missingApiNotice);
+      return;
+    }
     if (!health?.activeRunId) return;
     if (!globalRunning) return;
     setStopping(true);
