@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "pnpm -C apps/ui build",
+    "dev": "pnpm -C apps/ui dev"
+  },
+  "packageManager": "pnpm@9.15.9",
+  "devDependencies": {
+    "jest": "^30.2.0"
+  }
+}

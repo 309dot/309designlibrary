@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "corepack enable && pnpm -C apps/ui install --frozen-lockfile",
+  "buildCommand": "pnpm -C apps/ui build",
+  "outputDirectory": "apps/ui/dist"
+}
