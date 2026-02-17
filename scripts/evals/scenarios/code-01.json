@@ -1,0 +1,14 @@
+{
+  "id": "code-01",
+  "title": "파일 생성(코드)",
+  "agentMode": "code",
+  "permission": "basic",
+  "message": "다음 작업을 순서대로 수행해. 1) /workspace/workspace/__eval__/probe-1.txt 파일을 만들고 첫 줄에 \"hello\"를 써. 2) 방금 파일을 읽어서 내용 그대로 보여줘. 3) 마지막에 RESULT에 생성된 파일 경로를 적어.",
+  "expected": {
+    "evaluationAchieved": "yes",
+    "evidenceMin": "filesCreated>=1",
+    "verifyRequired": true,
+    "mustHaveToolEvents": true
+  }
+}
+

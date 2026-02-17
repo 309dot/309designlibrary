@@ -1,0 +1,14 @@
+{
+  "id": "code-05",
+  "title": "실패 후 복구(코드)",
+  "agentMode": "code",
+  "permission": "basic",
+  "message": "일부러 실패를 만든 뒤 복구해. 1) 존재하지 않는 /workspace/workspace/__eval__/nope/aaa.txt 를 읽어보고(실패 예상), 2) 그 다음 /workspace/workspace/__eval__/nope/ 폴더를 만들고 aaa.txt를 만들고 \"ok\"를 써, 3) 다시 읽어서 성공시키고 RESULT에 요약해.",
+  "expected": {
+    "evaluationAchieved": "yes",
+    "evidenceMin": "commands>=1",
+    "verifyRequired": true,
+    "mustHaveToolEvents": true
+  }
+}
+

@@ -1,0 +1,14 @@
+{
+  "id": "code-11",
+  "title": "짧은 문서 생성(코드)",
+  "agentMode": "code",
+  "permission": "basic",
+  "message": "/workspace/workspace/__eval__/notes.md 파일을 만들고 3줄(제목/불릿2개)만 작성해. 마지막에 RESULT에 파일 경로를 포함해.",
+  "expected": {
+    "evaluationAchieved": "yes",
+    "evidenceMin": "filesCreated>=1",
+    "verifyRequired": true,
+    "mustHaveToolEvents": true
+  }
+}
+

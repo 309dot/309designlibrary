@@ -1,30 +1,20 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import AppShell from "./components/layout/AppShell.jsx";
 import SessionList from "./components/sessions/SessionList.jsx";
-import Inspector from "./components/inspector/Inspector.jsx";
-import ApprovalGate from "./components/approvals/ApprovalGate.jsx";
 import PromptComposer from "./components/composer/PromptComposer.jsx";
 import TopBarMinimal from "./components/topbar/TopBarMinimal.jsx";
 import ChatThread from "./components/chat/ChatThread.jsx";
-import RightDrawerTabs from "./components/drawer/RightDrawerTabs.jsx";
 import ExecutionSteps from "./components/drawer/ExecutionSteps.jsx";
-import ApproveModal from "./components/modals/ApproveModal.jsx";
 
-const defaultApprovals = {
-  mail: false,
-  deploy: false,
-  merge: false,
-  gitPush: false,
-  prCreate: false
-};
-
-const approvalKeywords = {
-  mail: /메일|email|gmail|calendar|캘린더|보내|send/i,
-  deploy: /배포|deploy|release|prod|production/i,
-  merge: /머지|merge/i,
-  gitPush: /git\s*push|push origin/i,
-  prCreate: /\bPR\b|pull request|draft pr/i
-};
+const API_BASE = String(import.meta.env.VITE_API_BASE_URL ?? "")
+  .trim()
+  .replace(/\/$/, "");
+const apiUrl = (path) => (API_BASE ? `${API_BASE}${path}` : path);
+const apiFetch = (path, init) =>
+  fetch(apiUrl(path), {
+    ...(init ?? {}),
+    credentials: API_BASE ? "include" : init?.credentials
+  });
 
 const summarizeLog = (logText, lineCount = 6) => {
   if (!logText) return "아직 로그가 없습니다.";
@@ -36,33 +26,6 @@ const summarizeLog = (logText, lineCount = 6) => {
   return lines.slice(-lineCount).join("\n");
 };
 
-const filterLogs = (logText, filters) => {
-  if (!logText) return "";
-  const activeFilters = Object.entries(filters).filter(([, value]) => value);
-  if (!activeFilters.length) return logText;
-  const lines = logText.split("\n");
-  return lines
-    .filter((line) => {
-      return activeFilters.some(([key]) => {
-        if (key === "error") return /error|failed|exception|err/i.test(line);
-        if (key === "warn") return /warn|warning/i.test(line);
-        if (key === "tool") return /tool start|tool end|tool=/i.test(line);
-        if (key === "agent") return /agent|payloads|plan|actions|verify/i.test(line);
-        return false;
-      });
-    })
-    .join("\n");
-};
-
-const extractTerminal = (logText) => {
-  if (!logText) return "";
-  const lines = logText.split("\n");
-  const picked = lines.filter((line) =>
-    /stdout|stderr|\$|\bcommand\b|실행|exec/i.test(line)
-  );
-  return picked.length ? picked.join("\n") : "";
-};
-
 const resolveParentPath = (currentPath) => {
   if (!currentPath || currentPath === "/workspace") return "/workspace";
   const trimmed = currentPath.replace(/\/$/, "");
@@ -71,50 +34,28 @@ const resolveParentPath = (currentPath) => {
 };
 
 export default function App() {
-  const [config, setConfig] = useState(null);
-  const [models, setModels] = useState([]);
-  const [presets, setPresets] = useState({});
   const [sessions, setSessions] = useState([]);
   const [activeSessionId, setActiveSessionId] = useState(null);
   const [sessionDetail, setSessionDetail] = useState(null);
   const [draft, setDraft] = useState("");
-  const [plan, setPlan] = useState("");
-  const [planEdited, setPlanEdited] = useState(false);
-  const [mode, setMode] = useState("assistant");
-  const [selectedModel, setSelectedModel] = useState("");
-  const [approvals, setApprovals] = useState(defaultApprovals);
-  const [requiredApprovals, setRequiredApprovals] = useState(defaultApprovals);
   const [notice, setNotice] = useState("");
-  const [inspectorTab, setInspectorTab] = useState("tools");
-  const [toolEvents, setToolEvents] = useState([]);
   const [log, setLog] = useState("");
   const [lastLogAt, setLastLogAt] = useState(null);
-  const [runningSince, setRunningSince] = useState(null);
   const [diff, setDiff] = useState("");
   const [changedFiles, setChangedFiles] = useState([]);
-  const [fsPath, setFsPath] = useState("/workspace");
-  const [fsEntries, setFsEntries] = useState([]);
-  const [filePreview, setFilePreview] = useState("");
-  const [logFilter, setLogFilter] = useState({
-    error: false,
-    warn: false,
-    tool: false,
-    agent: false
-  });
-  const [statusFilter, setStatusFilter] = useState("all");
-  const [searchTerm, setSearchTerm] = useState("");
-  const [debugEnabled, setDebugEnabled] = useState(false);
-  const [advancedOpen, setAdvancedOpen] = useState(false);
-  const [runSummary, setRunSummary] = useState(null);
-  const [planExpanded, setPlanExpanded] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [activeDrawerTab, setActiveDrawerTab] = useState("steps"); // steps|approval|debug|settings
+  const [permissionDefault, setPermissionDefault] = useState("full"); // basic|full (이 브라우저 저장)
   const [leftCollapsed, setLeftCollapsed] = useState(false);
-  const [planMode, setPlanMode] = useState(false);
-  const [showSessionMeta, setShowSessionMeta] = useState(false);
-  const [approvalModalOpen, setApprovalModalOpen] = useState(false);
+  const [health, setHealth] = useState({ ok: true, running: false });
+  const [stopping, setStopping] = useState(false);
+  const [isNarrow, setIsNarrow] = useState(false);
 
   const lastSessionIdRef = useRef(null);
+  const sessionsRef = useRef([]);
+
+  useEffect(() => {
+    sessionsRef.current = sessions;
+  }, [sessions]);
 
   const activeRun = useMemo(() => {
     const runs = sessionDetail?.runs ?? [];
@@ -130,121 +71,188 @@ export default function App() {
   }, [sessionDetail]);
 
   useEffect(() => {
-    const loadConfig = async () => {
-      try {
-        const res = await fetch("/api/config");
-        const data = await res.json();
-        setConfig(data);
-        setModels(data.models ?? []);
-        setPresets(data.presets ?? {});
-        if (!selectedModel && data.models?.length) {
-          setSelectedModel(data.models[0].id);
-        }
-      } catch {
-        // ignore
-      }
-    };
+    try {
+      const saved = localStorage.getItem("309agent.permissionDefault");
+      if (saved === "full") setPermissionDefault("full");
+      else if (saved === "basic") setPermissionDefault("basic");
+      else setPermissionDefault("full");
+    } catch {
+      // ignore
+    }
+  }, []);
 
-    loadConfig();
-  }, [selectedModel]);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 1200px)");
+    const onChange = () => setIsNarrow(Boolean(mq.matches));
+    onChange();
+    if (mq.addEventListener) mq.addEventListener("change", onChange);
+    else mq.addListener(onChange);
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener("change", onChange);
+      else mq.removeListener(onChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    let delayMs = 1000;
+    const poll = async () => {
+      try {
+        const res = await apiFetch("/api/health");
+        if (!res.ok) throw new Error("bad_status");
+        const data = await res.json();
+        if (!cancelled) setHealth(data);
+        delayMs = 1000;
+      } catch {
+        if (!cancelled) setHealth({ ok: false, running: false });
+        delayMs = Math.min(Math.round(delayMs * 1.8), 15000);
+      }
+      if (!cancelled) setTimeout(poll, delayMs);
+    };
+    poll();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     let mounted = true;
+    let delayMs = 2000;
     const fetchSessions = async () => {
       try {
-        const res = await fetch("/api/sessions");
+        const res = await apiFetch("/api/sessions");
         const data = await res.json();
         if (!mounted) return;
         setSessions(data);
-        if (!activeSessionId && data.length) {
+        delayMs = 2000;
+        if (!data.length) return;
+        if (!activeSessionId) {
+          setActiveSessionId(data[0].id);
+          return;
+        }
+        // Active session may have been deleted (404). If so, fall back to the first session.
+        if (!data.some((s) => s.id === activeSessionId)) {
           setActiveSessionId(data[0].id);
         }
       } catch {
-        // ignore
+        delayMs = Math.min(Math.round(delayMs * 1.8), 15000);
       }
     };
     fetchSessions();
-    const timer = setInterval(fetchSessions, 2000);
+    let timer;
+    const loop = async () => {
+      await fetchSessions();
+      if (!mounted) return;
+      timer = setTimeout(loop, delayMs);
+    };
+    timer = setTimeout(loop, delayMs);
     return () => {
       mounted = false;
-      clearInterval(timer);
+      clearTimeout(timer);
     };
   }, [activeSessionId]);
 
   useEffect(() => {
     if (!activeSessionId) return;
     let mounted = true;
+    let delayMs = 2000;
     const fetchSession = async () => {
       try {
-        const res = await fetch(`/api/sessions/${activeSessionId}`);
+        const res = await apiFetch(`/api/sessions/${activeSessionId}`);
+        if (res.status === 404) {
+          if (!mounted) return;
+          setNotice("선택한 세션을 찾을 수 없습니다(삭제됨). 다른 세션으로 전환합니다.");
+          setSessionDetail(null);
+          setActiveSessionId(null);
+          return;
+        }
         if (!res.ok) return;
         const data = await res.json();
         if (!mounted) return;
         setSessionDetail(data);
+        delayMs = 2000;
       } catch {
-        // ignore
+        delayMs = Math.min(Math.round(delayMs * 1.8), 15000);
       }
     };
     fetchSession();
-    const timer = setInterval(fetchSession, 2000);
+    let timer;
+    const loop = async () => {
+      await fetchSession();
+      if (!mounted) return;
+      timer = setTimeout(loop, delayMs);
+    };
+    timer = setTimeout(loop, delayMs);
     return () => {
       mounted = false;
-      clearInterval(timer);
+      clearTimeout(timer);
     };
   }, [activeSessionId]);
 
   useEffect(() => {
-    if (!sessionDetail) return;
+    if (!sessionDetail?.id) return;
     if (lastSessionIdRef.current !== sessionDetail.id) {
       setDraft("");
-      setPlan(sessionDetail.plan || "");
-      setPlanEdited(false);
-      setMode(sessionDetail.modelPreset || "assistant");
-      setSelectedModel(sessionDetail.modelId || selectedModel);
-      setApprovals(sessionDetail.approvals || defaultApprovals);
-      setPlanExpanded(false);
-      setApprovalModalOpen(false);
+      setNotice("");
+      setLog("");
+      setLastLogAt(null);
+      setDiff("");
+      setChangedFiles([]);
       lastSessionIdRef.current = sessionDetail.id;
-      return;
     }
-    if (!planEdited) {
-      setPlan(sessionDetail.plan || "");
-    }
-  }, [sessionDetail, planEdited, selectedModel]);
+  }, [sessionDetail?.id]);
 
-  useEffect(() => {
-    if (debugEnabled) return;
-    if (activeDrawerTab === "debug") setActiveDrawerTab("steps");
-  }, [debugEnabled, activeDrawerTab]);
-
-  useEffect(() => {
-    if (sessionDetail?.requiredApprovals) {
-      setRequiredApprovals({ ...defaultApprovals, ...sessionDetail.requiredApprovals });
-      return;
+  const sanitizeUserText = (value) => {
+    let text = String(value ?? "");
+    if (!text.trim()) return "";
+    // Remove tool-call fragments and common meta markers.
+    text = text
+      .replace(/<tool_call[^>]*>[\s\S]*?<\/tool_call>/g, "")
+      .replace(/<tool_call[^>]*>/g, "")
+      .replace(/<\/tool_call>/g, "");
+    // Drop meta-only lines.
+    text = text
+      .split("\n")
+      .filter((line) => {
+        const t = line.trim();
+        if (!t) return true;
+        if (/^(NEEDS_APPROVAL|CAPABILITY_GAP|GAP_DESC|LEARN_SPEC|EVALUATION_JSON)\s*:/i.test(t)) {
+          return false;
+        }
+        return true;
+      })
+      .join("\n");
+    // If the message looks like broken JSON/object noise, replace it.
+    const noisy = (text.match(/[\]\}\{]{1}/g) ?? []).length;
+    const letters = (text.match(/[A-Za-z가-힣]/g) ?? []).length;
+    if (noisy > 12 && letters < 10) {
+      return "(세부 내용은 Developer Drawer에서 확인하세요.)";
     }
-    const base = sessionDetail?.request ?? "";
-    const text = `${base}\n${plan}`;
-    const nextRequired = { ...defaultApprovals };
-    Object.entries(approvalKeywords).forEach(([key, regex]) => {
-      nextRequired[key] = regex.test(text);
-    });
-    setRequiredApprovals(nextRequired);
-  }, [sessionDetail?.requiredApprovals, sessionDetail?.request, plan]);
+    return text.trim();
+  };
+
+  const viewMessages = useMemo(() => {
+    const base = sessionDetail?.messages ?? [];
+    return base
+      .filter((m) => m?.role !== "system")
+      .map((m) =>
+        m?.role === "assistant" ? { ...m, text: sanitizeUserText(m.text) } : m
+      )
+      .filter((m) => (m?.text ?? "").trim().length > 0);
+  }, [sessionDetail?.messages]);
 
   useEffect(() => {
     if (!activeRun) {
       setLog("");
       setLastLogAt(null);
-      setRunningSince(null);
       return;
     }
     setLog("");
     setLastLogAt(null);
-    if (activeRun.status === "running") {
-      setRunningSince(Date.now());
-    }
 
-    const es = new EventSource(`/api/runs/${activeRun.id}/stream`);
+    const es = new EventSource(apiUrl(`/api/runs/${activeRun.id}/stream`), {
+      withCredentials: Boolean(API_BASE)
+    });
     es.addEventListener("log", (event) => {
       const payload = JSON.parse(event.data || "{}");
       if (payload.data) {
@@ -264,35 +272,11 @@ export default function App() {
   }, [activeRun?.id]);
 
   useEffect(() => {
-    if (!activeRun || !debugEnabled) return;
-    let cancelled = false;
-    const pollTools = async () => {
-      if (cancelled) return;
-      try {
-        const res = await fetch(`/api/runs/${activeRun.id}/tools`);
-        if (res.ok) {
-          const data = await res.json();
-          setToolEvents(data?.events ?? []);
-        }
-      } catch {
-        // ignore
-      }
-      if (!cancelled) {
-        setTimeout(pollTools, 2000);
-      }
-    };
-    pollTools();
-    return () => {
-      cancelled = true;
-    };
-  }, [activeRun?.id, debugEnabled]);
-
-  useEffect(() => {
     if (!activeRun || activeRun.status === "running") return;
     if (sessionDetail?.pipeline?.phase !== "done") return;
     const loadArtifacts = async () => {
       try {
-        const res = await fetch(`/api/runs/${activeRun.id}/artifacts`);
+        const res = await apiFetch(`/api/runs/${activeRun.id}/artifacts`);
         if (res.ok) {
           const data = await res.json();
           setDiff(data.diff || "");
@@ -305,87 +289,32 @@ export default function App() {
     loadArtifacts();
   }, [activeRun?.id, activeRun?.status, sessionDetail?.pipeline?.phase]);
 
-  useEffect(() => {
-    if (!debugEnabled || !activeRun) {
-      setRunSummary(null);
-      return;
+  const actSummary = summarizeLog(log, 6);
+  const actLogPreview = summarizeLog(log, 80);
+
+  const globalRunning = Boolean(health?.running);
+  const runningThisSession =
+    globalRunning && Boolean(sessionDetail?.id) && health?.activeSessionId === sessionDetail?.id;
+  const disabledControls = globalRunning || stopping;
+
+  const persistPermissionDefault = (next) => {
+    const normalized = next === "full" ? "full" : "basic";
+    setPermissionDefault(normalized);
+    try {
+      localStorage.setItem("309agent.permissionDefault", normalized);
+    } catch {
+      // ignore
     }
-    let cancelled = false;
-    const loadSummary = async () => {
-      try {
-        const res = await fetch(`/api/runs/${activeRun.id}/summary`);
-        if (res.ok) {
-          const data = await res.json();
-          if (!cancelled) setRunSummary(data);
-        }
-      } catch {
-        // ignore
-      }
-    };
-    loadSummary();
-    const timer = setInterval(loadSummary, 4000);
-    return () => {
-      cancelled = true;
-      clearInterval(timer);
-    };
-  }, [activeRun?.id, debugEnabled]);
-
-  useEffect(() => {
-    const loadFiles = async () => {
-      try {
-        const res = await fetch(`/api/fs/list?path=${encodeURIComponent(fsPath)}`);
-        if (!res.ok) return;
-        const data = await res.json();
-        setFsPath(data.path);
-        setFsEntries(data.entries || []);
-      } catch {
-        // ignore
-      }
-    };
-    if (debugEnabled) loadFiles();
-  }, [fsPath, debugEnabled]);
-
-  const filteredLog = useMemo(() => filterLogs(log, logFilter), [log, logFilter]);
-  const terminalText = useMemo(() => {
-    const extracted = extractTerminal(log);
-    return extracted || "터미널 로그가 없습니다.";
-  }, [log]);
-
-  const canRunAct = useMemo(() => {
-    if (!plan.trim()) return false;
-    return Object.entries(requiredApprovals).every(([key, required]) => {
-      if (!required) return true;
-      return Boolean(approvals[key]);
-    });
-  }, [requiredApprovals, approvals, plan]);
-
-  const approvalsNeededCount = useMemo(() => {
-    return Object.entries(requiredApprovals).reduce((acc, [key, needed]) => {
-      if (!needed) return acc;
-      return acc + (approvals[key] ? 0 : 1);
-    }, 0);
-  }, [requiredApprovals, approvals]);
-
-  useEffect(() => {
-    if (sessionDetail?.pipeline?.phase !== "needs_approval") return;
-    if (approvalsNeededCount <= 0) return;
-    setApprovalModalOpen(true);
-  }, [sessionDetail?.pipeline?.phase, approvalsNeededCount]);
-
-  const disabledControls =
-    sessionDetail?.status === "running" || sessionDetail?.status === "planning";
+  };
 
   const handleNewChat = async () => {
     setNotice("");
+    if (disabledControls) return;
     try {
-      const res = await fetch("/api/chat/new", {
+        const res = await apiFetch("/api/chat/new", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          mode,
-          modelId: selectedModel,
-          approvals
-        })
+        body: JSON.stringify({ permission: permissionDefault })
       });
       if (!res.ok) {
         setNotice("새 채팅을 만들지 못했습니다.");
@@ -393,316 +322,281 @@ export default function App() {
       }
       const data = await res.json();
       setActiveSessionId(data.session.id);
-      setPlanEdited(false);
       setDraft("");
-      setNotice("");
     } catch {
       setNotice("서버에 연결할 수 없습니다.");
     }
   };
 
-  const sendChat = async ({ planOnly }) => {
+  const handleDeleteSession = async (sessionId) => {
+    if (!sessionId) return;
+    if (!confirm("이 세션을 삭제할까요?")) return;
+    try {
+      const res = await apiFetch(`/api/sessions/${encodeURIComponent(sessionId)}`, {
+        method: "DELETE"
+      });
+      if (!res.ok) {
+        setNotice(res.status === 409 ? "실행 중인 세션은 삭제할 수 없습니다." : "삭제 실패");
+        return;
+      }
+      if (activeSessionId === sessionId) {
+        // 다음 세션을 선택(없으면 새로 생성)
+        const next = sessions.find((s) => s.id !== sessionId)?.id ?? null;
+        if (next) setActiveSessionId(next);
+        else await handleNewChat();
+      }
+    } catch {
+      setNotice("서버에 연결할 수 없습니다.");
+    }
+  };
+
+  const sendChat = async () => {
     if (disabledControls) return;
+    if (!draft.trim()) return;
     setNotice("");
     try {
-      const res = await fetch("/api/chat/send", {
+      const res = await apiFetch("/api/chat/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           sessionId: sessionDetail?.id ?? null,
           message: draft,
-          mode,
-          modelId: selectedModel,
-          planMode: Boolean(planOnly),
-          approvals
+          agentMode: "auto",
+          permission: permissionDefault
         })
       });
       if (!res.ok) {
-        setNotice(
-          res.status === 409 ? "이미 실행 중입니다." : "요청을 시작하지 못했습니다."
-        );
+        setNotice(res.status === 409 ? "이미 실행 중입니다." : "요청을 시작하지 못했습니다.");
         return;
       }
       const data = await res.json();
       if (data?.session?.id) setActiveSessionId(data.session.id);
-      setPlanEdited(false);
       setDraft("");
-      setNotice(data.rewritten ? "경로가 workspace 기준으로 자동 변환되었습니다." : "");
-      openDrawer("steps");
+      setNotice(data.rewritten ? "경로(/workspace)가 자동으로 변환되었습니다." : "");
     } catch {
       setNotice("서버에 연결할 수 없습니다.");
     }
   };
 
-  const handleContinue = async () => {
+  const handleContinue = async (permissionOverride = null) => {
     if (!sessionDetail) return;
     if (disabledControls) return;
     setNotice("");
+    const permission = permissionOverride ?? permissionDefault;
     try {
-      const res = await fetch("/api/chat/continue", {
+      const res = await apiFetch("/api/chat/continue", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           sessionId: sessionDetail.id,
-          plan,
-          modelId: selectedModel,
-          approvals
+          permission
         })
       });
       if (!res.ok) {
-        if (res.status === 409) {
-          setApprovalModalOpen(true);
-          return;
-        }
-        setNotice("실행을 시작하지 못했습니다.");
+        setNotice(res.status === 409 ? "승인이 필요합니다." : "실행을 시작하지 못했습니다.");
         return;
       }
       setNotice("");
-      openDrawer("steps");
     } catch {
       setNotice("서버에 연결할 수 없습니다.");
     }
   };
 
-  const handleOpenFile = async (entry) => {
-    if (entry.type === "dir") {
-      setFsPath(entry.path);
-      return;
-    }
+  const handleStop = async () => {
+    if (!health?.activeRunId) return;
+    if (!globalRunning) return;
+    setStopping(true);
+    setNotice("");
     try {
-      const res = await fetch(`/api/fs/read?path=${encodeURIComponent(entry.path)}`);
-      if (!res.ok) return;
-      const data = await res.json();
-      setFilePreview(data.content || "");
+      const res = await apiFetch(`/api/runs/${health.activeRunId}/stop`, {
+        method: "POST"
+      });
+      if (!res.ok) {
+        setNotice("중지를 요청하지 못했습니다.");
+      }
     } catch {
-      // ignore
+      setNotice("서버에 연결할 수 없습니다.");
+    } finally {
+      setStopping(false);
     }
   };
 
-  const handleNavigate = (target) => {
-    if (target === "..") {
-      setFsPath(resolveParentPath(fsPath));
-    } else {
-      setFsPath(target);
-    }
+  const runningState = stopping ? "stopping" : globalRunning ? "running" : "idle";
+
+  const toggleLeft = () => {
+    setLeftCollapsed((prev) => {
+      const next = !prev;
+      // 좁은 화면에서는 좌/우 오버레이를 동시에 열지 않는다.
+      if (isNarrow && !next) setDrawerOpen(false);
+      return next;
+    });
   };
 
-  const handleLogFilterChange = (key) => {
-    setLogFilter((prev) => ({ ...prev, [key]: !prev[key] }));
-  };
-
-  const actSummary = summarizeLog(log, 6);
-  const actLogPreview = summarizeLog(log, 80);
-
-  const openDrawer = (tab) => {
-    setDrawerOpen(true);
-    setActiveDrawerTab(tab);
-  };
-
-  const handleSend = async () => {
-    if (disabledControls) return;
-    if (!draft.trim()) return;
-    await sendChat({ planOnly: Boolean(planMode) });
-  };
-
-  const handleSendPlan = async () => {
-    if (disabledControls) return;
-    if (!draft.trim()) return;
-    await sendChat({ planOnly: true });
+  const toggleDrawer = () => {
+    setDrawerOpen((prev) => {
+      const next = !prev;
+      // 좁은 화면에서는 좌/우 오버레이를 동시에 열지 않는다.
+      if (isNarrow && next) setLeftCollapsed(true);
+      return next;
+    });
   };
 
   return (
     <AppShell
+      onCloseOverlays={() => {
+        if (isNarrow) {
+          setLeftCollapsed(true);
+          setDrawerOpen(false);
+        }
+      }}
       left={
         <SessionList
           sessions={sessions}
           activeId={activeSessionId}
-          searchTerm={searchTerm}
-          statusFilter={statusFilter}
-          onSearch={setSearchTerm}
-          onFilter={setStatusFilter}
           onSelect={setActiveSessionId}
-          debugEnabled={debugEnabled}
-          onToggleDebug={() =>
-            setDebugEnabled((prev) => {
-              const next = !prev;
-              if (next) {
-                openDrawer("debug");
-              } else if (activeDrawerTab === "debug") {
-                setActiveDrawerTab("steps");
-              }
-              return next;
-            })
-          }
-          mode={mode}
-          showMeta={showSessionMeta}
+          onNewChat={handleNewChat}
+          onDelete={handleDeleteSession}
+          onClose={() => setLeftCollapsed(true)}
+          collapsed={leftCollapsed}
         />
       }
       center={
         <div className="main-chat">
           <TopBarMinimal
-            title={sessionDetail?.title || "New chat"}
-            status={sessionDetail?.status || "idle"}
             leftCollapsed={leftCollapsed}
-            onToggleLeft={() => setLeftCollapsed((prev) => !prev)}
-            onNewChat={handleNewChat}
-            approvalsNeededCount={approvalsNeededCount}
-            debugEnabled={debugEnabled}
             drawerOpen={drawerOpen}
-            onOpenSteps={() => openDrawer("steps")}
-            onOpenApproval={() => openDrawer("approval")}
-            onOpenDebug={() => {
-              if (!debugEnabled) setDebugEnabled(true);
-              openDrawer("debug");
-            }}
-            onOpenSettings={() => openDrawer("settings")}
-            onCloseDrawer={() => setDrawerOpen(false)}
+            onToggleLeft={toggleLeft}
+            onToggleDrawer={toggleDrawer}
           />
 
           <div className="chat-scroll">
             <ChatThread
-              title="OpenClaw"
-              status={sessionDetail?.status || "idle"}
-              phase={sessionDetail?.pipeline?.phase || "idle"}
-              messages={sessionDetail?.messages || []}
-              notice={notice}
-              onOpenSteps={() => openDrawer("steps")}
+              messages={viewMessages}
+              typing={
+                (sessionDetail?.pipeline?.phase === "planning" ||
+                  sessionDetail?.pipeline?.phase === "acting" ||
+                  sessionDetail?.pipeline?.phase === "verifying") ??
+                false
+              }
             />
           </div>
 
-          <div className="composer-sticky">
-            <PromptComposer
-              request={draft}
-              onChangeRequest={setDraft}
-              onSend={handleSend}
-              onSendPlan={handleSendPlan}
-              mode={mode}
-              onChangeMode={(nextMode) => {
-                setMode(nextMode);
-                if (presets[nextMode]) setSelectedModel(presets[nextMode]);
-              }}
-              models={models}
-              selectedModel={selectedModel}
-              onChangeModel={setSelectedModel}
-              planMode={planMode}
-              onTogglePlanMode={(next) => setPlanMode(Boolean(next))}
-              debugEnabled={debugEnabled}
-              onToggleDebug={(next) => setDebugEnabled(Boolean(next))}
-              disabled={disabledControls}
-            />
-          </div>
+          <PromptComposer
+            request={draft}
+            onChangeRequest={setDraft}
+            onSend={sendChat}
+            onStop={handleStop}
+            runningState={runningState}
+            disabled={disabledControls}
+            progressUi={(() => {
+              const session = sessionDetail ?? null;
+              const phase = session?.pipeline?.phase ?? "idle";
+              const pendingContinue = Boolean(session?.pipeline?.pendingContinue);
+              const running = Boolean(health?.running);
+              const show =
+                running ||
+                pendingContinue ||
+                phase === "needs_approval" ||
+                phase === "needs_user" ||
+                phase === "planning" ||
+                phase === "acting" ||
+                phase === "verifying" ||
+                phase === "evaluating" ||
+                phase === "replanning" ||
+                Boolean(notice);
 
-          <ApproveModal
-            open={approvalModalOpen}
-            pendingCount={approvalsNeededCount}
-            onCancel={() => setApprovalModalOpen(false)}
-            onApprove={() => {
-              setApprovalModalOpen(false);
-              openDrawer("approval");
-            }}
+              if (!show) return { visible: false };
+
+              let label = "대기";
+              if (!health?.ok) label = "연결 실패";
+              else if (running && !runningThisSession) label = "다른 작업 실행 중";
+              else if (phase === "needs_approval") label = "승인 필요";
+              else if (phase === "needs_user") label = "추가 정보 필요";
+              else if (pendingContinue) label = "추가 정보 필요";
+              else if (phase === "planning") label = "기획중...";
+              else if (phase === "acting") label = "작업중...";
+              else if (phase === "verifying") label = "검증중...";
+              else if (session?.status === "failed") label = "실패";
+              else if (session?.status === "cancelled") label = "중지됨";
+              else if (session?.status === "success" || phase === "done") label = "완료됨";
+
+              const actions = [];
+              if (running && !runningThisSession && health?.activeSessionId) {
+                actions.push({
+                  id: "show-running",
+                  label: "보기",
+                  kind: "ghost",
+                  onClick: () => setActiveSessionId(health.activeSessionId)
+                });
+              }
+
+              if (phase === "needs_approval") {
+                actions.push({
+                  id: "allow-once",
+                  label: "계속",
+                  kind: "primary",
+                  onClick: () => handleContinue("full")
+                });
+                actions.push({
+                  id: "keep-basic",
+                  label: "취소",
+                  kind: "ghost",
+                  onClick: () => persistPermissionDefault("basic")
+                });
+                actions.push({
+                  id: "allow-always",
+                  label: "항상 허용",
+                  kind: "link",
+                  onClick: () => {
+                    persistPermissionDefault("full");
+                    handleContinue("full");
+                  }
+                });
+              } else if (pendingContinue) {
+                actions.push({
+                  id: "continue",
+                  label: "계속 실행",
+                  kind: "primary",
+                  onClick: () => handleContinue()
+                });
+              }
+
+              return {
+                visible: true,
+                label,
+                spinning: running && runningThisSession,
+                notice: notice || "",
+                actions
+              };
+            })()}
           />
         </div>
       }
       right={
         <div className="right-drawer">
           <div className="right-drawer-header">
-            <div className="right-title">패널</div>
-            <button className="ghost tiny" onClick={() => setDrawerOpen(false)}>
-              닫기
+            <button
+              className="ghost icon-button"
+              type="button"
+              title="패널 닫기"
+              onClick={() => setDrawerOpen(false)}
+            >
+              ✕
             </button>
           </div>
-
-          <RightDrawerTabs
-            active={activeDrawerTab}
-            onChange={setActiveDrawerTab}
-            debugEnabled={debugEnabled}
-          />
-
           <div className="right-drawer-body">
-            {activeDrawerTab === "steps" && (
-              <ExecutionSteps
-                request={sessionDetail?.request || ""}
-                plan={plan}
-                planExpanded={planExpanded}
-                onTogglePlanExpanded={() => setPlanExpanded((prev) => !prev)}
-                onChangePlan={(value) => {
-                  setPlanEdited(true);
-                  setPlan(value);
-                }}
-                status={sessionDetail?.status}
-                phase={sessionDetail?.pipeline?.phase || "idle"}
-                pendingContinue={Boolean(sessionDetail?.pipeline?.pendingContinue)}
-                onContinue={handleContinue}
-                actSummary={actSummary}
-                actLogPreview={actLogPreview}
-                logs={log}
-                changedFiles={changedFiles}
-                diffText={diff}
-              />
-            )}
-
-            {activeDrawerTab === "approval" && (
-              <ApprovalGate
-                approvals={approvals}
-                required={requiredApprovals}
-                onToggle={(key) =>
-                  setApprovals((prev) => ({ ...prev, [key]: !prev[key] }))
-                }
-              />
-            )}
-
-            {activeDrawerTab === "debug" && debugEnabled ? (
-              <Inspector
-                activeTab={inspectorTab}
-                onTabChange={setInspectorTab}
-                toolEvents={toolEvents}
-                terminalText={terminalText}
-                diffText={diff}
-                files={changedFiles}
-                fsPath={fsPath}
-                fsEntries={fsEntries}
-                filePreview={filePreview}
-                onNavigate={handleNavigate}
-                onOpenFile={handleOpenFile}
-                logs={filteredLog}
-                logFilter={logFilter}
-                onLogFilterChange={handleLogFilterChange}
-                advancedOpen={advancedOpen}
-                onAdvancedToggle={() => setAdvancedOpen((prev) => !prev)}
-                config={config}
-                summary={runSummary}
-              />
-            ) : activeDrawerTab === "debug" ? (
-              <div className="empty">Debug가 꺼져 있습니다. 메뉴에서 켜세요.</div>
-            ) : null}
-
-            {activeDrawerTab === "settings" && (
-              <div className="settings-panel">
-                <div className="panel-title">Settings</div>
-                <div className="info-grid">
-                  <div className="meta-label">Plan 모드</div>
-                  <div>
-                    <input
-                      type="checkbox"
-                      checked={Boolean(planMode)}
-                      onChange={() => setPlanMode((prev) => !prev)}
-                    />
-                  </div>
-                  <div className="meta-label">Debug</div>
-                  <div>
-                    <input
-                      type="checkbox"
-                      checked={Boolean(debugEnabled)}
-                      onChange={() => setDebugEnabled((prev) => !prev)}
-                    />
-                  </div>
-                </div>
-              </div>
-            )}
+            <ExecutionSteps
+              session={sessionDetail}
+              actSummary={actSummary}
+              actLogPreview={actLogPreview}
+              logs={log}
+              changedFiles={changedFiles}
+              diffText={diff}
+            />
           </div>
         </div>
       }
-      mode={mode}
+      mode={"assistant"}
       leftCollapsed={leftCollapsed}
       drawerOpen={drawerOpen}
     />

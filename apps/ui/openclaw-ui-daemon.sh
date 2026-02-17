@@ -22,21 +22,7 @@ if [[ ! -x "$PNPM_BIN" ]]; then
   exit 1
 fi
 
-if ! docker info >/dev/null 2>&1; then
-  echo "Docker Desktop이 꺼져 있습니다." >&2
-  exit 1
-fi
-
-if ! docker image inspect openclaw-sandbox:local >/dev/null 2>&1; then
-  /Users/a309/Documents/Agent309/wOpenclaw/apps/ui/openclaw-sandbox-setup.sh
-fi
-
 cd "$WORKDIR"
-
-pid=$(lsof -nP -t -iTCP:4310 -sTCP:LISTEN || true)
-if [[ -n "$pid" ]]; then
-  kill "$pid" >/dev/null 2>&1 || true
-fi
 
 if [[ ! -f "$DIST_INDEX" ]]; then
   if [[ -x "$VITE_BIN" ]]; then
@@ -46,4 +32,5 @@ if [[ ! -f "$DIST_INDEX" ]]; then
   fi
 fi
 
-"$NODE_BIN" "$WORKDIR/server/launcher.mjs" >> "$LOG_DIR/ui-launcher.log" 2>&1
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] start ui server" >> "$LOG_DIR/ui-launcher.log"
+exec "$NODE_BIN" "$WORKDIR/server/index.mjs" >> "$LOG_DIR/ui-launcher.log" 2>&1

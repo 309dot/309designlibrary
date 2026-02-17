@@ -1,0 +1,14 @@
+{
+  "id": "code-04",
+  "title": "경로 rewrite(/workspace) 검증(코드)",
+  "agentMode": "code",
+  "permission": "basic",
+  "message": "/workspace/workspace/__eval__/probe-4.txt 파일을 만들고 \"path-rewrite-ok\"를 써. 그리고 그 파일을 읽어서 그대로 보여줘.",
+  "expected": {
+    "evaluationAchieved": "yes",
+    "evidenceMin": "filesCreated>=1",
+    "verifyRequired": true,
+    "mustHaveToolEvents": true
+  }
+}
+

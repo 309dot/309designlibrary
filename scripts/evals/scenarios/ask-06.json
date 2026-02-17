@@ -1,0 +1,14 @@
+{
+  "id": "ask-06",
+  "title": "짧은 리포트(Ask)",
+  "agentMode": "ask",
+  "permission": "basic",
+  "message": "자동 에이전트 성능 KPI 6개를 한 줄씩만 요약해줘(설명 금지).",
+  "expected": {
+    "evaluationAchieved": "yes",
+    "evidenceMin": "none",
+    "verifyRequired": false,
+    "mustHaveToolEvents": false
+  }
+}
+

@@ -67,3 +67,11 @@ OpenClaw가 "Sandbox image not found"를 내면 아래 스크립트를 한번 �
 - API: `http://localhost:4310/api/*`
 - 로그: `/Users/a309/Documents/Agent309/wOpenclaw/apps/ui/.data`
 
+## 웹(하이브리드) 배포
+
+- 프론트를 웹으로 배포할 때는 `VITE_API_BASE_URL`을 API 터널 주소로 지정합니다.
+- 예시:
+```bash
+VITE_API_BASE_URL=https://api.309agent.example.com
+```
+- 서버 CORS는 `CORS_ORIGINS`로 허용 도메인을 제한합니다.

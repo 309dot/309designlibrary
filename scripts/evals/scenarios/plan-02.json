@@ -1,0 +1,14 @@
+{
+  "id": "plan-02",
+  "title": "리스크 포함 계획(Plan)",
+  "agentMode": "plan",
+  "permission": "basic",
+  "message": "목표: tools 타임라인 매핑 버그를 고친다. 리스크/대안 포함해서 계획만 작성해.",
+  "expected": {
+    "evaluationAchieved": "no",
+    "evidenceMin": "none",
+    "verifyRequired": false,
+    "mustHaveToolEvents": false
+  }
+}
+

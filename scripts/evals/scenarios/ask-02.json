@@ -1,0 +1,14 @@
+{
+  "id": "ask-02",
+  "title": "불릿 3개(Ask)",
+  "agentMode": "ask",
+  "permission": "basic",
+  "message": "다음 문장의 핵심을 3개 불릿으로 정리해: 자동형 에이전트는 계획보다 검증이 중요하다.",
+  "expected": {
+    "evaluationAchieved": "yes",
+    "evidenceMin": "none",
+    "verifyRequired": false,
+    "mustHaveToolEvents": false
+  }
+}
+

@@ -1,0 +1,14 @@
+{
+  "id": "code-07",
+  "title": "증거 0이면 성공 금지(코드, 의도적 차단)",
+  "agentMode": "code",
+  "permission": "basic",
+  "message": "파일을 수정하거나 명령을 실행하지 말고, 지금 워크스페이스 상태를 한 줄로만 보고해.",
+  "expected": {
+    "evaluationAchieved": "no",
+    "evidenceMin": "none",
+    "verifyRequired": true,
+    "mustHaveToolEvents": false
+  }
+}
+

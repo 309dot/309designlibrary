@@ -1,0 +1,14 @@
+{
+  "id": "ask-01",
+  "title": "한 줄 요약(Ask)",
+  "agentMode": "ask",
+  "permission": "basic",
+  "message": "다음 문장을 한 줄로 요약해: 로컬 에이전트 성능은 측정 없이는 개선할 수 없다.",
+  "expected": {
+    "evaluationAchieved": "yes",
+    "evidenceMin": "none",
+    "verifyRequired": false,
+    "mustHaveToolEvents": false
+  }
+}
+

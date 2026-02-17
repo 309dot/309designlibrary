@@ -6,9 +6,42 @@ import fsp from "fs/promises";
 import path from "path";
 import crypto from "crypto";
 import { fileURLToPath } from "url";
+import { extractUrls, fetchWebDocument, hashUrl } from "./rag/web.mjs";
+import { chunkText } from "./rag/chunk.mjs";
+import { rankChunksByEmbedding } from "./rag/embed.mjs";
 
 const app = express();
-app.use(cors());
+const DEFAULT_PERMISSION =
+  String(process.env.DEFAULT_PERMISSION ?? "full").toLowerCase() === "basic"
+    ? "basic"
+    : "full";
+const CORS_ORIGINS = String(process.env.CORS_ORIGINS ?? "")
+  .split(",")
+  .map((v) => v.trim())
+  .filter(Boolean);
+const LOCAL_ORIGINS = new Set([
+  "http://localhost:4310",
+  "http://127.0.0.1:4310",
+  "http://localhost:5173",
+  "http://127.0.0.1:5173"
+]);
+const allowedOrigins =
+  CORS_ORIGINS.length > 0
+    ? new Set([...LOCAL_ORIGINS, ...CORS_ORIGINS])
+    : null;
+
+app.use(
+  cors({
+    credentials: true,
+    origin(origin, callback) {
+      if (!origin) return callback(null, true);
+      if (!allowedOrigins || allowedOrigins.has(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error("not_allowed_origin"), false);
+    }
+  })
+);
 app.use(express.json({ limit: "2mb" }));
 
 const WORKSPACE =
@@ -18,6 +51,11 @@ const RUNS_DIR = path.join(DATA_DIR, "runs");
 const SESSIONS_DIR = path.join(DATA_DIR, "sessions");
 const MEMORY_DIR = path.join(DATA_DIR, "memory");
 const GLOBAL_MEMORY_PATH = path.join(MEMORY_DIR, "global.md");
+const TMP_DIR = path.join(DATA_DIR, "tmp");
+const RAG_DIR = path.join(DATA_DIR, "rag");
+const RAG_WEB_CACHE_DIR = path.join(RAG_DIR, "web-cache");
+const CAPABILITIES_DIR = path.join(DATA_DIR, "capabilities");
+const CAP_REGISTRY_PATH = path.join(CAPABILITIES_DIR, "registry.json");
 
 const OPENCLAW_BIN =
   process.env.OPENCLAW_BIN ?? "/Users/a309/.openclaw/bin/openclaw";
@@ -28,11 +66,97 @@ const OPENCLAW_STATE_DIR =
   process.env.OPENCLAW_STATE_DIR ??
   "/Users/a309/Documents/Agent309/wOpenclaw/.openclaw-state";
 const OPENCLAW_LOG_DIR = process.env.OPENCLAW_LOG_DIR ?? "/tmp/openclaw";
+const MCP_CONFIG_PATH = process.env.MCP_CONFIG_PATH ?? path.join(WORKSPACE, "mcp.json");
+
+const DEFAULT_MCP_CONFIG = {
+  servers: {
+    "figma-desktop": {
+      type: "http",
+      url: "http://127.0.0.1:3845/mcp"
+    }
+  }
+};
+
+const MCP_CONFIG_TTL_MS = 5_000;
+const MCP_TOOLS_TTL_MS = 10_000;
 
 const PRESET_MODELS = {
   assistant: "qwen2.5:7b",
   dev: "qwen2.5:14b",
   design: "qwen2.5:32b"
+};
+
+const AGENT_MODELS = {
+  ask: "qwen2.5:7b",
+  plan: "qwen2.5:14b",
+  code: "qwen3-coder:30b"
+};
+
+const normalizePermission = (value) => (value === "full" ? "full" : "basic");
+
+const stripModePrefix = (message) => {
+  const raw = String(message ?? "").trimStart();
+  const match = raw.match(/^\/(ask|plan|code)\b\s*/i);
+  if (!match) return { forced: null, text: String(message ?? "") };
+  const forced = match[1].toLowerCase();
+  return { forced, text: raw.slice(match[0].length) };
+};
+
+const inferAgentMode = (message) => {
+  const s = String(message ?? "");
+  const { forced, text } = stripModePrefix(s);
+  if (forced) return { mode: forced, text };
+
+  // Figma links should never route to ask-mode.
+  // Without tools (ask-mode), we can't fetch design context or implement changes.
+  if (/https?:\/\/(?:www\.)?figma\.com\/(file|design|proto)\//i.test(s)) {
+    return { mode: "code", text: s };
+  }
+
+  // "code" intent heuristics (files/commands/tests).
+  // Goal: if the user is asking us to change code/UI or run commands, we must route to code mode.
+  // Ask mode must not pretend it will open/edit files (tools are disabled there).
+  const hasWorkspacePath =
+    /\/Users\/[^ \n\t]+/i.test(s) || /\/workspace(\/|\\)/i.test(s);
+  const codeHint =
+    /(수정|바꿔|변경|추가|삭제|만들|생성|리팩터|버그|에러|고쳐|해결|테스트|빌드|실행|커밋|브랜치|PR|푸시|git|npm|pnpm|yarn|옮기|이동|위치|정렬|패딩|마진|스타일|css|레이아웃|컴포넌트|버튼|사이드바|드롭다운)/i.test(
+      s
+    );
+  const looksLikePureQuestion =
+    /(\?|뭐야|무엇|왜|설명|정의|차이)/i.test(s) &&
+    !/(수정|바꿔|변경|추가|삭제|만들|생성|리팩터|고쳐|해결|옮기|이동|위치)/i.test(s);
+
+  if (hasWorkspacePath) return { mode: "code", text: s };
+  if (codeHint && !looksLikePureQuestion) return { mode: "code", text: s };
+
+  // "plan" intent heuristics (design/requirements/plan).
+  if (/(기획|계획|플랜|설계|요구사항|정리|로드맵|리스크|우선순위)/i.test(s)) {
+    return { mode: "plan", text: s };
+  }
+  return { mode: "ask", text: s };
+};
+
+const requestLikelyNeedsWorldChange = (message) => {
+  const s = String(message ?? "");
+  return /(파일|생성|만들|추가|삭제|수정|변경|리팩터|고쳐|해결|css|스타일|레이아웃|컴포넌트|버튼|사이드바|드롭다운|테스트|빌드|실행|커밋|브랜치|PR|git|pnpm|npm|yarn)/i.test(
+    s
+  );
+};
+
+const agentModeToPreset = (mode) => {
+  if (mode === "ask") return "assistant";
+  if (mode === "plan") return "dev";
+  return "dev";
+};
+
+const pickModelId = (mode, models) => {
+  const ids = (models ?? []).map((m) => m.id);
+  const desired = AGENT_MODELS[mode] ?? AGENT_MODELS.ask;
+  if (ids.includes(desired)) return desired;
+  // fallback: try 14b for code/plan if coder not available
+  if ((mode === "code" || mode === "plan") && ids.includes("qwen2.5:14b")) return "qwen2.5:14b";
+  if (ids.includes("qwen2.5:7b")) return "qwen2.5:7b";
+  return ids[0] ?? desired;
 };
 
 const defaultApprovals = {
@@ -64,12 +188,375 @@ const state = {
   active: null
 };
 
+const selfImproveState = {
+  running: false,
+  child: null,
+  startedAt: null,
+  logPath: null
+};
+
 const MAX_LOG_BYTES = 200_000;
+
+const mcpCache = {
+  configLoadedAt: 0,
+  config: null,
+  tools: new Map(), // serverName -> { loadedAt, tools }
+  sessions: new Map() // serverName -> { sessionId, initializedAt }
+};
 
 const ensureDirs = async () => {
   await fsp.mkdir(RUNS_DIR, { recursive: true });
   await fsp.mkdir(SESSIONS_DIR, { recursive: true });
   await fsp.mkdir(MEMORY_DIR, { recursive: true });
+  await fsp.mkdir(TMP_DIR, { recursive: true });
+  await fsp.mkdir(RAG_WEB_CACHE_DIR, { recursive: true });
+  await fsp.mkdir(CAPABILITIES_DIR, { recursive: true });
+};
+
+const migrateGlobalMemory = async () => {
+  await ensureDirs();
+  const raw = await readText(GLOBAL_MEMORY_PATH);
+  if (!raw.trim()) return;
+  if (isMostlyKorean(raw) && !containsCjk(raw)) return;
+  // Never block server startup on Ollama being down. Prefer stripping + best-effort rewrite with timeout.
+  const stripped = containsCjk(raw) ? raw.replace(/[\u4E00-\u9FFF]+/g, "").trim() : raw;
+  const rewritten = await rewriteToKorean(stripped, 1500).catch(() => stripped);
+  await writeText(GLOBAL_MEMORY_PATH, trimCharsFromEnd(rewritten || stripped, 1500));
+};
+
+const loadMcpConfig = async () => {
+  const now = Date.now();
+  if (mcpCache.config && now - mcpCache.configLoadedAt < MCP_CONFIG_TTL_MS) {
+    return mcpCache.config;
+  }
+  let cfg = DEFAULT_MCP_CONFIG;
+  try {
+    const raw = await fsp.readFile(MCP_CONFIG_PATH, "utf-8");
+    const parsed = JSON.parse(raw);
+    if (parsed && typeof parsed === "object" && parsed.servers) {
+      cfg = parsed;
+    }
+  } catch {
+    // ignore; fall back to DEFAULT_MCP_CONFIG
+  }
+  mcpCache.config = cfg;
+  mcpCache.configLoadedAt = now;
+  return cfg;
+};
+
+const parseMcpSse = (text) => {
+  const lines = String(text ?? "").split(/\r?\n/);
+  const dataLines = lines
+    .filter((l) => l.startsWith("data:"))
+    .map((l) => l.slice("data:".length).trim())
+    .filter(Boolean);
+  if (!dataLines.length) return null;
+  const last = dataLines[dataLines.length - 1];
+  try {
+    return JSON.parse(last);
+  } catch {
+    return null;
+  }
+};
+
+const fetchJsonWithTimeout = async (url, body, timeoutMs = 2_500, extraHeaders = null) => {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const headers = { "Content-Type": "application/json", ...(extraHeaders ?? {}) };
+    const resp = await fetch(url, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(body),
+      signal: controller.signal
+    });
+    const text = await resp.text();
+    const contentType = resp.headers.get("content-type") ?? "";
+    let json = null;
+    if (contentType.includes("text/event-stream") || text.trimStart().startsWith("event:")) {
+      json = parseMcpSse(text);
+    } else {
+      try {
+        json = JSON.parse(text);
+      } catch {
+        json = null;
+      }
+    }
+    return { ok: resp.ok, status: resp.status, json, text, headers: resp.headers };
+  } finally {
+    clearTimeout(timer);
+  }
+};
+
+const getMcpServer = async (serverName) => {
+  const cfg = await loadMcpConfig();
+  const servers = cfg?.servers ?? {};
+  const entry = servers?.[serverName] ?? null;
+  if (!entry) return null;
+  if (entry.type !== "http") return null;
+  const url = String(entry.url ?? "").trim();
+  if (!url) return null;
+
+  const figmaTokenFromFile = async () => {
+    try {
+      const tokenPath = path.join(WORKSPACE, ".secrets", "figma.token");
+      const token = await fsp.readFile(tokenPath, "utf-8");
+      return String(token ?? "").trim();
+    } catch {
+      return "";
+    }
+  };
+
+  const resolveHeaderValue = async (rawValue) => {
+    const raw = String(rawValue ?? "");
+    if (!raw) return "";
+    // Minimal template support: ${ENV_VAR}. (Used for Authorization, etc.)
+    const out = raw.replace(/\$\{([A-Z0-9_]+)\}/g, (_m, key) => String(process.env[key] ?? ""));
+    // Special-case: allow FIGMA_OAUTH_TOKEN to come from workspace secret file as well.
+    if (out.includes("Bearer ") && raw.includes("${FIGMA_OAUTH_TOKEN}") && !(process.env.FIGMA_OAUTH_TOKEN ?? "").trim()) {
+      const token = await figmaTokenFromFile();
+      if (token) return raw.replace("${FIGMA_OAUTH_TOKEN}", token);
+    }
+    return out;
+  };
+
+  const entryHeaders = entry.headers && typeof entry.headers === "object" ? entry.headers : null;
+  const headers = {};
+  if (entryHeaders) {
+    for (const [k, v] of Object.entries(entryHeaders)) {
+      const key = String(k ?? "").trim();
+      if (!key) continue;
+      const resolved = await resolveHeaderValue(v);
+      if (resolved) headers[key] = resolved;
+    }
+  }
+
+  const timeoutMsRaw = Number(entry.timeoutMs ?? entry.timeout_ms ?? 2_500);
+  const timeoutMs = Number.isFinite(timeoutMsRaw) ? Math.max(250, Math.min(60_000, timeoutMsRaw)) : 2_500;
+
+  return { name: serverName, type: "http", url, headers, timeoutMs };
+};
+
+const mcpJsonRpc = async ({ serverName, method, params }) => {
+  const server = await getMcpServer(serverName);
+  if (!server) {
+    return { ok: false, error: "mcp_server_not_configured" };
+  }
+  const id = createId();
+  const body = { jsonrpc: "2.0", id, method, params: params ?? {} };
+  const sessionEntry = mcpCache.sessions.get(serverName) ?? null;
+  const sessionId = sessionEntry?.sessionId ?? null;
+  const headers = {
+    ...(server.headers ?? {}),
+    accept: "application/json, text/event-stream",
+    ...(sessionId && method !== "initialize" ? { "mcp-session-id": sessionId } : {})
+  };
+  try {
+    const resp = await fetchJsonWithTimeout(server.url, body, server.timeoutMs ?? 2_500, headers);
+    if (!resp.ok || !resp.json) {
+      return {
+        ok: false,
+        error: "mcp_request_failed",
+        status: resp.status ?? null,
+        detail: resp.text?.slice(0, 4000) ?? ""
+      };
+    }
+    if (method === "initialize") {
+      const newSession = resp.headers?.get?.("mcp-session-id") ?? null;
+      if (newSession) {
+        mcpCache.sessions.set(serverName, { sessionId: newSession, initializedAt: Date.now() });
+      }
+    }
+    if (resp.json.error) {
+      return { ok: false, error: "mcp_error", detail: resp.json.error };
+    }
+    return { ok: true, result: resp.json.result ?? resp.json ?? null };
+  } catch (err) {
+    const name = String(err?.name ?? "");
+    const message = String(err?.message ?? "");
+    const joined = `${name}${message ? `: ${message}` : ""}`.trim() || String(err ?? "");
+    const isAbort = name === "AbortError" || joined.includes("AbortError");
+    return { ok: false, error: isAbort ? "mcp_timeout" : "mcp_unreachable", detail: joined };
+  }
+};
+
+const getMcpTools = async (serverName) => {
+  const cached = mcpCache.tools.get(serverName);
+  const now = Date.now();
+  if (cached && now - cached.loadedAt < MCP_TOOLS_TTL_MS) return cached.tools;
+
+  // Best-effort initialize (some MCP servers require it). Ignore failures.
+  await mcpJsonRpc({
+    serverName,
+    method: "initialize",
+    params: {
+      protocolVersion: "2024-11-05",
+      capabilities: {},
+      clientInfo: { name: "309Agent", version: "0.1.0" }
+    }
+  }).catch(() => {});
+
+  const resp = await mcpJsonRpc({ serverName, method: "tools/list", params: {} });
+  if (!resp.ok) {
+    return { ok: false, error: resp.error, detail: resp.detail };
+  }
+  const tools = resp.result?.tools ?? resp.result ?? [];
+  const normalized = Array.isArray(tools) ? tools : [];
+  mcpCache.tools.set(serverName, { loadedAt: now, tools: normalized });
+  return { ok: true, tools: normalized };
+};
+
+const extractMcpText = (result) => {
+  if (!result) return "";
+  const content = result.content ?? result.contents ?? null;
+  if (Array.isArray(content)) {
+    const parts = content
+      .map((c) => (c?.type === "text" ? c.text : c?.text))
+      .filter(Boolean);
+    return parts.join("\n\n").trim();
+  }
+  if (typeof result === "string") return result.trim();
+  return JSON.stringify(result, null, 2).slice(0, 8000);
+};
+
+const extractFigmaRef = (text) => {
+  const s = String(text ?? "");
+  const urlMatch = s.match(/https?:\/\/(?:www\.)?figma\.com\/(file|design|proto)\/([a-zA-Z0-9]+)([^\s]*)/i);
+  if (!urlMatch) return null;
+  const kind = urlMatch[1].toLowerCase();
+  const fileKey = urlMatch[2];
+  const urlTail = urlMatch[3] ?? "";
+  const nodeId =
+    (urlTail.match(/[?&]node-id=([^&]+)/i)?.[1] ??
+      urlTail.match(/[?&]node_id=([^&]+)/i)?.[1] ??
+      null);
+  const url = urlMatch[0];
+  return { kind, fileKey, nodeId, url };
+};
+
+const normalizeFigmaNodeId = (nodeId) => {
+  if (!nodeId) return "";
+  const decoded = decodeURIComponent(String(nodeId));
+  // Figma URLs often use `node-id=1-2` while APIs accept `1:2`.
+  return decoded.replace(/-/g, ":").trim();
+};
+
+const buildFigmaMcpContext = async (text) => {
+  const ref = extractFigmaRef(text);
+  if (!ref) return { ok: false, error: "no_figma_url" };
+
+  const toolsResp = await getMcpTools("figma-desktop");
+  if (!toolsResp.ok) {
+    return { ok: false, error: toolsResp.error, detail: toolsResp.detail, ref };
+  }
+  const tools = toolsResp.tools ?? [];
+  const toolNames = new Set(tools.map((t) => t?.name).filter(Boolean));
+
+  const used = [];
+  const snippets = [];
+
+  const callTool = async (name, args) => {
+    const resp = await mcpJsonRpc({
+      serverName: "figma-desktop",
+      method: "tools/call",
+      params: { name, arguments: args ?? {} }
+    });
+    if (!resp.ok) return { ok: false, error: resp.error, detail: resp.detail };
+    return { ok: true, text: extractMcpText(resp.result) };
+  };
+
+  const nodeId = normalizeFigmaNodeId(ref.nodeId);
+
+  // Prefer Figma Desktop MCP canonical tools.
+  if (toolNames.has("get_design_context")) {
+    const args = {
+      nodeId,
+      clientLanguages: "unknown",
+      clientFrameworks: "unknown",
+      artifactType: "DESIGN_SYSTEM"
+    };
+    let out = await callTool("get_design_context", args);
+    // Common case: the node isn't open/selected in Figma Desktop. Retry with empty nodeId (selected node).
+    if (!out.ok && nodeId) {
+      out = await callTool("get_design_context", { ...args, nodeId: "" });
+      used.push({ tool: "get_design_context(nodeId=selected)", ok: out.ok });
+    } else {
+      used.push({ tool: "get_design_context", ok: out.ok });
+    }
+    if (out.ok && out.text) {
+      snippets.push(`## get_design_context\n${out.text}`);
+    } else if (!out.ok) {
+      const detail = String(out.detail ?? out.error ?? "").trim();
+      if (detail) snippets.push(`## get_design_context (failed)\n${detail.slice(0, 800)}`);
+    }
+  }
+  if (toolNames.has("get_variable_defs")) {
+    const out = await callTool("get_variable_defs", {
+      nodeId,
+      clientLanguages: "unknown",
+      clientFrameworks: "unknown"
+    });
+    used.push({ tool: "get_variable_defs", ok: out.ok });
+    if (out.ok && out.text) snippets.push(`## get_variable_defs\n${out.text}`);
+    if (!out.ok) {
+      const detail = String(out.detail ?? out.error ?? "").trim();
+      if (detail) snippets.push(`## get_variable_defs (failed)\n${detail.slice(0, 800)}`);
+    }
+  }
+  if (!snippets.length && toolNames.has("get_metadata")) {
+    const out = await callTool("get_metadata", {
+      nodeId,
+      clientLanguages: "unknown",
+      clientFrameworks: "unknown"
+    });
+    used.push({ tool: "get_metadata", ok: out.ok });
+    if (out.ok && out.text) snippets.push(`## get_metadata\n${out.text}`);
+  }
+
+  if (!snippets.length) {
+    return {
+      ok: false,
+      error: "no_usable_figma_tools",
+      ref,
+      availableTools: [...toolNames].slice(0, 40)
+    };
+  }
+
+  const mergedTextForCheck = snippets.join("\n\n");
+  // Some Figma MCP backends return success responses that are actually "user action required"
+  // messages (e.g., Desktop selection not available). Treat those as a failure so the agent
+  // doesn't continue and stall/hallucinate.
+  if (
+    /No node could be found for the provided nodeId/i.test(mergedTextForCheck) ||
+    /Make sure the Figma desktop app is open/i.test(mergedTextForCheck) ||
+    /document containing the node is the active tab/i.test(mergedTextForCheck)
+  ) {
+    return {
+      ok: false,
+      error: "figma_node_not_found",
+      ref,
+      detail:
+        "Figma MCP는 연결됐지만 해당 nodeId를 찾지 못했습니다. Figma Desktop 앱에서 해당 문서를 열고 활성 탭으로 만든 뒤, 해당 프레임/컴포넌트를 선택하고 다시 시도하세요."
+    };
+  }
+
+  const header = `FIGMA_MCP_CONTEXT:\n- url: ${ref.url}\n- fileKey: ${ref.fileKey}${ref.nodeId ? `\n- nodeId: ${ref.nodeId}` : ""}\n- toolsUsed: ${used.map((u) => `${u.tool}:${u.ok ? "ok" : "fail"}`).join(", ")}`;
+  const body = snippets.join("\n\n---\n\n");
+  const merged = `${header}\n\n${body}`.trim();
+  return { ok: true, ref, text: trimCharsFromEnd(merged, 8000) };
+};
+
+const trashSessionFile = async (sessionId) => {
+  await ensureDirs();
+  const src = path.join(SESSIONS_DIR, `${sessionId}.json`);
+  const exists = await fsp.stat(src).catch(() => null);
+  if (!exists) return false;
+  const trashDir = path.join(DATA_DIR, "trash", "sessions");
+  await fsp.mkdir(trashDir, { recursive: true });
+  const stamp = new Date().toISOString().replace(/\D/g, "").slice(0, 14);
+  const dst = path.join(trashDir, `${sessionId}.${stamp}.json`);
+  await fsp.rename(src, dst);
+  return true;
 };
 
 const readJson = async (filePath) => {
@@ -99,6 +586,30 @@ const trimCharsFromEnd = (value, maxChars) => {
   return s.slice(Math.max(0, s.length - maxChars));
 };
 
+const redactConfigForDisk = (cfg) => {
+  if (!cfg || typeof cfg !== "object") return cfg;
+  const cloned = JSON.parse(JSON.stringify(cfg));
+  // Best-effort redaction: prevent secrets from being written into run artifacts.
+  if (cloned.models?.providers?.ollama) {
+    if (typeof cloned.models.providers.ollama.apiKey === "string") {
+      cloned.models.providers.ollama.apiKey = "REDACTED";
+    }
+  }
+  if (cloned.gateway?.auth?.token) cloned.gateway.auth.token = "REDACTED";
+  if (cloned.gateway?.remote?.token) cloned.gateway.remote.token = "REDACTED";
+  if (cloned.channels?.slack) {
+    if (typeof cloned.channels.slack.botToken === "string") cloned.channels.slack.botToken = "REDACTED";
+    if (typeof cloned.channels.slack.appToken === "string") cloned.channels.slack.appToken = "REDACTED";
+  }
+  return cloned;
+};
+
+const readTailText = async (filePath, maxChars = 20_000) => {
+  if (!filePath) return "";
+  const t = await readText(filePath);
+  return trimCharsFromEnd(t, maxChars);
+};
+
 const toOneLine = (value, maxLen = 180) => {
   const s = String(value ?? "")
     .replace(/\s+/g, " ")
@@ -108,6 +619,9 @@ const toOneLine = (value, maxLen = 180) => {
 
 const normalizeSession = (session) => {
   const createdAt = session?.createdAt ?? new Date().toISOString();
+  const permission = normalizePermission(session?.permission ?? DEFAULT_PERMISSION);
+  const agentMode = String(session?.agentMode ?? "").toLowerCase() || null;
+  let statusValue = session?.status ?? "idle";
   const approvals = {
     mail: false,
     deploy: false,
@@ -116,20 +630,83 @@ const normalizeSession = (session) => {
     prCreate: false,
     ...(session?.approvals ?? {})
   };
+  const goal = {
+    statement: "",
+    success_criteria: [],
+    artifacts: [],
+    ...(session?.pipeline?.goal ?? session?.goal ?? {})
+  };
+  const loop = {
+    step: "plan", // plan|act|verify|evaluate|replan|done
+    attempt: 0,
+    maxAttempts: 3,
+    lastFailure: null,
+    ...(session?.pipeline?.loop ?? {})
+  };
+  // ask sessions don't participate in the autonomy loop; keep it "done" to avoid false locking/UX noise.
+  if (agentMode === "ask") loop.step = "done";
+  const nextAction = {
+    type: "auto", // auto|needs_user|approval_required
+    description: "",
+    recommended: true,
+    ...(session?.pipeline?.nextAction ?? {})
+  };
+  const pipelineRaw = session?.pipeline ?? {};
   const pipeline = {
     planOnly: false,
     auto: true,
-    phase: "idle", // idle|planning|acting|verifying|done|needs_approval
+    phase: "idle", // idle|planning|acting|verifying|evaluating|replanning|done|needs_approval
     pendingContinue: false,
     activeRunId: null,
-    ...(session?.pipeline ?? {})
+    // Preserve any previously stored RAG/MCP context but keep a stable shape.
+    rag: {
+      urls: [],
+      references: [],
+      fetchedAt: null,
+      webContext: "",
+      method: null,
+      ...(pipelineRaw?.rag ?? {})
+    },
+    mcpContext: pipelineRaw?.mcpContext ?? undefined,
+    ...(pipelineRaw ?? {}),
+    // Always override normalized control fields after spreading raw pipeline.
+    goal,
+    loop,
+    nextAction,
+    planSteps: Array.isArray(pipelineRaw?.planSteps) ? pipelineRaw.planSteps : []
   };
   const memory = {
     sessionSummary: "",
     updatedAt: null,
     ...(session?.memory ?? {})
   };
+  if (/[\u4E00-\u9FFF]/.test(String(memory.sessionSummary ?? ""))) {
+    // Prevent CJK text from being re-injected via SESSION_MEMORY.
+    memory.sessionSummary = String(memory.sessionSummary ?? "").replace(/[\u4E00-\u9FFF]+/g, "").trim();
+  }
   const messages = Array.isArray(session?.messages) ? session.messages : [];
+  const historyRaw = Array.isArray(session?.history) ? session.history : [];
+  const history = historyRaw.map((e) => {
+    const normalized = ensureHistoryEntry(e);
+    // Evidence hygiene: ask/plan/evaluate/replan must not claim file/command changes.
+    if (["ask", "plan", "evaluate", "replan"].includes(normalized.type)) {
+      return {
+        ...normalized,
+        execution_summary: {
+          ...normalized.execution_summary,
+          worldChange: {
+            filesCreated: [],
+            filesModified: [],
+            filesDeleted: [],
+            commandsExecuted: [],
+            testsExecuted: [],
+            browserActions: []
+          }
+        }
+      };
+    }
+    return normalized;
+  });
   const requiredApprovals = {
     mail: false,
     deploy: false,
@@ -139,15 +716,56 @@ const normalizeSession = (session) => {
     ...(session?.requiredApprovals ?? {})
   };
 
+  // Repair: old ask sessions were marked as "running/acting" because isLockedCodeThread() was too broad.
+  // If the most recent ask run already finished, show it as done/success for UX stability.
+  if (agentMode === "ask") {
+    const activeRunId = pipeline?.activeRunId ?? null;
+    if (!activeRunId && String(session?.status ?? "") === "running") {
+      const runs = Array.isArray(session?.runs) ? session.runs : [];
+      const lastAsk = runs
+        .slice()
+        .reverse()
+        .find((r) => String(r?.kind ?? "").toLowerCase() === "ask");
+      if (lastAsk && String(lastAsk.status ?? "") !== "running") {
+        pipeline.phase = "done";
+        pipeline.pendingContinue = false;
+        loop.step = "done";
+        statusValue = String(lastAsk.status ?? "") === "success" ? "success" : "failed";
+      } else {
+        // Older sessions (created before run meta was appended) may have no runs[].
+        // If we already have an ask history entry and an assistant message, treat it as completed.
+        const historyTypes = Array.isArray(session?.history) ? session.history.map((h) => String(h?.type ?? "")) : [];
+        const hasAskHistory = historyTypes.some((t) => t.toLowerCase() === "ask");
+        const hasAssistantMsg =
+          Array.isArray(session?.messages) &&
+          session.messages.some((m) => String(m?.kind ?? "").toLowerCase() === "assistant");
+        if (hasAskHistory && hasAssistantMsg) {
+          const last = Array.isArray(session?.history) ? session.history[session.history.length - 1] : null;
+          const ok = String(last?.status ?? "").toLowerCase() === "success";
+          pipeline.phase = "done";
+          pipeline.pendingContinue = false;
+          loop.step = "done";
+          statusValue = ok ? "success" : "failed";
+        }
+      }
+    }
+  }
+
   return {
     ...session,
     createdAt,
+    status: statusValue,
     approvals,
     pipeline,
     memory,
     messages,
+    history,
     requiredApprovals,
-    lastAnswer: session?.lastAnswer ?? ""
+    lastAnswer: /[\u4E00-\u9FFF]/.test(String(session?.lastAnswer ?? ""))
+      ? String(session?.lastAnswer ?? "").replace(/[\u4E00-\u9FFF]+/g, "").trim()
+      : (session?.lastAnswer ?? ""),
+    permission,
+    agentMode: agentMode ?? null
   };
 };
 
@@ -176,6 +794,50 @@ const getPresetMap = async () => {
     }
   }
   return presetMap;
+};
+
+const containsCjk = (text) => /[\u4E00-\u9FFF]/.test(String(text ?? ""));
+
+const isMostlyKorean = (text) => {
+  const s = String(text ?? "");
+  if (!s.trim()) return true;
+  // If CJK ideographs exist, treat as not mostly Korean to force rewrite.
+  if (containsCjk(s)) return false;
+  const hangul = (s.match(/[가-힣]/g) ?? []).length;
+  const latin = (s.match(/[A-Za-z]/g) ?? []).length;
+  const letters = hangul + latin;
+  if (!letters) return true;
+  return hangul / letters >= 0.75;
+};
+
+const rewriteToKorean = async (text, timeoutMs = 2500) => {
+  if (!text) return "";
+  if (isMostlyKorean(text)) return text;
+  try {
+    const models = await listModels();
+    const model = pickModelId("ask", models);
+    const prompt = `다음 내용을 한국어로만 간결하게 다시 작성해줘. 의미는 보존하고, 불필요한 장식은 빼.\n\n---\n${text}\n---`;
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    const resp = await fetch("http://127.0.0.1:11434/api/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ model, prompt, stream: false }),
+      signal: controller.signal
+    }).finally(() => clearTimeout(timer));
+    if (!resp.ok) return text;
+    const data = await resp.json();
+    const out = String(data?.response ?? "").trim();
+    // If the model still returns non-Korean heavy output, fall back to stripping CJK.
+    const normalized = out || text;
+    if (containsCjk(normalized)) {
+      const stripped = normalized.replace(/[\u4E00-\u9FFF]+/g, "").trim();
+      return stripped || text;
+    }
+    return normalized;
+  } catch {
+    return text;
+  }
 };
 
 const maskToken = (token) => {
@@ -311,7 +973,8 @@ const listRuns = async () => {
   const entries = await fsp.readdir(RUNS_DIR);
   const metas = [];
   for (const entry of entries) {
-    if (!entry.endsWith(".json")) continue;
+    // Only include run meta JSON. (Exclude run temp config snapshots: *.config.json)
+    if (!/^\d{14}-[a-z0-9]{4}\.json$/i.test(entry)) continue;
     try {
       const metaPath = path.join(RUNS_DIR, entry);
       const meta = await readJson(metaPath);
@@ -331,8 +994,23 @@ const listSessions = async () => {
   for (const entry of entries) {
     if (!entry.endsWith(".json")) continue;
     try {
-      const session = await readJson(path.join(SESSIONS_DIR, entry));
-      sessions.push(normalizeSession(session));
+      const session = normalizeSession(await readJson(path.join(SESSIONS_DIR, entry)));
+      const lastMsg = Array.isArray(session.messages) ? session.messages[session.messages.length - 1] : null;
+      const snippetSource = lastMsg?.text || session.request || "";
+      const phase = String(session.pipeline?.phase ?? "idle");
+      const isRunning =
+        session.status === "running" ||
+        Boolean(session.pipeline?.activeRunId) ||
+        ["planning", "acting", "verifying", "evaluating", "replanning"].includes(phase);
+      sessions.push({
+        id: session.id,
+        title: session.title,
+        createdAt: session.createdAt,
+        status: isRunning ? "running" : session.status,
+        agentMode: session.agentMode ?? "ask",
+        permission: session.permission ?? DEFAULT_PERMISSION,
+        snippet: toOneLine(String(snippetSource), 120)
+      });
     } catch {
       // ignore
     }
@@ -365,19 +1043,31 @@ const updateSession = async (sessionId, updater) => {
   return updated;
 };
 
-const createSession = async ({ title, request, modelPreset, modelId, approvals }) => {
+const createSession = async ({
+  title,
+  request,
+  modelPreset,
+  modelId,
+  approvals,
+  agentMode,
+  permission
+}) => {
   const id = createId();
   const createdAt = new Date().toISOString();
+  const effectiveMode = agentMode ?? null;
+  const normalizedPermission = normalizePermission(permission ?? DEFAULT_PERMISSION);
   const session = {
     id,
     title: title || request?.slice(0, 60) || "New chat",
     createdAt,
-    status: request ? "planning" : "idle",
+    status: request ? (effectiveMode === "ask" ? "running" : "planning") : "idle",
     request: request ?? "",
     plan: "",
     planEdited: false,
     modelPreset,
     modelId,
+    agentMode: agentMode ?? null,
+    permission: normalizedPermission,
     approvals: {
       mail: false,
       deploy: false,
@@ -407,8 +1097,14 @@ const createSession = async ({ title, request, modelPreset, modelId, approvals }
       auto: true,
       phase: request ? "planning" : "idle",
       pendingContinue: false,
-      activeRunId: null
+      activeRunId: null,
+      rag: { urls: [], references: [], fetchedAt: null, webContext: "", method: null },
+      goal: { statement: "", success_criteria: [], artifacts: [] },
+      loop: { step: "plan", attempt: 0, maxAttempts: 3, lastFailure: null },
+      nextAction: { type: "auto", description: "", recommended: true },
+      planSteps: []
     },
+    history: [],
     lastAnswer: "",
     runs: []
   };
@@ -489,6 +1185,9 @@ const summarizeSystemPrompt = (report) => {
 
 const extractRunSummary = (raw) => {
   const summary = {
+    provider: null,
+    model: null,
+    sessionId: null,
     usage: null,
     systemPrompt: null
   };
@@ -497,6 +1196,12 @@ const extractRunSummary = (raw) => {
     const meta = parsed?.result?.meta ?? parsed?.meta ?? null;
     const usage = meta?.agentMeta?.usage ?? parsed?.agentMeta?.usage ?? null;
     if (usage) summary.usage = usage;
+    const agentMeta = meta?.agentMeta ?? parsed?.agentMeta ?? null;
+    if (agentMeta) {
+      if (!summary.provider && agentMeta.provider) summary.provider = agentMeta.provider;
+      if (!summary.model && agentMeta.model) summary.model = agentMeta.model;
+      if (!summary.sessionId && agentMeta.sessionId) summary.sessionId = agentMeta.sessionId;
+    }
     const report = meta?.systemPromptReport ?? parsed?.systemPromptReport ?? null;
     if (report) summary.systemPrompt = summarizeSystemPrompt(report);
   };
@@ -524,7 +1229,27 @@ const extractRunSummary = (raw) => {
 };
 
 const buildPlanPrompt = ({ request, contextPrefix }) => {
-  return `${contextPrefix || ""}너는 로컬 OpenClaw 에이전트다. 도구를 사용하지 말고 "계획"만 작성한다.\n\n출력 형식:\nPLAN:\n- (단계)\nRISKS:\n- (리스크)\nNEEDS_APPROVAL: mail|calendar|deploy|merge|git push|PR (해당되는 것만)\n\n요청:\n${request}`;
+  return `${contextPrefix || ""}너는 로컬 309Agent(=OpenClaw)다. 이 단계에서는 도구(tool)를 절대 사용하지 말고, \"목표(goal)+성공 기준+계획\"만 만든다.\n\n추가 규칙:\n- 입력에 Figma 링크가 있으면, 시스템이 FIGMA_MCP_CONTEXT 블록을 주입할 수 있다. 해당 컨텍스트를 근거로 계획을 세워라.\n- 단, Figma 앱 UI를 직접 조작하거나 원격으로 클릭/편집하는 것은 할 수 없다.\n\n필수 출력 포맷(반드시 이 구조를 지켜라. 파싱 실패하면 작업이 중단된다):\n\nGOAL:\n- statement: (사용자 요청을 1문장 목표로)\n- success_criteria: [\"2~5개\", \"완료 판단 기준\"]\n\nPLAN_STEPS (JSON):\n[\n  {\"id\":\"S1\",\"description\":\"...\",\"tool\":\"read|write|edit|exec|process\",\"expected_output\":\"...\",\"risk_level\":\"low|med|high\",\"requires_approval\":false},\n  {\"id\":\"S2\",\"description\":\"...\",\"tool\":\"...\",\"expected_output\":\"...\",\"risk_level\":\"...\",\"requires_approval\":true}\n]\n\nRISKS:\n- (리스크)\n\nNEEDS_APPROVAL: mail|calendar|deploy|merge|git push|PR (해당되는 것만)\n\n요청:\n${request}`;
+};
+
+const buildEvaluatePrompt = ({ request, goal, plan, actSummary, changedFiles, verifySummary, contextPrefix }) => {
+  const goalStatement = String(goal?.statement ?? "").trim();
+  const criteria = Array.isArray(goal?.success_criteria) ? goal.success_criteria : [];
+  const artifacts = Array.isArray(goal?.artifacts) ? goal.artifacts : [];
+  const criteriaBlock = criteria.length ? criteria.map((c) => `- ${c}`).join("\n") : "(없음)";
+  const changedBlock = Array.isArray(changedFiles) && changedFiles.length ? changedFiles.map((f) => `- ${f}`).join("\n") : "(없음)";
+  const artifactsBlock = artifacts.length ? artifacts.map((a) => `- ${a}`).join("\n") : "(없음)";
+  return `${contextPrefix || ""}너는 로컬 309Agent의 \"Evaluate\" 단계다. 목표 달성 여부를 판단하고 다음 행동을 결정한다. 도구(tool)는 사용하지 않는다.\n\n필수 출력 포맷(반드시 이 JSON 한 줄만 출력):\nEVALUATION_JSON:\n{\"achieved\":\"yes|no\",\"confidence\":0.0,\"missing\":[],\"next\":\"replan|done|needs_user|approval_required\",\"reason\":\"\",\"suggested_actions\":[]}\n\n입력:\n- request:\n${request}\n\n- goal.statement:\n${goalStatement || "(없음)"}\n\n- goal.success_criteria:\n${criteriaBlock}\n\n- goal.artifacts:\n${artifactsBlock}\n\n- plan(요약):\n${trimCharsFromEnd(plan || "", 2000)}\n\n- actSummary(요약):\n${trimCharsFromEnd(actSummary || "", 2000)}\n\n- changedFiles:\n${changedBlock}\n\n- verifySummary(요약):\n${trimCharsFromEnd(verifySummary || "", 2000)}\n\n판단 규칙:\n- achieved=yes는 \"말\"이 아니라 기준 충족 근거가 있을 때만.\n- Verify(테스트/스모크)가 실패했다고 판단되면 achieved=no로 둬라.\n- 부족하면 missing에 무엇이 부족한지 구체적으로.\n- next는 반드시 하나.\n`;
+};
+
+const buildReplanPrompt = ({ request, goal, plan, evaluation, lastFailure, contextPrefix }) => {
+  const goalStatement = String(goal?.statement ?? "").trim();
+  const criteria = Array.isArray(goal?.success_criteria) ? goal.success_criteria : [];
+  const criteriaBlock = criteria.length ? criteria.map((c) => `- ${c}`).join("\n") : "(없음)";
+  const missing = Array.isArray(evaluation?.missing) ? evaluation.missing : [];
+  const missingBlock = missing.length ? missing.map((m) => `- ${m}`).join("\n") : "(없음)";
+  const failureBlock = lastFailure ? `${lastFailure.kind}: ${lastFailure.reason}` : "(없음)";
+  return `${contextPrefix || ""}너는 로컬 309Agent의 \"Replan\" 단계다. Evaluate 결과를 반영해 다음 시도의 계획을 업데이트한다. 도구(tool)는 사용하지 않는다.\n\n필수 출력 포맷(반드시 이 JSON 한 줄만 출력):\nREPLAN_JSON:\n{\"updated_plan_steps\":[],\"strategy\":\"\",\"why_this\":\"\"}\n\n입력:\n- request:\n${request}\n\n- goal.statement:\n${goalStatement || "(없음)"}\n\n- goal.success_criteria:\n${criteriaBlock}\n\n- previous plan(요약):\n${trimCharsFromEnd(plan || "", 2000)}\n\n- evaluation.missing:\n${missingBlock}\n\n- evaluation.reason:\n${String(evaluation?.reason ?? "").slice(0, 800)}\n\n- lastFailure:\n${failureBlock}\n\n요구:\n- missing을 해결하도록 updated_plan_steps를 재작성.\n- 대안 2개를 고려하고, 추천 전략을 strategy/why_this로 명확히.\n`;
 };
 
 const formatApprovals = (approvals) => {
@@ -568,18 +1293,29 @@ const loadGlobalMemory = async () => {
   return trimCharsFromEnd(await readText(GLOBAL_MEMORY_PATH), 1500).trim();
 };
 
+const normalizeMemoryEntry = async (entry) => {
+  const raw = String(entry ?? "").trim();
+  if (!raw) return "";
+  // Keep memory Korean-only to prevent re-injection of other languages.
+  return await rewriteToKorean(raw);
+};
+
 const updateGlobalMemory = async (entry) => {
   await ensureDirs();
+  const normalizedEntry = await normalizeMemoryEntry(entry);
+  if (!normalizedEntry) return;
   const prev = await readText(GLOBAL_MEMORY_PATH);
-  const next = `${prev}${prev.trim() ? "\n" : ""}${entry}`.trim();
+  const next = `${prev}${prev.trim() ? "\n" : ""}${normalizedEntry}`.trim();
   await writeText(GLOBAL_MEMORY_PATH, trimCharsFromEnd(next, 1500));
 };
 
 const updateSessionMemory = async (sessionId, entry) => {
+  const normalizedEntry = await normalizeMemoryEntry(entry);
+  if (!normalizedEntry) return loadSession(sessionId);
   return updateSession(sessionId, (session) => {
     const normalized = normalizeSession(session);
     const prev = String(normalized.memory?.sessionSummary ?? "").trim();
-    const next = `${prev}${prev ? "\n" : ""}${entry}`.trim();
+    const next = `${prev}${prev ? "\n" : ""}${normalizedEntry}`.trim();
     return {
       ...normalized,
       memory: {
@@ -591,15 +1327,203 @@ const updateSessionMemory = async (sessionId, entry) => {
 };
 
 const buildContextPrefix = async (session) => {
+  const figmaBlock = String(session?.pipeline?.mcpContext?.figma?.text ?? "").trim();
+  const ragBlock = String(session?.pipeline?.rag?.webContext ?? "").trim();
   const globalMemory = await loadGlobalMemory();
   const sessionMemory = String(session?.memory?.sessionSummary ?? "").trim();
   const recent = getRecentMessagesForContext(session?.messages ?? [], 6);
 
   const blocks = [];
+  if (figmaBlock) blocks.push(figmaBlock);
+  if (ragBlock) blocks.push(ragBlock);
   if (globalMemory) blocks.push(`GLOBAL_MEMORY:\n${globalMemory}`);
   if (sessionMemory) blocks.push(`SESSION_MEMORY:\n${sessionMemory}`);
   if (recent) blocks.push(`RECENT_MESSAGES:\n${recent}`);
   return blocks.length ? `${blocks.join("\n\n")}\n\n---\n\n` : "";
+};
+
+const readWebCache = async (url) => {
+  await ensureDirs();
+  const key = hashUrl(url);
+  const cachePath = path.join(RAG_WEB_CACHE_DIR, `${key}.json`);
+  const data = await readJson(cachePath).catch(() => null);
+  return data && typeof data === "object" ? data : null;
+};
+
+const writeWebCache = async (url, payload) => {
+  await ensureDirs();
+  const key = hashUrl(url);
+  const cachePath = path.join(RAG_WEB_CACHE_DIR, `${key}.json`);
+  await writeJson(cachePath, payload).catch(() => {});
+};
+
+const keywordScore = (query, chunk) => {
+  const q = String(query ?? "")
+    .toLowerCase()
+    .replace(/[^a-z0-9가-힣\s]/g, " ")
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 24);
+  if (!q.length) return 0;
+  const t = String(chunk ?? "").toLowerCase();
+  let score = 0;
+  for (const w of q) {
+    if (w.length < 2) continue;
+    if (t.includes(w)) score += 1;
+  }
+  return score / q.length;
+};
+
+const buildWebRagContext = async (message) => {
+  // Skip RAG for Figma URLs: they frequently return CloudFront blocks.
+  // Figma should be handled via MCP (get_design_context/get_screenshot).
+  const urls = extractUrls(message, 2).filter((u) => !/https?:\/\/(?:www\.)?figma\.com\//i.test(u));
+  if (!urls.length) return { ok: false, error: "no_urls" };
+
+  const docs = [];
+  const errors = [];
+  for (const url of urls) {
+    const cached = await readWebCache(url);
+    const now = Date.now();
+    if (cached?.fetchedAt && now - Number(cached.fetchedAt) < 24 * 60 * 60 * 1000) {
+      if (cached?.text) docs.push(cached);
+      continue;
+    }
+    const fetched = await fetchWebDocument(url, { timeoutMs: 12_000 });
+    if (fetched.ok && fetched.text) {
+      const payload = {
+        url: fetched.url,
+        title: fetched.title,
+        text: trimCharsFromEnd(fetched.text, 40_000),
+        fetchedAt: Date.now()
+      };
+      await writeWebCache(url, payload);
+      docs.push(payload);
+    } else if (!fetched.ok) {
+      // Preserve the most specific reason (e.g. blocked_private_ip/blocked_localhost) for user feedback.
+      errors.push({ url, error: fetched.error ?? "fetch_failed", detail: fetched.detail ?? null });
+    }
+  }
+
+  if (!docs.length) {
+    const first = errors[0] ?? null;
+    return {
+      ok: false,
+      error: first?.error ?? "fetch_failed",
+      detail: first?.detail ?? null,
+      urls
+    };
+  }
+
+  const sourceLines = docs.map((d, i) => `SOURCE ${i + 1}: ${d.title} (${d.url})`);
+  const allChunks = [];
+  const chunkMeta = [];
+  for (let i = 0; i < docs.length; i++) {
+    const chunks = chunkText(docs[i].text, { maxChars: 2600, minChars: 800 });
+    for (let j = 0; j < chunks.length; j++) {
+      allChunks.push(chunks[j]);
+      chunkMeta.push({ sourceIndex: i, chunkIndex: j });
+    }
+  }
+  if (!allChunks.length) return { ok: false, error: "no_text" };
+
+  // Rank by embeddings (preferred), fallback to keyword scoring if embedding model is missing.
+  let picked = null;
+  let method = "embedding";
+  const emb = await rankChunksByEmbedding({ query: message, chunks: allChunks, topK: 6 });
+  if (emb.ok) {
+    picked = emb.picked;
+  } else {
+    method = "keyword";
+    const scored = allChunks.map((c, idx) => ({
+      index: idx,
+      score: keywordScore(message, c),
+      text: c
+    }));
+    scored.sort((a, b) => b.score - a.score);
+    picked = scored.slice(0, 6);
+  }
+
+  const references = [];
+  const snippetLines = [];
+  for (const item of picked) {
+    const meta = chunkMeta[item.index] ?? { sourceIndex: 0, chunkIndex: 0 };
+    const doc = docs[meta.sourceIndex] ?? docs[0];
+    const snippet = trimCharsFromEnd(String(item.text ?? ""), 900);
+    references.push({
+      url: doc.url,
+      title: doc.title,
+      source: meta.sourceIndex + 1,
+      chunk: meta.chunkIndex + 1,
+      snippet
+    });
+    snippetLines.push(`[S${meta.sourceIndex + 1}-${meta.chunkIndex + 1}] ${snippet}`);
+  }
+
+  const webContext = `RAG_WEB_CONTEXT:\n${sourceLines.join("\n")}\n\nSNIPPETS:\n${snippetLines.join("\n\n")}\n\n(주의: 로그인/동적 페이지는 일부 내용이 누락될 수 있음. method=${method})`;
+  return { ok: true, urls: docs.map((d) => d.url), references, webContext: trimCharsFromEnd(webContext, 8000), method };
+};
+
+const readCapabilityRegistry = async () => {
+  await ensureDirs();
+  const data = await readJson(CAP_REGISTRY_PATH).catch(() => null);
+  if (!data || typeof data !== "object") {
+    return { updatedAt: null, items: {} };
+  }
+  return {
+    updatedAt: data.updatedAt ?? null,
+    items: data.items && typeof data.items === "object" ? data.items : {}
+  };
+};
+
+const writeCapabilityRegistry = async (registry) => {
+  await ensureDirs();
+  const next = {
+    updatedAt: new Date().toISOString(),
+    items: registry?.items ?? {}
+  };
+  await writeJson(CAP_REGISTRY_PATH, next).catch(() => {});
+  return next;
+};
+
+const hasOllamaModel = async (name) => {
+  const out = await runCommand("ollama", ["list"], WORKSPACE);
+  if (!out.ok) return false;
+  return out.stdout.split("\n").some((line) => line.trimStart().startsWith(`${name} `));
+};
+
+const ensureEmbeddingModelInstalled = async () => {
+  const registry = await readCapabilityRegistry();
+  const current = registry.items?.rag_web ?? null;
+  if (current?.status === "installed") return { ok: true, already: true };
+
+  const present = await hasOllamaModel("nomic-embed-text");
+  if (present) {
+    registry.items.rag_web = {
+      status: "installed",
+      installedAt: new Date().toISOString(),
+      detail: "nomic-embed-text already present"
+    };
+    await writeCapabilityRegistry(registry);
+    return { ok: true, already: true };
+  }
+
+  registry.items.rag_web = {
+    status: "installing",
+    startedAt: new Date().toISOString(),
+    detail: "ollama pull nomic-embed-text"
+  };
+  await writeCapabilityRegistry(registry);
+
+  // Fire-and-forget install. Do not block user requests.
+  const child = spawn("ollama", ["pull", "nomic-embed-text"], {
+    cwd: WORKSPACE,
+    stdio: "ignore",
+    detached: true
+  });
+  child.unref();
+
+  return { ok: true, started: true };
 };
 
 const parseNeedsApproval = (planText) => {
@@ -617,22 +1541,260 @@ const parseNeedsApproval = (planText) => {
   return required;
 };
 
-const approvalsSatisfied = (required, approvals) => {
+const approvalsSatisfied = (required, approvals, permission) => {
+  if (normalizePermission(permission) === "full") return true;
   const req = required || defaultApprovals;
   const app = approvals || defaultApprovals;
   return Object.entries(req).every(([key, needed]) => !needed || Boolean(app[key]));
 };
 
-const buildActPrompt = ({ request, plan, approvals, contextPrefix }) => {
+const hasCodeLikeHistory = (session) => {
+  const history = Array.isArray(session?.history) ? session.history : [];
+  return history.some((h) => ["act", "verify", "evaluate", "replan"].includes(String(h?.type ?? "").toLowerCase()));
+};
+
+// Once a session has entered code-loop mode, do not let follow-up "ask" overwrite request/mode/state.
+const isLockedCodeThread = (session) => {
+  const mode = String(session?.agentMode ?? "").toLowerCase();
+  // Important: do NOT use pipeline.loop defaults here. They exist even for ask sessions.
+  // Locking is only for real code-loop sessions.
+  if (mode === "code") return true;
+  if (hasCodeLikeHistory(session)) return true;
+  return false;
+};
+
+const extractJsonAfterMarker = (text, marker) => {
+  const s = String(text ?? "");
+  const idx = s.indexOf(marker);
+  if (idx < 0) return null;
+  const tail = s.slice(idx + marker.length);
+  const start = tail.indexOf("{");
+  const startArr = tail.indexOf("[");
+  const startIdx =
+    startArr >= 0 && (start < 0 || startArr < start) ? startArr : start;
+  if (startIdx < 0) return null;
+  const raw = tail.slice(startIdx).trim();
+  // Try whole-string JSON first.
+  try {
+    return JSON.parse(raw);
+  } catch {
+    // Try parse first top-level JSON value by bracket matching.
+  }
+
+  const openChar = raw[0];
+  const closeChar = openChar === "[" ? "]" : "}";
+  let depth = 0;
+  for (let i = 0; i < raw.length; i++) {
+    const ch = raw[i];
+    if (ch === openChar) depth++;
+    if (ch === closeChar) depth--;
+    if (depth === 0) {
+      const slice = raw.slice(0, i + 1);
+      try {
+        return JSON.parse(slice);
+      } catch {
+        return null;
+      }
+    }
+  }
+  return null;
+};
+
+const parseGoalAndPlanSteps = (planText) => {
+  const text = String(planText ?? "");
+  const statement =
+    text.match(/^\s*-\s*statement:\s*(.+)\s*$/m)?.[1]?.trim() ??
+    text.match(/^\s*statement:\s*(.+)\s*$/m)?.[1]?.trim() ??
+    "";
+
+  const criteriaInline =
+    text.match(/^\s*-\s*success_criteria:\s*(\[[^\n]+\])\s*$/m)?.[1] ??
+    text.match(/^\s*success_criteria:\s*(\[[^\n]+\])\s*$/m)?.[1] ??
+    null;
+  let success_criteria = [];
+  if (criteriaInline) {
+    try {
+      const parsed = JSON.parse(criteriaInline);
+      if (Array.isArray(parsed)) success_criteria = parsed.map((c) => String(c));
+    } catch {
+      // ignore
+    }
+  }
+  if (!success_criteria.length) {
+    // Fallback: collect bullets between "GOAL:" and "PLAN_STEPS"
+    const goalIdx = text.toUpperCase().indexOf("GOAL:");
+    const stepsIdx = text.toUpperCase().indexOf("PLAN_STEPS");
+    const block =
+      goalIdx >= 0
+        ? text.slice(goalIdx, stepsIdx > goalIdx ? stepsIdx : goalIdx + 800)
+        : "";
+    const lines = block
+      .split("\n")
+      .map((l) => l.trim())
+      .filter((l) => l.startsWith("- ") && !l.includes("statement:") && !l.includes("success_criteria:"));
+    success_criteria = lines.map((l) => l.replace(/^- /, "").trim()).filter(Boolean).slice(0, 5);
+  }
+
+  const planSteps = extractJsonAfterMarker(text, "PLAN_STEPS") ?? [];
+  const normalizedSteps = Array.isArray(planSteps) ? planSteps : [];
+
+  return {
+    goal: {
+      statement,
+      success_criteria
+    },
+    plan_steps: normalizedSteps
+  };
+};
+
+const parseEvaluation = (text) => {
+  const parsed = extractJsonAfterMarker(text, "EVALUATION_JSON:");
+  if (parsed && typeof parsed === "object") return parsed;
+  return null;
+};
+
+const parseReplan = (text) => {
+  const parsed = extractJsonAfterMarker(text, "REPLAN_JSON:");
+  if (parsed && typeof parsed === "object") return parsed;
+  return null;
+};
+
+const getWorldChangeFromPorcelain = (porcelain) => {
+  const out = { filesCreated: [], filesModified: [], filesDeleted: [] };
+  const lines = String(porcelain ?? "")
+    .split("\n")
+    .map((l) => l.trimEnd())
+    .filter(Boolean);
+  for (const line of lines) {
+    if (line.startsWith("?? ")) {
+      out.filesCreated.push(line.slice(3));
+      continue;
+    }
+    const code = line.slice(0, 2);
+    const file = line.slice(3).trim();
+    if (!file) continue;
+    if (code.includes("D")) out.filesDeleted.push(file);
+    else if (code.includes("A")) out.filesCreated.push(file);
+    else out.filesModified.push(file);
+  }
+  out.filesCreated = [...new Set(out.filesCreated)].sort();
+  out.filesModified = [...new Set(out.filesModified)].sort();
+  out.filesDeleted = [...new Set(out.filesDeleted)].sort();
+  return out;
+};
+
+const parsePorcelainMap = (porcelain) => {
+  const map = new Map();
+  const lines = String(porcelain ?? "")
+    .split("\n")
+    .map((l) => l.trimEnd())
+    .filter(Boolean);
+  for (const line of lines) {
+    if (line.length < 4) continue;
+    const status = line.slice(0, 2);
+    let file = line.slice(3).trim();
+    if (file.includes("->")) {
+      file = file.split("->").pop().trim();
+    }
+    map.set(file, status);
+  }
+  return map;
+};
+
+// Evidence-based best-effort delta between two porcelain snapshots.
+// (Porcelain doesn't capture "changed again" while already dirty; this avoids guessing.)
+const getWorldChangeDeltaFromPorcelain = (beforePorcelain, afterPorcelain) => {
+  if (!afterPorcelain) return { filesCreated: [], filesModified: [], filesDeleted: [] };
+  if (!beforePorcelain) return getWorldChangeFromPorcelain(afterPorcelain);
+
+  const before = parsePorcelainMap(beforePorcelain);
+  const after = parsePorcelainMap(afterPorcelain);
+  const created = [];
+  const modified = [];
+  const deleted = [];
+
+  for (const [file, status] of after.entries()) {
+    const prev = before.get(file);
+    if (!prev) {
+      if (status.includes("D")) deleted.push(file);
+      else if (status.includes("A") || status.includes("?")) created.push(file);
+      else modified.push(file);
+      continue;
+    }
+    if (prev !== status) {
+      if (status.includes("D")) deleted.push(file);
+      else if (status.includes("A") || status.includes("?")) created.push(file);
+      else modified.push(file);
+    }
+  }
+
+  return {
+    filesCreated: [...new Set(created)].sort(),
+    filesModified: [...new Set(modified)].sort(),
+    filesDeleted: [...new Set(deleted)].sort()
+  };
+};
+
+const buildExecutionSummary = ({ worldChange, result, commandsExecuted, testsExecuted, nextSuggestedActions }) => {
+  return {
+    worldChange: {
+      filesCreated: worldChange?.filesCreated ?? [],
+      filesModified: worldChange?.filesModified ?? [],
+      filesDeleted: worldChange?.filesDeleted ?? [],
+      commandsExecuted: commandsExecuted ?? [],
+      testsExecuted: testsExecuted ?? [],
+      browserActions: []
+    },
+    result,
+    nextSuggestedActions: nextSuggestedActions ?? []
+  };
+};
+
+const ensureHistoryEntry = (entry) => {
+  const e = entry && typeof entry === "object" ? entry : {};
+  const execution_summary = e.execution_summary ?? buildExecutionSummary({ result: e.result ?? "skipped" });
+  return {
+    id: e.id ?? createId(),
+    at: e.at ?? new Date().toISOString(),
+    type: e.type ?? "unknown",
+    runId: e.runId ?? null,
+    status: e.status ?? null,
+    summary: e.summary ?? "",
+    detail: e.detail ?? "",
+    execution_summary,
+    verifyDecision: e.verifyDecision ?? null,
+    evaluation: e.evaluation ?? null,
+    requiredApprovals: e.requiredApprovals ?? null,
+    bypassedByFull: e.bypassedByFull ?? false
+  };
+};
+
+const buildAskPrompt = ({ request, contextPrefix }) => {
+  return `${contextPrefix || ""}너는 로컬 309Agent(=OpenClaw)다.\n\n규칙:\n- 반드시 한국어로만 답한다.\n- tool을 사용하지 않는다.\n- 짧고 명확하게 답한다.\n- 파일을 열겠다/수정하겠다/실행하겠다 같은 \"실행을 암시하는 표현\"은 금지한다. (ask 모드는 설명/요약만)\n- 만약 컨텍스트에 RAG_WEB_CONTEXT가 포함되어 있다면, 반드시 그 근거를 기반으로 답한다. (\"직접 방문해야\" 같은 회피 금지)\n- 입력에 Figma 링크가 있고 FIGMA_MCP_CONTEXT가 주어지면, 그 컨텍스트를 근거로 답하라(“못 한다”로 회피하지 말 것).\n\n요청:\n${request}`;
+};
+
+const buildActPrompt = ({ request, plan, approvals, permission, contextPrefix }) => {
   const approvalText = formatApprovals(approvals);
-  return `${contextPrefix || ""}너는 로컬 OpenClaw 에이전트이며 실제로 실행한다.\n\n규칙:\n- 파일/디렉터리 확인, git, 테스트, 쉘 실행은 반드시 tool을 사용한다.\n- tool 없이 실행했다고 말하지 말 것.\n- 승인되지 않은 위험 작업(메일/캘린더 발송, 배포, 머지, git push/PR)은 절대 실행하지 말고 승인을 요청한다.\n- 출력 형식: PLAN -> ACTIONS(tool 호출 포함) -> VERIFY(stdout/stderr 원문) -> RESULT(변경 파일/테스트) -> NEXT\n\n승인됨: ${approvalText}\n\n요청:\n${request}\n\n계획:\n${plan || "(계획 없음)"}`;
+  const perm = normalizePermission(permission);
+  const approvalRule =
+    perm === "full"
+      ? "- 권한=full: 승인 게이트는 통과된 것으로 간주한다. 단, 메일 자동 발송/배포/머지 같은 외부 영향 작업은 '승인 필요'로 한 번 더 확인을 요청한다.\n"
+      : "- 승인되지 않은 위험 작업(메일/캘린더 발송, 배포, 머지, git push/PR)은 절대 실행하지 말고 승인을 요청한다.\n";
+  return `${contextPrefix || ""}너는 로컬 OpenClaw 에이전트이며 실제로 실행한다.\n\n규칙:\n- 파일/디렉터리 확인, git, 테스트, 쉘 실행은 반드시 tool을 사용한다.\n- tool 없이 실행했다고 말하지 말 것.\n- 절대 \"도구 호출 스펙(JSON)\"을 텍스트/코드블록으로 출력하지 말 것. (예: \`{\"name\":\"read\",...}\` 출력 금지)\n- 대신: tool을 실제로 실행하고, 그 결과(stdout/stderr/읽은 내용/변경사항)를 VERIFY/RESULT에 포함한다.\n${approvalRule}- 출력 형식: PLAN -> ACTIONS -> VERIFY(stdout/stderr 원문) -> RESULT(변경 파일/테스트) -> NEXT\n- FIGMA_MCP_CONTEXT가 있으면 그 내용을 설계 근거로 사용하라.\n- 다만 Figma 앱 UI를 직접 조작/편집하는 것은 할 수 없으니, 필요한 경우 사용자에게 “Figma에서 해야 할 최소 단계”만 요청하라.\n\n승인됨(기존 체크): ${approvalText}\n권한 모드: ${perm}\n\n요청:\n${request}\n\n계획:\n${plan || "(계획 없음)"}`;
 };
 
 const runCommand = (cmd, args, cwd) =>
   new Promise((resolve) => {
     execFile(cmd, args, { cwd }, (error, stdout, stderr) => {
+      const code =
+        typeof error?.code === "number"
+          ? error.code
+          : error
+            ? 1
+            : 0;
       resolve({
         ok: !error,
+        exitCode: code,
         stdout: stdout?.toString() ?? "",
         stderr: stderr?.toString() ?? ""
       });
@@ -665,8 +1827,46 @@ const loadVerifyCommand = async () => {
   }
 };
 
+const detectSmokeVerify = async () => {
+  // Keep it cheap and deterministic. At least 1 command must run.
+  // Prefer the UI build, because this repo is primarily the UI server+client.
+  const uiPkg = path.join(WORKSPACE, "apps/ui/package.json");
+  const rootPkg = path.join(WORKSPACE, "package.json");
+  const hasUi = await fsp.stat(uiPkg).then(() => true).catch(() => false);
+  if (hasUi) {
+    return { cmd: "pnpm", args: ["-C", "apps/ui", "build"], cwd: WORKSPACE, label: "pnpm -C apps/ui build" };
+  }
+  const hasRoot = await fsp.stat(rootPkg).then(() => true).catch(() => false);
+  if (hasRoot) {
+    return {
+      cmd: process.execPath,
+      args: ["-e", "JSON.parse(require('fs').readFileSync('package.json','utf8')); console.log('package.json ok')"],
+      cwd: WORKSPACE,
+      label: "node -e package.json parse"
+    };
+  }
+  return {
+    cmd: "ls",
+    args: ["-la"],
+    cwd: WORKSPACE,
+    label: "ls -la"
+  };
+};
+
+const runSmokeVerify = async () => {
+  const spec = await detectSmokeVerify();
+  const out = await runCommand(spec.cmd, spec.args, spec.cwd);
+  return {
+    ok: out.ok,
+    exitCode: out.exitCode ?? (out.ok ? 0 : 1),
+    stdout: out.stdout,
+    stderr: out.stderr,
+    label: spec.label
+  };
+};
+
 const buildVerifyPrompt = ({ request, plan, verifyCmd, contextPrefix }) => {
-  return `${contextPrefix || ""}너는 로컬 OpenClaw 에이전트이며 "검증(Verify)" 단계만 수행한다.\n\n목표:\n- 아래 테스트 명령을 tool(exec)로 실행한다.\n- stdout/stderr 원문을 포함해 결과를 요약한다.\n\n규칙:\n- 테스트는 반드시 tool(exec)로 실행한다.\n- 출력 형식: ACTIONS(tool 호출 포함) -> VERIFY(stdout/stderr 원문) -> RESULT(테스트 통과/실패) -> NEXT\n\n테스트 명령:\n${verifyCmd}\n\n요청(참고):\n${request}\n\n계획(참고):\n${plan || "(계획 없음)"}`;
+  return `${contextPrefix || ""}너는 로컬 OpenClaw 에이전트이며 "검증(Verify)" 단계만 수행한다.\n\n목표:\n- 아래 테스트 명령을 tool(exec)로 실행한다.\n- stdout/stderr 원문을 포함해 결과를 요약한다.\n\n규칙:\n- 테스트는 반드시 tool(exec)로 실행한다.\n- 절대 \"도구 호출 스펙(JSON)\"을 텍스트/코드블록으로 출력하지 말 것. 결과만 남겨라.\n- 출력 형식: ACTIONS -> VERIFY(stdout/stderr 원문) -> RESULT(테스트 통과/실패) -> NEXT\n\n테스트 명령:\n${verifyCmd}\n\n요청(참고):\n${request}\n\n계획(참고):\n${plan || "(계획 없음)"}`;
 };
 
 const getDiffArtifacts = async () => {
@@ -686,7 +1886,7 @@ const getDiffArtifacts = async () => {
   return { files, diff: mergedDiff };
 };
 
-const startRun = async ({ prompt, modelId, kind, sessionId }) => {
+const startRun = async ({ prompt, modelId, kind, sessionId, preserveSessionState = false }) => {
   await ensureDirs();
   await fsp.access(OPENCLAW_BIN);
   await fsp.access(OPENCLAW_CONFIG);
@@ -698,6 +1898,14 @@ const startRun = async ({ prompt, modelId, kind, sessionId }) => {
   const logPath = path.join(RUNS_DIR, `${id}.log`);
   const gatewayLogPath = getGatewayLogPath();
   const metaPath = path.join(RUNS_DIR, `${id}.json`);
+  const MAX_RUN_MS_BY_KIND = {
+    ask: 2 * 60_000,
+    plan: 4 * 60_000,
+    act: 8 * 60_000,
+    verify: 6 * 60_000,
+    evaluate: 4 * 60_000,
+    replan: 4 * 60_000
+  };
 
   const cfg = await loadConfig();
   const tempConfigPath = await (async () => {
@@ -705,11 +1913,15 @@ const startRun = async ({ prompt, modelId, kind, sessionId }) => {
     if (!cfg?.agents?.defaults) return null;
     cfg.agents.defaults.model = cfg.agents.defaults.model ?? {};
     cfg.agents.defaults.model.primary = `ollama/${modelId}`;
-    const tempPath = path.join(RUNS_DIR, `${id}.config.json`);
-    await fsp.writeFile(tempPath, JSON.stringify(cfg, null, 2));
+    // Write an ephemeral config for this run. Do NOT redact gateway tokens here, or Gateway auth may break.
+    // The file is stored under DATA_DIR/tmp and is deleted on run completion.
+    const tempPath = path.join(TMP_DIR, `${id}.openclaw.json`);
+    await fsp.writeFile(tempPath, JSON.stringify(cfg, null, 2), { mode: 0o600 });
+    await fsp.chmod(tempPath, 0o600).catch(() => {});
     return tempPath;
   })();
 
+  const openclawSessionId = sessionId ? `ui-thread-${sessionId}` : `ui-${id}`;
   const meta = {
     id,
     sessionId,
@@ -719,9 +1931,12 @@ const startRun = async ({ prompt, modelId, kind, sessionId }) => {
     status: "running",
     logPath,
     gatewayLogPath,
+    openclawSessionId,
+    preserveSessionState: Boolean(preserveSessionState),
     configPath: OPENCLAW_CONFIG,
     modelId: modelId ?? null,
     stateDir: OPENCLAW_STATE_DIR,
+    gitStatusBeforeAct: gitStatusBefore,
     exitCode: null,
     completedAt: null,
     durationMs: null
@@ -729,13 +1944,27 @@ const startRun = async ({ prompt, modelId, kind, sessionId }) => {
 
   await writeJson(metaPath, meta);
 
-  if (sessionId) {
+  // For inline ask inside an active code-thread, we must not mutate the pipeline/status.
+  // (This prevents "ask" from overwriting a running/failed code loop state.)
+  const shouldMutateSession =
+    Boolean(sessionId) && !(kind === "ask" && preserveSessionState);
+
+  if (shouldMutateSession) {
     await updateSession(sessionId, (session) => ({
       ...session,
       status: kind === "plan" ? "planning" : "running",
       pipeline: {
         ...(session.pipeline ?? {}),
-        phase: kind === "plan" ? "planning" : kind === "verify" ? "verifying" : "acting",
+        phase:
+          kind === "plan"
+            ? "planning"
+            : kind === "verify"
+              ? "verifying"
+              : kind === "evaluate"
+                ? "evaluating"
+                : kind === "replan"
+                  ? "replanning"
+                  : "acting",
         pendingContinue: false,
         activeRunId: id,
         gitStatusBeforeAct: gitStatusBefore ?? (session.pipeline?.gitStatusBeforeAct ?? null)
@@ -758,11 +1987,10 @@ const startRun = async ({ prompt, modelId, kind, sessionId }) => {
   }
 
   const agentOut = fs.createWriteStream(logPath, { flags: "a" });
-  state.active = { id, agent: null, metaPath };
+  state.active = { id, agent: null, metaPath, stopRequested: false, timeoutRequested: false };
 
   const startAt = Date.now();
 
-  const openclawSessionId = sessionId ? `ui-thread-${sessionId}` : `ui-${id}`;
   const agent = spawn(
     OPENCLAW_BIN,
     ["agent", "--session-id", openclawSessionId, "--message", prompt, "--json"],
@@ -774,13 +2002,81 @@ const startRun = async ({ prompt, modelId, kind, sessionId }) => {
   agent.stdout.pipe(agentOut);
   agent.stderr.pipe(agentOut);
 
-  const finish = async (status, code) => {
+  // Hard timeout: OpenClaw can occasionally stall (no exit, no output). Never allow infinite "doing nothing".
+  const maxMs = MAX_RUN_MS_BY_KIND[kind] ?? 8 * 60_000;
+  const timeout = setTimeout(() => {
+    // Only cancel if this run is still active.
+    if (!state.active || state.active.id !== id) return;
+    state.active.timeoutRequested = true;
+    try {
+      agentOut.write(`\n[TIMEOUT] kind=${kind} exceeded ${maxMs}ms. Sending SIGTERM...\n`);
+    } catch {}
+    try {
+      agent.kill("SIGTERM");
+    } catch {}
+    setTimeout(() => {
+      if (!state.active || state.active.id !== id) return;
+      try {
+        agentOut.write(`\n[TIMEOUT] kind=${kind} still running. Sending SIGKILL...\n`);
+      } catch {}
+      try {
+        agent.kill("SIGKILL");
+      } catch {}
+    }, 5000);
+  }, maxMs);
+
+  const finish = async (status, code, { timedOut } = {}) => {
+    clearTimeout(timeout);
+    // Enrich run meta with actual runtime info (provider/model/usage/systemPrompt) from OpenClaw JSON output.
+    const runRaw = (() => {
+      try {
+        return fs.readFileSync(logPath, "utf-8");
+      } catch {
+        return "";
+      }
+    })();
+    const extracted = extractRunSummary(runRaw);
+
+    const runArtifacts = (() => {
+      // Make artifacts "run-scoped" when possible (avoid showing the whole repo's dirty diff).
+      if (kind === "act") {
+        const baselineDirty = Boolean(gitStatusBefore && String(gitStatusBefore).trim());
+        const wc = worldChangeDelta ?? { filesCreated: [], filesModified: [], filesDeleted: [] };
+        const files = [
+          ...(wc.filesCreated ?? []).map((f) => `A ${f}`),
+          ...(wc.filesModified ?? []).map((f) => `M ${f}`),
+          ...(wc.filesDeleted ?? []).map((f) => `D ${f}`)
+        ];
+        return {
+          baselineDirty,
+          worldChange: wc,
+          files,
+          diff: trimCharsFromEnd(String(diffArtifacts?.diff ?? ""), 200_000)
+        };
+      }
+      if (kind === "verify" || kind === "evaluate" || kind === "replan") {
+        return {
+          baselineDirty: false,
+          worldChange: { filesCreated: [], filesModified: [], filesDeleted: [] },
+          files: [],
+          diff: trimCharsFromEnd(String(diffArtifacts?.diff ?? ""), 200_000)
+        };
+      }
+      return { baselineDirty: false, worldChange: { filesCreated: [], filesModified: [], filesDeleted: [] }, files: [], diff: "" };
+    })();
+
     const updated = {
       ...meta,
       status,
+      timedOut: Boolean(timedOut),
       exitCode: code ?? null,
       completedAt: new Date().toISOString(),
-      durationMs: Date.now() - startAt
+      durationMs: Date.now() - startAt,
+      usage: extracted.usage ?? null,
+      systemPrompt: extracted.systemPrompt ?? null,
+      provider: extracted.provider ?? null,
+      actualModelId: extracted.model ?? null,
+      artifacts: runArtifacts
     };
     await writeJson(metaPath, updated);
     if (tempConfigPath) {
@@ -790,6 +2086,100 @@ const startRun = async ({ prompt, modelId, kind, sessionId }) => {
     agentOut.end();
 
     if (sessionId) {
+      const planText = kind === "plan" && status === "success" ? extractPayloadText(runRaw) : null;
+      const humanAnswerRaw =
+        kind === "act" || kind === "verify" || kind === "ask"
+          ? extractHumanAnswer(runRaw)
+          : "";
+      const humanAnswer =
+        kind === "act" || kind === "verify" || kind === "ask"
+          ? await rewriteToKorean(humanAnswerRaw)
+          : humanAnswerRaw;
+
+      const payloadText = extractPayloadText(runRaw);
+      const diffArtifacts =
+        kind === "act" || kind === "verify" || kind === "evaluate" || kind === "replan"
+          ? await getDiffArtifacts().catch(() => ({ files: [], diff: "" }))
+          : { files: [], diff: "" };
+      const verifyCmdForHistory = kind === "verify" ? await loadVerifyCommand() : "";
+      // World-change evidence should be captured only for steps that can actually change the world.
+      // ask/plan/evaluate/replan must not "guess" changes based on a dirty repo snapshot.
+      const porcelainNow = kind === "act" ? await getGitStatusSnapshot() : null;
+      const worldChangeDelta =
+        kind === "act" && porcelainNow
+          ? getWorldChangeDeltaFromPorcelain(gitStatusBefore, porcelainNow)
+          : null;
+      const parsedGoal =
+        kind === "plan" && status === "success" ? parseGoalAndPlanSteps(payloadText) : null;
+      const parsedEvaluation =
+        kind === "evaluate" && status === "success" ? parseEvaluation(payloadText) : null;
+      const parsedReplan =
+        kind === "replan" && status === "success" ? parseReplan(payloadText) : null;
+
+      const executionSummaryForKind = (() => {
+        const wc =
+          kind === "act" && worldChangeDelta
+            ? worldChangeDelta
+            : { filesCreated: [], filesModified: [], filesDeleted: [] };
+        const testsExecuted =
+          kind === "verify" && verifyCmdForHistory
+            ? [verifyCmdForHistory]
+            : [];
+        return buildExecutionSummary({
+          worldChange: wc,
+          result:
+            status === "success"
+              ? "success"
+              : status === "cancelled"
+                ? "cancelled"
+                : "failed",
+          commandsExecuted: [],
+          testsExecuted,
+          nextSuggestedActions: []
+        });
+      })();
+
+      const historyEntry = (() => {
+        const base = {
+          type: kind,
+          runId: updated.id,
+          status,
+          summary: "",
+          detail: trimCharsFromEnd(payloadText || "", 8000),
+          execution_summary: executionSummaryForKind
+        };
+        if (kind === "plan") {
+          const st = parsedGoal?.goal?.statement ?? "";
+          base.summary = st ? `GOAL: ${toOneLine(st, 140)}` : "계획을 생성했습니다.";
+          base.requiredApprovals = (parsedGoal ? null : null);
+        } else if (kind === "act") {
+          base.summary = humanAnswer ? toOneLine(humanAnswer, 160) : "실행을 완료했습니다.";
+        } else if (kind === "verify") {
+          base.summary = humanAnswer ? toOneLine(humanAnswer, 160) : "검증을 완료했습니다.";
+          const changedByDiff = Array.isArray(diffArtifacts?.files) ? diffArtifacts.files.length > 0 : false;
+          base.verifyDecision = {
+            verifyCmdPresent: Boolean(verifyCmdForHistory),
+            changedByDiff,
+            changedByStatus: false,
+            actHadToolWork: false,
+            smokeOnly: false,
+            reason: verifyCmdForHistory ? "verifyCmd 실행 결과" : "verify 단계 실행"
+          };
+        } else if (kind === "evaluate") {
+          base.summary = parsedEvaluation
+            ? `평가: achieved=${parsedEvaluation.achieved ?? "?"} conf=${parsedEvaluation.confidence ?? "?"}`
+            : "평가를 수행했습니다.";
+          base.evaluation = parsedEvaluation;
+        } else if (kind === "replan") {
+          base.summary = parsedReplan?.strategy
+            ? `재계획: ${toOneLine(parsedReplan.strategy, 160)}`
+            : "재계획을 생성했습니다.";
+        } else if (kind === "ask") {
+          base.summary = humanAnswer ? toOneLine(humanAnswer, 160) : "답변을 생성했습니다.";
+        }
+        return ensureHistoryEntry(base);
+      })();
+
       const updatedSession = await updateSession(sessionId, (session) => {
         const normalized = normalizeSession(session);
         const runs = (session.runs || []).map((run) =>
@@ -801,23 +2191,105 @@ const startRun = async ({ prompt, modelId, kind, sessionId }) => {
         let pipeline = { ...(normalized.pipeline ?? {}) };
         let lastAnswer = normalized.lastAnswer ?? "";
         let messages = [...(normalized.messages ?? [])];
+        let history = [...(normalized.history ?? [])];
+
+        if (status === "cancelled") {
+          messages.push({
+            id: createId(),
+            at: new Date().toISOString(),
+            kind: "assistant",
+            role: "assistant",
+            text: "요청을 중지했습니다.",
+            runId: updated.id
+          });
+          history.push(historyEntry);
+          return {
+            ...normalized,
+            status: "cancelled",
+            plan,
+            requiredApprovals,
+            pipeline: { ...pipeline, phase: "done", pendingContinue: false, activeRunId: null },
+            lastAnswer,
+            messages,
+            history,
+            runs
+          };
+        }
+
+        if (status === "failed" && Boolean(timedOut)) {
+          messages.push({
+            id: createId(),
+            at: new Date().toISOString(),
+            kind: "assistant",
+            role: "assistant",
+            text: `시간이 너무 오래 걸려 자동으로 중지했습니다. (단계: ${kind})`,
+            runId: updated.id
+          });
+          history.push(
+            ensureHistoryEntry({
+              type: "timeout",
+              runId: updated.id,
+              status: "failed",
+              summary: `시간 초과로 중지됨 (${kind})`,
+              detail: `kind=${kind} maxMs=${maxMs}`,
+              execution_summary: buildExecutionSummary({
+                worldChange: { filesCreated: [], filesModified: [], filesDeleted: [] },
+                result: "failed",
+                commandsExecuted: [],
+                testsExecuted: [],
+                nextSuggestedActions: ["요청을 더 작게 쪼개거나, 더 가벼운 모델로 재시도하세요."]
+              })
+            })
+          );
+          return {
+            ...normalized,
+            status: "failed",
+            pipeline: {
+              ...(normalized.pipeline ?? {}),
+              phase: "done",
+              pendingContinue: false,
+              activeRunId: null,
+              nextAction: {
+                type: "needs_user",
+                description: `시간 초과로 중단됨: ${kind}. 요청을 더 작게 쪼개서 다시 시도하세요.`,
+                recommended: true
+              }
+            },
+            messages,
+            history,
+            runs
+          };
+        }
 
         if (kind === "plan") {
           if (status === "success") {
-            const raw = fs.readFileSync(logPath, "utf-8");
-            plan = extractPayloadText(raw);
+            plan = planText ?? "";
             const parsed = parseNeedsApproval(plan);
             const hasAny = Object.values(parsed).some(Boolean);
             requiredApprovals = hasAny
               ? parsed
               : inferRequiredApprovals(`${normalized.request}\n${plan}`);
+            // Store goal + plan steps for code-mode loop visibility.
+            if (parsedGoal?.goal) {
+              const statementRaw = String(parsedGoal.goal.statement ?? "").trim();
+              const criteriaRaw = Array.isArray(parsedGoal.goal.success_criteria)
+                ? parsedGoal.goal.success_criteria.slice(0, 5).map((c) => String(c))
+                : [];
+              const fallbackStatement = toOneLine(normalized.request, 160);
+              const fallbackCriteria = ["요청 핵심을 수행했는가", "근거(변경/로그/결과)가 남았는가"];
+              pipeline = {
+                ...pipeline,
+                goal: {
+                  ...(pipeline.goal ?? {}),
+                  statement: statementRaw || fallbackStatement,
+                  success_criteria: criteriaRaw.length ? criteriaRaw : fallbackCriteria
+                },
+                planSteps: Array.isArray(parsedGoal.plan_steps) ? parsedGoal.plan_steps : pipeline.planSteps ?? []
+              };
+            }
             // Plan 단계만 끝난 상태. 다음 단계 실행 여부는 finish() 밖에서 결정한다.
             statusValue = "idle";
-            pipeline = {
-              ...pipeline,
-              phase: "idle",
-              pendingContinue: false
-            };
+            pipeline = { ...pipeline, phase: "idle", pendingContinue: false };
           } else {
             statusValue = "failed";
             pipeline = {
@@ -826,9 +2298,9 @@ const startRun = async ({ prompt, modelId, kind, sessionId }) => {
               pendingContinue: false
             };
           }
+          history.push(historyEntry);
         } else if (kind === "act") {
-          const raw = fs.readFileSync(logPath, "utf-8");
-          const answer = extractHumanAnswer(raw);
+          const answer = humanAnswer;
           if (status === "success") {
             lastAnswer = answer;
             if (answer) {
@@ -841,12 +2313,17 @@ const startRun = async ({ prompt, modelId, kind, sessionId }) => {
                 runId: updated.id
               });
             }
-            // 다음 단계(verify) 여부는 finish() 밖에서 결정한다.
-            statusValue = "success";
+            // 다음 단계(verify/evaluate) 여부는 finish() 밖에서 결정한다.
+            statusValue = "running";
+            pipeline = { ...pipeline, phase: "idle", pendingContinue: false };
             pipeline = {
               ...pipeline,
-              phase: "idle",
-              pendingContinue: false
+              goal: {
+                ...(pipeline.goal ?? {}),
+                artifacts: [
+                  ...new Set([...(pipeline.goal?.artifacts ?? []), ...((diffArtifacts.files ?? []).slice(0, 200))])
+                ]
+              }
             };
           } else {
             if (answer) {
@@ -866,9 +2343,9 @@ const startRun = async ({ prompt, modelId, kind, sessionId }) => {
               pendingContinue: false
             };
           }
+          history.push(historyEntry);
         } else if (kind === "verify") {
-          const raw = fs.readFileSync(logPath, "utf-8");
-          const verifyText = extractHumanAnswer(raw);
+          const verifyText = humanAnswer;
           if (verifyText) {
             messages.push({
               id: createId(),
@@ -879,12 +2356,56 @@ const startRun = async ({ prompt, modelId, kind, sessionId }) => {
               runId: updated.id
             });
           }
-          statusValue = status === "success" ? "success" : "failed";
+          statusValue = status === "success" ? "running" : "failed";
+          pipeline = { ...pipeline, phase: "idle", pendingContinue: false };
+          history.push(historyEntry);
+        } else if (kind === "evaluate") {
+          // Evaluate doesn't have to be shown in user chat; store results for the loop.
+          const achieved = String(parsedEvaluation?.achieved ?? "").toLowerCase() === "yes";
+          statusValue = achieved ? "running" : normalized.status;
           pipeline = {
             ...pipeline,
-            phase: "done",
+            phase: "idle",
             pendingContinue: false
           };
+          history.push(historyEntry);
+        } else if (kind === "replan") {
+          statusValue = "running";
+          pipeline = {
+            ...pipeline,
+            phase: "idle",
+            pendingContinue: false
+          };
+          if (parsedReplan?.updated_plan_steps && Array.isArray(parsedReplan.updated_plan_steps)) {
+            pipeline = { ...pipeline, planSteps: parsedReplan.updated_plan_steps };
+          }
+          history.push(historyEntry);
+        } else if (kind === "ask") {
+          const answer = humanAnswer;
+          if (answer) {
+            const refs = Array.isArray(pipeline?.rag?.references) ? pipeline.rag.references : [];
+            messages.push({
+              id: createId(),
+              at: new Date().toISOString(),
+              kind: "assistant",
+              role: "assistant",
+              text: answer,
+              references: refs.length ? refs.slice(0, 8) : undefined,
+              runId: updated.id
+            });
+          }
+          // Inline ask must not overwrite status/pipeline/lastAnswer for a code-thread.
+          if (!preserveSessionState) {
+            lastAnswer = answer || lastAnswer;
+            statusValue = status === "success" ? "success" : "failed";
+            pipeline = { ...pipeline, phase: "done", pendingContinue: false };
+          }
+          history.push(historyEntry);
+        }
+
+        // Regardless of kind/outcome, the run is no longer active from the session's perspective.
+        if (!preserveSessionState) {
+          pipeline = { ...(pipeline ?? {}), activeRunId: null };
         }
         return {
           ...normalized,
@@ -894,111 +2415,129 @@ const startRun = async ({ prompt, modelId, kind, sessionId }) => {
           pipeline,
           lastAnswer,
           messages,
+          history,
           runs
         };
       });
 
-      // 자동 파이프라인: plan 성공 -> act -> (조건부) verify
-      if (status === "success" && kind === "plan") {
-        const after = normalizeSession(updatedSession);
-        const planOnly = Boolean(after.pipeline?.planOnly);
-        const approvalsOk = approvalsSatisfied(after.requiredApprovals, after.approvals);
+      // Goal-driven autonomy loop (code mode only):
+      // plan -> (approval) -> act -> verify/smoke -> evaluate -> (replan+retry)* -> done
+      const after = normalizeSession(updatedSession);
+      const agentMode = after.agentMode ?? null;
 
-        if (planOnly) {
-          await updateSession(sessionId, (s) => ({
-            ...normalizeSession(s),
-            pipeline: {
-              ...(s.pipeline ?? {}),
-              phase: "idle",
-              pendingContinue: true
-            }
-          }));
-          await appendMessage(sessionId, {
-            role: "assistant",
+      const recordDoneAndMemory = async ({ finalStatus, note, nextAction }) => {
+        const current = await loadSession(sessionId);
+        const baselinePorcelain = current.pipeline?.gitStatusBeforeAct ?? null;
+        const porcelain = await getGitStatusSnapshot();
+        const snapshotWc = porcelain
+          ? getWorldChangeFromPorcelain(porcelain)
+          : { filesCreated: [], filesModified: [], filesDeleted: [] };
+        const deltaWc = porcelain
+          ? getWorldChangeDeltaFromPorcelain(baselinePorcelain, porcelain)
+          : { filesCreated: [], filesModified: [], filesDeleted: [] };
+        const deltaCount =
+          (deltaWc.filesCreated?.length ?? 0) +
+          (deltaWc.filesModified?.length ?? 0) +
+          (deltaWc.filesDeleted?.length ?? 0);
+        const snapCount =
+          (snapshotWc.filesCreated?.length ?? 0) +
+          (snapshotWc.filesModified?.length ?? 0) +
+          (snapshotWc.filesDeleted?.length ?? 0);
+        const baselineIsDirty = Boolean(baselinePorcelain && baselinePorcelain.trim());
+        // If the repo was already dirty, "snapshot" is misleading. Prefer empty + an explicit note.
+        const wcMode =
+          deltaCount > 0
+            ? "delta"
+            : baselineIsDirty && snapCount > 0
+              ? "unknown_dirty"
+              : snapCount > 0
+                ? "snapshot"
+                : "none";
+        const wc =
+          wcMode === "delta"
+            ? deltaWc
+            : wcMode === "snapshot"
+              ? snapshotWc
+              : { filesCreated: [], filesModified: [], filesDeleted: [] };
+
+        const summarizeTop = (label, prefix, files, limit = 10) => {
+          const list = (files ?? []).slice(0, limit);
+          if (!list.length) return null;
+          const items = list.map((f) => `\`${prefix} ${f}\``).join(", ");
+          return `- ${label}: ${items}`;
+        };
+
+        const createdLine = summarizeTop("생성", "A", wc.filesCreated);
+        const modifiedLine = summarizeTop("수정", "M", wc.filesModified);
+        const deletedLine = summarizeTop("삭제", "D", wc.filesDeleted);
+        const lines = [createdLine, modifiedLine, deletedLine].filter(Boolean);
+        const counts = `생성 ${wc.filesCreated.length} / 수정 ${wc.filesModified.length} / 삭제 ${wc.filesDeleted.length}${
+          wcMode === "delta"
+            ? " (이번 실행 기준)"
+            : wcMode === "snapshot"
+              ? " (현재 변경 기준)"
+              : wcMode === "unknown_dirty"
+                ? " (기존 변경이 많아 이번 실행 변경을 확정할 수 없음)"
+                : ""
+        }`;
+
+        const doneNote =
+          note ||
+          (finalStatus === "success"
+            ? "완료"
+            : finalStatus === "cancelled"
+              ? "중지됨"
+              : "실패");
+
+        const doneMessage = `${doneNote}\n\n변경 요약: ${counts}\n${lines.length ? `\n변경 파일(Top 10):\n${lines.join("\n")}\n\n(전체 diff는 패널에서 확인하세요.)` : "\n변경 파일을 감지하지 못했습니다. (git status 기준)\n"}`.trim();
+        const doneEntry = ensureHistoryEntry({
+          type: "done",
+          runId: null,
+          status: finalStatus,
+          summary: doneNote,
+          detail: doneMessage,
+          execution_summary: buildExecutionSummary({
+            worldChange: wc,
+            result: finalStatus === "success" ? "success" : finalStatus === "cancelled" ? "cancelled" : "failed",
+            commandsExecuted: [],
+            testsExecuted: [],
+            nextSuggestedActions: []
+          })
+        });
+
+        const updated = await updateSession(sessionId, (s) => {
+          const n = normalizeSession(s);
+          const history = [...(n.history ?? []), doneEntry];
+          const messages = [...(n.messages ?? [])];
+          messages.push({
+            id: createId(),
+            at: new Date().toISOString(),
             kind: "assistant",
-            text: "계획이 준비되었습니다. 실행 단계에서 '나머지 실행(Act+Verify)' 버튼을 눌러주세요."
-          });
-          return;
-        }
-
-        if (!approvalsOk) {
-          await updateSession(sessionId, (s) => ({
-            ...normalizeSession(s),
-            pipeline: {
-              ...(s.pipeline ?? {}),
-              phase: "needs_approval",
-              pendingContinue: true
-            }
-          }));
-          await appendMessage(sessionId, {
             role: "assistant",
-            kind: "assistant",
-            text: "승인이 필요한 작업이 포함되어 자동 실행을 멈췄습니다. 승인 탭에서 체크 후 '나머지 실행'을 눌러주세요."
+            text: doneMessage,
+            runId: null
           });
-          return;
-        }
+          const pipeline = {
+            ...(n.pipeline ?? {}),
+            phase: "done",
+            pendingContinue: false,
+            loop: { ...(n.pipeline?.loop ?? {}), step: "done" },
+            nextAction: nextAction ?? { type: "auto", description: "", recommended: true }
+          };
+          return { ...n, status: finalStatus, pipeline, history, messages, lastAnswer: doneMessage };
+        });
 
-        if (!state.active) {
-          const session = await loadSession(sessionId);
-          const contextPrefix = await buildContextPrefix(session);
-          const actPrompt = buildActPrompt({
-            request: session.request,
-            plan: session.plan,
-            approvals: session.approvals,
-            contextPrefix
-          });
-          await startRun({
-            prompt: actPrompt,
-            modelId: session.modelId,
-            kind: "act",
-            sessionId
-          });
-        }
-        return;
-      }
+        const now = new Date();
+        const entry = `- [${now.toISOString().slice(0, 10)}] ${toOneLine(
+          updated.title,
+          60
+        )}: ${toOneLine(updated.request, 120)} -> ${toOneLine(updated.lastAnswer, 180)}`;
+        await updateSessionMemory(sessionId, entry);
+        await updateGlobalMemory(entry);
+      };
 
-      if (status === "success" && kind === "act") {
-        const session = await loadSession(sessionId);
-        const verifyCmd = await loadVerifyCommand();
-        const before = session.pipeline?.gitStatusBeforeAct ?? null;
-        const after = await getGitStatusSnapshot();
-        const changedSinceAct = before !== null && after !== null ? before !== after : false;
-        const shouldVerify = Boolean(verifyCmd) && changedSinceAct;
-
-        if (!shouldVerify) {
-          const now = new Date();
-          const entry = `- [${now.toISOString().slice(0, 10)}] ${toOneLine(
-            session.title,
-            60
-          )}: ${toOneLine(session.request, 120)} -> ${toOneLine(session.lastAnswer, 180)}`;
-          await updateSessionMemory(sessionId, entry);
-          await updateGlobalMemory(entry);
-          await updateSession(sessionId, (s) => ({
-            ...normalizeSession(s),
-            pipeline: { ...(s.pipeline ?? {}), phase: "done", pendingContinue: false }
-          }));
-          return;
-        }
-
-        if (!state.active) {
-          const contextPrefix = await buildContextPrefix(session);
-          const verifyPrompt = buildVerifyPrompt({
-            request: session.request,
-            plan: session.plan,
-            verifyCmd,
-            contextPrefix
-          });
-          await startRun({
-            prompt: verifyPrompt,
-            modelId: session.modelId,
-            kind: "verify",
-            sessionId
-          });
-        }
-        return;
-      }
-
-      if (kind === "verify") {
+      // Keep existing memory behavior for ask/plan modes.
+      if (agentMode === "ask") {
         const session = await loadSession(sessionId);
         const now = new Date();
         const entry = `- [${now.toISOString().slice(0, 10)}] ${toOneLine(
@@ -1009,22 +2548,616 @@ const startRun = async ({ prompt, modelId, kind, sessionId }) => {
         await updateGlobalMemory(entry);
         return;
       }
+
+      // Legacy (plan mode): plan only, then pendingContinue.
+      if (agentMode === "plan" && kind === "plan" && status === "success") {
+        await updateSession(sessionId, (s) => {
+          const n = normalizeSession(s);
+          return {
+            ...n,
+            status: "idle",
+            pipeline: {
+              ...(n.pipeline ?? {}),
+              phase: "idle",
+              pendingContinue: true,
+              loop: { ...(n.pipeline?.loop ?? {}), step: "plan" },
+              nextAction: { type: "needs_user", description: "계속 실행하려면 '계속 실행'을 선택하세요.", recommended: true }
+            }
+          };
+        });
+        await appendMessage(sessionId, {
+          role: "assistant",
+          kind: "assistant",
+          text: "계획이 준비되었습니다. 계속 실행하려면 '계속 실행'을 눌러주세요."
+        });
+        return;
+      }
+
+      if (agentMode !== "code") {
+        // Non-code flows stop here.
+        return;
+      }
+
+      // CODE MODE LOOP
+      if (kind === "plan" && status === "success") {
+        const latest = await loadSession(sessionId);
+        const planOnly = Boolean(latest.pipeline?.planOnly);
+        const approvalsOk = approvalsSatisfied(latest.requiredApprovals, latest.approvals, latest.permission);
+        const neededKeys = Object.entries(latest.requiredApprovals ?? {})
+          .filter(([, v]) => Boolean(v))
+          .map(([k]) => k);
+        const bypassedByFull =
+          normalizePermission(latest.permission) === "full" &&
+          neededKeys.length > 0 &&
+          !approvalsSatisfied(latest.requiredApprovals, latest.approvals, "basic");
+
+        if (planOnly) {
+          await updateSession(sessionId, (s) => {
+            const n = normalizeSession(s);
+            return {
+              ...n,
+              pipeline: {
+                ...(n.pipeline ?? {}),
+                phase: "idle",
+                pendingContinue: true,
+                loop: { ...(n.pipeline?.loop ?? {}), step: "plan", attempt: 0 },
+                nextAction: { type: "needs_user", description: "Plan 모드입니다. 계속 실행하려면 '계속 실행'을 누르세요.", recommended: true }
+              }
+            };
+          });
+          await appendMessage(sessionId, {
+            role: "assistant",
+            kind: "assistant",
+            text: "계획이 준비되었습니다. Plan 모드이므로 여기서 멈췄습니다. 계속 실행하려면 '계속 실행'을 눌러주세요."
+          });
+          return;
+        }
+
+        if (!approvalsOk) {
+          await updateSession(sessionId, (s) => {
+            const n = normalizeSession(s);
+            return {
+              ...n,
+              pipeline: {
+                ...(n.pipeline ?? {}),
+                phase: "needs_approval",
+                pendingContinue: true,
+                loop: { ...(n.pipeline?.loop ?? {}), step: "plan", attempt: 0 },
+                nextAction: {
+                  type: "approval_required",
+                  description: neededKeys.length ? `승인이 필요한 항목: ${neededKeys.join(", ")}` : "승인이 필요한 작업이 포함되어 있습니다.",
+                  recommended: true
+                }
+              }
+            };
+          });
+          await appendMessage(sessionId, {
+            role: "assistant",
+            kind: "assistant",
+            text: "승인이 필요한 작업이 포함되어 자동 실행을 멈췄습니다. 채팅에서 '계속' 또는 '항상 허용'을 선택하면 계속 진행합니다."
+          });
+          return;
+        }
+
+        if (bypassedByFull) {
+          const bypassEntry = ensureHistoryEntry({
+            type: "approval",
+            runId: null,
+            status: "success",
+            summary: "full 권한으로 승인 게이트를 우회했습니다.",
+            detail: `requiredApprovals: ${neededKeys.join(", ")}`,
+            bypassedByFull: true,
+            execution_summary: buildExecutionSummary({
+              worldChange: { filesCreated: [], filesModified: [], filesDeleted: [] },
+              result: "success",
+              commandsExecuted: [],
+              testsExecuted: [],
+              nextSuggestedActions: []
+            })
+          });
+          await updateSession(sessionId, (s) => {
+            const n = normalizeSession(s);
+            return { ...n, history: [...(n.history ?? []), bypassEntry] };
+          });
+        }
+
+        if (!state.active) {
+          await updateSession(sessionId, (s) => {
+            const n = normalizeSession(s);
+            const attempt = Math.max(1, Number(n.pipeline?.loop?.attempt ?? 0) || 0);
+            return {
+              ...n,
+              status: "running",
+              pipeline: {
+                ...(n.pipeline ?? {}),
+                loop: { ...(n.pipeline?.loop ?? {}), step: "act", attempt },
+                nextAction: { type: "auto", description: "", recommended: true }
+              }
+            };
+          });
+
+          const session = await loadSession(sessionId);
+          const contextPrefix = await buildContextPrefix(session);
+          const { text: rewrittenRequest } = rewriteWorkspacePaths(session.request);
+          const actPrompt = buildActPrompt({
+            request: rewrittenRequest,
+            plan: session.plan,
+            approvals: session.approvals,
+            permission: session.permission,
+            contextPrefix
+          });
+          await startRun({ prompt: actPrompt, modelId: session.modelId, kind: "act", sessionId });
+        }
+        return;
+      }
+
+      if (kind === "act") {
+        const session = await loadSession(sessionId);
+        if (status !== "success") {
+          const reason = toOneLine(extractHumanAnswer(runRaw), 240) || "act 단계 실패";
+          await recordDoneAndMemory({
+            finalStatus: "failed",
+            note: "실행(Act)이 실패했습니다.",
+            nextAction: { type: "needs_user", description: `실패 원인 확인 후 다시 시도하세요: ${reason}`, recommended: true }
+          });
+          return;
+        }
+
+        // Always attempt verify, and record evidence (exitCode/stdout/stderr). No evidence => no "success".
+        // We execute verify on the host to avoid the "model narrated it" failure mode.
+        const verifyCmd = await loadVerifyCommand();
+        const before = session.pipeline?.gitStatusBeforeAct ?? null;
+        const afterStatus = await getGitStatusSnapshot();
+        const changedByStatus =
+          before !== null && afterStatus !== null ? before !== afterStatus : false;
+        const changedByDiff = Array.isArray(diffArtifacts?.files)
+          ? diffArtifacts.files.length > 0
+          : false;
+        const actHadToolWork = /ACTIONS:\s*[\s\S]*?(VERIFY:|RESULT:|NEXT:)/i.test(
+          payloadText || ""
+        );
+
+        const verifyDecision = {
+          verifyCmdPresent: Boolean(verifyCmd),
+          changedByDiff,
+          changedByStatus,
+          actHadToolWork,
+          smokeOnly: !verifyCmd,
+          reason: verifyCmd ? "verifyCmd 실행(호스트)" : "verifyCmd 없음: smoke verify(호스트)"
+        };
+
+        await updateSession(sessionId, (s) => {
+          const n = normalizeSession(s);
+          const loop = n.pipeline?.loop ?? {};
+          return {
+            ...n,
+            pipeline: {
+              ...(n.pipeline ?? {}),
+              phase: "verifying",
+              loop: { ...loop, step: "verify" },
+              lastVerifyDecision: verifyDecision
+            }
+          };
+        });
+
+        const cwd = (await getRepoRoot()) ?? WORKSPACE;
+        const result = verifyCmd
+          ? await runCommand("/bin/zsh", ["-lc", verifyCmd], cwd)
+          : await (async () => {
+              const smoke = await runSmokeVerify();
+              return {
+                ok: smoke.ok,
+                exitCode: smoke.exitCode ?? (smoke.ok ? 0 : 1),
+                stdout: smoke.stdout,
+                stderr: smoke.stderr,
+                label: smoke.label
+              };
+            })();
+
+        const label = verifyCmd ? verifyCmd : `SMOKE: ${(result.label ?? "smoke").toString()}`;
+        const exitCode = Number.isFinite(result.exitCode) ? result.exitCode : result.ok ? 0 : 1;
+        const stdoutTail = trimCharsFromEnd(result.stdout || "", 6000);
+        const stderrTail = trimCharsFromEnd(result.stderr || "", 6000);
+        const verifyOk = Boolean(result.ok) && exitCode === 0;
+
+        const verifyDetail = `VERIFY_COMMAND:\n${label}\n\nexitCode: ${exitCode}\n\nSTDOUT:\n${stdoutTail}\n\nSTDERR:\n${stderrTail}`.trim();
+        // Verify should not claim workspace changes; it is evidence for test execution only.
+        const wc = { filesCreated: [], filesModified: [], filesDeleted: [] };
+        const verifyEntry = ensureHistoryEntry({
+          type: "verify",
+          runId: null,
+          status: verifyOk ? "success" : "failed",
+          summary: verifyOk
+            ? `검증: 통과 (exit=${exitCode})`
+            : `검증: 실패 (exit=${exitCode})`,
+          detail: trimCharsFromEnd(verifyDetail, 8000),
+          verifyDecision,
+          execution_summary: buildExecutionSummary({
+            worldChange: wc,
+            result: verifyOk ? "success" : "failed",
+            commandsExecuted: [],
+            testsExecuted: [label],
+            nextSuggestedActions: verifyOk
+              ? []
+              : ["실패 로그(Verify)를 확인하고 수정 후 재시도"]
+          })
+        });
+
+        await updateSession(sessionId, (s) => {
+          const n = normalizeSession(s);
+          const messages = [...(n.messages ?? [])];
+          messages.push({
+            id: createId(),
+            at: new Date().toISOString(),
+            kind: "assistant",
+            role: "assistant",
+            text: verifyOk ? "검증을 완료했습니다. (통과)" : "검증을 완료했습니다. (실패)",
+            runId: null
+          });
+          return {
+            ...n,
+            messages,
+            history: [...(n.history ?? []), verifyEntry],
+            pipeline: {
+              ...(n.pipeline ?? {}),
+              phase: "idle",
+              loop: { ...(n.pipeline?.loop ?? {}), step: "evaluate" }
+            }
+          };
+        });
+
+        const refreshed = await loadSession(sessionId);
+        const contextPrefix = await buildContextPrefix(refreshed);
+        const evalPrompt = buildEvaluatePrompt({
+          request: refreshed.request,
+          goal: refreshed.pipeline?.goal ?? {},
+          plan: refreshed.plan,
+          actSummary: refreshed.lastAnswer,
+          changedFiles: diffArtifacts?.files ?? [],
+          verifySummary: verifyEntry.summary,
+          contextPrefix
+        });
+        if (!state.active) {
+          await startRun({
+            prompt: evalPrompt,
+            modelId: refreshed.modelId,
+            kind: "evaluate",
+            sessionId
+          });
+        }
+        return;
+      }
+
+      if (kind === "verify") {
+        // Always evaluate after verify (success/fail).
+        const session = await loadSession(sessionId);
+        const contextPrefix = await buildContextPrefix(session);
+        const evalPrompt = buildEvaluatePrompt({
+          request: session.request,
+          goal: session.pipeline?.goal ?? {},
+          plan: session.plan,
+          actSummary: session.lastAnswer,
+          changedFiles: diffArtifacts?.files ?? [],
+          verifySummary: extractHumanAnswer(runRaw),
+          contextPrefix
+        });
+        if (!state.active) {
+          await updateSession(sessionId, (s) => {
+            const n = normalizeSession(s);
+            return { ...n, pipeline: { ...(n.pipeline ?? {}), loop: { ...(n.pipeline?.loop ?? {}), step: "evaluate" } } };
+          });
+          await startRun({ prompt: evalPrompt, modelId: session.modelId, kind: "evaluate", sessionId });
+        }
+        return;
+      }
+
+      if (kind === "evaluate") {
+        const session = await loadSession(sessionId);
+        const loop = session.pipeline?.loop ?? { attempt: 1, maxAttempts: 3 };
+        const evalObj = parsedEvaluation ?? null;
+        if (!evalObj) {
+          await recordDoneAndMemory({
+            finalStatus: "failed",
+            note: "평가(Evaluate) 결과를 파싱하지 못했습니다.",
+            nextAction: {
+              type: "needs_user",
+              description: "Evaluate 출력 형식이 깨졌습니다. 다시 시도하거나(재실행), 요청을 더 구체화해 주세요.",
+              recommended: true
+            }
+          });
+          return;
+        }
+        let achieved = String(evalObj?.achieved ?? "").toLowerCase() === "yes";
+        let next = String(evalObj?.next ?? "").toLowerCase();
+        const missing = Array.isArray(evalObj?.missing) ? evalObj.missing : [];
+        const suggested = Array.isArray(evalObj?.suggested_actions) ? evalObj.suggested_actions : [];
+
+        // Evidence gate: if the most recent verify failed, we must not treat this as achieved.
+        const lastVerify = [...(session.history ?? [])]
+          .slice()
+          .reverse()
+          .find((h) => String(h?.type ?? "").toLowerCase() === "verify");
+        const verifyFailed = lastVerify && String(lastVerify.status ?? "").toLowerCase() === "failed";
+        const verifyPassed = lastVerify && String(lastVerify.status ?? "").toLowerCase() === "success";
+        if (verifyFailed && achieved) {
+          achieved = false;
+          next = next && next !== "done" ? next : "replan";
+        }
+
+        // Evidence gate: for "code" tasks that likely require world changes, don't allow achieved=yes with no world change.
+        const lastAct = [...(session.history ?? [])]
+          .slice()
+          .reverse()
+          .find((h) => String(h?.type ?? "").toLowerCase() === "act");
+        const actWc = lastAct?.execution_summary?.worldChange ?? null;
+        const actChangeCount = actWc
+          ? (actWc.filesCreated?.length ?? 0) +
+            (actWc.filesModified?.length ?? 0) +
+            (actWc.filesDeleted?.length ?? 0)
+          : 0;
+        if (achieved && requestLikelyNeedsWorldChange(session.request) && actChangeCount === 0) {
+          achieved = false;
+          next = next && next !== "done" ? next : "replan";
+        }
+
+        // Approval sanity: only block for approval_required when requiredApprovals actually exists and isn't satisfied.
+        // Some models may emit next=approval_required spuriously; do not trap the user in a fake "approval required" state.
+        const neededKeys = Object.entries(session.requiredApprovals ?? {})
+          .filter(([, v]) => Boolean(v))
+          .map(([k]) => k);
+        const approvalsOk = approvalsSatisfied(session.requiredApprovals, session.approvals, session.permission);
+        if (next === "approval_required" && neededKeys.length === 0) {
+          // If we already have strong evidence (verify passed and/or world change happened), treat it as done.
+          if ((verifyPassed && !verifyFailed) || actChangeCount > 0 || !requestLikelyNeedsWorldChange(session.request)) {
+            achieved = true;
+            next = "done";
+          } else {
+            next = "needs_user";
+          }
+        }
+
+        if (achieved || next === "done") {
+          await recordDoneAndMemory({
+            finalStatus: "success",
+            note: "목표를 달성했습니다.",
+            nextAction: { type: "auto", description: "", recommended: true }
+          });
+          return;
+        }
+
+        if (next === "approval_required") {
+          if (neededKeys.length === 0 || approvalsOk) {
+            await recordDoneAndMemory({
+              finalStatus: "success",
+              note: "승인 없이 완료 가능한 작업으로 판단되어 종료했습니다.",
+              nextAction: { type: "auto", description: "", recommended: true }
+            });
+            return;
+          }
+          await updateSession(sessionId, (s) => {
+            const n = normalizeSession(s);
+            return {
+              ...n,
+              pipeline: {
+                ...(n.pipeline ?? {}),
+                phase: "needs_approval",
+                pendingContinue: true,
+                loop: { ...(n.pipeline?.loop ?? {}), step: "evaluate" },
+                nextAction: {
+                  type: "approval_required",
+                  description: neededKeys.length ? `승인이 필요한 항목: ${neededKeys.join(", ")}` : "승인이 필요한 작업이 남아 있습니다.",
+                  recommended: true
+                }
+              }
+            };
+          });
+          await appendMessage(sessionId, {
+            role: "assistant",
+            kind: "assistant",
+            text: "승인이 필요한 작업이 남아 있어 자동 실행을 멈췄습니다. '계속' 또는 '항상 허용'을 선택하면 진행합니다."
+          });
+          return;
+        }
+
+        if (next === "needs_user") {
+          await recordDoneAndMemory({
+            finalStatus: "failed",
+            note: "추가 정보가 필요합니다.",
+            nextAction: {
+              type: "needs_user",
+              description: missing.length ? `부족한 것: ${missing.join(", ")}` : "추가 정보가 필요합니다.",
+              recommended: true
+            }
+          });
+          return;
+        }
+
+        // Replan/retry
+        if (loop.attempt >= loop.maxAttempts) {
+          await recordDoneAndMemory({
+            finalStatus: "failed",
+            note: "재시도 횟수를 초과했습니다.",
+            nextAction: {
+              type: "needs_user",
+              description: "수동으로 방향을 지정해 주세요. (원인/제약/원하는 결과를 추가로 알려주세요)",
+              recommended: true
+            }
+          });
+          return;
+        }
+
+        const contextPrefix = await buildContextPrefix(session);
+        const replanPrompt = buildReplanPrompt({
+          request: session.request,
+          goal: session.pipeline?.goal ?? {},
+          plan: session.plan,
+          evaluation: evalObj ?? { missing, reason: "" },
+          lastFailure: session.pipeline?.loop?.lastFailure ?? null,
+          contextPrefix
+        });
+        if (!state.active) {
+          await updateSession(sessionId, (s) => {
+            const n = normalizeSession(s);
+            return {
+              ...n,
+              pipeline: {
+                ...(n.pipeline ?? {}),
+                loop: { ...(n.pipeline?.loop ?? {}), step: "replan" },
+                nextAction: { type: "auto", description: suggested[0] ? `다음 시도: ${suggested[0]}` : "재계획 중", recommended: true }
+              }
+            };
+          });
+          await startRun({ prompt: replanPrompt, modelId: session.modelId, kind: "replan", sessionId });
+        }
+        return;
+      }
+
+      if (kind === "replan" && status === "success") {
+        const session = await loadSession(sessionId);
+        const loop = session.pipeline?.loop ?? { attempt: 1, maxAttempts: 3 };
+        const nextAttempt = Math.max(1, (Number(loop.attempt) || 1) + 1);
+        const approvalsOk = approvalsSatisfied(session.requiredApprovals, session.approvals, session.permission);
+        if (!approvalsOk) {
+          await updateSession(sessionId, (s) => {
+            const n = normalizeSession(s);
+            return {
+              ...n,
+              pipeline: {
+                ...(n.pipeline ?? {}),
+                phase: "needs_approval",
+                pendingContinue: true,
+                loop: { ...(n.pipeline?.loop ?? {}), step: "replan", attempt: nextAttempt },
+                nextAction: { type: "approval_required", description: "재시도 전에 승인이 필요합니다.", recommended: true }
+              }
+            };
+          });
+          await appendMessage(sessionId, {
+            role: "assistant",
+            kind: "assistant",
+            text: "재시도 전에 승인이 필요한 작업이 포함되어 자동 실행을 멈췄습니다."
+          });
+          return;
+        }
+
+        if (!state.active) {
+          await updateSession(sessionId, (s) => {
+            const n = normalizeSession(s);
+            return { ...n, pipeline: { ...(n.pipeline ?? {}), loop: { ...(n.pipeline?.loop ?? {}), step: "act", attempt: nextAttempt } } };
+          });
+
+          const contextPrefix = await buildContextPrefix(session);
+          const { text: rewrittenRequest } = rewriteWorkspacePaths(session.request);
+          const actPrompt = buildActPrompt({
+            request: rewrittenRequest,
+            plan: session.plan,
+            approvals: session.approvals,
+            permission: session.permission,
+            contextPrefix
+          });
+          await startRun({ prompt: actPrompt, modelId: session.modelId, kind: "act", sessionId });
+        }
+        return;
+      }
     }
   };
 
   agent.on("close", (code) => {
-    finish(code === 0 ? "success" : "failed", code).catch(() => {});
+    const stopped = Boolean(state.active?.stopRequested);
+    const timedOut = Boolean(state.active?.timeoutRequested);
+    const status = timedOut ? "failed" : stopped ? "cancelled" : code === 0 ? "success" : "failed";
+    finish(status, code, { timedOut }).catch(() => {});
   });
 
   agent.on("error", () => {
-    finish("failed", 1).catch(() => {});
+    const timedOut = Boolean(state.active?.timeoutRequested);
+    finish("failed", 1, { timedOut }).catch(() => {});
   });
 
   return meta;
 };
 
 app.get("/api/health", async (_req, res) => {
-  res.json({ ok: true, running: Boolean(state.active) });
+  const running = Boolean(state.active);
+  if (!running) return res.json({ ok: true, running: false });
+  const activeMeta = state.active?.metaPath ? await readJson(state.active.metaPath).catch(() => null) : null;
+  res.json({
+    ok: true,
+    running: true,
+    activeRunId: activeMeta?.id ?? state.active?.id ?? null,
+    activeSessionId: activeMeta?.sessionId ?? null,
+    activeKind: activeMeta?.kind ?? null
+  });
+});
+
+app.get("/api/capabilities", async (_req, res) => {
+  const reg = await readCapabilityRegistry();
+  res.json(reg);
+});
+
+app.post("/api/self-improve/run", async (_req, res) => {
+  if (selfImproveState.running) {
+    return res.status(409).json({ error: "self_improve_running" });
+  }
+  if (state.active) {
+    return res.status(409).json({ error: "agent_running" });
+  }
+  try {
+    await ensureDirs();
+    const outDir = path.join(DATA_DIR, "self-improve");
+    await fsp.mkdir(outDir, { recursive: true });
+    const stamp = new Date().toISOString().replace(/\D/g, "").slice(0, 14);
+    const logPath = path.join(outDir, `server-${stamp}.log`);
+    const scriptPath = path.join(WORKSPACE, "scripts/self_improve/run_self_improve.mjs");
+    const child = spawn(process.execPath, [scriptPath], {
+      cwd: WORKSPACE,
+      env: {
+        ...process.env,
+        SELF_IMPROVE_BASE_URL: `http://127.0.0.1:${Number(process.env.PORT ?? 4310)}`
+      },
+      stdio: ["ignore", "pipe", "pipe"]
+    });
+
+    selfImproveState.running = true;
+    selfImproveState.child = child;
+    selfImproveState.startedAt = new Date().toISOString();
+    selfImproveState.logPath = logPath;
+
+    const out = fs.createWriteStream(logPath, { flags: "a" });
+    child.stdout.pipe(out);
+    child.stderr.pipe(out);
+
+    child.on("close", () => {
+      selfImproveState.running = false;
+      selfImproveState.child = null;
+    });
+
+    return res.json({ ok: true, startedAt: selfImproveState.startedAt, logPath });
+  } catch {
+    return res.status(500).json({ error: "failed_to_start" });
+  }
+});
+
+app.get("/api/self-improve/status", async (_req, res) => {
+  const tail = await readTailText(selfImproveState.logPath, 20_000);
+  res.json({
+    ok: true,
+    running: Boolean(selfImproveState.running),
+    startedAt: selfImproveState.startedAt,
+    logPath: selfImproveState.logPath,
+    tail
+  });
+});
+
+app.post("/api/self-improve/stop", async (_req, res) => {
+  if (!selfImproveState.running || !selfImproveState.child) {
+    return res.status(409).json({ error: "not_running" });
+  }
+  try {
+    selfImproveState.child.kill("SIGTERM");
+    return res.json({ ok: true });
+  } catch {
+    return res.status(500).json({ error: "stop_failed" });
+  }
 });
 
 app.get("/api/config", async (_req, res) => {
@@ -1064,6 +3197,69 @@ app.get("/api/models", async (_req, res) => {
   }
 });
 
+app.get("/api/mcp/servers", async (_req, res) => {
+  try {
+    const cfg = await loadMcpConfig();
+    const servers = cfg?.servers ?? {};
+    const entries = Object.entries(servers).map(([name, value]) => ({
+      name,
+      type: value?.type ?? null,
+      url: value?.url ?? null
+    }));
+    res.json({ ok: true, servers: entries });
+  } catch {
+    res.status(500).json({ ok: false, error: "failed_to_load_mcp_config" });
+  }
+});
+
+app.post("/api/mcp/:server/tools/list", async (req, res) => {
+  const serverName = String(req.params.server ?? "").trim();
+  if (!serverName) return res.status(400).json({ ok: false, error: "server_required" });
+  const resp = await getMcpTools(serverName);
+  if (!resp.ok) {
+    // Helpful hint for Figma MCP (common case)
+    let hint = null;
+    if (serverName === "figma-desktop") {
+      const server = await getMcpServer(serverName);
+      const url = String(server?.url ?? "");
+      const detail = String(resp.detail ?? "").toLowerCase();
+      if (url.includes("mcp.figma.com") && (detail.includes("unauthorized") || detail.includes("forbidden"))) {
+        hint =
+          "Figma MCP 인증이 필요합니다. 토큰을 `WORKSPACE/.secrets/figma.token`(1줄)로 저장하거나 환경변수 `FIGMA_OAUTH_TOKEN`을 설정한 뒤 다시 시도하세요.";
+      } else {
+        hint =
+          "Figma Desktop에서 Dev Mode를 켠 뒤, MCP Server(로컬) 기능이 활성화되어 있어야 합니다. (예: http://127.0.0.1:3845/mcp)";
+      }
+    }
+    return res.status(502).json({ ok: false, error: resp.error, detail: resp.detail ?? null, hint });
+  }
+  const tools = (resp.tools ?? []).map((t) => ({
+    name: t?.name ?? null,
+    description: t?.description ?? null,
+    inputSchema: t?.inputSchema ?? t?.input_schema ?? null
+  }));
+  return res.json({ ok: true, tools });
+});
+
+app.post("/api/mcp/:server/tools/call", async (req, res) => {
+  const serverName = String(req.params.server ?? "").trim();
+  const name = String(req.body?.name ?? "").trim();
+  const args = req.body?.arguments ?? {};
+  if (!serverName) return res.status(400).json({ ok: false, error: "server_required" });
+  if (!name) return res.status(400).json({ ok: false, error: "tool_name_required" });
+
+  const resp = await mcpJsonRpc({
+    serverName,
+    method: "tools/call",
+    params: { name, arguments: args }
+  });
+  if (!resp.ok) {
+    return res.status(502).json({ ok: false, error: resp.error, detail: resp.detail ?? null });
+  }
+  const text = extractMcpText(resp.result);
+  return res.json({ ok: true, result: resp.result ?? null, text });
+});
+
 app.get("/api/sessions", async (_req, res) => {
   const sessions = await listSessions();
   res.json(sessions);
@@ -1078,21 +3274,46 @@ app.get("/api/sessions/:id", async (req, res) => {
   }
 });
 
+app.delete("/api/sessions/:id", async (req, res) => {
+  const sessionId = String(req.params.id ?? "").trim();
+  if (!sessionId) return res.status(400).json({ error: "session_required" });
+  const activeMeta =
+    state.active?.metaPath ? await readJson(state.active.metaPath).catch(() => null) : null;
+  if (activeMeta?.sessionId === sessionId) {
+    return res.status(409).json({ error: "in_progress" });
+  }
+  try {
+    const ok = await trashSessionFile(sessionId);
+    if (!ok) return res.status(404).json({ error: "not_found" });
+    return res.json({ ok: true, deletedId: sessionId });
+  } catch {
+    return res.status(500).json({ error: "delete_failed" });
+  }
+});
+
 app.post("/api/chat/new", async (req, res) => {
   if (state.active) {
     return res.status(409).json({ error: "already_running" });
   }
   try {
-    const modelPreset = String(req.body?.mode ?? req.body?.modelPreset ?? "assistant");
-    const modelId = String(req.body?.modelId ?? "").trim();
-    const presets = await getPresetMap();
-    const effectiveModel = modelId || presets[modelPreset] || modelId;
+    const agentModeRaw = String(req.body?.agentMode ?? "ask").trim().toLowerCase();
+    const agentMode = agentModeRaw === "plan" || agentModeRaw === "code" ? agentModeRaw : "ask";
+    const permission = normalizePermission(req.body?.permission ?? DEFAULT_PERMISSION);
+    const requestedModelId = String(req.body?.modelId ?? "").trim();
+    const models = await listModels();
+    const effectiveModel =
+      requestedModelId && models.some((m) => m.id === requestedModelId)
+        ? requestedModelId
+        : pickModelId(agentMode, models);
+    const modelPreset = agentModeToPreset(agentMode);
     const session = await createSession({
       title: "New chat",
       request: "",
       modelPreset,
       modelId: effectiveModel,
-      approvals: req.body?.approvals
+      approvals: req.body?.approvals,
+      agentMode,
+      permission
     });
     res.json({ session });
   } catch {
@@ -1101,11 +3322,27 @@ app.post("/api/chat/new", async (req, res) => {
 });
 
 app.post("/api/chat/send", async (req, res) => {
-  const message = String(req.body?.message ?? "").trim();
+  const messageRaw = String(req.body?.message ?? "").trim();
   const incomingSessionId = String(req.body?.sessionId ?? "").trim();
-  const modelPreset = String(req.body?.mode ?? req.body?.modelPreset ?? "assistant");
-  const modelId = String(req.body?.modelId ?? "").trim();
-  const planMode = Boolean(req.body?.planMode);
+  const permissionRaw = req.body?.permission;
+  const permission = permissionRaw === undefined ? null : normalizePermission(permissionRaw);
+  const requestedAgentMode = String(req.body?.agentMode ?? "").trim().toLowerCase();
+  const explicitMode =
+    requestedAgentMode === "ask" || requestedAgentMode === "plan" || requestedAgentMode === "code";
+  const inferred = inferAgentMode(messageRaw);
+  const agentMode =
+    explicitMode
+      ? requestedAgentMode
+      : inferred.mode;
+  const message = inferred.text.trim();
+  const requestedModelId = String(req.body?.modelId ?? "").trim();
+  const models = await listModels();
+  const effectiveModel =
+    requestedModelId && models.some((m) => m.id === requestedModelId)
+      ? requestedModelId
+      : pickModelId(agentMode, models);
+  const modelPreset = agentModeToPreset(agentMode);
+  const planMode = agentMode === "plan" ? true : Boolean(req.body?.planMode);
 
   if (!message) {
     return res.status(400).json({ error: "message_required" });
@@ -1115,16 +3352,15 @@ app.post("/api/chat/send", async (req, res) => {
   }
 
   try {
-    const presets = await getPresetMap();
-    const effectiveModel = modelId || presets[modelPreset] || modelId;
-
     let sessionId = incomingSessionId;
     if (!sessionId) {
       const session = await createSession({
         request: message,
         modelPreset,
         modelId: effectiveModel,
-        approvals: req.body?.approvals
+        approvals: req.body?.approvals,
+        agentMode,
+        permission: permission ?? DEFAULT_PERMISSION
       });
       sessionId = session.id;
       await updateSession(sessionId, (s) => ({
@@ -1133,31 +3369,163 @@ app.post("/api/chat/send", async (req, res) => {
           ...(s.pipeline ?? {}),
           planOnly: planMode,
           auto: !planMode,
-          phase: "planning",
+          phase: agentMode === "ask" ? "acting" : "planning",
           pendingContinue: false
         }
       }));
     } else {
+      const existing = await loadSession(sessionId);
+      const lockedCode = isLockedCodeThread(existing);
+      // Any ask inside a locked code-thread is treated as an inline follow-up question.
+      // It must not overwrite request/mode/pipeline, regardless of whether the mode was explicit.
+      const followupAsk = lockedCode && agentMode === "ask";
+
       await appendMessage(sessionId, { role: "user", kind: "user", text: message });
+
       await updateSession(sessionId, (s) => {
         const normalized = normalizeSession(s);
-        const title = normalized.title && normalized.title !== "New chat"
-          ? normalized.title
-          : message.slice(0, 60) || "New chat";
+        // Follow-up 질문(ask)은 code-thread의 request/mode/state를 덮어쓰지 않는다.
+        if (followupAsk) {
+          return {
+            ...normalized,
+            permission: permission ?? normalized.permission,
+            approvals: { ...normalized.approvals, ...(req.body?.approvals ?? {}) }
+          };
+        }
+
+        const title =
+          normalized.title && normalized.title !== "New chat"
+            ? normalized.title
+            : message.slice(0, 60) || "New chat";
         return {
           ...normalized,
           title,
-          status: "planning",
+          status: agentMode === "ask" ? "running" : "planning",
           request: message,
           modelPreset,
           modelId: effectiveModel,
+          agentMode,
+          permission: permission ?? normalized.permission,
           approvals: { ...normalized.approvals, ...(req.body?.approvals ?? {}) },
           pipeline: {
             ...(normalized.pipeline ?? {}),
             planOnly: planMode,
             auto: !planMode,
-            phase: "planning",
+            phase: agentMode === "ask" ? "acting" : "planning",
             pendingContinue: false
+          }
+        };
+      });
+    }
+
+    // Optional: If the user provided a Figma URL, pull a small amount of design context via MCP once,
+    // store it in the session, and inject into subsequent prompts.
+    const figmaRef = extractFigmaRef(message);
+    if (figmaRef) {
+      const ctx = await buildFigmaMcpContext(message);
+      if (ctx.ok && ctx.text) {
+        await updateSession(sessionId, (s) => {
+          const normalized = normalizeSession(s);
+          return {
+            ...normalized,
+            pipeline: {
+              ...(normalized.pipeline ?? {}),
+              mcpContext: {
+                ...(normalized.pipeline?.mcpContext ?? {}),
+                figma: {
+                  ok: true,
+                  ref: ctx.ref ?? figmaRef,
+                  fetchedAt: new Date().toISOString(),
+                  text: ctx.text
+                }
+              }
+            }
+          };
+        });
+        await appendMessage(sessionId, {
+          role: "assistant",
+          kind: "assistant",
+          text: "Figma MCP에서 디자인 정보를 불러왔습니다. 이 컨텍스트를 바탕으로 작업을 진행합니다."
+        });
+      } else {
+        await updateSession(sessionId, (s) => {
+          const normalized = normalizeSession(s);
+          return {
+            ...normalized,
+            pipeline: {
+              ...(normalized.pipeline ?? {}),
+              mcpContext: {
+                ...(normalized.pipeline?.mcpContext ?? {}),
+                figma: {
+                  ok: false,
+                  ref: ctx.ref ?? figmaRef,
+                  fetchedAt: new Date().toISOString(),
+                  error: ctx.error ?? "unknown",
+                  detail: String(ctx.detail ?? "").slice(0, 800)
+                }
+              }
+            }
+          };
+        });
+
+        const hint =
+          ctx.error === "mcp_unreachable" || ctx.error === "mcp_timeout"
+            ? "Figma Desktop 앱에서 Dev Mode를 켠 뒤, MCP Server(로컬) 기능을 활성화해야 합니다. (보통 http://127.0.0.1:3845/mcp)"
+            : ctx.error === "figma_node_not_found"
+              ? "Figma Desktop에서 해당 문서를 열고 활성 탭으로 만든 뒤, 해당 프레임/컴포넌트를 클릭(선택)하고 다시 실행해 주세요."
+            : ctx.error === "no_usable_figma_tools"
+              ? "Figma MCP에 연결은 됐지만 사용할 수 있는 도구를 자동으로 고르지 못했습니다. `POST /api/mcp/figma-desktop/tools/list`로 도구 목록을 확인한 뒤, 어떤 도구를 쓸지 지정해 주세요."
+              : "Figma MCP 컨텍스트를 자동으로 가져오지 못했습니다.";
+
+        await appendMessage(sessionId, {
+          role: "assistant",
+          kind: "assistant",
+          text: `Figma MCP 컨텍스트를 불러오지 못했습니다. (${ctx.error ?? "unknown"})\n\n힌트: ${hint}`
+        });
+
+        await updateSession(sessionId, (s) => {
+          const n = normalizeSession(s);
+          return {
+            ...n,
+            status: "failed",
+            pipeline: {
+              ...(n.pipeline ?? {}),
+              phase: "needs_user",
+              nextAction: {
+                type: "needs_user",
+                description: "Figma Desktop에서 노드를 선택한 뒤 다시 요청하세요.",
+                recommended: true
+              }
+            }
+          };
+        });
+
+        // If the request includes a Figma link and we couldn't load MCP context, do not continue
+        // to run LLM steps that will stall or hallucinate. Ask the user to fix MCP first.
+        // (The UI can keep the thread; user action is required.)
+        return res.json({ session: await loadSession(sessionId), run: null, rewritten: false });
+      }
+    }
+
+    // Web RAG (URL-based): if the user included URLs, fetch + retrieve a small grounded context block.
+    const urls = extractUrls(message, 2);
+    if (urls.length) {
+      const rag = await buildWebRagContext(message);
+      await updateSession(sessionId, (s) => {
+        const n = normalizeSession(s);
+        return {
+          ...n,
+          pipeline: {
+            ...(n.pipeline ?? {}),
+            rag: {
+              ...(n.pipeline?.rag ?? {}),
+              urls: rag.ok ? (rag.urls ?? urls) : urls,
+              references: rag.ok ? (rag.references ?? []) : [],
+              fetchedAt: new Date().toISOString(),
+              webContext: rag.ok ? (rag.webContext ?? "") : "",
+              method: rag.ok ? (rag.method ?? "unknown") : "none",
+              error: rag.ok ? null : rag.error ?? "fetch_failed"
+            }
           }
         };
       });
@@ -1166,19 +3534,27 @@ app.post("/api/chat/send", async (req, res) => {
     const session = await loadSession(sessionId);
     const contextPrefix = await buildContextPrefix(session);
     const { text: rewrittenPrompt, rewritten } = rewriteWorkspacePaths(message);
-    const planPrompt = buildPlanPrompt({
-      request: rewrittenPrompt,
-      contextPrefix
-    });
 
+    if (agentMode === "ask") {
+      const askPrompt = buildAskPrompt({ request: rewrittenPrompt, contextPrefix });
+      const run = await startRun({
+        prompt: askPrompt,
+        modelId: effectiveModel,
+        kind: "ask",
+        sessionId,
+        preserveSessionState: isLockedCodeThread(session)
+      });
+      return res.json({ session: await loadSession(sessionId), run, rewritten });
+    }
+
+    const planPrompt = buildPlanPrompt({ request: rewrittenPrompt, contextPrefix });
     const run = await startRun({
       prompt: planPrompt,
       modelId: effectiveModel,
       kind: "plan",
       sessionId
     });
-
-    res.json({ session: await loadSession(sessionId), run, rewritten });
+    return res.json({ session: await loadSession(sessionId), run, rewritten });
   } catch {
     res.status(500).json({ error: "failed_to_start" });
   }
@@ -1188,6 +3564,8 @@ app.post("/api/chat/continue", async (req, res) => {
   const sessionId = String(req.body?.sessionId ?? "").trim();
   const planOverride = String(req.body?.plan ?? "").trim();
   const approvals = req.body?.approvals ?? {};
+  const permissionRaw = req.body?.permission;
+  const permission = permissionRaw === undefined ? null : normalizePermission(permissionRaw);
 
   if (!sessionId) {
     return res.status(400).json({ error: "session_required" });
@@ -1206,6 +3584,7 @@ app.post("/api/chat/continue", async (req, res) => {
       plan: nextPlan,
       planEdited: Boolean(planOverride) && planOverride !== (current.plan ?? ""),
       approvals: { ...current.approvals, ...approvals },
+      permission: permission ?? current.permission,
       pipeline: {
         ...(current.pipeline ?? {}),
         planOnly: false,
@@ -1215,7 +3594,11 @@ app.post("/api/chat/continue", async (req, res) => {
     }));
 
     const refreshed = await loadSession(sessionId);
-    const approvalsOk = approvalsSatisfied(refreshed.requiredApprovals, refreshed.approvals);
+    const approvalsOk = approvalsSatisfied(
+      refreshed.requiredApprovals,
+      refreshed.approvals,
+      refreshed.permission
+    );
     if (!approvalsOk) {
       await updateSession(sessionId, (s) => ({
         ...normalizeSession(s),
@@ -1224,12 +3607,32 @@ app.post("/api/chat/continue", async (req, res) => {
       return res.status(409).json({ error: "needs_approval" });
     }
 
+    // Resume code-mode loop by moving to act step.
+    if (refreshed.agentMode === "code") {
+      await updateSession(sessionId, (s) => {
+        const n = normalizeSession(s);
+        const attempt = Math.max(1, Number(n.pipeline?.loop?.attempt ?? 0) || 0);
+        return {
+          ...n,
+          status: "running",
+          pipeline: {
+            ...(n.pipeline ?? {}),
+            phase: "idle",
+            pendingContinue: false,
+            loop: { ...(n.pipeline?.loop ?? {}), step: "act", attempt },
+            nextAction: { type: "auto", description: "", recommended: true }
+          }
+        };
+      });
+    }
+
     const contextPrefix = await buildContextPrefix(refreshed);
     const { text: rewrittenRequest, rewritten } = rewriteWorkspacePaths(refreshed.request);
     const actPrompt = buildActPrompt({
       request: rewrittenRequest,
       plan: refreshed.plan,
       approvals: refreshed.approvals,
+      permission: refreshed.permission,
       contextPrefix
     });
 
@@ -1300,6 +3703,7 @@ app.post("/api/act", async (req, res) => {
       request: rewrittenRequest,
       plan,
       approvals,
+      permission: session.permission,
       contextPrefix
     });
     await updateSession(sessionId, (current) => ({
@@ -1332,6 +3736,24 @@ app.get("/api/runs/:id", async (req, res) => {
     res.json(meta);
   } catch {
     res.status(404).json({ error: "not_found" });
+  }
+});
+
+app.post("/api/runs/:id/stop", async (req, res) => {
+  if (!state.active || !state.active.agent) {
+    return res.status(409).json({ error: "not_running" });
+  }
+  const runId = String(req.params.id ?? "").trim();
+  const activeMeta = state.active?.metaPath ? await readJson(state.active.metaPath).catch(() => null) : null;
+  if (!runId || (activeMeta?.id && activeMeta.id !== runId)) {
+    return res.status(409).json({ error: "different_run_active", activeRunId: activeMeta?.id ?? null });
+  }
+  try {
+    state.active.stopRequested = true;
+    state.active.agent.kill("SIGTERM");
+    return res.json({ ok: true });
+  } catch {
+    return res.status(500).json({ error: "stop_failed" });
   }
 });
 
@@ -1413,7 +3835,7 @@ app.get("/api/runs/:id/tools", async (req, res) => {
         .filter((name) => name.startsWith("openclaw-") && name.endsWith(".log"))
         .map((name) => path.join(openclawDir, name))
         .sort();
-      const sessionId = `ui-${req.params.id}`;
+      const sessionId = meta.openclawSessionId ?? `ui-${req.params.id}`;
       for (const candidate of candidates.reverse()) {
         const tail = await readTail(candidate, 2_000_000);
         const runId = findRunIdForSession(tail, sessionId);
@@ -1431,10 +3853,25 @@ app.get("/api/runs/:id/tools", async (req, res) => {
 
 app.get("/api/runs/:id/artifacts", async (_req, res) => {
   try {
+    const runId = String(_req.params.id ?? "").trim();
+    if (runId) {
+      const metaPath = path.join(RUNS_DIR, `${runId}.json`);
+      const meta = await readJson(metaPath).catch(() => null);
+      if (meta?.artifacts) {
+        return res.json({
+          files: meta.artifacts.files ?? [],
+          diff: meta.artifacts.diff ?? "",
+          baselineDirty: Boolean(meta.artifacts.baselineDirty),
+          worldChange: meta.artifacts.worldChange ?? null
+        });
+      }
+    }
     const diffArtifacts = await getDiffArtifacts();
-    res.json({
+    return res.json({
       files: diffArtifacts.files,
-      diff: diffArtifacts.diff
+      diff: diffArtifacts.diff,
+      baselineDirty: false,
+      worldChange: null
     });
   } catch {
     res.status(500).json({ error: "failed_to_collect_artifacts" });
@@ -1495,8 +3932,11 @@ if (fs.existsSync(DIST_DIR)) {
 
 const PORT = Number(process.env.PORT ?? 4310);
 
-ensureDirs().then(() => {
-  app.listen(PORT, () => {
-    console.log(`OpenClaw UI server listening on ${PORT}`);
+ensureDirs()
+  .then(() => migrateGlobalMemory())
+  .catch(() => {})
+  .finally(() => {
+    app.listen(PORT, () => {
+      console.log(`OpenClaw UI server listening on ${PORT}`);
+    });
   });
-});

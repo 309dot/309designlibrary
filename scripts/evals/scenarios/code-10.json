@@ -1,0 +1,14 @@
+{
+  "id": "code-10",
+  "title": "git status 증거(코드)",
+  "agentMode": "code",
+  "permission": "basic",
+  "message": "workspace/__eval__/probe-10.txt 파일을 만들고, 그 다음 git status --porcelain을 실행해서 변경이 감지되는지 확인해. VERIFY에 stdout/stderr를 포함해.",
+  "expected": {
+    "evaluationAchieved": "yes",
+    "evidenceMin": "commands>=1",
+    "verifyRequired": true,
+    "mustHaveToolEvents": true
+  }
+}
+

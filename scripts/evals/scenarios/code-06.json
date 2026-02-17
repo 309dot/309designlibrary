@@ -1,0 +1,14 @@
+{
+  "id": "code-06",
+  "title": "Smoke verify 최소 근거(코드)",
+  "agentMode": "code",
+  "permission": "basic",
+  "message": "workspace/__eval__/probe-6.txt 파일을 만들고 내용을 읽어. 마지막에 VERIFY에 stdout/stderr 근거를 포함해(비어도 빈 문자열로 표시).",
+  "expected": {
+    "evaluationAchieved": "yes",
+    "evidenceMin": "filesCreated>=1",
+    "verifyRequired": true,
+    "mustHaveToolEvents": true
+  }
+}
+

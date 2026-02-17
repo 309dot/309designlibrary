@@ -1,0 +1,14 @@
+{
+  "id": "code-03",
+  "title": "디렉터리 목록 저장(코드)",
+  "agentMode": "code",
+  "permission": "basic",
+  "message": "다음 작업을 순서대로 수행해. 1) /workspace/workspace/__eval__/ 폴더를 만들고, 안에 a.txt b.txt 두 파일을 만들어. 2) 그 폴더의 파일 목록을 /workspace/workspace/__eval__/list.txt 에 저장해. 3) RESULT에 list.txt 내용 일부를 보여줘.",
+  "expected": {
+    "evaluationAchieved": "yes",
+    "evidenceMin": "commands>=1",
+    "verifyRequired": true,
+    "mustHaveToolEvents": true
+  }
+}
+

@@ -13,21 +13,6 @@ PNPM_BIN="$USER_HOME/.volta/bin/pnpm"
 VITE_BIN="$WORKDIR/node_modules/vite/bin/vite.js"
 DIST_INDEX="$WORKDIR/dist/index.html"
 
-# Docker preflight (needed for OpenClaw sandbox)
-if ! docker info >/dev/null 2>&1; then
-  echo "Docker Desktop이 꺼져 있습니다. 먼저 실행해주세요." >&2
-  exit 1
-fi
-
-if ! docker image inspect openclaw-sandbox:local >/dev/null 2>&1; then
-  /Users/a309/Documents/Agent309/wOpenclaw/apps/ui/openclaw-sandbox-setup.sh
-fi
-
-pid=$(lsof -nP -t -iTCP:4310 -sTCP:LISTEN || true)
-if [[ -n "$pid" ]]; then
-  kill "$pid" >/dev/null 2>&1 || true
-fi
-
 if [[ ! -x "$NODE_BIN" ]]; then
   echo "node 실행 파일이 없습니다: $NODE_BIN" >&2
   exit 1
@@ -47,7 +32,11 @@ if [[ ! -f "$DIST_INDEX" ]]; then
   fi
 fi
 
-nohup "$NODE_BIN" "$WORKDIR/server/launcher.mjs" > "$LOG_DIR/ui-launcher.log" 2>&1 < /dev/null &
+if lsof -nP -iTCP:4310 -sTCP:LISTEN >/dev/null 2>&1; then
+  echo "4310 포트에서 이미 실행 중입니다."
+else
+  nohup "$NODE_BIN" "$WORKDIR/server/index.mjs" > "$LOG_DIR/ui-launcher.log" 2>&1 < /dev/null &
+fi
 
 sleep 1
 open "http://localhost:4310"

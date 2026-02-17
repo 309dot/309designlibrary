@@ -1,0 +1,14 @@
+{
+  "id": "ask-05",
+  "title": "다음 액션 제안(Ask)",
+  "agentMode": "ask",
+  "permission": "basic",
+  "message": "내가 '에이전트가 아무것도 안 한 것 같다'고 느낄 때 가장 먼저 확인할 3가지를 추천해줘.",
+  "expected": {
+    "evaluationAchieved": "yes",
+    "evidenceMin": "none",
+    "verifyRequired": false,
+    "mustHaveToolEvents": false
+  }
+}
+

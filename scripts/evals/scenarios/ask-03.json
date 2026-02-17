@@ -1,0 +1,14 @@
+{
+  "id": "ask-03",
+  "title": "설명 요청(Ask)",
+  "agentMode": "ask",
+  "permission": "basic",
+  "message": "Verify recipe가 왜 중요한지 비개발자도 이해하게 5줄로 설명해줘.",
+  "expected": {
+    "evaluationAchieved": "yes",
+    "evidenceMin": "none",
+    "verifyRequired": false,
+    "mustHaveToolEvents": false
+  }
+}
+

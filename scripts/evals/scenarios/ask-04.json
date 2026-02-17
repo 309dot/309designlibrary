@@ -1,0 +1,14 @@
+{
+  "id": "ask-04",
+  "title": "툴 타임라인 설명(Ask)",
+  "agentMode": "ask",
+  "permission": "basic",
+  "message": "툴 타임라인이 왜 '진실의 원천'인지 3문장으로 설명해줘.",
+  "expected": {
+    "evaluationAchieved": "yes",
+    "evidenceMin": "none",
+    "verifyRequired": false,
+    "mustHaveToolEvents": false
+  }
+}
+

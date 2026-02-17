@@ -1,0 +1,14 @@
+{
+  "id": "code-08",
+  "title": "Verify recipe 존재 요구(코드)",
+  "agentMode": "code",
+  "permission": "basic",
+  "message": "workspace/__eval__/probe-8.txt 파일을 만들고 내용을 읽어. 그리고 Verify 단계에서 verify.recipe.json 레시피가 적용되었는지 확인 가능하게 근거를 남겨.",
+  "expected": {
+    "evaluationAchieved": "yes",
+    "evidenceMin": "filesCreated>=1",
+    "verifyRequired": true,
+    "mustHaveToolEvents": true
+  }
+}
+
