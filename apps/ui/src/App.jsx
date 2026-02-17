@@ -55,15 +55,54 @@ const summarizeLog = (logText, lineCount = 6) => {
   return lines.slice(-lineCount).join("\n");
 };
 
-const resolveParentPath = (currentPath) => {
-  if (!currentPath || currentPath === "/workspace") return "/workspace";
-  const trimmed = currentPath.replace(/\/$/, "");
-  const parent = trimmed.split("/").slice(0, -1).join("/");
-  return parent || "/workspace";
+const DEFAULT_PROJECT = {
+  id: "default",
+  name: "wOpenclaw",
+  type: "path",
+  value: "/Users/a309/Documents/Agent309/wOpenclaw"
+};
+
+const normalizeProjectType = (value) => (value === "git" ? "git" : "path");
+
+const buildProjectId = (type, value) => {
+  const key = `${normalizeProjectType(type)}:${String(value ?? "").trim()}`;
+  let hash = 0;
+  for (let i = 0; i < key.length; i += 1) {
+    hash = (hash * 31 + key.charCodeAt(i)) | 0;
+  }
+  return `p-${Math.abs(hash).toString(16)}`;
+};
+
+const projectNameFromValue = (type, value) => {
+  const raw = String(value ?? "").trim();
+  if (!raw) return "Unnamed project";
+  if (type === "git") {
+    const cleaned = raw.replace(/\.git$/i, "").replace(/\/+$/, "");
+    const parts = cleaned.split("/").filter(Boolean);
+    return parts[parts.length - 1] || cleaned;
+  }
+  const cleaned = raw.replace(/\/+$/, "");
+  const parts = cleaned.split("/").filter(Boolean);
+  return parts[parts.length - 1] || cleaned;
+};
+
+const normalizeProjectRef = (project) => {
+  if (!project || typeof project !== "object") return { ...DEFAULT_PROJECT };
+  const type = normalizeProjectType(project.type);
+  const value = String(project.value ?? "").trim();
+  if (!value) return { ...DEFAULT_PROJECT };
+  return {
+    id: String(project.id ?? "").trim() || buildProjectId(type, value),
+    name: String(project.name ?? "").trim() || projectNameFromValue(type, value),
+    type,
+    value
+  };
 };
 
 export default function App() {
   const [sessions, setSessions] = useState([]);
+  const [manualProjects, setManualProjects] = useState([]);
+  const [selectedProjectId, setSelectedProjectId] = useState("default");
   const [activeSessionId, setActiveSessionId] = useState(null);
   const [sessionDetail, setSessionDetail] = useState(null);
   const [draft, setDraft] = useState("");
@@ -91,6 +130,80 @@ export default function App() {
   useEffect(() => {
     sessionsRef.current = sessions;
   }, [sessions]);
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem("309agent.projects");
+      if (!raw) return;
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) return;
+      const normalized = parsed
+        .map((item) => normalizeProjectRef(item))
+        .filter((item) => item.id !== DEFAULT_PROJECT.id);
+      setManualProjects(normalized);
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("309agent.projects", JSON.stringify(manualProjects));
+    } catch {
+      // ignore
+    }
+  }, [manualProjects]);
+
+  const sessionsWithProject = useMemo(
+    () =>
+      (sessions ?? []).map((session) => ({
+        ...session,
+        project: normalizeProjectRef(session.project),
+        lastActivityAt: session.lastActivityAt || session.createdAt || null
+      })),
+    [sessions]
+  );
+
+  const projectBuckets = useMemo(() => {
+    const map = new Map();
+    map.set(DEFAULT_PROJECT.id, { ...DEFAULT_PROJECT, sessions: [] });
+    for (const project of manualProjects) {
+      map.set(project.id, { ...project, sessions: [] });
+    }
+    for (const session of sessionsWithProject) {
+      const project = normalizeProjectRef(session.project);
+      if (!map.has(project.id)) {
+        map.set(project.id, { ...project, sessions: [] });
+      }
+      map.get(project.id).sessions.push(session);
+    }
+    return [...map.values()].sort((a, b) => {
+      if (a.id === DEFAULT_PROJECT.id) return -1;
+      if (b.id === DEFAULT_PROJECT.id) return 1;
+      const aRecent = (a.sessions ?? [])
+        .map((s) => Date.parse(s.lastActivityAt || s.createdAt || ""))
+        .filter((n) => Number.isFinite(n))
+        .sort((x, y) => y - x)[0] ?? 0;
+      const bRecent = (b.sessions ?? [])
+        .map((s) => Date.parse(s.lastActivityAt || s.createdAt || ""))
+        .filter((n) => Number.isFinite(n))
+        .sort((x, y) => y - x)[0] ?? 0;
+      if (aRecent !== bRecent) return bRecent - aRecent;
+      return a.name.localeCompare(b.name);
+    });
+  }, [manualProjects, sessionsWithProject]);
+
+  useEffect(() => {
+    if (!activeSessionId) return;
+    const active = sessionsWithProject.find((s) => s.id === activeSessionId);
+    if (!active?.project?.id) return;
+    setSelectedProjectId(active.project.id);
+  }, [activeSessionId, sessionsWithProject]);
+
+  useEffect(() => {
+    if (projectBuckets.some((p) => p.id === selectedProjectId)) return;
+    setSelectedProjectId(DEFAULT_PROJECT.id);
+  }, [projectBuckets, selectedProjectId]);
 
   const activeRun = useMemo(() => {
     const runs = sessionDetail?.runs ?? [];
@@ -449,18 +562,26 @@ export default function App() {
     }
   };
 
-  const handleNewChat = async () => {
+  const handleNewChat = async (projectOverride = null) => {
     if (!API_CONFIGURED) {
       setNotice(missingApiNotice);
       return;
     }
     setNotice("");
     if (disabledControls) return;
+    const targetProject = normalizeProjectRef(
+      projectOverride ??
+        projectBuckets.find((project) => project.id === selectedProjectId) ??
+        DEFAULT_PROJECT
+    );
     try {
         const res = await apiFetch("/api/chat/new", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ permission: permissionDefault })
+        body: JSON.stringify({
+          permission: permissionDefault,
+          project: targetProject
+        })
       });
       if (!res.ok) {
         setNotice("새 채팅을 만들지 못했습니다.");
@@ -468,6 +589,7 @@ export default function App() {
       }
       const data = await res.json();
       setActiveSessionId(data.session.id);
+      setSelectedProjectId(normalizeProjectRef(data.session?.project ?? targetProject).id);
       setDraft("");
     } catch {
       setNotice("서버에 연결할 수 없습니다.");
@@ -500,6 +622,127 @@ export default function App() {
     }
   };
 
+  const handleAddProject = (draftProject) => {
+    const project = normalizeProjectRef(draftProject);
+    setManualProjects((prev) => {
+      if (project.id === DEFAULT_PROJECT.id) return prev;
+      const exists = prev.some((item) => item.id === project.id);
+      if (exists) {
+        return prev.map((item) => (item.id === project.id ? project : item));
+      }
+      return [...prev, project];
+    });
+    setSelectedProjectId(project.id);
+  };
+
+  const handleMoveSessionProject = async (sessionId, project) => {
+    if (!API_CONFIGURED) {
+      setNotice(missingApiNotice);
+      return;
+    }
+    const targetProject = normalizeProjectRef(project);
+    try {
+      const res = await apiFetch(`/api/sessions/${encodeURIComponent(sessionId)}/project`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: targetProject.id,
+          type: targetProject.type,
+          value: targetProject.value,
+          name: targetProject.name
+        })
+      });
+      if (!res.ok) {
+        setNotice("세션 이동에 실패했습니다.");
+        return;
+      }
+      setSessions((prev) =>
+        prev.map((session) =>
+          session.id === sessionId ? { ...session, project: targetProject } : session
+        )
+      );
+      if (activeSessionId === sessionId) {
+        setSelectedProjectId(targetProject.id);
+      }
+      setNotice("");
+    } catch {
+      setNotice("서버에 연결할 수 없습니다.");
+    }
+  };
+
+  const handleRenameProject = async (projectId, nextName) => {
+    const name = String(nextName ?? "").trim();
+    if (!projectId || !name || projectId === DEFAULT_PROJECT.id) return;
+    const bucket = projectBuckets.find((p) => p.id === projectId);
+    if (!bucket) return;
+    const renamedProject = { ...bucket, name };
+    try {
+      await Promise.all(
+        (bucket.sessions ?? []).map((session) =>
+          apiFetch(`/api/sessions/${encodeURIComponent(session.id)}/project`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              id: renamedProject.id,
+              type: renamedProject.type,
+              value: renamedProject.value,
+              name: renamedProject.name
+            })
+          })
+        )
+      );
+      setManualProjects((prev) =>
+        prev.map((project) => (project.id === projectId ? { ...project, name } : project))
+      );
+      setSessions((prev) =>
+        prev.map((session) =>
+          normalizeProjectRef(session.project).id === projectId
+            ? { ...session, project: renamedProject }
+            : session
+        )
+      );
+    } catch {
+      setNotice("프로젝트 이름 변경에 실패했습니다.");
+    }
+  };
+
+  const handleDeleteProject = async (projectId) => {
+    if (!projectId || projectId === DEFAULT_PROJECT.id) return;
+    const bucket = projectBuckets.find((p) => p.id === projectId);
+    if (!bucket) return;
+    if (!confirm(`프로젝트 '${bucket.name}'을(를) 삭제할까요? 세션은 기본 프로젝트로 이동됩니다.`)) {
+      return;
+    }
+    try {
+      await Promise.all(
+        (bucket.sessions ?? []).map((session) =>
+          apiFetch(`/api/sessions/${encodeURIComponent(session.id)}/project`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              id: DEFAULT_PROJECT.id,
+              type: DEFAULT_PROJECT.type,
+              value: DEFAULT_PROJECT.value,
+              name: DEFAULT_PROJECT.name
+            })
+          })
+        )
+      );
+      setSessions((prev) =>
+        prev.map((session) =>
+          normalizeProjectRef(session.project).id === projectId
+            ? { ...session, project: { ...DEFAULT_PROJECT } }
+            : session
+        )
+      );
+      setManualProjects((prev) => prev.filter((project) => project.id !== projectId));
+      if (selectedProjectId === projectId) setSelectedProjectId(DEFAULT_PROJECT.id);
+      setNotice("");
+    } catch {
+      setNotice("프로젝트 삭제에 실패했습니다.");
+    }
+  };
+
   const sendChat = async () => {
     if (!API_CONFIGURED) {
       setNotice(missingApiNotice);
@@ -509,6 +752,9 @@ export default function App() {
     if (!draft.trim()) return;
     setNotice("");
     try {
+      const targetProject = normalizeProjectRef(
+        projectBuckets.find((project) => project.id === selectedProjectId) ?? DEFAULT_PROJECT
+      );
       const res = await apiFetch("/api/chat/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -516,7 +762,8 @@ export default function App() {
           sessionId: sessionDetail?.id ?? null,
           message: draft,
           agentMode: "auto",
-          permission: permissionDefault
+          permission: permissionDefault,
+          project: targetProject
         })
       });
       if (!res.ok) {
@@ -613,10 +860,16 @@ export default function App() {
       }}
       left={
         <SessionList
-          sessions={sessions}
+          projects={projectBuckets}
+          selectedProjectId={selectedProjectId}
           activeId={activeSessionId}
           onSelect={setActiveSessionId}
+          onSelectProject={setSelectedProjectId}
+          onAddProject={handleAddProject}
+          onRenameProject={handleRenameProject}
+          onDeleteProject={handleDeleteProject}
           onNewChat={handleNewChat}
+          onMoveSession={handleMoveSessionProject}
           onDelete={handleDeleteSession}
           onClose={() => setLeftCollapsed(true)}
           collapsed={leftCollapsed}
@@ -655,6 +908,7 @@ export default function App() {
               const phase = session?.pipeline?.phase ?? "idle";
               const pendingContinue = Boolean(session?.pipeline?.pendingContinue);
               const running = Boolean(health?.running);
+              const sessionActivelyRunning = running && runningThisSession;
 
               let label = "대기";
               if (!health?.ok) label = "연결 실패";
@@ -662,9 +916,9 @@ export default function App() {
               else if (phase === "needs_approval") label = "승인 필요";
               else if (phase === "needs_user") label = "추가 정보 필요";
               else if (pendingContinue) label = "추가 정보 필요";
-              else if (phase === "planning") label = "기획중...";
-              else if (phase === "acting") label = "작업중...";
-              else if (phase === "verifying") label = "검증중...";
+              else if (phase === "planning" && sessionActivelyRunning) label = "기획중...";
+              else if (phase === "acting" && sessionActivelyRunning) label = "작업중...";
+              else if (phase === "verifying" && sessionActivelyRunning) label = "검증중...";
               else if (session?.status === "failed") label = "실패";
               else if (session?.status === "cancelled") label = "중지됨";
               else if (session?.status === "success" || phase === "done") label = "완료됨";

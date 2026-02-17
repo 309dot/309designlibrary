@@ -8,8 +8,27 @@ LOG_DIR="/Users/a309/Library/Application Support/OpenClawUI/logs"
 export HOME="$USER_HOME"
 mkdir -p "$LOG_DIR"
 
-NODE_BIN="$USER_HOME/.volta/bin/node"
-PNPM_BIN="$USER_HOME/.volta/bin/pnpm"
+VOLTA_HOME="${VOLTA_HOME:-$USER_HOME/.volta}"
+resolve_volta_node() {
+  local latest=""
+  latest="$(ls -1d "$VOLTA_HOME"/tools/image/node/* 2>/dev/null | sort -V | tail -n 1 || true)"
+  if [[ -n "$latest" && -x "$latest/bin/node" ]]; then
+    echo "$latest/bin/node"
+    return 0
+  fi
+  echo "$USER_HOME/.volta/bin/node"
+}
+resolve_volta_pnpm() {
+  local latest=""
+  latest="$(ls -1d "$VOLTA_HOME"/tools/image/packages/pnpm/* 2>/dev/null | sort -V | tail -n 1 || true)"
+  if [[ -n "$latest" && -x "$latest/bin/pnpm" ]]; then
+    echo "$latest/bin/pnpm"
+    return 0
+  fi
+  echo "$USER_HOME/.volta/bin/pnpm"
+}
+NODE_BIN="$(resolve_volta_node)"
+PNPM_BIN="$(resolve_volta_pnpm)"
 VITE_BIN="$WORKDIR/node_modules/vite/bin/vite.js"
 DIST_INDEX="$WORKDIR/dist/index.html"
 

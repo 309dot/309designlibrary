@@ -93,6 +93,42 @@ const AGENT_MODELS = {
 };
 
 const normalizePermission = (value) => (value === "full" ? "full" : "basic");
+const DEFAULT_SESSION_PROJECT = {
+  id: "default",
+  name: "wOpenclaw",
+  type: "path",
+  value: WORKSPACE
+};
+
+const normalizeProjectType = (value) => (value === "git" ? "git" : "path");
+
+const projectNameFromValue = (type, value) => {
+  const raw = String(value ?? "").trim();
+  if (!raw) return "Unnamed project";
+  if (type === "git") {
+    const cleaned = raw.replace(/\.git$/i, "").replace(/\/+$/, "");
+    const parts = cleaned.split("/").filter(Boolean);
+    return parts[parts.length - 1] || cleaned;
+  }
+  const trimmed = raw.replace(/\/+$/, "");
+  return path.basename(trimmed) || trimmed || "Unnamed project";
+};
+
+const buildProjectId = (type, value) => {
+  const key = `${normalizeProjectType(type)}:${String(value ?? "").trim()}`;
+  const digest = crypto.createHash("sha1").update(key).digest("hex").slice(0, 10);
+  return `p-${digest}`;
+};
+
+const normalizeProjectRef = (project) => {
+  if (!project || typeof project !== "object") return { ...DEFAULT_SESSION_PROJECT };
+  const type = normalizeProjectType(project.type);
+  const value = String(project.value ?? "").trim();
+  if (!value) return { ...DEFAULT_SESSION_PROJECT };
+  const name = String(project.name ?? "").trim() || projectNameFromValue(type, value);
+  const id = String(project.id ?? "").trim() || buildProjectId(type, value);
+  return { id, name, type, value };
+};
 
 const stripModePrefix = (message) => {
   const raw = String(message ?? "").trimStart();
@@ -143,6 +179,32 @@ const requestLikelyNeedsWorldChange = (message) => {
   );
 };
 
+const inferCandidateFilesForRequest = (message) => {
+  const s = String(message ?? "").toLowerCase();
+  const candidates = new Set();
+  // Global fallback candidates for UI tweaks.
+  candidates.add("apps/ui/src/styles.css");
+  candidates.add("apps/ui/src/App.jsx");
+
+  if (/(입력|인풋|input|패딩|padding|라운드|radius|border)/i.test(s)) {
+    candidates.add("apps/ui/src/components/composer/PromptComposer.jsx");
+    candidates.add("apps/ui/src/components/chat/ChatPane.jsx");
+  }
+  if (/(사이드바|sidebar|세션 목록|session list)/i.test(s)) {
+    candidates.add("apps/ui/src/components/sessions/SessionList.jsx");
+    candidates.add("apps/ui/src/components/layout/AppShell.jsx");
+  }
+  if (/(헤더|header|탑바|topbar)/i.test(s)) {
+    candidates.add("apps/ui/src/components/topbar/TopBarMinimal.jsx");
+    candidates.add("apps/ui/src/components/topbar/OverflowMenu.jsx");
+  }
+  if (/(버튼|button)/i.test(s)) {
+    candidates.add("apps/ui/src/components/act/ActRunner.jsx");
+    candidates.add("apps/ui/src/components/composer/PromptComposer.jsx");
+  }
+  return [...candidates].slice(0, 8);
+};
+
 const agentModeToPreset = (mode) => {
   if (mode === "ask") return "assistant";
   if (mode === "plan") return "dev";
@@ -153,10 +215,14 @@ const pickModelId = (mode, models) => {
   const ids = (models ?? []).map((m) => m.id);
   const desired = AGENT_MODELS[mode] ?? AGENT_MODELS.ask;
   if (ids.includes(desired)) return desired;
-  // fallback: try 14b for code/plan if coder not available
-  if ((mode === "code" || mode === "plan") && ids.includes("qwen2.5:14b")) return "qwen2.5:14b";
-  if (ids.includes("qwen2.5:7b")) return "qwen2.5:7b";
-  return ids[0] ?? desired;
+  // ask 모드만 fallback 허용 (대화 UX 보호).
+  // code/plan은 조용한 모델 강등을 막아 정확한 실패를 노출한다.
+  if (mode === "ask") {
+    if (ids.includes("qwen2.5:14b")) return "qwen2.5:14b";
+    if (ids.includes("qwen2.5:7b")) return "qwen2.5:7b";
+    return ids[0] ?? desired;
+  }
+  return null;
 };
 
 const defaultApprovals = {
@@ -621,6 +687,7 @@ const normalizeSession = (session) => {
   const createdAt = session?.createdAt ?? new Date().toISOString();
   const permission = normalizePermission(session?.permission ?? DEFAULT_PERMISSION);
   const agentMode = String(session?.agentMode ?? "").toLowerCase() || null;
+  const project = normalizeProjectRef(session?.project);
   let statusValue = session?.status ?? "idle";
   const approvals = {
     mail: false,
@@ -715,13 +782,13 @@ const normalizeSession = (session) => {
     prCreate: false,
     ...(session?.requiredApprovals ?? {})
   };
+  const runs = Array.isArray(session?.runs) ? session.runs : [];
 
   // Repair: old ask sessions were marked as "running/acting" because isLockedCodeThread() was too broad.
   // If the most recent ask run already finished, show it as done/success for UX stability.
   if (agentMode === "ask") {
     const activeRunId = pipeline?.activeRunId ?? null;
     if (!activeRunId && String(session?.status ?? "") === "running") {
-      const runs = Array.isArray(session?.runs) ? session.runs : [];
       const lastAsk = runs
         .slice()
         .reverse()
@@ -751,6 +818,44 @@ const normalizeSession = (session) => {
     }
   }
 
+  // Recovery: if the server restarted or crashed, session JSON can keep stale "running" state.
+  // In that case no in-memory active run exists, so repair to a terminal state.
+  const activeRunId = pipeline?.activeRunId ?? null;
+  if (String(statusValue ?? "") === "running" && activeRunId && state.active?.id !== activeRunId) {
+    const activeRun = runs.find((r) => String(r?.id ?? "") === String(activeRunId));
+    const activeRunStatus = String(activeRun?.status ?? "").toLowerCase();
+    const runningCreatedAt = activeRun?.createdAt ? Date.parse(String(activeRun.createdAt)) : NaN;
+    const runningAgeMs = Number.isFinite(runningCreatedAt) ? Date.now() - runningCreatedAt : Number.POSITIVE_INFINITY;
+    // Avoid false recovery during handoff windows (e.g. plan -> act) where memory state can briefly be empty.
+    // Only recover stale "running" runs after a long grace period.
+    const RUNNING_RECOVERY_GRACE_MS = 10 * 60 * 1000;
+    if (activeRunStatus === "running" && runningAgeMs < RUNNING_RECOVERY_GRACE_MS) {
+      return {
+        ...session,
+        createdAt,
+        status: statusValue,
+        approvals,
+        pipeline,
+        history,
+        runs
+      };
+    }
+    if (activeRunStatus === "success") statusValue = "success";
+    else if (activeRunStatus === "cancelled") statusValue = "cancelled";
+    else statusValue = "failed";
+    pipeline.phase = "done";
+    pipeline.pendingContinue = false;
+    pipeline.activeRunId = null;
+    loop.step = "done";
+    if (!pipeline.nextAction || String(pipeline.nextAction.type ?? "") === "auto") {
+      pipeline.nextAction = {
+        type: "needs_user",
+        description: "이전 실행이 중단되어 상태를 복구했습니다. 다시 실행해 주세요.",
+        recommended: true
+      };
+    }
+  }
+
   return {
     ...session,
     createdAt,
@@ -765,7 +870,8 @@ const normalizeSession = (session) => {
       ? String(session?.lastAnswer ?? "").replace(/[\u4E00-\u9FFF]+/g, "").trim()
       : (session?.lastAnswer ?? ""),
     permission,
-    agentMode: agentMode ?? null
+    agentMode: agentMode ?? null,
+    project
   };
 };
 
@@ -816,6 +922,7 @@ const rewriteToKorean = async (text, timeoutMs = 2500) => {
   try {
     const models = await listModels();
     const model = pickModelId("ask", models);
+    if (!model) return text;
     const prompt = `다음 내용을 한국어로만 간결하게 다시 작성해줘. 의미는 보존하고, 불필요한 장식은 빼.\n\n---\n${text}\n---`;
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeoutMs);
@@ -1006,9 +1113,14 @@ const listSessions = async () => {
         id: session.id,
         title: session.title,
         createdAt: session.createdAt,
+        lastActivityAt:
+          session.history?.[session.history.length - 1]?.at ??
+          session.messages?.[session.messages.length - 1]?.at ??
+          session.createdAt,
         status: isRunning ? "running" : session.status,
         agentMode: session.agentMode ?? "ask",
         permission: session.permission ?? DEFAULT_PERMISSION,
+        project: session.project ?? { ...DEFAULT_SESSION_PROJECT },
         snippet: toOneLine(String(snippetSource), 120)
       });
     } catch {
@@ -1050,7 +1162,8 @@ const createSession = async ({
   modelId,
   approvals,
   agentMode,
-  permission
+  permission,
+  project
 }) => {
   const id = createId();
   const createdAt = new Date().toISOString();
@@ -1068,6 +1181,7 @@ const createSession = async ({
     modelId,
     agentMode: agentMode ?? null,
     permission: normalizedPermission,
+    project: normalizeProjectRef(project),
     approvals: {
       mail: false,
       deploy: false,
@@ -1329,9 +1443,11 @@ const updateSessionMemory = async (sessionId, entry) => {
 const buildContextPrefix = async (session) => {
   const figmaBlock = String(session?.pipeline?.mcpContext?.figma?.text ?? "").trim();
   const ragBlock = String(session?.pipeline?.rag?.webContext ?? "").trim();
-  const globalMemory = await loadGlobalMemory();
-  const sessionMemory = String(session?.memory?.sessionSummary ?? "").trim();
-  const recent = getRecentMessagesForContext(session?.messages ?? [], 6);
+  const mode = String(session?.agentMode ?? "").toLowerCase();
+  const isCodeMode = mode === "code";
+  const globalMemory = isCodeMode ? "" : await loadGlobalMemory();
+  const sessionMemory = isCodeMode ? "" : String(session?.memory?.sessionSummary ?? "").trim();
+  const recent = getRecentMessagesForContext(session?.messages ?? [], isCodeMode ? 4 : 6);
 
   const blocks = [];
   if (figmaBlock) blocks.push(figmaBlock);
@@ -1780,7 +1896,7 @@ const buildActPrompt = ({ request, plan, approvals, permission, contextPrefix })
     perm === "full"
       ? "- 권한=full: 승인 게이트는 통과된 것으로 간주한다. 단, 메일 자동 발송/배포/머지 같은 외부 영향 작업은 '승인 필요'로 한 번 더 확인을 요청한다.\n"
       : "- 승인되지 않은 위험 작업(메일/캘린더 발송, 배포, 머지, git push/PR)은 절대 실행하지 말고 승인을 요청한다.\n";
-  return `${contextPrefix || ""}너는 로컬 OpenClaw 에이전트이며 실제로 실행한다.\n\n규칙:\n- 파일/디렉터리 확인, git, 테스트, 쉘 실행은 반드시 tool을 사용한다.\n- tool 없이 실행했다고 말하지 말 것.\n- 절대 \"도구 호출 스펙(JSON)\"을 텍스트/코드블록으로 출력하지 말 것. (예: \`{\"name\":\"read\",...}\` 출력 금지)\n- 대신: tool을 실제로 실행하고, 그 결과(stdout/stderr/읽은 내용/변경사항)를 VERIFY/RESULT에 포함한다.\n${approvalRule}- 출력 형식: PLAN -> ACTIONS -> VERIFY(stdout/stderr 원문) -> RESULT(변경 파일/테스트) -> NEXT\n- FIGMA_MCP_CONTEXT가 있으면 그 내용을 설계 근거로 사용하라.\n- 다만 Figma 앱 UI를 직접 조작/편집하는 것은 할 수 없으니, 필요한 경우 사용자에게 “Figma에서 해야 할 최소 단계”만 요청하라.\n\n승인됨(기존 체크): ${approvalText}\n권한 모드: ${perm}\n\n요청:\n${request}\n\n계획:\n${plan || "(계획 없음)"}`;
+  return `${contextPrefix || ""}너는 로컬 OpenClaw 에이전트이며 실제로 실행한다.\n\n규칙:\n- 파일/디렉터리 확인, git, 테스트, 쉘 실행은 반드시 tool을 사용한다.\n- tool 없이 실행했다고 말하지 말 것.\n- 절대 \"도구 호출 스펙(JSON)\"을 텍스트/코드블록으로 출력하지 말 것. (예: \`{\"name\":\"read\",...}\` 출력 금지)\n- 대신: tool을 실제로 실행하고, 그 결과(stdout/stderr/읽은 내용/변경사항)를 VERIFY/RESULT에 포함한다.\n- 요청에 파일 경로가 명시되지 않아도 먼저 스스로 탐색해서(예: read/exec로 후보 파일 확인) 수정을 시도한다.\n- 사용자에게 \"파일 경로를 알려달라/정보를 더 달라\"고 먼저 묻지 말고, 최소 1개 파일 수정 시도 후 결과를 보고한다.\n- 한 번의 시도에서 실패해도 가능한 후보 파일로 재시도한 뒤 결론을 낸다.\n${approvalRule}- 출력 형식: PLAN -> ACTIONS -> VERIFY(stdout/stderr 원문) -> RESULT(변경 파일/테스트) -> NEXT\n- FIGMA_MCP_CONTEXT가 있으면 그 내용을 설계 근거로 사용하라.\n- 다만 Figma 앱 UI를 직접 조작/편집하는 것은 할 수 없으니, 필요한 경우 사용자에게 “Figma에서 해야 할 최소 단계”만 요청하라.\n\n승인됨(기존 체크): ${approvalText}\n권한 모드: ${perm}\n\n요청:\n${request}\n\n계획:\n${plan || "(계획 없음)"}`;
 };
 
 const runCommand = (cmd, args, cwd) =>
@@ -2036,6 +2152,16 @@ const startRun = async ({ prompt, modelId, kind, sessionId, preserveSessionState
       }
     })();
     const extracted = extractRunSummary(runRaw);
+    // Compute run-scoped diff/change evidence before building run artifacts.
+    const diffArtifacts =
+      kind === "act" || kind === "verify" || kind === "evaluate" || kind === "replan"
+        ? await getDiffArtifacts().catch(() => ({ files: [], diff: "" }))
+        : { files: [], diff: "" };
+    const porcelainNow = kind === "act" ? await getGitStatusSnapshot() : null;
+    const worldChangeDelta =
+      kind === "act" && porcelainNow
+        ? getWorldChangeDeltaFromPorcelain(gitStatusBefore, porcelainNow)
+        : null;
 
     const runArtifacts = (() => {
       // Make artifacts "run-scoped" when possible (avoid showing the whole repo's dirty diff).
@@ -2097,18 +2223,7 @@ const startRun = async ({ prompt, modelId, kind, sessionId, preserveSessionState
           : humanAnswerRaw;
 
       const payloadText = extractPayloadText(runRaw);
-      const diffArtifacts =
-        kind === "act" || kind === "verify" || kind === "evaluate" || kind === "replan"
-          ? await getDiffArtifacts().catch(() => ({ files: [], diff: "" }))
-          : { files: [], diff: "" };
       const verifyCmdForHistory = kind === "verify" ? await loadVerifyCommand() : "";
-      // World-change evidence should be captured only for steps that can actually change the world.
-      // ask/plan/evaluate/replan must not "guess" changes based on a dirty repo snapshot.
-      const porcelainNow = kind === "act" ? await getGitStatusSnapshot() : null;
-      const worldChangeDelta =
-        kind === "act" && porcelainNow
-          ? getWorldChangeDeltaFromPorcelain(gitStatusBefore, porcelainNow)
-          : null;
       const parsedGoal =
         kind === "plan" && status === "success" ? parseGoalAndPlanSteps(payloadText) : null;
       const parsedEvaluation =
@@ -2662,20 +2777,6 @@ const startRun = async ({ prompt, modelId, kind, sessionId, preserveSessionState
         }
 
         if (!state.active) {
-          await updateSession(sessionId, (s) => {
-            const n = normalizeSession(s);
-            const attempt = Math.max(1, Number(n.pipeline?.loop?.attempt ?? 0) || 0);
-            return {
-              ...n,
-              status: "running",
-              pipeline: {
-                ...(n.pipeline ?? {}),
-                loop: { ...(n.pipeline?.loop ?? {}), step: "act", attempt },
-                nextAction: { type: "auto", description: "", recommended: true }
-              }
-            };
-          });
-
           const session = await loadSession(sessionId);
           const contextPrefix = await buildContextPrefix(session);
           const { text: rewrittenRequest } = rewriteWorkspacePaths(session.request);
@@ -2716,6 +2817,72 @@ const startRun = async ({ prompt, modelId, kind, sessionId, preserveSessionState
         const actHadToolWork = /ACTIONS:\s*[\s\S]*?(VERIFY:|RESULT:|NEXT:)/i.test(
           payloadText || ""
         );
+        const asksMoreInfo = /(알려주시면|정보.*필요|경로.*(필요|알려)|파일.*(제공|알려))/i.test(
+          payloadText || ""
+        );
+
+        // Hard gate: code-like requests must not end as "정보 더 필요" without any file change evidence.
+        if (
+          requestLikelyNeedsWorldChange(session.request) &&
+          !changedByDiff &&
+          !changedByStatus &&
+          asksMoreInfo
+        ) {
+          const loop = session.pipeline?.loop ?? { attempt: 1, maxAttempts: 3 };
+          const attempt = Number(loop.attempt ?? 1) || 1;
+          const autoRetryAllowed = attempt < 2;
+          const candidates = inferCandidateFilesForRequest(session.request);
+          if (autoRetryAllowed && candidates.length) {
+            const { text: rewrittenRequest } = rewriteWorkspacePaths(session.request);
+            const narrowedRequest = `${rewrittenRequest}\n\n자동 추정 후보 파일(우선 확인):\n${candidates
+              .map((f) => `- ${f}`)
+              .join("\n")}`;
+            await updateSession(sessionId, (s) => {
+              const n = normalizeSession(s);
+              return {
+                ...n,
+                status: "running",
+                pipeline: {
+                  ...(n.pipeline ?? {}),
+                  phase: "acting",
+                  loop: {
+                    ...(n.pipeline?.loop ?? {}),
+                    step: "act",
+                    attempt: attempt + 1
+                  },
+                  nextAction: { type: "auto", description: "", recommended: true }
+                }
+              };
+            });
+            const refreshed = await loadSession(sessionId);
+            const contextPrefix = await buildContextPrefix(refreshed);
+            const retryPrompt = buildActPrompt({
+              request: narrowedRequest,
+              plan: refreshed.plan,
+              approvals: refreshed.approvals,
+              permission: refreshed.permission,
+              contextPrefix
+            });
+            await startRun({
+              prompt: retryPrompt,
+              modelId: refreshed.modelId,
+              kind: "act",
+              sessionId
+            });
+            return;
+          }
+          await recordDoneAndMemory({
+            finalStatus: "failed",
+            note: "실행(Act)이 파일 변경 없이 추가 정보 요청으로 종료되었습니다.",
+            nextAction: {
+              type: "needs_user",
+              description:
+                "자동 탐색/재시도 후에도 변경하지 못했습니다. 화면 요소 이름 또는 관련 파일 힌트를 1개만 추가해 주세요.",
+              recommended: true
+            }
+          });
+          return;
+        }
 
         const verifyDecision = {
           verifyCmdPresent: Boolean(verifyCmd),
@@ -3291,6 +3458,34 @@ app.delete("/api/sessions/:id", async (req, res) => {
   }
 });
 
+app.patch("/api/sessions/:id/project", async (req, res) => {
+  const sessionId = String(req.params.id ?? "").trim();
+  if (!sessionId) return res.status(400).json({ error: "session_required" });
+  const id = String(req.body?.id ?? "").trim();
+  const type = normalizeProjectType(req.body?.type);
+  const value = String(req.body?.value ?? "").trim();
+  const name = String(req.body?.name ?? "").trim();
+  if (!value) return res.status(400).json({ error: "project_value_required" });
+  try {
+    const updated = await updateSession(sessionId, (session) => {
+      const normalized = normalizeSession(session);
+      return {
+        ...normalized,
+        project: normalizeProjectRef({
+          ...normalized.project,
+          id: id || undefined,
+          type,
+          value,
+          name: name || undefined
+        })
+      };
+    });
+    return res.json({ ok: true, session: updated });
+  } catch {
+    return res.status(404).json({ error: "not_found" });
+  }
+});
+
 app.post("/api/chat/new", async (req, res) => {
   if (state.active) {
     return res.status(409).json({ error: "already_running" });
@@ -3305,6 +3500,13 @@ app.post("/api/chat/new", async (req, res) => {
       requestedModelId && models.some((m) => m.id === requestedModelId)
         ? requestedModelId
         : pickModelId(agentMode, models);
+    if (!effectiveModel) {
+      return res.status(503).json({
+        error: "model_unavailable",
+        mode: agentMode,
+        requiredModel: AGENT_MODELS[agentMode] ?? null
+      });
+    }
     const modelPreset = agentModeToPreset(agentMode);
     const session = await createSession({
       title: "New chat",
@@ -3313,7 +3515,8 @@ app.post("/api/chat/new", async (req, res) => {
       modelId: effectiveModel,
       approvals: req.body?.approvals,
       agentMode,
-      permission
+      permission,
+      project: req.body?.project
     });
     res.json({ session });
   } catch {
@@ -3341,6 +3544,13 @@ app.post("/api/chat/send", async (req, res) => {
     requestedModelId && models.some((m) => m.id === requestedModelId)
       ? requestedModelId
       : pickModelId(agentMode, models);
+  if (!effectiveModel) {
+    return res.status(503).json({
+      error: "model_unavailable",
+      mode: agentMode,
+      requiredModel: AGENT_MODELS[agentMode] ?? null
+    });
+  }
   const modelPreset = agentModeToPreset(agentMode);
   const planMode = agentMode === "plan" ? true : Boolean(req.body?.planMode);
 
@@ -3360,7 +3570,8 @@ app.post("/api/chat/send", async (req, res) => {
         modelId: effectiveModel,
         approvals: req.body?.approvals,
         agentMode,
-        permission: permission ?? DEFAULT_PERMISSION
+        permission: permission ?? DEFAULT_PERMISSION,
+        project: req.body?.project
       });
       sessionId = session.id;
       await updateSession(sessionId, (s) => ({
@@ -3406,6 +3617,13 @@ app.post("/api/chat/send", async (req, res) => {
           modelId: effectiveModel,
           agentMode,
           permission: permission ?? normalized.permission,
+          project:
+            req.body?.project && typeof req.body.project === "object"
+              ? normalizeProjectRef({
+                  ...normalized.project,
+                  ...req.body.project
+                })
+              : normalized.project,
           approvals: { ...normalized.approvals, ...(req.body?.approvals ?? {}) },
           pipeline: {
             ...(normalized.pipeline ?? {}),
@@ -3665,7 +3883,8 @@ app.post("/api/plan", async (req, res) => {
       request,
       modelPreset,
       modelId: effectiveModel,
-      approvals: req.body?.approvals
+      approvals: req.body?.approvals,
+      project: req.body?.project
     });
     const { text: rewrittenPrompt, rewritten } = rewriteWorkspacePaths(request);
     const contextPrefix = await buildContextPrefix(session);
@@ -3749,8 +3968,30 @@ app.post("/api/runs/:id/stop", async (req, res) => {
     return res.status(409).json({ error: "different_run_active", activeRunId: activeMeta?.id ?? null });
   }
   try {
+    const targetRunId = state.active.id;
+    const targetPid = Number(state.active.agent.pid || 0);
     state.active.stopRequested = true;
     state.active.agent.kill("SIGTERM");
+    // Some OpenClaw runs may ignore SIGTERM; escalate to SIGKILL.
+    setTimeout(() => {
+      if (!state.active || state.active.id !== targetRunId) return;
+      try {
+        state.active.timeoutRequested = true;
+      } catch {}
+      try {
+        if (targetPid > 0) {
+          spawn("pkill", ["-TERM", "-P", String(targetPid)]);
+        }
+      } catch {}
+      try {
+        state.active.agent.kill("SIGKILL");
+      } catch {}
+      try {
+        if (targetPid > 0) {
+          spawn("pkill", ["-KILL", "-P", String(targetPid)]);
+        }
+      } catch {}
+    }, 3000);
     return res.json({ ok: true });
   } catch {
     return res.status(500).json({ error: "stop_failed" });
