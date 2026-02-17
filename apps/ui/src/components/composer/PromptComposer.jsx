@@ -1,25 +1,60 @@
 import React, { useEffect, useMemo, useRef } from "react";
 
+const ProgressCircleIcon = ({ spinning }) => (
+  <svg
+    className={spinning ? "agent-progress-circle spinning" : "agent-progress-circle"}
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <circle cx="8" cy="8" r="7" stroke="var(--agent-progress-base, #BDBDBD)" strokeWidth="2" />
+    <path
+      d="M8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1"
+      stroke="var(--agent-progress-fill, #0B98FF)"
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+  </svg>
+);
+
+const SendArrowIcon = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 10.3707 10.6667"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path
+      d="M5.852 2.552V10.6667H4.51867V2.552L0.942667 6.128L0 5.18533L5.18533 0L10.3707 5.18533L9.428 6.128L5.852 2.552Z"
+      fill="white"
+    />
+  </svg>
+);
+
+const StopIcon = () => (
+  <span className="agent-stop-icon" aria-hidden="true" />
+);
+
 export default function PromptComposer({
   request,
   onChangeRequest,
   onSend,
-  onSendPlan,
-  mode,
-  onChangeMode,
-  models,
-  selectedModel,
-  onChangeModel,
-  planMode,
-  onTogglePlanMode,
-  debugEnabled,
-  onToggleDebug,
-  disabled
+  onStop,
+  runningState, // idle|running|stopping
+  disabled,
+  progressUi
 }) {
   const textareaRef = useRef(null);
 
   const placeholder = useMemo(
-    () => "메시지를 입력하세요…",
+    () => "요청사항을 말씀해주세요",
     []
   );
 
@@ -32,12 +67,6 @@ export default function PromptComposer({
       if (event.isComposing) return;
 
       const isCmd = event.metaKey && !event.ctrlKey;
-      const isCmdShift = event.metaKey && event.shiftKey && !event.ctrlKey;
-      if (isCmdShift) {
-        event.preventDefault();
-        onSendPlan?.();
-        return;
-      }
       if (event.shiftKey) return; // newline
       if (isCmd) {
         event.preventDefault();
@@ -47,11 +76,46 @@ export default function PromptComposer({
 
     el.addEventListener("keydown", onKeyDown);
     return () => el.removeEventListener("keydown", onKeyDown);
-  }, [onSend, onSendPlan]);
+  }, [onSend]);
+
+  const sendDisabled = disabled || !request.trim();
+  const isRunning = runningState === "running" || runningState === "stopping";
+  const buttonMode = isRunning ? "stop" : "send";
 
   return (
-    <div className="composer">
-      <div className="composer-input">
+    <div className="composer agentchat-input">
+      {progressUi?.visible ? (
+        <div className="agent-progress-area">
+          <div className="agent-progress" role="status" aria-live="polite">
+            <div className="agent-progress-left">
+              <ProgressCircleIcon spinning={Boolean(progressUi?.spinning)} />
+              <div className="agent-progress-text">{progressUi?.label ?? ""}</div>
+            </div>
+            <div className="agent-progress-right">
+              {progressUi?.actions?.map((a) => (
+                <button
+                  key={a.id}
+                  className={
+                    a.kind === "primary"
+                      ? "agent-pill primary"
+                      : a.kind === "link"
+                        ? "agent-link"
+                        : "agent-pill"
+                  }
+                  onClick={a.onClick}
+                  type="button"
+                >
+                  {a.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : null}
+
+      {progressUi?.notice ? <div className="agent-progress-note">{progressUi.notice}</div> : null}
+
+      <div className="agent-chat-area">
         <textarea
           ref={textareaRef}
           value={request}
@@ -61,61 +125,24 @@ export default function PromptComposer({
           disabled={disabled}
         />
 
-        <button
-          className="primary composer-send"
-          onClick={onSend}
-          disabled={disabled || !request.trim()}
-        >
-          ↑
-        </button>
-      </div>
-
-      <div className="composer-controls">
-        <select
-          className="composer-select"
-          value={selectedModel}
-          onChange={(e) => onChangeModel?.(e.target.value)}
-          disabled={disabled}
-          title="모델"
-        >
-          {models?.map((m) => (
-            <option key={m.id} value={m.id}>
-              {m.name || m.id}
-            </option>
-          ))}
-        </select>
-
-        <select
-          className="composer-select"
-          value={mode}
-          onChange={(e) => onChangeMode?.(e.target.value)}
-          disabled={disabled}
-          title="모드"
-        >
-          <option value="assistant">비서</option>
-          <option value="dev">개발</option>
-          <option value="design">설계</option>
-        </select>
-
-        <label className="composer-check">
-          <input
-            type="checkbox"
-            checked={Boolean(planMode)}
-            onChange={() => onTogglePlanMode?.(!planMode)}
-            disabled={disabled}
-          />
-          <span>Plan</span>
-        </label>
-
-        <label className="composer-check">
-          <input
-            type="checkbox"
-            checked={Boolean(debugEnabled)}
-            onChange={() => onToggleDebug?.(!debugEnabled)}
-            disabled={disabled}
-          />
-          <span>Debug</span>
-        </label>
+        <div className="agent-chat-actions">
+          <button
+            className="agent-send"
+            onClick={buttonMode === "send" ? onSend : onStop}
+            disabled={buttonMode === "send" ? sendDisabled : runningState === "stopping"}
+            title={buttonMode === "send" ? "보내기 (Cmd+Enter)" : "중지"}
+            aria-label={buttonMode === "send" ? "보내기" : "중지"}
+            type="button"
+          >
+            {runningState === "stopping" ? (
+              <span className="spinner" aria-hidden="true" />
+            ) : buttonMode === "stop" ? (
+              <StopIcon />
+            ) : (
+              <SendArrowIcon />
+            )}
+          </button>
+        </div>
       </div>
     </div>
   );
