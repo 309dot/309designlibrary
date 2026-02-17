@@ -15,11 +15,27 @@ const IS_LOCAL_HOST =
   (window.location.hostname === "localhost" ||
     window.location.hostname === "127.0.0.1");
 const API_CONFIGURED = Boolean(API_BASE) || IS_LOCAL_HOST;
+const apiHost = (() => {
+  try {
+    return API_BASE ? new URL(API_BASE).hostname : "";
+  } catch {
+    return "";
+  }
+})();
+const USE_CREDENTIALS =
+  API_BASE &&
+  apiHost &&
+  !apiHost.endsWith(".loca.lt") &&
+  !apiHost.endsWith(".trycloudflare.com");
 const apiUrl = (path) => (API_BASE ? `${API_BASE}${path}` : path);
 const apiFetch = (path, init) =>
   fetch(apiUrl(path), {
     ...(init ?? {}),
-    credentials: API_BASE ? "include" : init?.credentials
+    credentials: API_BASE
+      ? USE_CREDENTIALS
+        ? "include"
+        : "omit"
+      : init?.credentials
   });
 
 const summarizeLog = (logText, lineCount = 6) => {
@@ -60,6 +76,9 @@ export default function App() {
   const sessionsRef = useRef([]);
   const missingApiNotice =
     "웹 배포에서는 API 서버 주소가 필요합니다. Vercel 환경변수 VITE_API_BASE_URL을 설정하고 다시 배포하세요.";
+  const authApiNotice = API_BASE
+    ? `API 터널 인증/연결이 필요합니다. 아래 주소를 새 탭에서 열어 확인한 뒤 다시 시도하세요: ${API_BASE}`
+    : "API 터널 인증/연결이 필요합니다.";
 
   useEffect(() => {
     sessionsRef.current = sessions;
@@ -115,6 +134,13 @@ export default function App() {
     const poll = async () => {
       try {
         const res = await apiFetch("/api/health");
+        if (res.status === 511) {
+          if (!cancelled) setNotice(authApiNotice);
+          if (!cancelled) setHealth({ ok: false, running: false });
+          delayMs = 15000;
+          if (!cancelled) setTimeout(poll, delayMs);
+          return;
+        }
         if (!res.ok) throw new Error("bad_status");
         const data = await res.json();
         if (!cancelled) setHealth(data);
@@ -138,6 +164,11 @@ export default function App() {
     const fetchSessions = async () => {
       try {
         const res = await apiFetch("/api/sessions");
+        if (res.status === 511) {
+          if (mounted) setNotice(authApiNotice);
+          delayMs = 15000;
+          return;
+        }
         const data = await res.json();
         if (!mounted) return;
         setSessions(data);
@@ -177,6 +208,11 @@ export default function App() {
     const fetchSession = async () => {
       try {
         const res = await apiFetch(`/api/sessions/${activeSessionId}`);
+        if (res.status === 511) {
+          if (mounted) setNotice(authApiNotice);
+          delayMs = 15000;
+          return;
+        }
         if (res.status === 404) {
           if (!mounted) return;
           setNotice("선택한 세션을 찾을 수 없습니다(삭제됨). 다른 세션으로 전환합니다.");
@@ -270,7 +306,7 @@ export default function App() {
     setLastLogAt(null);
 
     const es = new EventSource(apiUrl(`/api/runs/${activeRun.id}/stream`), {
-      withCredentials: Boolean(API_BASE)
+      withCredentials: Boolean(API_BASE) && Boolean(USE_CREDENTIALS)
     });
     es.addEventListener("log", (event) => {
       const payload = JSON.parse(event.data || "{}");
