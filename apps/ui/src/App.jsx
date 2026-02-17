@@ -22,6 +22,8 @@ const apiHost = (() => {
     return "";
   }
 })();
+const IS_LOCALTUNNEL = Boolean(apiHost) && apiHost.endsWith(".loca.lt");
+const TUNNEL_HEADERS = IS_LOCALTUNNEL ? { "x-localtunnel-bypass": "1" } : {};
 const USE_CREDENTIALS =
   API_BASE &&
   apiHost &&
@@ -36,6 +38,11 @@ const apiFetch = (path, init) =>
         ? "include"
         : "omit"
       : init?.credentials
+    ,
+    headers: {
+      ...(TUNNEL_HEADERS ?? {}),
+      ...((init?.headers ?? {}) || {})
+    }
   });
 
 const summarizeLog = (logText, lineCount = 6) => {
@@ -305,24 +312,56 @@ export default function App() {
     setLog("");
     setLastLogAt(null);
 
-    const es = new EventSource(apiUrl(`/api/runs/${activeRun.id}/stream`), {
-      withCredentials: Boolean(API_BASE) && Boolean(USE_CREDENTIALS)
-    });
-    es.addEventListener("log", (event) => {
-      const payload = JSON.parse(event.data || "{}");
-      if (payload.data) {
-        setLog((prev) => prev + payload.data);
-        setLastLogAt(Date.now());
+    if (!API_BASE || !IS_LOCALTUNNEL) {
+      const es = new EventSource(apiUrl(`/api/runs/${activeRun.id}/stream`), {
+        withCredentials: Boolean(API_BASE) && Boolean(USE_CREDENTIALS)
+      });
+      es.addEventListener("log", (event) => {
+        const payload = JSON.parse(event.data || "{}");
+        if (payload.data) {
+          setLog((prev) => prev + payload.data);
+          setLastLogAt(Date.now());
+        }
+      });
+      es.addEventListener("done", () => {
+        es.close();
+      });
+      es.onerror = () => {
+        es.close();
+      };
+      return () => {
+        es.close();
+      };
+    }
+
+    // localtunnel can't send custom headers for SSE. Fall back to polling.
+    let mounted = true;
+    let offset = 0;
+    let delayMs = 1000;
+    const poll = async () => {
+      if (!mounted) return;
+      try {
+        const res = await apiFetch(`/api/runs/${activeRun.id}/log?offset=${offset}`);
+        if (res.status === 511) {
+          setNotice(authApiNotice);
+          delayMs = 15000;
+        } else if (res.ok) {
+          const data = await res.json();
+          if (data?.data) {
+            setLog((prev) => prev + data.data);
+            setLastLogAt(Date.now());
+          }
+          if (typeof data?.nextOffset === "number") offset = data.nextOffset;
+          delayMs = 1000;
+        }
+      } catch {
+        delayMs = Math.min(Math.round(delayMs * 1.8), 15000);
       }
-    });
-    es.addEventListener("done", () => {
-      es.close();
-    });
-    es.onerror = () => {
-      es.close();
+      if (mounted) setTimeout(poll, delayMs);
     };
+    poll();
     return () => {
-      es.close();
+      mounted = false;
     };
   }, [activeRun?.id]);
 
