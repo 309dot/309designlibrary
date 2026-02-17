@@ -80,6 +80,7 @@ export default function App() {
   const [isNarrow, setIsNarrow] = useState(false);
 
   const lastSessionIdRef = useRef(null);
+  const runWatchRef = useRef({ runId: null, startedAt: 0 });
   const sessionsRef = useRef([]);
   const missingApiNotice =
     "웹 배포에서는 API 서버 주소가 필요합니다. Vercel 환경변수 VITE_API_BASE_URL을 설정하고 다시 배포하세요.";
@@ -103,6 +104,14 @@ export default function App() {
       (b.createdAt || "").localeCompare(a.createdAt || "")
     )[0];
   }, [sessionDetail]);
+
+  useEffect(() => {
+    const runId = activeRun?.id ?? null;
+    if (!runId) return;
+    if (runWatchRef.current.runId !== runId) {
+      runWatchRef.current = { runId, startedAt: Date.now() };
+    }
+  }, [activeRun?.id]);
 
   useEffect(() => {
     try {
@@ -392,6 +401,44 @@ export default function App() {
     globalRunning && Boolean(sessionDetail?.id) && health?.activeSessionId === sessionDetail?.id;
   const disabledControls = globalRunning || stopping;
 
+  const formatPhaseKo = (phase) => {
+    switch (phase) {
+      case "planning":
+        return "기획";
+      case "acting":
+        return "작업";
+      case "verifying":
+        return "검증";
+      case "evaluating":
+        return "판정";
+      case "replanning":
+        return "재기획";
+      case "needs_approval":
+        return "승인 대기";
+      case "needs_user":
+        return "추가 정보 대기";
+      case "done":
+        return "완료";
+      default:
+        return "대기";
+    }
+  };
+
+  const formatStatusKo = (status) => {
+    switch (status) {
+      case "success":
+        return "완료";
+      case "failed":
+        return "실패";
+      case "cancelled":
+        return "중지됨";
+      case "running":
+        return "실행 중";
+      default:
+        return "대기";
+    }
+  };
+
   const persistPermissionDefault = (next) => {
     const normalized = next === "full" ? "full" : "basic";
     setPermissionDefault(normalized);
@@ -608,19 +655,6 @@ export default function App() {
               const phase = session?.pipeline?.phase ?? "idle";
               const pendingContinue = Boolean(session?.pipeline?.pendingContinue);
               const running = Boolean(health?.running);
-              const show =
-                running ||
-                pendingContinue ||
-                phase === "needs_approval" ||
-                phase === "needs_user" ||
-                phase === "planning" ||
-                phase === "acting" ||
-                phase === "verifying" ||
-                phase === "evaluating" ||
-                phase === "replanning" ||
-                Boolean(notice);
-
-              if (!show) return { visible: false };
 
               let label = "대기";
               if (!health?.ok) label = "연결 실패";
@@ -634,6 +668,37 @@ export default function App() {
               else if (session?.status === "failed") label = "실패";
               else if (session?.status === "cancelled") label = "중지됨";
               else if (session?.status === "success" || phase === "done") label = "완료됨";
+
+              const healthLed =
+                health?.ok === false ? "red" : running ? "green" : "gray";
+
+              const now = Date.now();
+              const hasActiveRun = Boolean(health?.activeRunId);
+              const startedAt = runWatchRef.current.startedAt || now;
+              const lastGrowAt = lastLogAt || null;
+              const ageMs = lastGrowAt ? now - lastGrowAt : now - startedAt;
+              const LOG_FRESH_MS = 4000;
+              const LOG_STALE_MS = 15000;
+              const logLed =
+                health?.ok === false
+                  ? "red"
+                  : !hasActiveRun
+                    ? "gray"
+                    : lastGrowAt && ageMs <= LOG_FRESH_MS
+                      ? "green"
+                      : ageMs >= LOG_STALE_MS
+                        ? "red"
+                        : "gray";
+
+              const statusText = (() => {
+                const rawStatus = String(session?.status || "-");
+                const rawPhase = String(phase || "-");
+                const s = formatStatusKo(session?.status);
+                const p = formatPhaseKo(phase);
+                const runId = String(health?.activeRunId || session?.pipeline?.activeRunId || "");
+                const short = runId ? runId.slice(0, 8) : "-";
+                return `상태 ${s}(${rawStatus}) · 단계 ${p}(${rawPhase}) · run ${short}`;
+              })();
 
               const actions = [];
               if (running && !runningThisSession && health?.activeSessionId) {
@@ -681,6 +746,9 @@ export default function App() {
                 label,
                 spinning: running && runningThisSession,
                 notice: notice || "",
+                healthLed,
+                logLed,
+                statusText,
                 actions
               };
             })()}

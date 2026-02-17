@@ -42,6 +42,21 @@ const StopIcon = () => (
   <span className="agent-stop-icon" aria-hidden="true" />
 );
 
+const LedDot = ({ state, label }) => (
+  <span
+    className={
+      state === "green"
+        ? "agent-led agent-led--green"
+        : state === "red"
+          ? "agent-led agent-led--red"
+          : "agent-led agent-led--gray"
+    }
+    role="img"
+    aria-label={label}
+    title={label}
+  />
+);
+
 export default function PromptComposer({
   request,
   onChangeRequest,
@@ -89,7 +104,16 @@ export default function PromptComposer({
           <div className="agent-progress" role="status" aria-live="polite">
             <div className="agent-progress-left">
               <ProgressCircleIcon spinning={Boolean(progressUi?.spinning)} />
-              <div className="agent-progress-text">{progressUi?.label ?? ""}</div>
+              <div className="agent-progress-texts">
+                <div className="agent-progress-topline">
+                  <LedDot state={progressUi?.healthLed} label="서버 상태" />
+                  <LedDot state={progressUi?.logLed} label="로그 증가" />
+                  <div className="agent-progress-text">{progressUi?.label ?? ""}</div>
+                </div>
+                {progressUi?.statusText ? (
+                  <div className="agent-progress-subtext">{progressUi.statusText}</div>
+                ) : null}
+              </div>
             </div>
             <div className="agent-progress-right">
               {progressUi?.actions?.map((a) => (
