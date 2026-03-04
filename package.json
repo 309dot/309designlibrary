@@ -1,0 +1,20 @@
+{
+  "name": "309-design-library",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "preview:build": "npx esbuild button-preview-entry.tsx --bundle --platform=browser --format=esm --outfile=dist/button-preview.js",
+    "preview:serve": "python3 -m http.server 4173 --directory dist",
+    "explorer:build": "npx esbuild component-explorer-entry.tsx --bundle --platform=browser --format=esm --outfile=dist/component-explorer.js",
+    "explorer:serve": "python3 -m http.server 5000 --directory dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  }
+}
