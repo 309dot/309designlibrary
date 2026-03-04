@@ -1328,7 +1328,7 @@ var require_react_dom_development = __commonJS({
         return dispatcher;
       }
       "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-      var React46 = require_react(), Internals = {
+      var React54 = require_react(), Internals = {
         d: {
           f: noop,
           r: function() {
@@ -1346,7 +1346,7 @@ var require_react_dom_development = __commonJS({
         },
         p: 0,
         findDOMNode: null
-      }, REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), ReactSharedInternals = React46.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
+      }, REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), ReactSharedInternals = React54.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
       "function" === typeof Map && null != Map.prototype && "function" === typeof Map.prototype.forEach && "function" === typeof Set && null != Set.prototype && "function" === typeof Set.prototype.clear && "function" === typeof Set.prototype.forEach || console.error(
         "React depends on Map and Set built-in types. Make sure that you load a polyfill in older browsers. https://reactjs.org/link/react-polyfills"
       );
@@ -2881,7 +2881,7 @@ var require_react_dom_client_development = __commonJS({
         "number" === type && getActiveElement(node.ownerDocument) === node || node.defaultValue === "" + value || (node.defaultValue = "" + value);
       }
       function validateOptionProps(element, props) {
-        null == props.value && ("object" === typeof props.children && null !== props.children ? React46.Children.forEach(props.children, function(child) {
+        null == props.value && ("object" === typeof props.children && null !== props.children ? React54.Children.forEach(props.children, function(child) {
           null == child || "string" === typeof child || "number" === typeof child || "bigint" === typeof child || didWarnInvalidChild || (didWarnInvalidChild = true, console.error(
             "Cannot infer the option value of complex children. Pass a `value` prop or use a plain string as children to <option>."
           ));
@@ -18513,14 +18513,14 @@ var require_react_dom_client_development = __commonJS({
         ));
       }
       "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-      var Scheduler = require_scheduler(), React46 = require_react(), ReactDOM = require_react_dom(), assign = Object.assign, REACT_LEGACY_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.element"), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy");
+      var Scheduler = require_scheduler(), React54 = require_react(), ReactDOM = require_react_dom(), assign = Object.assign, REACT_LEGACY_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.element"), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy");
       /* @__PURE__ */ Symbol.for("react.scope");
       var REACT_ACTIVITY_TYPE = /* @__PURE__ */ Symbol.for("react.activity");
       /* @__PURE__ */ Symbol.for("react.legacy_hidden");
       /* @__PURE__ */ Symbol.for("react.tracing_marker");
       var REACT_MEMO_CACHE_SENTINEL = /* @__PURE__ */ Symbol.for("react.memo_cache_sentinel");
       /* @__PURE__ */ Symbol.for("react.view_transition");
-      var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React46.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
+      var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React54.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
         pending: false,
         data: null,
         method: null,
@@ -21308,7 +21308,7 @@ var require_react_dom_client_development = __commonJS({
         }
       };
       (function() {
-        var isomorphicReactPackageVersion = React46.version;
+        var isomorphicReactPackageVersion = React54.version;
         if ("19.2.4" !== isomorphicReactPackageVersion)
           throw Error(
             'Incompatible React versions: The "react" and "react-dom" packages must have the exact same version. Instead got:\n  - react:      ' + (isomorphicReactPackageVersion + "\n  - react-dom:  19.2.4\nLearn more: https://react.dev/warnings/version-mismatch")
@@ -21449,7 +21449,7 @@ var require_client = __commonJS({
 });
 
 // component-explorer-entry.tsx
-var import_react44 = __toESM(require_react());
+var import_react52 = __toESM(require_react());
 var import_client = __toESM(require_client());
 
 // style-tokens.ts
@@ -25754,6 +25754,72 @@ var componentMetadata = {
       ]
     }
   },
+  "Icons": {
+    "id": "Icons",
+    "docsPath": "components/Icons/Icons.docs.md",
+    "sourcePath": "components/Icons/Icons.tsx",
+    "tokens": [
+      "border.width.0",
+      "colors.primitive.palette.base.transparent",
+      "colors.semantic.theme.icon.base.staticDark",
+      "colors.semantic.theme.icon.base.staticDarkQuaternary",
+      "colors.semantic.theme.icon.base.staticDarkSecondary",
+      "colors.semantic.theme.icon.base.staticDarkTertiary",
+      "colors.semantic.theme.icon.base.staticWhite",
+      "colors.semantic.theme.icon.base.staticWhiteQuaternary",
+      "colors.semantic.theme.icon.base.staticWhiteSecondary",
+      "colors.semantic.theme.icon.base.staticWhiteTertiary",
+      "colors.semantic.theme.icon.status.destructive",
+      "colors.semantic.theme.icon.status.info",
+      "colors.semantic.theme.icon.status.success",
+      "colors.semantic.theme.icon.status.warning",
+      "radius.scale.md",
+      "shadows.focusRing.light.css",
+      "spacing.scale",
+      "spacing.scale.0",
+      "spacing.scale.14",
+      "spacing.scale.16",
+      "spacing.scale.20",
+      "spacing.scale.24",
+      "spacing.scale.4"
+    ],
+    "styleNumbers": {
+      "spacingScale": [
+        0,
+        4,
+        8,
+        10,
+        12,
+        14,
+        16,
+        20,
+        24,
+        40,
+        120,
+        160,
+        192,
+        844
+      ],
+      "spacingPrimitive": [],
+      "borderWidths": [
+        0,
+        1
+      ],
+      "radiusScale": [
+        "lg",
+        "md",
+        "xl"
+      ],
+      "typographyScale": [
+        "bodyS.regular",
+        "captionL.regular",
+        "captionM.medium",
+        "captionM.regular",
+        "h4.bold",
+        "h6.medium"
+      ]
+    }
+  },
   "Input": {
     "id": "Input",
     "docsPath": "components/Input/Input.docs.md",
@@ -26725,6 +26791,86 @@ var componentMetadata = {
       ]
     }
   },
+  "TabMenu": {
+    "id": "TabMenu",
+    "docsPath": "components/TabMenu/TabMenu.docs.md",
+    "sourcePath": "components/TabMenu/TabMenu.tsx",
+    "tokens": [
+      "border.color.theme.action.normal",
+      "border.color.theme.select.primary",
+      "border.width.0",
+      "border.width.1",
+      "border.width.2",
+      "colors.primitive.palette.base.transparent",
+      "colors.semantic.theme.background.button.secondary",
+      "colors.semantic.theme.background.button.tertiary",
+      "colors.semantic.theme.background.overlay.custom",
+      "colors.semantic.theme.text.base.staticDark",
+      "colors.semantic.theme.text.base.staticDarkSecondary",
+      "radius.scale.lg",
+      "radius.scale.md",
+      "radius.scale.sm",
+      "radius.scale.xl",
+      "shadows.elevation.xs.css",
+      "spacing.primitive.5",
+      "spacing.primitive.7",
+      "spacing.scale.0",
+      "spacing.scale.10",
+      "spacing.scale.12",
+      "spacing.scale.14",
+      "spacing.scale.16",
+      "spacing.scale.2",
+      "spacing.scale.24",
+      "spacing.scale.4",
+      "spacing.scale.6",
+      "spacing.scale.8",
+      "typography.scale.bodyS.medium",
+      "typography.scale.captionL.medium",
+      "typography.scale.captionM.medium"
+    ],
+    "styleNumbers": {
+      "spacingScale": [
+        0,
+        1,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16,
+        24,
+        40,
+        224,
+        1024
+      ],
+      "spacingPrimitive": [
+        5,
+        7
+      ],
+      "borderWidths": [
+        0,
+        1,
+        2
+      ],
+      "radiusScale": [
+        "lg",
+        "md",
+        "sm",
+        "xl"
+      ],
+      "typographyScale": [
+        "bodyM.medium",
+        "bodyS.medium",
+        "bodyS.regular",
+        "captionL.medium",
+        "captionL.regular",
+        "captionM.medium",
+        "h3.bold"
+      ]
+    }
+  },
   "TaskCard": {
     "id": "TaskCard",
     "docsPath": "components/TaskCard/TaskCard.docs.md",
@@ -26784,6 +26930,155 @@ var componentMetadata = {
         "captionL.medium",
         "captionL.regular",
         "captionM.medium",
+        "h3.bold",
+        "h5.semiBold"
+      ]
+    }
+  },
+  "Toggle": {
+    "id": "Toggle",
+    "docsPath": "components/Toggle/Toggle.docs.md",
+    "sourcePath": "components/Toggle/Toggle.tsx",
+    "tokens": [
+      "border.width.0",
+      "colors.semantic.theme.background.toggle.active",
+      "colors.semantic.theme.background.toggle.activeDisabled",
+      "colors.semantic.theme.background.toggle.activeHover",
+      "colors.semantic.theme.background.toggle.default",
+      "colors.semantic.theme.background.toggle.disabled",
+      "colors.semantic.theme.background.toggle.handle",
+      "colors.semantic.theme.background.toggle.handleDisabled",
+      "colors.semantic.theme.background.toggle.hover",
+      "radius.scale.full",
+      "shadows.elevation.xs.css",
+      "shadows.focusRing.light.css",
+      "spacing.scale.0",
+      "spacing.scale.12",
+      "spacing.scale.14",
+      "spacing.scale.16",
+      "spacing.scale.2",
+      "spacing.scale.20",
+      "spacing.scale.28"
+    ],
+    "styleNumbers": {
+      "spacingScale": [
+        0,
+        2,
+        4,
+        8,
+        12,
+        14,
+        16,
+        20,
+        24,
+        28,
+        40,
+        96,
+        224,
+        844,
+        1024
+      ],
+      "spacingPrimitive": [],
+      "borderWidths": [
+        0,
+        1
+      ],
+      "radiusScale": [
+        "full",
+        "md",
+        "xl"
+      ],
+      "typographyScale": [
+        "bodyM.medium",
+        "bodyS.regular",
+        "captionL.medium",
+        "captionL.regular",
+        "captionM.medium",
+        "h3.bold",
+        "h5.semiBold"
+      ]
+    }
+  },
+  "Tooltip": {
+    "id": "Tooltip",
+    "docsPath": "components/Tooltip/Tooltip.docs.md",
+    "sourcePath": "components/Tooltip/Tooltip.tsx",
+    "tokens": [
+      "border.color.theme.action.normal",
+      "border.width.0",
+      "border.width.1",
+      "colors.primitive.palette.base.transparent",
+      "colors.semantic.theme.background.surface.default",
+      "colors.semantic.theme.icon.base.staticDark",
+      "colors.semantic.theme.icon.base.staticDarkQuaternary",
+      "colors.semantic.theme.icon.base.staticWhite",
+      "colors.semantic.theme.text.base.staticDark",
+      "colors.semantic.theme.text.base.staticDarkSecondary",
+      "radius.scale.full",
+      "radius.scale.md",
+      "radius.scale.sm",
+      "shadows.tooltip.sm.css",
+      "spacing.scale.0",
+      "spacing.scale.10",
+      "spacing.scale.1024",
+      "spacing.scale.12",
+      "spacing.scale.120",
+      "spacing.scale.14",
+      "spacing.scale.16",
+      "spacing.scale.192",
+      "spacing.scale.224",
+      "spacing.scale.24",
+      "spacing.scale.28",
+      "spacing.scale.320",
+      "spacing.scale.4",
+      "spacing.scale.6",
+      "spacing.scale.8",
+      "spacing.scale.80",
+      "spacing.scale.844",
+      "typography.scale.captionM.medium",
+      "typography.scale.captionM.regular",
+      "typography.scale.captionS.medium"
+    ],
+    "styleNumbers": {
+      "spacingScale": [
+        0,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16,
+        20,
+        24,
+        40,
+        80,
+        120,
+        192,
+        224,
+        320,
+        844,
+        1024
+      ],
+      "spacingPrimitive": [],
+      "borderWidths": [
+        0,
+        1
+      ],
+      "radiusScale": [
+        "full",
+        "lg",
+        "md",
+        "sm",
+        "xl"
+      ],
+      "typographyScale": [
+        "bodyM.medium",
+        "bodyS.regular",
+        "captionL.medium",
+        "captionM.medium",
+        "captionM.regular",
+        "captionS.medium",
         "h3.bold",
         "h5.semiBold"
       ]
@@ -33038,7 +33333,7 @@ function Dropdown({
         const avatarSize = getAvatarSize(variant, size);
         const labelColor = isDisabled ? textBase7.staticDarkQuaternary : textBase7.staticDark;
         const subTextColor = isDisabled ? textBase7.staticDarkQuaternary : textBase7.staticDarkTertiary;
-        const overlayBackground = (() => {
+        const overlayBackground2 = (() => {
           if (isSelected && variant === "select") {
             if (visualState === "hover") {
               return palette10.gray["2a"];
@@ -33363,7 +33658,7 @@ function Dropdown({
                 borderStyle: "solid",
                 borderWidth: visualState === "focus" ? border.width["1"] : border.width["0"],
                 borderColor: wrapBorderColor,
-                backgroundColor: overlayBackground,
+                backgroundColor: overlayBackground2,
                 boxShadow: wrapBoxShadow,
                 boxSizing: "border-box"
               }
@@ -34516,13 +34811,606 @@ function FeatureCardPreviewPage() {
   );
 }
 
-// components/Input/Input.preview.tsx
+// components/Icons/Icons.preview.tsx
 var import_react23 = __toESM(require_react());
 
-// components/Input/Input.tsx
+// components/Icons/Icons.tsx
 var import_react22 = __toESM(require_react());
-var palette14 = colors.primitive.palette;
+var REMIX_ICON_STYLESHEET_ID = "309-remixicon-stylesheet";
+var REMIX_ICON_STYLESHEET_URL = "https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css";
+var SIZE_MAP = {
+  "14": spacing.scale["14"],
+  "16": spacing.scale["16"],
+  "20": spacing.scale["20"],
+  "24": spacing.scale["24"]
+};
+var iconBase = colors.semantic.theme.icon.base;
+var iconStatus = colors.semantic.theme.icon.status;
+var transparent = colors.primitive.palette.base.transparent;
+var TONE_MAP = {
+  primary: iconBase.staticDark,
+  secondary: iconBase.staticDarkSecondary,
+  tertiary: iconBase.staticDarkTertiary,
+  quaternary: iconBase.staticDarkQuaternary,
+  inverted: iconBase.staticWhite,
+  invertedSecondary: iconBase.staticWhiteSecondary,
+  invertedTertiary: iconBase.staticWhiteTertiary,
+  invertedQuaternary: iconBase.staticWhiteQuaternary,
+  success: iconStatus.success,
+  warning: iconStatus.warning,
+  destructive: iconStatus.destructive,
+  info: iconStatus.info
+};
+function ensureRemixIconStylesheet() {
+  if (typeof document === "undefined") {
+    return;
+  }
+  const exists = document.getElementById(REMIX_ICON_STYLESHEET_ID);
+  if (exists) {
+    return;
+  }
+  const link = document.createElement("link");
+  link.id = REMIX_ICON_STYLESHEET_ID;
+  link.rel = "stylesheet";
+  link.href = REMIX_ICON_STYLESHEET_URL;
+  document.head.appendChild(link);
+}
+function normalizeIconName(name, type) {
+  const withoutPrefix = name.trim().replace(/^ri-/, "");
+  if (!withoutPrefix) {
+    return `question-${type}`;
+  }
+  const alreadyTyped = withoutPrefix.endsWith("-line") || withoutPrefix.endsWith("-fill");
+  if (alreadyTyped) {
+    return withoutPrefix;
+  }
+  return `${withoutPrefix}-${type}`;
+}
+function resolveState3(forced, disabled, hovered, focused) {
+  if (disabled || forced === "disabled") {
+    return "disabled";
+  }
+  if (forced) {
+    return forced;
+  }
+  if (focused) {
+    return "focus";
+  }
+  if (hovered) {
+    return "hover";
+  }
+  return "default";
+}
+function resolveColor(tone, state) {
+  if (state === "disabled") {
+    return iconBase.staticDarkQuaternary;
+  }
+  if (state === "hover" || state === "focus") {
+    if (tone === "secondary") {
+      return iconBase.staticDark;
+    }
+    if (tone === "tertiary") {
+      return iconBase.staticDarkSecondary;
+    }
+    if (tone === "quaternary") {
+      return iconBase.staticDarkTertiary;
+    }
+  }
+  return TONE_MAP[tone];
+}
+function resolveAriaLabel(name, ariaLabel) {
+  if (ariaLabel && ariaLabel.trim()) {
+    return ariaLabel;
+  }
+  return name.trim() || "icon";
+}
+function Icons({
+  name,
+  type = "line",
+  size = "24",
+  tone = "primary",
+  state,
+  decorative = true,
+  ariaLabel,
+  disabled = false,
+  interactive = false,
+  className,
+  style,
+  iconStyle,
+  onClick,
+  onMouseEnter,
+  onMouseLeave,
+  onFocus,
+  onBlur
+}) {
+  const [hovered, setHovered] = (0, import_react22.useState)(false);
+  const [focused, setFocused] = (0, import_react22.useState)(false);
+  (0, import_react22.useEffect)(() => {
+    ensureRemixIconStylesheet();
+  }, []);
+  const resolvedState = resolveState3(state, disabled, hovered, focused);
+  const resolvedColor = resolveColor(tone, resolvedState);
+  const iconClass = (0, import_react22.useMemo)(() => `ri-${normalizeIconName(name, type)}`, [name, type]);
+  const iconSize = SIZE_MAP[size];
+  const interactiveMode = interactive || Boolean(onClick);
+  const glyph = /* @__PURE__ */ import_react22.default.createElement(
+    "i",
+    {
+      className: iconClass,
+      "aria-hidden": decorative ? "true" : void 0,
+      style: {
+        width: iconSize,
+        height: iconSize,
+        minWidth: iconSize,
+        minHeight: iconSize,
+        fontSize: iconSize,
+        lineHeight: `${iconSize}px`,
+        color: resolvedColor,
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        ...iconStyle
+      }
+    }
+  );
+  if (interactiveMode) {
+    return /* @__PURE__ */ import_react22.default.createElement(
+      "button",
+      {
+        type: "button",
+        className,
+        onClick: (event) => {
+          if (resolvedState === "disabled") {
+            event.preventDefault();
+            return;
+          }
+          onClick?.(event);
+        },
+        onMouseEnter: (event) => {
+          setHovered(true);
+          onMouseEnter?.(event);
+        },
+        onMouseLeave: (event) => {
+          setHovered(false);
+          onMouseLeave?.(event);
+        },
+        onFocus: (event) => {
+          setFocused(true);
+          onFocus?.(event);
+        },
+        onBlur: (event) => {
+          setFocused(false);
+          onBlur?.(event);
+        },
+        "aria-label": decorative ? void 0 : resolveAriaLabel(name, ariaLabel),
+        "aria-hidden": decorative ? "true" : void 0,
+        "aria-disabled": resolvedState === "disabled" || void 0,
+        disabled: resolvedState === "disabled",
+        style: {
+          margin: spacing.scale["0"],
+          padding: spacing.scale["4"],
+          borderStyle: "solid",
+          borderWidth: border.width["0"],
+          borderRadius: radius.scale.md,
+          backgroundColor: transparent,
+          display: "inline-flex",
+          alignItems: "center",
+          justifyContent: "center",
+          cursor: resolvedState === "disabled" ? "not-allowed" : "pointer",
+          boxShadow: resolvedState === "focus" ? shadows.focusRing.light.css : "none",
+          color: resolvedColor,
+          ...style
+        }
+      },
+      glyph
+    );
+  }
+  return /* @__PURE__ */ import_react22.default.createElement(
+    "span",
+    {
+      className,
+      role: decorative ? void 0 : "img",
+      "aria-label": decorative ? void 0 : resolveAriaLabel(name, ariaLabel),
+      "aria-hidden": decorative ? "true" : void 0,
+      style: {
+        width: iconSize,
+        height: iconSize,
+        minWidth: iconSize,
+        minHeight: iconSize,
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        color: resolvedColor,
+        ...style
+      }
+    },
+    glyph
+  );
+}
+
+// components/Icons/Icons.types.ts
+var ICON_TYPE_OPTIONS = ["line", "fill"];
+var ICON_VISUAL_STATE_OPTIONS = ["default", "hover", "focus", "disabled"];
+var ICON_SIZE_OPTIONS = ["14", "16", "20", "24"];
+var ICON_TONE_OPTIONS = [
+  "primary",
+  "secondary",
+  "tertiary",
+  "quaternary",
+  "inverted",
+  "invertedSecondary",
+  "invertedTertiary",
+  "invertedQuaternary",
+  "success",
+  "warning",
+  "destructive",
+  "info"
+];
+var ICON_SAMPLE_NAMES = [
+  "add",
+  "add-circle",
+  "alert",
+  "arrow-left",
+  "arrow-right",
+  "arrow-up",
+  "arrow-down",
+  "check",
+  "close",
+  "dashboard",
+  "delete-bin",
+  "download",
+  "error-warning",
+  "eye",
+  "eye-off",
+  "filter",
+  "forbid",
+  "history",
+  "information",
+  "list-settings",
+  "moon",
+  "rainy",
+  "search",
+  "settings",
+  "star",
+  "sun",
+  "time",
+  "user",
+  "notification",
+  "menu"
+];
+
+// components/Icons/Icons.preview.tsx
 var textBase9 = colors.semantic.theme.text.base;
+var palette14 = colors.primitive.palette;
+function textStyle(token) {
+  return {
+    fontFamily: token.fontFamily,
+    fontSize: token.fontSize,
+    fontWeight: token.fontWeight,
+    lineHeight: `${token.lineHeight}px`,
+    letterSpacing: `${token.letterSpacing}px`
+  };
+}
+function IconsPreviewPage() {
+  const [name, setName] = (0, import_react23.useState)(ICON_SAMPLE_NAMES[0]);
+  const [type, setType] = (0, import_react23.useState)("line");
+  const [size, setSize] = (0, import_react23.useState)("24");
+  const [tone, setTone] = (0, import_react23.useState)("primary");
+  const [state, setState] = (0, import_react23.useState)("default");
+  const [interactive, setInteractive] = (0, import_react23.useState)(false);
+  const [disabled, setDisabled] = (0, import_react23.useState)(false);
+  const [decorative, setDecorative] = (0, import_react23.useState)(true);
+  const gridNames = (0, import_react23.useMemo)(() => ICON_SAMPLE_NAMES.slice(0, spacing.scale["20"]), []);
+  return /* @__PURE__ */ import_react23.default.createElement(
+    "main",
+    {
+      style: {
+        minHeight: spacing.scale["844"],
+        backgroundColor: palette14.base.white,
+        color: textBase9.staticDark,
+        padding: spacing.scale["24"],
+        display: "grid",
+        gap: spacing.scale["20"]
+      }
+    },
+    /* @__PURE__ */ import_react23.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react23.default.createElement(
+      "h1",
+      {
+        style: {
+          margin: spacing.scale["0"],
+          ...textStyle(typography.scale.h4.bold)
+        }
+      },
+      "Icons Preview"
+    ), /* @__PURE__ */ import_react23.default.createElement(
+      "p",
+      {
+        style: {
+          margin: spacing.scale["0"],
+          color: textBase9.staticDarkSecondary,
+          ...textStyle(typography.scale.bodyS.regular)
+        }
+      },
+      "Figma MCP \uB178\uB4DC `1403:50643` \uAE30\uC900 \uC544\uC774\uCF58 \uC2EC\uBCFC \uB124\uC774\uBC0D(`*-line`, `*-fill`)\uACFC 24px \uAE30\uBCF8 \uADDC\uACA9\uC744 \uCEF4\uD3EC\uB10C\uD2B8\uB85C \uBC18\uC601\uD588\uC2B5\uB2C8\uB2E4."
+    )),
+    /* @__PURE__ */ import_react23.default.createElement(
+      "section",
+      {
+        style: {
+          borderStyle: "solid",
+          borderWidth: border.width["1"],
+          borderColor: palette14.gray["3"],
+          borderRadius: radius.scale.xl,
+          backgroundColor: palette14.gray["1"],
+          padding: spacing.scale["16"],
+          display: "grid",
+          gridTemplateColumns: `repeat(auto-fit, minmax(${spacing.scale["160"]}px, 1fr))`,
+          gap: spacing.scale["12"]
+        }
+      },
+      /* @__PURE__ */ import_react23.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react23.default.createElement("span", { style: { ...textStyle(typography.scale.captionM.medium), color: textBase9.staticDarkSecondary } }, "Name"), /* @__PURE__ */ import_react23.default.createElement(
+        "select",
+        {
+          value: name,
+          onChange: (event) => setName(event.target.value),
+          style: {
+            minHeight: spacing.scale["40"],
+            borderStyle: "solid",
+            borderWidth: border.width["1"],
+            borderColor: palette14.gray["3"],
+            borderRadius: radius.scale.md,
+            paddingInline: spacing.scale["12"],
+            backgroundColor: palette14.base.white,
+            color: textBase9.staticDark
+          }
+        },
+        ICON_SAMPLE_NAMES.map((item) => /* @__PURE__ */ import_react23.default.createElement("option", { key: item, value: item }, item))
+      )),
+      /* @__PURE__ */ import_react23.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react23.default.createElement("span", { style: { ...textStyle(typography.scale.captionM.medium), color: textBase9.staticDarkSecondary } }, "Type"), /* @__PURE__ */ import_react23.default.createElement(
+        "select",
+        {
+          value: type,
+          onChange: (event) => setType(event.target.value),
+          style: {
+            minHeight: spacing.scale["40"],
+            borderStyle: "solid",
+            borderWidth: border.width["1"],
+            borderColor: palette14.gray["3"],
+            borderRadius: radius.scale.md,
+            paddingInline: spacing.scale["12"],
+            backgroundColor: palette14.base.white,
+            color: textBase9.staticDark
+          }
+        },
+        ICON_TYPE_OPTIONS.map((item) => /* @__PURE__ */ import_react23.default.createElement("option", { key: item, value: item }, item))
+      )),
+      /* @__PURE__ */ import_react23.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react23.default.createElement("span", { style: { ...textStyle(typography.scale.captionM.medium), color: textBase9.staticDarkSecondary } }, "Size Token"), /* @__PURE__ */ import_react23.default.createElement(
+        "select",
+        {
+          value: size,
+          onChange: (event) => setSize(event.target.value),
+          style: {
+            minHeight: spacing.scale["40"],
+            borderStyle: "solid",
+            borderWidth: border.width["1"],
+            borderColor: palette14.gray["3"],
+            borderRadius: radius.scale.md,
+            paddingInline: spacing.scale["12"],
+            backgroundColor: palette14.base.white,
+            color: textBase9.staticDark
+          }
+        },
+        ICON_SIZE_OPTIONS.map((item) => /* @__PURE__ */ import_react23.default.createElement("option", { key: item, value: item }, item))
+      )),
+      /* @__PURE__ */ import_react23.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react23.default.createElement("span", { style: { ...textStyle(typography.scale.captionM.medium), color: textBase9.staticDarkSecondary } }, "Tone"), /* @__PURE__ */ import_react23.default.createElement(
+        "select",
+        {
+          value: tone,
+          onChange: (event) => setTone(event.target.value),
+          style: {
+            minHeight: spacing.scale["40"],
+            borderStyle: "solid",
+            borderWidth: border.width["1"],
+            borderColor: palette14.gray["3"],
+            borderRadius: radius.scale.md,
+            paddingInline: spacing.scale["12"],
+            backgroundColor: palette14.base.white,
+            color: textBase9.staticDark
+          }
+        },
+        ICON_TONE_OPTIONS.map((item) => /* @__PURE__ */ import_react23.default.createElement("option", { key: item, value: item }, item))
+      )),
+      /* @__PURE__ */ import_react23.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react23.default.createElement("span", { style: { ...textStyle(typography.scale.captionM.medium), color: textBase9.staticDarkSecondary } }, "State"), /* @__PURE__ */ import_react23.default.createElement(
+        "select",
+        {
+          value: state,
+          onChange: (event) => setState(event.target.value),
+          style: {
+            minHeight: spacing.scale["40"],
+            borderStyle: "solid",
+            borderWidth: border.width["1"],
+            borderColor: palette14.gray["3"],
+            borderRadius: radius.scale.md,
+            paddingInline: spacing.scale["12"],
+            backgroundColor: palette14.base.white,
+            color: textBase9.staticDark
+          }
+        },
+        ICON_VISUAL_STATE_OPTIONS.map((item) => /* @__PURE__ */ import_react23.default.createElement("option", { key: item, value: item }, item))
+      )),
+      [
+        ["interactive", interactive, setInteractive],
+        ["disabled", disabled, setDisabled],
+        ["decorative", decorative, setDecorative]
+      ].map(([label, value, setter]) => /* @__PURE__ */ import_react23.default.createElement(
+        "label",
+        {
+          key: label,
+          style: {
+            minHeight: spacing.scale["40"],
+            borderStyle: "solid",
+            borderWidth: border.width["1"],
+            borderColor: palette14.gray["3"],
+            borderRadius: radius.scale.md,
+            backgroundColor: palette14.base.white,
+            paddingInline: spacing.scale["12"],
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: spacing.scale["8"]
+          }
+        },
+        /* @__PURE__ */ import_react23.default.createElement("span", { style: { ...textStyle(typography.scale.captionL.regular) } }, label),
+        /* @__PURE__ */ import_react23.default.createElement("input", { type: "checkbox", checked: value, onChange: (event) => setter(event.target.checked) })
+      ))
+    ),
+    /* @__PURE__ */ import_react23.default.createElement(
+      "section",
+      {
+        style: {
+          borderStyle: "solid",
+          borderWidth: border.width["1"],
+          borderColor: palette14.gray["3"],
+          borderRadius: radius.scale.xl,
+          backgroundColor: palette14.gray["1"],
+          padding: spacing.scale["20"],
+          display: "grid",
+          gap: spacing.scale["16"]
+        }
+      },
+      /* @__PURE__ */ import_react23.default.createElement(
+        "h2",
+        {
+          style: {
+            margin: spacing.scale["0"],
+            ...textStyle(typography.scale.h6.medium)
+          }
+        },
+        "Active Variant"
+      ),
+      /* @__PURE__ */ import_react23.default.createElement(
+        "div",
+        {
+          style: {
+            minHeight: spacing.scale["192"],
+            borderStyle: "dashed",
+            borderWidth: border.width["1"],
+            borderColor: colors.semantic.theme.icon.base.staticDarkQuaternary,
+            borderRadius: radius.scale.lg,
+            backgroundColor: palette14.base.white,
+            display: "grid",
+            placeItems: "center",
+            gap: spacing.scale["12"]
+          }
+        },
+        /* @__PURE__ */ import_react23.default.createElement(
+          Icons,
+          {
+            name,
+            type,
+            size,
+            tone,
+            state,
+            interactive,
+            disabled,
+            decorative,
+            ariaLabel: `${name} ${type} icon`
+          }
+        ),
+        /* @__PURE__ */ import_react23.default.createElement(
+          "div",
+          {
+            style: {
+              display: "grid",
+              gap: spacing.scale["4"],
+              textAlign: "center",
+              color: textBase9.staticDarkSecondary,
+              ...textStyle(typography.scale.captionM.regular)
+            }
+          },
+          /* @__PURE__ */ import_react23.default.createElement("div", null, `class: ri-${name}-${type}`),
+          /* @__PURE__ */ import_react23.default.createElement("div", null, `state: ${state}`),
+          /* @__PURE__ */ import_react23.default.createElement("div", null, `size token: spacing.scale.${size}`)
+        )
+      )
+    ),
+    /* @__PURE__ */ import_react23.default.createElement(
+      "section",
+      {
+        style: {
+          borderStyle: "solid",
+          borderWidth: border.width["1"],
+          borderColor: palette14.gray["3"],
+          borderRadius: radius.scale.xl,
+          backgroundColor: palette14.gray["1"],
+          padding: spacing.scale["16"],
+          display: "grid",
+          gap: spacing.scale["12"]
+        }
+      },
+      /* @__PURE__ */ import_react23.default.createElement(
+        "h2",
+        {
+          style: {
+            margin: spacing.scale["0"],
+            ...textStyle(typography.scale.h6.medium)
+          }
+        },
+        "Sample Grid (Line / Fill)"
+      ),
+      /* @__PURE__ */ import_react23.default.createElement(
+        "div",
+        {
+          style: {
+            display: "grid",
+            gridTemplateColumns: `repeat(auto-fill, minmax(${spacing.scale["120"]}px, 1fr))`,
+            gap: spacing.scale["12"]
+          }
+        },
+        gridNames.map((iconName) => /* @__PURE__ */ import_react23.default.createElement(
+          "article",
+          {
+            key: iconName,
+            style: {
+              borderStyle: "dashed",
+              borderWidth: border.width["1"],
+              borderColor: colors.semantic.theme.icon.base.staticDarkQuaternary,
+              borderRadius: radius.scale.md,
+              backgroundColor: palette14.base.white,
+              minHeight: spacing.scale["120"],
+              padding: spacing.scale["10"],
+              display: "grid",
+              alignContent: "center",
+              justifyItems: "center",
+              gap: spacing.scale["8"]
+            }
+          },
+          /* @__PURE__ */ import_react23.default.createElement("div", { style: { display: "inline-flex", alignItems: "center", gap: spacing.scale["12"] } }, /* @__PURE__ */ import_react23.default.createElement(Icons, { name: iconName, type: "line", size: "24", tone: "secondary" }), /* @__PURE__ */ import_react23.default.createElement(Icons, { name: iconName, type: "fill", size: "24", tone: "primary" })),
+          /* @__PURE__ */ import_react23.default.createElement(
+            "span",
+            {
+              style: {
+                ...textStyle(typography.scale.captionM.regular),
+                color: textBase9.staticDarkSecondary,
+                textAlign: "center",
+                wordBreak: "break-word"
+              }
+            },
+            iconName
+          )
+        ))
+      )
+    )
+  );
+}
+
+// components/Input/Input.preview.tsx
+var import_react25 = __toESM(require_react());
+
+// components/Input/Input.tsx
+var import_react24 = __toESM(require_react());
+var palette15 = colors.primitive.palette;
+var textBase10 = colors.semantic.theme.text.base;
 var textStatus = colors.semantic.theme.text.status;
 var FLAG_BASE_SRC = "/components/Input/assets/flag-base.png";
 var FLAG_GROUP_SRC = "/components/Input/assets/flag-group.png";
@@ -34582,26 +35470,26 @@ function resolveVisualState6(forcedState, disabled, hovered, focused, value) {
 function getFieldBorderColor(target, state) {
   if (target === "destructive") {
     if (state === "focus") {
-      return palette14.red["6"];
+      return palette15.red["6"];
     }
     if (state === "hover") {
-      return palette14.red["5"];
+      return palette15.red["5"];
     }
     if (state === "disabled") {
-      return palette14.gray["2"];
+      return palette15.gray["2"];
     }
-    return palette14.red["4"];
+    return palette15.red["4"];
   }
   if (state === "focus") {
-    return palette14.purple["6"];
+    return palette15.purple["6"];
   }
   if (state === "hover") {
-    return palette14.gray["4"];
+    return palette15.gray["4"];
   }
   if (state === "disabled") {
-    return palette14.gray["2"];
+    return palette15.gray["2"];
   }
-  return palette14.gray["3"];
+  return palette15.gray["3"];
 }
 function getFieldFocusShadow(target, state) {
   if (state !== "focus") {
@@ -34610,7 +35498,7 @@ function getFieldFocusShadow(target, state) {
   return target === "destructive" ? shadows.focusRing.lightDestructive.css : shadows.focusRing.light.css;
 }
 function FlagIcon({ disabled }) {
-  return /* @__PURE__ */ import_react22.default.createElement(
+  return /* @__PURE__ */ import_react24.default.createElement(
     "span",
     {
       "aria-hidden": "true",
@@ -34624,13 +35512,13 @@ function FlagIcon({ disabled }) {
         mixBlendMode: disabled ? "luminosity" : "normal"
       }
     },
-    /* @__PURE__ */ import_react22.default.createElement("img", { src: FLAG_BASE_SRC, alt: "", style: { position: "absolute", inset: 0, width: "100%", height: "100%", display: "block" } }),
-    /* @__PURE__ */ import_react22.default.createElement("span", { style: { position: "absolute", inset: spacing.scale["0"] } }, /* @__PURE__ */ import_react22.default.createElement("img", { src: FLAG_GROUP_SRC, alt: "", style: { width: "100%", height: "100%", display: "block" } })),
-    /* @__PURE__ */ import_react22.default.createElement("img", { src: FLAG_OVERLAY_SRC, alt: "", style: { position: "absolute", inset: 0, width: "100%", height: "100%", display: "block" } })
+    /* @__PURE__ */ import_react24.default.createElement("img", { src: FLAG_BASE_SRC, alt: "", style: { position: "absolute", inset: 0, width: "100%", height: "100%", display: "block" } }),
+    /* @__PURE__ */ import_react24.default.createElement("span", { style: { position: "absolute", inset: spacing.scale["0"] } }, /* @__PURE__ */ import_react24.default.createElement("img", { src: FLAG_GROUP_SRC, alt: "", style: { width: "100%", height: "100%", display: "block" } })),
+    /* @__PURE__ */ import_react24.default.createElement("img", { src: FLAG_OVERLAY_SRC, alt: "", style: { position: "absolute", inset: 0, width: "100%", height: "100%", display: "block" } })
   );
 }
 function IconImage({ src, size, disabled }) {
-  return /* @__PURE__ */ import_react22.default.createElement(
+  return /* @__PURE__ */ import_react24.default.createElement(
     "span",
     {
       "aria-hidden": "true",
@@ -34644,7 +35532,7 @@ function IconImage({ src, size, disabled }) {
         opacity: disabled ? 0.5 : 1
       }
     },
-    /* @__PURE__ */ import_react22.default.createElement("img", { src, alt: "", style: { width: "100%", height: "100%", display: "block" } })
+    /* @__PURE__ */ import_react24.default.createElement("img", { src, alt: "", style: { width: "100%", height: "100%", display: "block" } })
   );
 }
 function Input({
@@ -34684,9 +35572,9 @@ function Input({
   onMouseLeave,
   ...rest
 }) {
-  const [hovered, setHovered] = (0, import_react22.useState)(false);
-  const [focused, setFocused] = (0, import_react22.useState)(false);
-  const [uncontrolledValue, setUncontrolledValue] = (0, import_react22.useState)(defaultValue);
+  const [hovered, setHovered] = (0, import_react24.useState)(false);
+  const [focused, setFocused] = (0, import_react24.useState)(false);
+  const [uncontrolledValue, setUncontrolledValue] = (0, import_react24.useState)(defaultValue);
   const sizeStyle = SIZE_STYLES[size];
   const resolvedValue = value ?? uncontrolledValue;
   const resolvedState = resolveVisualState6(state, disabled, hovered, focused, resolvedValue);
@@ -34694,12 +35582,12 @@ function Input({
   const hasFilledValue = resolvedState === "filled" || resolvedValue.trim().length > 0;
   const fieldBorderColor = getFieldBorderColor(target, resolvedState);
   const fieldFocusShadow = getFieldFocusShadow(target, resolvedState);
-  const helperColor = componentDisabled ? textBase9.staticDarkQuaternary : target === "destructive" ? textStatus.destructive : textBase9.staticDarkTertiary;
-  const bodyTextColor = componentDisabled ? textBase9.staticDarkQuaternary : textBase9.staticDark;
-  const tertiaryTextColor = componentDisabled ? textBase9.staticDarkQuaternary : textBase9.staticDarkTertiary;
-  const secondaryTextColor = componentDisabled ? textBase9.staticDarkQuaternary : textBase9.staticDarkSecondary;
+  const helperColor = componentDisabled ? textBase10.staticDarkQuaternary : target === "destructive" ? textStatus.destructive : textBase10.staticDarkTertiary;
+  const bodyTextColor = componentDisabled ? textBase10.staticDarkQuaternary : textBase10.staticDark;
+  const tertiaryTextColor = componentDisabled ? textBase10.staticDarkQuaternary : textBase10.staticDarkTertiary;
+  const secondaryTextColor = componentDisabled ? textBase10.staticDarkQuaternary : textBase10.staticDarkSecondary;
   const containerShadow = componentDisabled ? "none" : shadows.elevation.xs.css;
-  const sideBorderColor = componentDisabled ? palette14.gray["2"] : palette14.gray["3"];
+  const sideBorderColor = componentDisabled ? palette15.gray["2"] : palette15.gray["3"];
   const handleMouseEnter = (event) => {
     setHovered(true);
     onMouseEnter?.(event);
@@ -34731,7 +35619,7 @@ function Input({
   const fullFieldRadius = {
     borderRadius: sizeStyle.fieldRadius
   };
-  return /* @__PURE__ */ import_react22.default.createElement(
+  return /* @__PURE__ */ import_react24.default.createElement(
     "div",
     {
       id,
@@ -34749,7 +35637,7 @@ function Input({
       onMouseLeave: handleMouseLeave,
       ...rest
     },
-    showLabel ? /* @__PURE__ */ import_react22.default.createElement(
+    showLabel ? /* @__PURE__ */ import_react24.default.createElement(
       "div",
       {
         style: {
@@ -34760,7 +35648,7 @@ function Input({
           padding: spacing.scale["0"]
         }
       },
-      /* @__PURE__ */ import_react22.default.createElement(
+      /* @__PURE__ */ import_react24.default.createElement(
         "div",
         {
           style: {
@@ -34772,21 +35660,21 @@ function Input({
             whiteSpace: "nowrap"
           }
         },
-        /* @__PURE__ */ import_react22.default.createElement(
+        /* @__PURE__ */ import_react24.default.createElement(
           "span",
           {
             style: {
-              color: textBase9.staticDark,
+              color: textBase10.staticDark,
               ...mediumTypography
             }
           },
           label
         ),
-        /* @__PURE__ */ import_react22.default.createElement(
+        /* @__PURE__ */ import_react24.default.createElement(
           "span",
           {
             style: {
-              color: textBase9.staticDarkTertiary,
+              color: textBase10.staticDarkTertiary,
               ...mediumTypography
             }
           },
@@ -34794,7 +35682,7 @@ function Input({
         )
       )
     ) : null,
-    /* @__PURE__ */ import_react22.default.createElement(
+    /* @__PURE__ */ import_react24.default.createElement(
       "div",
       {
         style: {
@@ -34805,7 +35693,7 @@ function Input({
           boxShadow: containerShadow
         }
       },
-      type === "external" ? /* @__PURE__ */ import_react22.default.createElement(
+      type === "external" ? /* @__PURE__ */ import_react24.default.createElement(
         "div",
         {
           style: {
@@ -34820,12 +35708,12 @@ function Input({
             borderLeftWidth: border.width["1"],
             borderRightWidth: border.width["0"],
             borderColor: sideBorderColor,
-            backgroundColor: palette14.gray["1"],
+            backgroundColor: palette15.gray["1"],
             ...leftFieldRadius
           }
         },
-        leadIcon ? /* @__PURE__ */ import_react22.default.createElement(import_react22.default.Fragment, null, leadIcon ?? /* @__PURE__ */ import_react22.default.createElement(IconImage, { src: EARTH_ICON_SRC, size: spacing.scale["20"], disabled: componentDisabled })) : null,
-        /* @__PURE__ */ import_react22.default.createElement(
+        leadIcon ? /* @__PURE__ */ import_react24.default.createElement(import_react24.default.Fragment, null, leadIcon ?? /* @__PURE__ */ import_react24.default.createElement(IconImage, { src: EARTH_ICON_SRC, size: spacing.scale["20"], disabled: componentDisabled })) : null,
+        /* @__PURE__ */ import_react24.default.createElement(
           "div",
           {
             style: {
@@ -34836,7 +35724,7 @@ function Input({
               paddingBlock: spacing.scale["0"]
             }
           },
-          /* @__PURE__ */ import_react22.default.createElement(
+          /* @__PURE__ */ import_react24.default.createElement(
             "span",
             {
               style: {
@@ -34849,7 +35737,7 @@ function Input({
           )
         )
       ) : null,
-      /* @__PURE__ */ import_react22.default.createElement(
+      /* @__PURE__ */ import_react24.default.createElement(
         "div",
         {
           style: {
@@ -34862,13 +35750,13 @@ function Input({
             borderStyle: "solid",
             borderWidth: border.width["1"],
             borderColor: fieldBorderColor,
-            backgroundColor: palette14.base.white,
+            backgroundColor: palette15.base.white,
             boxShadow: fieldFocusShadow,
             overflow: "hidden",
             ...type === "default" ? fullFieldRadius : type === "external" ? rightFieldRadius : leftFieldRadius
           }
         },
-        /* @__PURE__ */ import_react22.default.createElement(
+        /* @__PURE__ */ import_react24.default.createElement(
           "div",
           {
             style: {
@@ -34879,8 +35767,8 @@ function Input({
               minWidth: spacing.scale["0"]
             }
           },
-          type !== "external" && showFlag ? /* @__PURE__ */ import_react22.default.createElement(FlagIcon, { disabled: componentDisabled }) : null,
-          type !== "external" && showLeadDropdown ? /* @__PURE__ */ import_react22.default.createElement(
+          type !== "external" && showFlag ? /* @__PURE__ */ import_react24.default.createElement(FlagIcon, { disabled: componentDisabled }) : null,
+          type !== "external" && showLeadDropdown ? /* @__PURE__ */ import_react24.default.createElement(
             "div",
             {
               style: {
@@ -34892,7 +35780,7 @@ function Input({
                 paddingBlock: spacing.scale["0"]
               }
             },
-            /* @__PURE__ */ import_react22.default.createElement(
+            /* @__PURE__ */ import_react24.default.createElement(
               "span",
               {
                 style: {
@@ -34903,9 +35791,9 @@ function Input({
               },
               leadDropdownLabel
             ),
-            /* @__PURE__ */ import_react22.default.createElement(IconImage, { src: CHEVRON_ICON_SRC, size: spacing.scale["16"], disabled: componentDisabled })
+            /* @__PURE__ */ import_react24.default.createElement(IconImage, { src: CHEVRON_ICON_SRC, size: spacing.scale["16"], disabled: componentDisabled })
           ) : null,
-          /* @__PURE__ */ import_react22.default.createElement(
+          /* @__PURE__ */ import_react24.default.createElement(
             "div",
             {
               style: {
@@ -34916,8 +35804,8 @@ function Input({
                 minWidth: spacing.scale["0"]
               }
             },
-            type !== "external" && showLeadIcon ? /* @__PURE__ */ import_react22.default.createElement(import_react22.default.Fragment, null, leadIcon ?? /* @__PURE__ */ import_react22.default.createElement(IconImage, { src: EARTH_ICON_SRC, size: spacing.scale["20"], disabled: componentDisabled })) : null,
-            /* @__PURE__ */ import_react22.default.createElement(
+            type !== "external" && showLeadIcon ? /* @__PURE__ */ import_react24.default.createElement(import_react24.default.Fragment, null, leadIcon ?? /* @__PURE__ */ import_react24.default.createElement(IconImage, { src: EARTH_ICON_SRC, size: spacing.scale["20"], disabled: componentDisabled })) : null,
+            /* @__PURE__ */ import_react24.default.createElement(
               "div",
               {
                 style: {
@@ -34929,7 +35817,7 @@ function Input({
                   paddingBlock: spacing.scale["0"]
                 }
               },
-              /* @__PURE__ */ import_react22.default.createElement(
+              /* @__PURE__ */ import_react24.default.createElement(
                 "input",
                 {
                   "aria-label": inputAriaLabel,
@@ -34954,7 +35842,7 @@ function Input({
               )
             )
           ),
-          showBadge ? /* @__PURE__ */ import_react22.default.createElement(
+          showBadge ? /* @__PURE__ */ import_react24.default.createElement(
             "div",
             {
               style: {
@@ -34964,20 +35852,20 @@ function Input({
                 paddingBlock: spacing.scale["0"]
               }
             },
-            /* @__PURE__ */ import_react22.default.createElement(
+            /* @__PURE__ */ import_react24.default.createElement(
               "div",
               {
                 style: {
                   display: "inline-flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  backgroundColor: palette14.gray["2"],
+                  backgroundColor: palette15.gray["2"],
                   borderRadius: radius.scale.sm,
                   paddingInline: spacing.scale["2"],
                   paddingBlock: spacing.scale["0"]
                 }
               },
-              /* @__PURE__ */ import_react22.default.createElement(
+              /* @__PURE__ */ import_react24.default.createElement(
                 "div",
                 {
                   style: {
@@ -34988,7 +35876,7 @@ function Input({
                     paddingBlock: spacing.scale["0"]
                   }
                 },
-                /* @__PURE__ */ import_react22.default.createElement(
+                /* @__PURE__ */ import_react24.default.createElement(
                   "span",
                   {
                     style: {
@@ -35002,8 +35890,8 @@ function Input({
               )
             )
           ) : null,
-          showTailIcon ? /* @__PURE__ */ import_react22.default.createElement(import_react22.default.Fragment, null, tailIcon ?? /* @__PURE__ */ import_react22.default.createElement(IconImage, { src: INFO_ICON_SRC, size: spacing.scale["20"], disabled: componentDisabled })) : null,
-          showTailDropdown ? /* @__PURE__ */ import_react22.default.createElement(
+          showTailIcon ? /* @__PURE__ */ import_react24.default.createElement(import_react24.default.Fragment, null, tailIcon ?? /* @__PURE__ */ import_react24.default.createElement(IconImage, { src: INFO_ICON_SRC, size: spacing.scale["20"], disabled: componentDisabled })) : null,
+          showTailDropdown ? /* @__PURE__ */ import_react24.default.createElement(
             "div",
             {
               style: {
@@ -35015,7 +35903,7 @@ function Input({
                 paddingBlock: spacing.scale["0"]
               }
             },
-            /* @__PURE__ */ import_react22.default.createElement(
+            /* @__PURE__ */ import_react24.default.createElement(
               "span",
               {
                 style: {
@@ -35026,11 +35914,11 @@ function Input({
               },
               tailDropdownLabel
             ),
-            /* @__PURE__ */ import_react22.default.createElement(IconImage, { src: CHEVRON_ICON_SRC, size: spacing.scale["16"], disabled: componentDisabled })
+            /* @__PURE__ */ import_react24.default.createElement(IconImage, { src: CHEVRON_ICON_SRC, size: spacing.scale["16"], disabled: componentDisabled })
           ) : null
         )
       ),
-      type === "button" ? /* @__PURE__ */ import_react22.default.createElement(
+      type === "button" ? /* @__PURE__ */ import_react24.default.createElement(
         "button",
         {
           type: "button",
@@ -35049,12 +35937,12 @@ function Input({
             borderRightWidth: border.width["1"],
             borderLeftWidth: border.width["0"],
             borderColor: sideBorderColor,
-            backgroundColor: palette14.base.transparent,
+            backgroundColor: palette15.base.transparent,
             cursor: componentDisabled ? "not-allowed" : "pointer",
             ...rightFieldRadius
           }
         },
-        /* @__PURE__ */ import_react22.default.createElement(
+        /* @__PURE__ */ import_react24.default.createElement(
           "span",
           {
             style: {
@@ -35067,7 +35955,7 @@ function Input({
         )
       ) : null
     ),
-    showHelper ? /* @__PURE__ */ import_react22.default.createElement(
+    showHelper ? /* @__PURE__ */ import_react24.default.createElement(
       "div",
       {
         style: {
@@ -35079,8 +35967,8 @@ function Input({
           paddingBlock: spacing.scale["2"]
         }
       },
-      /* @__PURE__ */ import_react22.default.createElement(IconImage, { src: INFO_ICON_SRC, size: spacing.scale["16"], disabled: componentDisabled }),
-      /* @__PURE__ */ import_react22.default.createElement(
+      /* @__PURE__ */ import_react24.default.createElement(IconImage, { src: INFO_ICON_SRC, size: spacing.scale["16"], disabled: componentDisabled }),
+      /* @__PURE__ */ import_react24.default.createElement(
         "span",
         {
           style: {
@@ -35100,35 +35988,35 @@ var TYPES7 = ["default", "external", "button"];
 var SIZES9 = ["md", "xs"];
 var TARGETS = ["default", "destructive"];
 var STATES7 = ["auto", "default", "hover", "focus", "filled", "disabled"];
-var palette15 = colors.primitive.palette;
-var textBase10 = colors.semantic.theme.text.base;
+var palette16 = colors.primitive.palette;
+var textBase11 = colors.semantic.theme.text.base;
 function toTitle11(value) {
   return value.charAt(0).toUpperCase() + value.slice(1);
 }
 function InputPreviewPage() {
-  const [type, setType] = (0, import_react23.useState)("default");
-  const [size, setSize] = (0, import_react23.useState)("md");
-  const [target, setTarget] = (0, import_react23.useState)("default");
-  const [state, setState] = (0, import_react23.useState)("auto");
-  const [value, setValue] = (0, import_react23.useState)("");
-  const [showFlag, setShowFlag] = (0, import_react23.useState)(true);
-  const [showLeadDropdown, setShowLeadDropdown] = (0, import_react23.useState)(true);
-  const [showLeadIcon, setShowLeadIcon] = (0, import_react23.useState)(true);
-  const [showBadge, setShowBadge] = (0, import_react23.useState)(true);
-  const [showTailIcon, setShowTailIcon] = (0, import_react23.useState)(true);
-  const [showTailDropdown, setShowTailDropdown] = (0, import_react23.useState)(true);
-  return /* @__PURE__ */ import_react23.default.createElement(
+  const [type, setType] = (0, import_react25.useState)("default");
+  const [size, setSize] = (0, import_react25.useState)("md");
+  const [target, setTarget] = (0, import_react25.useState)("default");
+  const [state, setState] = (0, import_react25.useState)("auto");
+  const [value, setValue] = (0, import_react25.useState)("");
+  const [showFlag, setShowFlag] = (0, import_react25.useState)(true);
+  const [showLeadDropdown, setShowLeadDropdown] = (0, import_react25.useState)(true);
+  const [showLeadIcon, setShowLeadIcon] = (0, import_react25.useState)(true);
+  const [showBadge, setShowBadge] = (0, import_react25.useState)(true);
+  const [showTailIcon, setShowTailIcon] = (0, import_react25.useState)(true);
+  const [showTailDropdown, setShowTailDropdown] = (0, import_react25.useState)(true);
+  return /* @__PURE__ */ import_react25.default.createElement(
     "main",
     {
       style: {
         minHeight: spacing.scale["844"],
-        backgroundColor: palette15.base.white,
-        color: textBase10.staticDark,
+        backgroundColor: palette16.base.white,
+        color: textBase11.staticDark,
         padding: spacing.scale["24"],
         fontFamily: typography.scale.bodyM.medium.fontFamily
       }
     },
-    /* @__PURE__ */ import_react23.default.createElement(
+    /* @__PURE__ */ import_react25.default.createElement(
       "section",
       {
         style: {
@@ -35138,7 +36026,7 @@ function InputPreviewPage() {
           gap: spacing.scale["24"]
         }
       },
-      /* @__PURE__ */ import_react23.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react23.default.createElement(
+      /* @__PURE__ */ import_react25.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react25.default.createElement(
         "h1",
         {
           style: {
@@ -35151,12 +36039,12 @@ function InputPreviewPage() {
           }
         },
         "Input Preview"
-      ), /* @__PURE__ */ import_react23.default.createElement(
+      ), /* @__PURE__ */ import_react25.default.createElement(
         "p",
         {
           style: {
             margin: spacing.scale["0"],
-            color: textBase10.staticDarkSecondary,
+            color: textBase11.staticDarkSecondary,
             fontFamily: typography.scale.bodyS.regular.fontFamily,
             fontSize: typography.scale.bodyS.regular.fontSize,
             fontWeight: typography.scale.bodyS.regular.fontWeight,
@@ -35166,22 +36054,22 @@ function InputPreviewPage() {
         },
         "Figma \uCD95(Type, Size, Target, State)\uACFC \uBCF4\uC870 \uC694\uC18C(Flag/Dropdown/Icon/Badge) \uC870\uD569 \uAC80\uC99D"
       )),
-      /* @__PURE__ */ import_react23.default.createElement(
+      /* @__PURE__ */ import_react25.default.createElement(
         "section",
         {
           style: {
             borderStyle: "solid",
             borderWidth: border.width["1"],
-            borderColor: palette15.gray["3"],
+            borderColor: palette16.gray["3"],
             borderRadius: radius.scale.xl,
-            backgroundColor: palette15.gray["1"],
+            backgroundColor: palette16.gray["1"],
             padding: spacing.scale["16"],
             display: "grid",
             gridTemplateColumns: `repeat(auto-fit, minmax(${spacing.scale["224"]}px, 1fr))`,
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react23.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react23.default.createElement("span", null, "Type"), /* @__PURE__ */ import_react23.default.createElement(
+        /* @__PURE__ */ import_react25.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react25.default.createElement("span", null, "Type"), /* @__PURE__ */ import_react25.default.createElement(
           "select",
           {
             value: type,
@@ -35190,16 +36078,16 @@ function InputPreviewPage() {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette15.gray["3"],
+              borderColor: palette16.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
-              backgroundColor: palette15.base.white,
-              color: textBase10.staticDark
+              backgroundColor: palette16.base.white,
+              color: textBase11.staticDark
             }
           },
-          TYPES7.map((item) => /* @__PURE__ */ import_react23.default.createElement("option", { key: item, value: item }, toTitle11(item)))
+          TYPES7.map((item) => /* @__PURE__ */ import_react25.default.createElement("option", { key: item, value: item }, toTitle11(item)))
         )),
-        /* @__PURE__ */ import_react23.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react23.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react23.default.createElement(
+        /* @__PURE__ */ import_react25.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react25.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react25.default.createElement(
           "select",
           {
             value: size,
@@ -35208,16 +36096,16 @@ function InputPreviewPage() {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette15.gray["3"],
+              borderColor: palette16.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
-              backgroundColor: palette15.base.white,
-              color: textBase10.staticDark
+              backgroundColor: palette16.base.white,
+              color: textBase11.staticDark
             }
           },
-          SIZES9.map((item) => /* @__PURE__ */ import_react23.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
+          SIZES9.map((item) => /* @__PURE__ */ import_react25.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
         )),
-        /* @__PURE__ */ import_react23.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react23.default.createElement("span", null, "Target"), /* @__PURE__ */ import_react23.default.createElement(
+        /* @__PURE__ */ import_react25.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react25.default.createElement("span", null, "Target"), /* @__PURE__ */ import_react25.default.createElement(
           "select",
           {
             value: target,
@@ -35226,16 +36114,16 @@ function InputPreviewPage() {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette15.gray["3"],
+              borderColor: palette16.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
-              backgroundColor: palette15.base.white,
-              color: textBase10.staticDark
+              backgroundColor: palette16.base.white,
+              color: textBase11.staticDark
             }
           },
-          TARGETS.map((item) => /* @__PURE__ */ import_react23.default.createElement("option", { key: item, value: item }, toTitle11(item)))
+          TARGETS.map((item) => /* @__PURE__ */ import_react25.default.createElement("option", { key: item, value: item }, toTitle11(item)))
         )),
-        /* @__PURE__ */ import_react23.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react23.default.createElement("span", null, "State"), /* @__PURE__ */ import_react23.default.createElement(
+        /* @__PURE__ */ import_react25.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react25.default.createElement("span", null, "State"), /* @__PURE__ */ import_react25.default.createElement(
           "select",
           {
             value: state,
@@ -35244,16 +36132,16 @@ function InputPreviewPage() {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette15.gray["3"],
+              borderColor: palette16.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
-              backgroundColor: palette15.base.white,
-              color: textBase10.staticDark
+              backgroundColor: palette16.base.white,
+              color: textBase11.staticDark
             }
           },
-          STATES7.map((item) => /* @__PURE__ */ import_react23.default.createElement("option", { key: item, value: item }, toTitle11(item)))
+          STATES7.map((item) => /* @__PURE__ */ import_react25.default.createElement("option", { key: item, value: item }, toTitle11(item)))
         )),
-        /* @__PURE__ */ import_react23.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react23.default.createElement("span", null, "Value"), /* @__PURE__ */ import_react23.default.createElement(
+        /* @__PURE__ */ import_react25.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react25.default.createElement("span", null, "Value"), /* @__PURE__ */ import_react25.default.createElement(
           "input",
           {
             value,
@@ -35263,11 +36151,11 @@ function InputPreviewPage() {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette15.gray["3"],
+              borderColor: palette16.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
-              backgroundColor: palette15.base.white,
-              color: textBase10.staticDark
+              backgroundColor: palette16.base.white,
+              color: textBase11.staticDark
             }
           }
         )),
@@ -35278,7 +36166,7 @@ function InputPreviewPage() {
           ["Badge", showBadge, setShowBadge],
           ["Tail Icon", showTailIcon, setShowTailIcon],
           ["Tail Dropdown", showTailDropdown, setShowTailDropdown]
-        ].map(([labelText, checked, setChecked]) => /* @__PURE__ */ import_react23.default.createElement(
+        ].map(([labelText, checked, setChecked]) => /* @__PURE__ */ import_react25.default.createElement(
           "label",
           {
             key: labelText,
@@ -35286,18 +36174,18 @@ function InputPreviewPage() {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette15.gray["3"],
+              borderColor: palette16.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "space-between",
               gap: spacing.scale["8"],
-              backgroundColor: palette15.base.white
+              backgroundColor: palette16.base.white
             }
           },
-          /* @__PURE__ */ import_react23.default.createElement("span", null, labelText),
-          /* @__PURE__ */ import_react23.default.createElement(
+          /* @__PURE__ */ import_react25.default.createElement("span", null, labelText),
+          /* @__PURE__ */ import_react25.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -35307,21 +36195,21 @@ function InputPreviewPage() {
           )
         ))
       ),
-      /* @__PURE__ */ import_react23.default.createElement(
+      /* @__PURE__ */ import_react25.default.createElement(
         "section",
         {
           style: {
             borderStyle: "solid",
             borderWidth: border.width["1"],
-            borderColor: palette15.gray["3"],
+            borderColor: palette16.gray["3"],
             borderRadius: radius.scale.xl,
-            backgroundColor: palette15.gray["1"],
+            backgroundColor: palette16.gray["1"],
             padding: spacing.scale["24"],
             display: "grid",
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react23.default.createElement(
+        /* @__PURE__ */ import_react25.default.createElement(
           "h2",
           {
             style: {
@@ -35335,7 +36223,7 @@ function InputPreviewPage() {
           },
           "Interactive"
         ),
-        /* @__PURE__ */ import_react23.default.createElement(
+        /* @__PURE__ */ import_react25.default.createElement(
           Input,
           {
             type,
@@ -35353,21 +36241,21 @@ function InputPreviewPage() {
           }
         )
       ),
-      /* @__PURE__ */ import_react23.default.createElement(
+      /* @__PURE__ */ import_react25.default.createElement(
         "section",
         {
           style: {
             borderStyle: "solid",
             borderWidth: border.width["1"],
-            borderColor: palette15.gray["3"],
+            borderColor: palette16.gray["3"],
             borderRadius: radius.scale.xl,
-            backgroundColor: palette15.gray["1"],
+            backgroundColor: palette16.gray["1"],
             padding: spacing.scale["24"],
             display: "grid",
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react23.default.createElement(
+        /* @__PURE__ */ import_react25.default.createElement(
           "h2",
           {
             style: {
@@ -35381,12 +36269,12 @@ function InputPreviewPage() {
           },
           "Variant Matrix"
         ),
-        /* @__PURE__ */ import_react23.default.createElement("div", { style: { display: "grid", gap: spacing.scale["16"] } }, TARGETS.map((matrixTarget) => /* @__PURE__ */ import_react23.default.createElement("div", { key: matrixTarget, style: { display: "grid", gap: spacing.scale["12"] } }, /* @__PURE__ */ import_react23.default.createElement(
+        /* @__PURE__ */ import_react25.default.createElement("div", { style: { display: "grid", gap: spacing.scale["16"] } }, TARGETS.map((matrixTarget) => /* @__PURE__ */ import_react25.default.createElement("div", { key: matrixTarget, style: { display: "grid", gap: spacing.scale["12"] } }, /* @__PURE__ */ import_react25.default.createElement(
           "h3",
           {
             style: {
               margin: spacing.scale["0"],
-              color: textBase10.staticDarkSecondary,
+              color: textBase11.staticDarkSecondary,
               fontFamily: typography.scale.bodyS.medium.fontFamily,
               fontSize: typography.scale.bodyS.medium.fontSize,
               fontWeight: typography.scale.bodyS.medium.fontWeight,
@@ -35396,11 +36284,11 @@ function InputPreviewPage() {
           },
           "Target: ",
           toTitle11(matrixTarget)
-        ), /* @__PURE__ */ import_react23.default.createElement("div", { style: { display: "grid", gap: spacing.scale["12"] } }, SIZES9.map((matrixSize) => /* @__PURE__ */ import_react23.default.createElement("div", { key: matrixSize, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react23.default.createElement(
+        ), /* @__PURE__ */ import_react25.default.createElement("div", { style: { display: "grid", gap: spacing.scale["12"] } }, SIZES9.map((matrixSize) => /* @__PURE__ */ import_react25.default.createElement("div", { key: matrixSize, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react25.default.createElement(
           "span",
           {
             style: {
-              color: textBase10.staticDarkSecondary,
+              color: textBase11.staticDarkSecondary,
               fontFamily: typography.scale.captionL.medium.fontFamily,
               fontSize: typography.scale.captionL.medium.fontSize,
               fontWeight: typography.scale.captionL.medium.fontWeight,
@@ -35410,7 +36298,7 @@ function InputPreviewPage() {
           },
           "Size: ",
           matrixSize.toUpperCase()
-        ), /* @__PURE__ */ import_react23.default.createElement("div", { style: { display: "grid", gap: spacing.scale["12"] } }, TYPES7.map((matrixType) => /* @__PURE__ */ import_react23.default.createElement(
+        ), /* @__PURE__ */ import_react25.default.createElement("div", { style: { display: "grid", gap: spacing.scale["12"] } }, TYPES7.map((matrixType) => /* @__PURE__ */ import_react25.default.createElement(
           Input,
           {
             key: `${matrixTarget}-${matrixSize}-${matrixType}`,
@@ -35433,15 +36321,15 @@ function InputPreviewPage() {
 }
 
 // components/NavigationBar/NavigationBar.preview.tsx
-var import_react24 = __toESM(require_react());
+var import_react26 = __toESM(require_react());
 
 // components/NavigationBar/NavigationBar.tsx
 var LOGO_SRC = "/components/NavigationBar/assets/logo.png";
 var CHEVRON_DOWN_SRC = "/components/NavigationBar/assets/chevron-down.png";
 var PRO_ACCESS_ICON_SRC = "/components/NavigationBar/assets/pro-access.png";
 var DEFAULT_AVATAR_SRC = "/components/NavigationBar/assets/avatar.png";
-var palette16 = colors.primitive.palette;
-var textBase11 = colors.semantic.theme.text.base;
+var palette17 = colors.primitive.palette;
+var textBase12 = colors.semantic.theme.text.base;
 var textAccent2 = colors.semantic.theme.text.accent;
 var NAV_DEFAULT_WIDTH = spacing.scale["1440"];
 var NAV_HEIGHT = spacing.scale["64"];
@@ -35558,10 +36446,10 @@ function SearchField({
   interactionState,
   disabled
 }) {
-  const fieldBorderColor = disabled ? palette16.gray["2"] : palette16.gray["3"];
-  const fieldBackground = disabled ? palette16.gray["1"] : palette16.base.white;
-  const placeholderColor = disabled ? textBase11.staticDarkQuaternary : textBase11.staticDarkTertiary;
-  const shortcutColor = disabled ? textBase11.staticDarkQuaternary : textBase11.staticDarkSecondary;
+  const fieldBorderColor = disabled ? palette17.gray["2"] : palette17.gray["3"];
+  const fieldBackground = disabled ? palette17.gray["1"] : palette17.base.white;
+  const placeholderColor = disabled ? textBase12.staticDarkQuaternary : textBase12.staticDarkTertiary;
+  const shortcutColor = disabled ? textBase12.staticDarkQuaternary : textBase12.staticDarkSecondary;
   return /* @__PURE__ */ React.createElement(
     "div",
     {
@@ -35611,7 +36499,7 @@ function SearchField({
             alignItems: "center",
             justifyContent: "center",
             borderRadius: radius.scale.sm,
-            backgroundColor: disabled ? palette16.gray["2a"] : palette16.gray["2"],
+            backgroundColor: disabled ? palette17.gray["2a"] : palette17.gray["2"],
             paddingInline: spacing.scale["8"],
             paddingBlock: spacing.scale["2"],
             color: shortcutColor,
@@ -35631,7 +36519,7 @@ function NavigationMainItem({
   onClick
 }) {
   const disabled = componentDisabled || item.disabled;
-  const textColor = disabled ? textBase11.staticDarkQuaternary : item.accent ? textAccent2.blueAccent : textBase11.staticDarkSecondary;
+  const textColor = disabled ? textBase12.staticDarkQuaternary : item.accent ? textAccent2.blueAccent : textBase12.staticDarkSecondary;
   const hasProIcon = item.id === "pro-access";
   const hasLeadingIcon = Boolean(item.icon) || hasProIcon;
   const hasTrailingChevron = item.hasChevron;
@@ -35656,7 +36544,7 @@ function NavigationMainItem({
         gap: hasLeadingIcon || hasTrailingChevron ? spacing.scale["6"] : spacing.scale["0"],
         borderStyle: "solid",
         borderWidth: border.width["0"],
-        backgroundColor: palette16.base.transparent,
+        backgroundColor: palette17.base.transparent,
         paddingInline: spacing.scale["0"],
         paddingBlock: spacing.scale["0"],
         margin: spacing.scale["0"],
@@ -35688,9 +36576,9 @@ function NavigationBottomTabItem({
   onClick
 }) {
   const disabled = componentDisabled || item.disabled;
-  const textColor = disabled ? textBase11.staticDarkQuaternary : textBase11.staticDarkSecondary;
-  const badgeBackground = disabled ? palette16.gray["2a"] : palette16.gray["1a"];
-  const badgeTextColor = disabled ? textBase11.staticDarkQuaternary : active ? textBase11.staticDark : textBase11.staticDarkSecondary;
+  const textColor = disabled ? textBase12.staticDarkQuaternary : textBase12.staticDarkSecondary;
+  const badgeBackground = disabled ? palette17.gray["2a"] : palette17.gray["1a"];
+  const badgeTextColor = disabled ? textBase12.staticDarkQuaternary : active ? textBase12.staticDark : textBase12.staticDarkSecondary;
   const isInteractive = Boolean(onClick) && !disabled;
   return /* @__PURE__ */ React.createElement(
     "button",
@@ -35708,8 +36596,8 @@ function NavigationBottomTabItem({
         borderStyle: "solid",
         borderWidth: border.width["0"],
         borderBottomWidth: active ? border.width["2"] : border.width["0"],
-        borderBottomColor: active ? border.color.theme.select.primary : palette16.base.transparent,
-        backgroundColor: palette16.base.transparent,
+        borderBottomColor: active ? border.color.theme.select.primary : palette17.base.transparent,
+        backgroundColor: palette17.base.transparent,
         paddingInline: spacing.scale["0"],
         paddingTop: spacing.scale["10"],
         paddingBottom: spacing.scale["14"],
@@ -35811,8 +36699,8 @@ function NavigationBar({
     boxSizing: "border-box"
   };
   if (type === "07") {
-    const ctaTextColor = componentDisabled ? textBase11.staticDarkQuaternary : textBase11.staticWhite;
-    const ctaBackground = componentDisabled ? palette16.gray["3"] : palette16.gray["13"];
+    const ctaTextColor = componentDisabled ? textBase12.staticDarkQuaternary : textBase12.staticWhite;
+    const ctaBackground = componentDisabled ? palette17.gray["3"] : palette17.gray["13"];
     return /* @__PURE__ */ React.createElement(
       "header",
       {
@@ -35844,9 +36732,9 @@ function NavigationBar({
             paddingBlock: spacing.scale["8"],
             borderStyle: "solid",
             borderWidth: border.width["1"],
-            borderColor: componentDisabled ? palette16.gray["2"] : palette16.gray["3"],
+            borderColor: componentDisabled ? palette17.gray["2"] : palette17.gray["3"],
             borderRadius: radius.scale.xxl,
-            backgroundColor: palette16.base.white,
+            backgroundColor: palette17.base.white,
             boxShadow: shadows.elevation.lg.css,
             boxSizing: "border-box"
           }
@@ -35925,7 +36813,7 @@ function NavigationBar({
     );
   }
   if (type === "08") {
-    const helpTextColor = componentDisabled ? textBase11.staticDarkQuaternary : textBase11.staticDarkSecondary;
+    const helpTextColor = componentDisabled ? textBase12.staticDarkQuaternary : textBase12.staticDarkSecondary;
     return /* @__PURE__ */ React.createElement(
       "header",
       {
@@ -35937,7 +36825,7 @@ function NavigationBar({
           minHeight: NAV_HEIGHT_DOUBLE,
           display: "flex",
           flexDirection: "column",
-          backgroundColor: palette16.base.white,
+          backgroundColor: palette17.base.white,
           ...style
         },
         ...props
@@ -36022,7 +36910,7 @@ function NavigationBar({
             paddingRight: spacing.scale["64"],
             borderBottomStyle: "solid",
             borderBottomWidth: border.width["1"],
-            borderBottomColor: palette16.gray["2"],
+            borderBottomColor: palette17.gray["2"],
             boxSizing: "border-box"
           }
         },
@@ -36072,7 +36960,7 @@ function NavigationBar({
               gap: spacing.scale["6"],
               borderStyle: "solid",
               borderWidth: border.width["0"],
-              backgroundColor: palette16.base.transparent,
+              backgroundColor: palette17.base.transparent,
               paddingInline: spacing.scale["0"],
               paddingBlock: spacing.scale["0"],
               color: helpTextColor,
@@ -36114,8 +37002,8 @@ function NavigationBar({
           paddingBottom: spacing.scale["16"],
           borderBottomStyle: "solid",
           borderBottomWidth: border.width["1"],
-          borderBottomColor: componentDisabled ? palette16.gray["2"] : palette16.gray["3"],
-          backgroundColor: palette16.base.white,
+          borderBottomColor: componentDisabled ? palette17.gray["2"] : palette17.gray["3"],
+          backgroundColor: palette17.base.white,
           boxSizing: "border-box",
           ...style
         },
@@ -36175,8 +37063,8 @@ function NavigationBar({
           paddingBottom: spacing.scale["16"],
           borderBottomStyle: "solid",
           borderBottomWidth: border.width["1"],
-          borderBottomColor: componentDisabled ? palette16.gray["2"] : palette16.gray["3"],
-          backgroundColor: palette16.base.white,
+          borderBottomColor: componentDisabled ? palette17.gray["2"] : palette17.gray["3"],
+          backgroundColor: palette17.base.white,
           boxSizing: "border-box",
           ...style
         },
@@ -36234,8 +37122,8 @@ function NavigationBar({
         paddingBottom: spacing.scale["16"],
         borderBottomStyle: "solid",
         borderBottomWidth: border.width["1"],
-        borderBottomColor: componentDisabled ? palette16.gray["2"] : palette16.gray["3"],
-        backgroundColor: palette16.base.white,
+        borderBottomColor: componentDisabled ? palette17.gray["2"] : palette17.gray["3"],
+        backgroundColor: palette17.base.white,
         boxSizing: "border-box",
         ...style
       },
@@ -36281,15 +37169,15 @@ function toTitle12(value) {
   return value.replace(/^./, (first) => first.toUpperCase());
 }
 function NavigationBarPreviewPage() {
-  const [type, setType] = (0, import_react24.useState)("01");
-  const [interactionState, setInteractionState] = (0, import_react24.useState)("default");
-  const [width, setWidth] = (0, import_react24.useState)(spacing.scale["1440"]);
-  const [useCustomLinks, setUseCustomLinks] = (0, import_react24.useState)(false);
-  const [activeBottomLinkId, setActiveBottomLinkId] = (0, import_react24.useState)(DEFAULT_BOTTOM_LINKS[1].id);
-  const [lastAction, setLastAction] = (0, import_react24.useState)("None");
-  const resolvedMainLinks = (0, import_react24.useMemo)(() => useCustomLinks ? CUSTOM_MAIN_LINKS : void 0, [useCustomLinks]);
-  const resolvedBottomLinks = (0, import_react24.useMemo)(() => useCustomLinks ? CUSTOM_BOTTOM_LINKS : DEFAULT_BOTTOM_LINKS, [useCustomLinks]);
-  (0, import_react24.useEffect)(() => {
+  const [type, setType] = (0, import_react26.useState)("01");
+  const [interactionState, setInteractionState] = (0, import_react26.useState)("default");
+  const [width, setWidth] = (0, import_react26.useState)(spacing.scale["1440"]);
+  const [useCustomLinks, setUseCustomLinks] = (0, import_react26.useState)(false);
+  const [activeBottomLinkId, setActiveBottomLinkId] = (0, import_react26.useState)(DEFAULT_BOTTOM_LINKS[1].id);
+  const [lastAction, setLastAction] = (0, import_react26.useState)("None");
+  const resolvedMainLinks = (0, import_react26.useMemo)(() => useCustomLinks ? CUSTOM_MAIN_LINKS : void 0, [useCustomLinks]);
+  const resolvedBottomLinks = (0, import_react26.useMemo)(() => useCustomLinks ? CUSTOM_BOTTOM_LINKS : DEFAULT_BOTTOM_LINKS, [useCustomLinks]);
+  (0, import_react26.useEffect)(() => {
     if (resolvedBottomLinks.some((item) => item.id === activeBottomLinkId)) {
       return;
     }
@@ -36297,7 +37185,7 @@ function NavigationBarPreviewPage() {
       setActiveBottomLinkId(resolvedBottomLinks[spacing.scale["0"]].id);
     }
   }, [activeBottomLinkId, resolvedBottomLinks]);
-  return /* @__PURE__ */ import_react24.default.createElement(
+  return /* @__PURE__ */ import_react26.default.createElement(
     "main",
     {
       style: {
@@ -36308,7 +37196,7 @@ function NavigationBarPreviewPage() {
         fontFamily: typography.scale.bodyM.medium.fontFamily
       }
     },
-    /* @__PURE__ */ import_react24.default.createElement(
+    /* @__PURE__ */ import_react26.default.createElement(
       "section",
       {
         style: {
@@ -36318,7 +37206,7 @@ function NavigationBarPreviewPage() {
           gap: spacing.scale["24"]
         }
       },
-      /* @__PURE__ */ import_react24.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react24.default.createElement(
+      /* @__PURE__ */ import_react26.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react26.default.createElement(
         "h1",
         {
           style: {
@@ -36333,7 +37221,7 @@ function NavigationBarPreviewPage() {
           }
         },
         "Navigation Bar Preview"
-      ), /* @__PURE__ */ import_react24.default.createElement(
+      ), /* @__PURE__ */ import_react26.default.createElement(
         "p",
         {
           style: {
@@ -36350,7 +37238,7 @@ function NavigationBarPreviewPage() {
         },
         "Figma `Type=01~08` \uBCC0\uD615\uACFC \uC0C1\uD638\uC791\uC6A9 \uC0C1\uD0DC\uB97C \uD55C \uD654\uBA74\uC5D0\uC11C \uAC80\uC99D\uD569\uB2C8\uB2E4."
       )),
-      /* @__PURE__ */ import_react24.default.createElement(
+      /* @__PURE__ */ import_react26.default.createElement(
         "section",
         {
           style: {
@@ -36365,7 +37253,7 @@ function NavigationBarPreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react24.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react24.default.createElement("span", null, "Type"), /* @__PURE__ */ import_react24.default.createElement(
+        /* @__PURE__ */ import_react26.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react26.default.createElement("span", null, "Type"), /* @__PURE__ */ import_react26.default.createElement(
           "select",
           {
             value: type,
@@ -36381,9 +37269,9 @@ function NavigationBarPreviewPage() {
               color: colors.semantic.theme.text.base.staticDark
             }
           },
-          TYPES8.map((item) => /* @__PURE__ */ import_react24.default.createElement("option", { key: item, value: item }, "Type ", item))
+          TYPES8.map((item) => /* @__PURE__ */ import_react26.default.createElement("option", { key: item, value: item }, "Type ", item))
         )),
-        /* @__PURE__ */ import_react24.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react24.default.createElement("span", null, "Interaction State"), /* @__PURE__ */ import_react24.default.createElement(
+        /* @__PURE__ */ import_react26.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react26.default.createElement("span", null, "Interaction State"), /* @__PURE__ */ import_react26.default.createElement(
           "select",
           {
             value: interactionState,
@@ -36399,9 +37287,9 @@ function NavigationBarPreviewPage() {
               color: colors.semantic.theme.text.base.staticDark
             }
           },
-          INTERACTION_STATES.map((item) => /* @__PURE__ */ import_react24.default.createElement("option", { key: item, value: item }, toTitle12(item)))
+          INTERACTION_STATES.map((item) => /* @__PURE__ */ import_react26.default.createElement("option", { key: item, value: item }, toTitle12(item)))
         )),
-        /* @__PURE__ */ import_react24.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react24.default.createElement("span", null, "Width"), /* @__PURE__ */ import_react24.default.createElement(
+        /* @__PURE__ */ import_react26.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react26.default.createElement("span", null, "Width"), /* @__PURE__ */ import_react26.default.createElement(
           "select",
           {
             value: width,
@@ -36417,9 +37305,9 @@ function NavigationBarPreviewPage() {
               color: colors.semantic.theme.text.base.staticDark
             }
           },
-          WIDTH_OPTIONS.map((item) => /* @__PURE__ */ import_react24.default.createElement("option", { key: item, value: item }, item, "px"))
+          WIDTH_OPTIONS.map((item) => /* @__PURE__ */ import_react26.default.createElement("option", { key: item, value: item }, item, "px"))
         )),
-        /* @__PURE__ */ import_react24.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react24.default.createElement("span", null, "Type 08 Active Tab"), /* @__PURE__ */ import_react24.default.createElement(
+        /* @__PURE__ */ import_react26.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react26.default.createElement("span", null, "Type 08 Active Tab"), /* @__PURE__ */ import_react26.default.createElement(
           "select",
           {
             value: activeBottomLinkId,
@@ -36435,9 +37323,9 @@ function NavigationBarPreviewPage() {
               color: colors.semantic.theme.text.base.staticDark
             }
           },
-          resolvedBottomLinks.map((item) => /* @__PURE__ */ import_react24.default.createElement("option", { key: item.id, value: item.id }, item.label))
+          resolvedBottomLinks.map((item) => /* @__PURE__ */ import_react26.default.createElement("option", { key: item.id, value: item.id }, item.label))
         )),
-        /* @__PURE__ */ import_react24.default.createElement(
+        /* @__PURE__ */ import_react26.default.createElement(
           "label",
           {
             style: {
@@ -36454,11 +37342,11 @@ function NavigationBarPreviewPage() {
               backgroundColor: colors.primitive.palette.base.white
             }
           },
-          /* @__PURE__ */ import_react24.default.createElement("span", null, "Custom Links"),
-          /* @__PURE__ */ import_react24.default.createElement("input", { type: "checkbox", checked: useCustomLinks, onChange: (event) => setUseCustomLinks(event.target.checked) })
+          /* @__PURE__ */ import_react26.default.createElement("span", null, "Custom Links"),
+          /* @__PURE__ */ import_react26.default.createElement("input", { type: "checkbox", checked: useCustomLinks, onChange: (event) => setUseCustomLinks(event.target.checked) })
         )
       ),
-      /* @__PURE__ */ import_react24.default.createElement(
+      /* @__PURE__ */ import_react26.default.createElement(
         "section",
         {
           style: {
@@ -36472,7 +37360,7 @@ function NavigationBarPreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react24.default.createElement(
+        /* @__PURE__ */ import_react26.default.createElement(
           "h2",
           {
             style: {
@@ -36488,7 +37376,7 @@ function NavigationBarPreviewPage() {
           },
           "Selected Variant"
         ),
-        /* @__PURE__ */ import_react24.default.createElement("div", { style: { overflowX: "auto" } }, /* @__PURE__ */ import_react24.default.createElement(
+        /* @__PURE__ */ import_react26.default.createElement("div", { style: { overflowX: "auto" } }, /* @__PURE__ */ import_react26.default.createElement(
           NavigationBar,
           {
             type,
@@ -36507,7 +37395,7 @@ function NavigationBarPreviewPage() {
             onCtaClick: () => setLastAction("CTA: try-for-free")
           }
         )),
-        /* @__PURE__ */ import_react24.default.createElement(
+        /* @__PURE__ */ import_react26.default.createElement(
           "p",
           {
             style: {
@@ -36526,7 +37414,7 @@ function NavigationBarPreviewPage() {
           lastAction
         )
       ),
-      /* @__PURE__ */ import_react24.default.createElement(
+      /* @__PURE__ */ import_react26.default.createElement(
         "section",
         {
           style: {
@@ -36540,7 +37428,7 @@ function NavigationBarPreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react24.default.createElement(
+        /* @__PURE__ */ import_react26.default.createElement(
           "h2",
           {
             style: {
@@ -36556,7 +37444,7 @@ function NavigationBarPreviewPage() {
           },
           "All Types"
         ),
-        TYPES8.map((variant) => /* @__PURE__ */ import_react24.default.createElement("div", { key: variant, style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react24.default.createElement(
+        TYPES8.map((variant) => /* @__PURE__ */ import_react26.default.createElement("div", { key: variant, style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react26.default.createElement(
           "span",
           {
             style: {
@@ -36572,7 +37460,7 @@ function NavigationBarPreviewPage() {
           },
           "Type ",
           variant
-        ), /* @__PURE__ */ import_react24.default.createElement("div", { style: { overflowX: "auto" } }, /* @__PURE__ */ import_react24.default.createElement(
+        ), /* @__PURE__ */ import_react26.default.createElement("div", { style: { overflowX: "auto" } }, /* @__PURE__ */ import_react26.default.createElement(
           NavigationBar,
           {
             type: variant,
@@ -36597,15 +37485,15 @@ function NavigationBarPreviewPage() {
 }
 
 // components/Pagenation/Pagenation.preview.tsx
-var import_react25 = __toESM(require_react());
+var import_react27 = __toESM(require_react());
 
 // components/Pagenation/Pagenation.tsx
 var ARROW_LEFT_ICON_MD_SRC = "/components/Pagenation/assets/arrow-left-md.svg";
 var ARROW_RIGHT_ICON_MD_SRC = "/components/Pagenation/assets/arrow-right-md.svg";
 var ARROW_LEFT_ICON_SM_SRC = "/components/Pagenation/assets/arrow-left-sm.svg";
 var ARROW_RIGHT_ICON_SM_SRC = "/components/Pagenation/assets/arrow-right-sm.svg";
-var palette17 = colors.primitive.palette;
-var textBase12 = colors.semantic.theme.text.base;
+var palette18 = colors.primitive.palette;
+var textBase13 = colors.semantic.theme.text.base;
 var SIZE_CONFIG8 = {
   md: {
     iconSize: spacing.scale["20"],
@@ -36720,7 +37608,7 @@ function ArrowControlButton({
         borderStyle: "solid",
         borderWidth: border.width["0"],
         borderRadius: ghost ? config.numberRadius : radius.scale.full,
-        backgroundColor: ghost ? palette17.base.transparent : palette17.gray["1a"],
+        backgroundColor: ghost ? palette18.base.transparent : palette18.gray["1a"],
         padding: config.iconPadding,
         cursor: disabled ? "default" : "pointer",
         boxShadow: withFocusRing2("none", interactionState, disabled)
@@ -36751,7 +37639,7 @@ function Dots({
           width: spacing.scale["6"],
           height: spacing.scale["6"],
           borderRadius: radius.scale.full,
-          backgroundColor: index === activeIndex ? palette17.base.dark1 : palette17.gray["2"],
+          backgroundColor: index === activeIndex ? palette18.base.dark1 : palette18.gray["2"],
           display: "inline-flex",
           flexShrink: 0
         }
@@ -36786,7 +37674,7 @@ function NumberItemButton({
         borderStyle: "solid",
         borderWidth: border.width["0"],
         borderRadius: config.numberRadius,
-        backgroundColor: isActive ? palette17.gray["1a"] : palette17.base.transparent,
+        backgroundColor: isActive ? palette18.gray["1a"] : palette18.base.transparent,
         padding: spacing.scale["0"],
         cursor: itemDisabled || item.kind === "more" ? "default" : "pointer",
         boxShadow: withFocusRing2("none", interactionState, itemDisabled)
@@ -36796,7 +37684,7 @@ function NumberItemButton({
       "span",
       {
         style: {
-          color: itemDisabled ? textBase12.staticDarkQuaternary : isActive ? textBase12.staticDark : textBase12.staticDarkSecondary,
+          color: itemDisabled ? textBase13.staticDarkQuaternary : isActive ? textBase13.staticDark : textBase13.staticDarkSecondary,
           textAlign: "center",
           whiteSpace: "nowrap",
           ...toTypographyStyle6(config.numberTypography)
@@ -36829,9 +37717,9 @@ function ActionButton3({
         gap: config.buttonGap,
         borderStyle: "solid",
         borderWidth: primary ? border.width["0"] : border.width["1"],
-        borderColor: primary ? palette17.base.transparent : palette17.gray["3"],
+        borderColor: primary ? palette18.base.transparent : palette18.gray["3"],
         borderRadius: config.buttonRadius,
-        backgroundColor: primary ? palette17.gray["13"] : palette17.base.white,
+        backgroundColor: primary ? palette18.gray["13"] : palette18.base.white,
         paddingInline: config.buttonPaddingX,
         paddingBlock: config.buttonPaddingY,
         cursor: disabled ? "default" : "pointer",
@@ -36847,7 +37735,7 @@ function ActionButton3({
           justifyContent: "center",
           paddingInline: spacing.scale["4"],
           paddingBlock: spacing.scale["0"],
-          color: disabled ? textBase12.staticDarkQuaternary : primary ? textBase12.staticWhite : textBase12.staticDark,
+          color: disabled ? textBase13.staticDarkQuaternary : primary ? textBase13.staticWhite : textBase13.staticDark,
           textAlign: "center",
           whiteSpace: "nowrap",
           ...toTypographyStyle6(config.buttonTypography)
@@ -37064,16 +37952,16 @@ function buildNumberItems(activePage) {
   ];
 }
 function PagenationPreviewPage() {
-  const [type, setType] = (0, import_react25.useState)("numbers");
-  const [size, setSize] = (0, import_react25.useState)("md");
-  const [interactionState, setInteractionState] = (0, import_react25.useState)("default");
-  const [showDots, setShowDots] = (0, import_react25.useState)(true);
-  const [activeDotIndex, setActiveDotIndex] = (0, import_react25.useState)(spacing.scale["0"]);
-  const [activePage, setActivePage] = (0, import_react25.useState)("57");
-  const [lastAction, setLastAction] = (0, import_react25.useState)("None");
-  const numberItems = (0, import_react25.useMemo)(() => buildNumberItems(activePage), [activePage]);
+  const [type, setType] = (0, import_react27.useState)("numbers");
+  const [size, setSize] = (0, import_react27.useState)("md");
+  const [interactionState, setInteractionState] = (0, import_react27.useState)("default");
+  const [showDots, setShowDots] = (0, import_react27.useState)(true);
+  const [activeDotIndex, setActiveDotIndex] = (0, import_react27.useState)(spacing.scale["0"]);
+  const [activePage, setActivePage] = (0, import_react27.useState)("57");
+  const [lastAction, setLastAction] = (0, import_react27.useState)("None");
+  const numberItems = (0, import_react27.useMemo)(() => buildNumberItems(activePage), [activePage]);
   const shouldShowDotsToggle = type === "arrows" || type === "buttons";
-  return /* @__PURE__ */ import_react25.default.createElement(
+  return /* @__PURE__ */ import_react27.default.createElement(
     "main",
     {
       style: {
@@ -37084,7 +37972,7 @@ function PagenationPreviewPage() {
         fontFamily: typography.scale.bodyM.medium.fontFamily
       }
     },
-    /* @__PURE__ */ import_react25.default.createElement(
+    /* @__PURE__ */ import_react27.default.createElement(
       "section",
       {
         style: {
@@ -37094,7 +37982,7 @@ function PagenationPreviewPage() {
           gap: spacing.scale["24"]
         }
       },
-      /* @__PURE__ */ import_react25.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react25.default.createElement(
+      /* @__PURE__ */ import_react27.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react27.default.createElement(
         "h1",
         {
           style: {
@@ -37107,7 +37995,7 @@ function PagenationPreviewPage() {
           }
         },
         "Pagenation Preview"
-      ), /* @__PURE__ */ import_react25.default.createElement(
+      ), /* @__PURE__ */ import_react27.default.createElement(
         "p",
         {
           style: {
@@ -37122,7 +38010,7 @@ function PagenationPreviewPage() {
         },
         "Figma Variant(`Type`, `Size`)\uC640 Number Active/Interaction \uC0C1\uD0DC\uB97C \uC778\uD130\uB799\uD2F0\uBE0C\uD558\uAC8C \uAC80\uC99D\uD569\uB2C8\uB2E4."
       )),
-      /* @__PURE__ */ import_react25.default.createElement(
+      /* @__PURE__ */ import_react27.default.createElement(
         "section",
         {
           style: {
@@ -37137,7 +38025,7 @@ function PagenationPreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react25.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react25.default.createElement("span", null, "Type"), /* @__PURE__ */ import_react25.default.createElement(
+        /* @__PURE__ */ import_react27.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react27.default.createElement("span", null, "Type"), /* @__PURE__ */ import_react27.default.createElement(
           "select",
           {
             value: type,
@@ -37153,9 +38041,9 @@ function PagenationPreviewPage() {
               color: colors.semantic.theme.text.base.staticDark
             }
           },
-          TYPES9.map((item) => /* @__PURE__ */ import_react25.default.createElement("option", { key: item, value: item }, toTitle13(item)))
+          TYPES9.map((item) => /* @__PURE__ */ import_react27.default.createElement("option", { key: item, value: item }, toTitle13(item)))
         )),
-        /* @__PURE__ */ import_react25.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react25.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react25.default.createElement(
+        /* @__PURE__ */ import_react27.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react27.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react27.default.createElement(
           "select",
           {
             value: size,
@@ -37171,9 +38059,9 @@ function PagenationPreviewPage() {
               color: colors.semantic.theme.text.base.staticDark
             }
           },
-          SIZES10.map((item) => /* @__PURE__ */ import_react25.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
+          SIZES10.map((item) => /* @__PURE__ */ import_react27.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
         )),
-        /* @__PURE__ */ import_react25.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react25.default.createElement("span", null, "Interaction State"), /* @__PURE__ */ import_react25.default.createElement(
+        /* @__PURE__ */ import_react27.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react27.default.createElement("span", null, "Interaction State"), /* @__PURE__ */ import_react27.default.createElement(
           "select",
           {
             value: interactionState,
@@ -37189,9 +38077,9 @@ function PagenationPreviewPage() {
               color: colors.semantic.theme.text.base.staticDark
             }
           },
-          INTERACTION_STATES2.map((item) => /* @__PURE__ */ import_react25.default.createElement("option", { key: item, value: item }, toTitle13(item)))
+          INTERACTION_STATES2.map((item) => /* @__PURE__ */ import_react27.default.createElement("option", { key: item, value: item }, toTitle13(item)))
         )),
-        /* @__PURE__ */ import_react25.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react25.default.createElement("span", null, "Active Page (Numbers)"), /* @__PURE__ */ import_react25.default.createElement(
+        /* @__PURE__ */ import_react27.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react27.default.createElement("span", null, "Active Page (Numbers)"), /* @__PURE__ */ import_react27.default.createElement(
           "select",
           {
             value: activePage,
@@ -37208,9 +38096,9 @@ function PagenationPreviewPage() {
               color: colors.semantic.theme.text.base.staticDark
             }
           },
-          PAGE_OPTIONS.map((item) => /* @__PURE__ */ import_react25.default.createElement("option", { key: item, value: item }, item))
+          PAGE_OPTIONS.map((item) => /* @__PURE__ */ import_react27.default.createElement("option", { key: item, value: item }, item))
         )),
-        /* @__PURE__ */ import_react25.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react25.default.createElement("span", null, "Active Dot"), /* @__PURE__ */ import_react25.default.createElement(
+        /* @__PURE__ */ import_react27.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react27.default.createElement("span", null, "Active Dot"), /* @__PURE__ */ import_react27.default.createElement(
           "select",
           {
             value: activeDotIndex,
@@ -37227,9 +38115,9 @@ function PagenationPreviewPage() {
               color: colors.semantic.theme.text.base.staticDark
             }
           },
-          DOT_OPTIONS.map((item) => /* @__PURE__ */ import_react25.default.createElement("option", { key: item, value: item }, item + spacing.scale["1"]))
+          DOT_OPTIONS.map((item) => /* @__PURE__ */ import_react27.default.createElement("option", { key: item, value: item }, item + spacing.scale["1"]))
         )),
-        /* @__PURE__ */ import_react25.default.createElement(
+        /* @__PURE__ */ import_react27.default.createElement(
           "label",
           {
             style: {
@@ -37246,8 +38134,8 @@ function PagenationPreviewPage() {
               backgroundColor: shouldShowDotsToggle ? colors.primitive.palette.base.white : colors.primitive.palette.gray["2"]
             }
           },
-          /* @__PURE__ */ import_react25.default.createElement("span", null, "Show Dots"),
-          /* @__PURE__ */ import_react25.default.createElement(
+          /* @__PURE__ */ import_react27.default.createElement("span", null, "Show Dots"),
+          /* @__PURE__ */ import_react27.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -37258,7 +38146,7 @@ function PagenationPreviewPage() {
           )
         )
       ),
-      /* @__PURE__ */ import_react25.default.createElement(
+      /* @__PURE__ */ import_react27.default.createElement(
         "section",
         {
           style: {
@@ -37273,7 +38161,7 @@ function PagenationPreviewPage() {
             justifyItems: "center"
           }
         },
-        /* @__PURE__ */ import_react25.default.createElement(
+        /* @__PURE__ */ import_react27.default.createElement(
           "h2",
           {
             style: {
@@ -37288,7 +38176,7 @@ function PagenationPreviewPage() {
           },
           "Live Preview"
         ),
-        /* @__PURE__ */ import_react25.default.createElement(
+        /* @__PURE__ */ import_react27.default.createElement(
           Pagenation,
           {
             type,
@@ -37311,7 +38199,7 @@ function PagenationPreviewPage() {
             onRightButtonClick: () => setLastAction("Right Button")
           }
         ),
-        /* @__PURE__ */ import_react25.default.createElement(
+        /* @__PURE__ */ import_react27.default.createElement(
           "p",
           {
             style: {
@@ -37333,14 +38221,14 @@ function PagenationPreviewPage() {
 }
 
 // components/ProgressBar/ProgressBar.preview.tsx
-var import_react26 = __toESM(require_react());
+var import_react28 = __toESM(require_react());
 
 // components/ProgressBar/ProgressBar.tsx
 var TAIL_ICON_DEFAULT_SRC = "/components/ProgressBar/assets/tail-icon-default.svg";
 var HELPER_ICON_DEFAULT_SRC = "/components/ProgressBar/assets/helper-icon-default.svg";
 var HELPER_ICON_DESTRUCTIVE_SRC = "/components/ProgressBar/assets/helper-icon-destructive.svg";
-var palette18 = colors.primitive.palette;
-var textBase13 = colors.semantic.theme.text.base;
+var palette19 = colors.primitive.palette;
+var textBase14 = colors.semantic.theme.text.base;
 var textStatus2 = colors.semantic.theme.text.status;
 var PROGRESS_MIN = spacing.scale["0"];
 var PROGRESS_MAX = spacing.scale["10"] * spacing.scale["10"];
@@ -37350,11 +38238,11 @@ var SIZE_TO_LINE_HEIGHT = {
   lg: spacing.scale["12"]
 };
 var COLOR_TO_FILL = {
-  green: palette18.green["8"],
-  blue: palette18.blue["8"],
-  red: palette18.red["8"],
-  orange: palette18.orange["8"],
-  purple: palette18.purple["8"]
+  green: palette19.green["8"],
+  blue: palette19.blue["8"],
+  red: palette19.red["8"],
+  orange: palette19.orange["8"],
+  purple: palette19.purple["8"]
 };
 function toTypographyStyle7(token) {
   return {
@@ -37368,7 +38256,7 @@ function toTypographyStyle7(token) {
 function clampProgress(value) {
   return Math.max(PROGRESS_MIN, Math.min(PROGRESS_MAX, value));
 }
-function resolveColor(target, color) {
+function resolveColor2(target, color) {
   if (color) {
     return color;
   }
@@ -37442,7 +38330,7 @@ function ShimmerOverlay({
       style: {
         position: "absolute",
         inset: spacing.scale["0"],
-        backgroundImage: `linear-gradient(90deg, ${palette18.base.transparent} 0%, ${palette18.white["8"]} 50%, ${palette18.base.transparent} 100%)`,
+        backgroundImage: `linear-gradient(90deg, ${palette19.base.transparent} 0%, ${palette19.white["8"]} 50%, ${palette19.base.transparent} 100%)`,
         backgroundSize: `${spacing.scale["40"]}px 100%`,
         animationName: "progress-bar-shimmer",
         animationDuration: `${spacing.scale["160"] * spacing.scale["10"]}ms`,
@@ -37474,18 +38362,18 @@ function ProgressBar({
   style,
   ...props
 }) {
-  const resolvedColor = resolveColor(target, color);
+  const resolvedColor = resolveColor2(target, color);
   const isDestructive = target === "destructive";
   const disabled = interactionState === "disabled";
   const lineHeight = SIZE_TO_LINE_HEIGHT[size];
   const progress = clampProgress(progressValue);
-  const fillColor = disabled ? palette18.gray["4"] : COLOR_TO_FILL[resolvedColor];
+  const fillColor = disabled ? palette19.gray["4"] : COLOR_TO_FILL[resolvedColor];
   const resolvedShowProgressState = resolveShowProgressState(showProgressState, target);
   const resolvedShowTailIcon = typeof showTailIcon === "boolean" ? showTailIcon : resolvedShowProgressState;
   const resolvedShowHelper = resolveShowHelper(showHelper, direction);
-  const helperColor = isDestructive ? textStatus2.destructive : textBase13.staticDarkTertiary;
-  const optionalColor = disabled ? textBase13.staticDarkQuaternary : textBase13.staticDarkTertiary;
-  const primaryTextColor = disabled ? textBase13.staticDarkQuaternary : textBase13.staticDark;
+  const helperColor = isDestructive ? textStatus2.destructive : textBase14.staticDarkTertiary;
+  const optionalColor = disabled ? textBase14.staticDarkQuaternary : textBase14.staticDarkTertiary;
+  const primaryTextColor = disabled ? textBase14.staticDarkQuaternary : textBase14.staticDark;
   const progressText = valueText ?? `${Math.round(progress)}%`;
   return /* @__PURE__ */ React.createElement(
     "div",
@@ -37600,7 +38488,7 @@ function ProgressBar({
           style: {
             height: lineHeight,
             borderRadius: radius.scale.full,
-            backgroundColor: palette18.gray["2"],
+            backgroundColor: palette19.gray["2"],
             overflow: "hidden",
             position: "relative",
             flex: "1 0 0",
@@ -37660,7 +38548,7 @@ function ProgressBar({
           width: "100%",
           height: lineHeight,
           borderRadius: radius.scale.full,
-          backgroundColor: palette18.gray["2"],
+          backgroundColor: palette19.gray["2"],
           overflow: "hidden",
           position: "relative"
         }
@@ -37701,7 +38589,7 @@ function ProgressBar({
         "span",
         {
           style: {
-            color: disabled ? textBase13.staticDarkQuaternary : helperColor,
+            color: disabled ? textBase14.staticDarkQuaternary : helperColor,
             whiteSpace: "nowrap",
             ...toTypographyStyle7(typography.scale.captionL.regular)
           }
@@ -37725,25 +38613,25 @@ function toTitle14(value) {
   return value.replace(/^./, (char) => char.toUpperCase());
 }
 function ProgressBarPreviewPage() {
-  const [direction, setDirection] = (0, import_react26.useState)("vertical");
-  const [target, setTarget] = (0, import_react26.useState)("default");
-  const [size, setSize] = (0, import_react26.useState)("md");
-  const [color, setColor] = (0, import_react26.useState)("green");
-  const [interactionState, setInteractionState] = (0, import_react26.useState)("default");
-  const [progressValue, setProgressValue] = (0, import_react26.useState)(spacing.scale["50"]);
-  const [showLabel, setShowLabel] = (0, import_react26.useState)(true);
-  const [showOptionalLabel, setShowOptionalLabel] = (0, import_react26.useState)(true);
-  const [showProgressState, setShowProgressState] = (0, import_react26.useState)(true);
-  const [showTailIcon, setShowTailIcon] = (0, import_react26.useState)(true);
-  const [showHelper, setShowHelper] = (0, import_react26.useState)(true);
-  const [shimmering, setShimmering] = (0, import_react26.useState)(false);
-  const computedColor = (0, import_react26.useMemo)(() => {
+  const [direction, setDirection] = (0, import_react28.useState)("vertical");
+  const [target, setTarget] = (0, import_react28.useState)("default");
+  const [size, setSize] = (0, import_react28.useState)("md");
+  const [color, setColor] = (0, import_react28.useState)("green");
+  const [interactionState, setInteractionState] = (0, import_react28.useState)("default");
+  const [progressValue, setProgressValue] = (0, import_react28.useState)(spacing.scale["50"]);
+  const [showLabel, setShowLabel] = (0, import_react28.useState)(true);
+  const [showOptionalLabel, setShowOptionalLabel] = (0, import_react28.useState)(true);
+  const [showProgressState, setShowProgressState] = (0, import_react28.useState)(true);
+  const [showTailIcon, setShowTailIcon] = (0, import_react28.useState)(true);
+  const [showHelper, setShowHelper] = (0, import_react28.useState)(true);
+  const [shimmering, setShimmering] = (0, import_react28.useState)(false);
+  const computedColor = (0, import_react28.useMemo)(() => {
     if (target === "destructive") {
       return "red";
     }
     return color;
   }, [color, target]);
-  return /* @__PURE__ */ import_react26.default.createElement(
+  return /* @__PURE__ */ import_react28.default.createElement(
     "main",
     {
       style: {
@@ -37754,7 +38642,7 @@ function ProgressBarPreviewPage() {
         fontFamily: typography.scale.bodyM.medium.fontFamily
       }
     },
-    /* @__PURE__ */ import_react26.default.createElement(
+    /* @__PURE__ */ import_react28.default.createElement(
       "section",
       {
         style: {
@@ -37764,7 +38652,7 @@ function ProgressBarPreviewPage() {
           gap: spacing.scale["24"]
         }
       },
-      /* @__PURE__ */ import_react26.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react26.default.createElement(
+      /* @__PURE__ */ import_react28.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react28.default.createElement(
         "h1",
         {
           style: {
@@ -37777,7 +38665,7 @@ function ProgressBarPreviewPage() {
           }
         },
         "Progress Bar Preview"
-      ), /* @__PURE__ */ import_react26.default.createElement(
+      ), /* @__PURE__ */ import_react28.default.createElement(
         "p",
         {
           style: {
@@ -37792,7 +38680,7 @@ function ProgressBarPreviewPage() {
         },
         "Figma Variant(`Direction`, `Target`) \uAE30\uC900 \uD504\uB9AC\uBDF0\uC640 Line \uD655\uC7A5 \uCD95(`Size`, `Color`, `Shimmering`) \uAC80\uC99D \uD654\uBA74"
       )),
-      /* @__PURE__ */ import_react26.default.createElement(
+      /* @__PURE__ */ import_react28.default.createElement(
         "section",
         {
           style: {
@@ -37807,7 +38695,7 @@ function ProgressBarPreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react26.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react26.default.createElement("span", null, "Direction"), /* @__PURE__ */ import_react26.default.createElement(
+        /* @__PURE__ */ import_react28.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react28.default.createElement("span", null, "Direction"), /* @__PURE__ */ import_react28.default.createElement(
           "select",
           {
             value: direction,
@@ -37821,9 +38709,9 @@ function ProgressBarPreviewPage() {
               paddingInline: spacing.scale["12"]
             }
           },
-          DIRECTIONS2.map((item) => /* @__PURE__ */ import_react26.default.createElement("option", { key: item, value: item }, toTitle14(item)))
+          DIRECTIONS2.map((item) => /* @__PURE__ */ import_react28.default.createElement("option", { key: item, value: item }, toTitle14(item)))
         )),
-        /* @__PURE__ */ import_react26.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react26.default.createElement("span", null, "Target"), /* @__PURE__ */ import_react26.default.createElement(
+        /* @__PURE__ */ import_react28.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react28.default.createElement("span", null, "Target"), /* @__PURE__ */ import_react28.default.createElement(
           "select",
           {
             value: target,
@@ -37837,9 +38725,9 @@ function ProgressBarPreviewPage() {
               paddingInline: spacing.scale["12"]
             }
           },
-          TARGETS2.map((item) => /* @__PURE__ */ import_react26.default.createElement("option", { key: item, value: item }, toTitle14(item)))
+          TARGETS2.map((item) => /* @__PURE__ */ import_react28.default.createElement("option", { key: item, value: item }, toTitle14(item)))
         )),
-        /* @__PURE__ */ import_react26.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react26.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react26.default.createElement(
+        /* @__PURE__ */ import_react28.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react28.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react28.default.createElement(
           "select",
           {
             value: size,
@@ -37853,9 +38741,9 @@ function ProgressBarPreviewPage() {
               paddingInline: spacing.scale["12"]
             }
           },
-          SIZES11.map((item) => /* @__PURE__ */ import_react26.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
+          SIZES11.map((item) => /* @__PURE__ */ import_react28.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
         )),
-        /* @__PURE__ */ import_react26.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react26.default.createElement("span", null, "Color"), /* @__PURE__ */ import_react26.default.createElement(
+        /* @__PURE__ */ import_react28.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react28.default.createElement("span", null, "Color"), /* @__PURE__ */ import_react28.default.createElement(
           "select",
           {
             value: computedColor,
@@ -37871,9 +38759,9 @@ function ProgressBarPreviewPage() {
               backgroundColor: target === "destructive" ? colors.primitive.palette.gray["2"] : colors.primitive.palette.base.white
             }
           },
-          COLORS2.map((item) => /* @__PURE__ */ import_react26.default.createElement("option", { key: item, value: item }, toTitle14(item)))
+          COLORS2.map((item) => /* @__PURE__ */ import_react28.default.createElement("option", { key: item, value: item }, toTitle14(item)))
         )),
-        /* @__PURE__ */ import_react26.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react26.default.createElement("span", null, "Interaction State"), /* @__PURE__ */ import_react26.default.createElement(
+        /* @__PURE__ */ import_react28.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react28.default.createElement("span", null, "Interaction State"), /* @__PURE__ */ import_react28.default.createElement(
           "select",
           {
             value: interactionState,
@@ -37887,9 +38775,9 @@ function ProgressBarPreviewPage() {
               paddingInline: spacing.scale["12"]
             }
           },
-          INTERACTION_STATES3.map((item) => /* @__PURE__ */ import_react26.default.createElement("option", { key: item, value: item }, toTitle14(item)))
+          INTERACTION_STATES3.map((item) => /* @__PURE__ */ import_react28.default.createElement("option", { key: item, value: item }, toTitle14(item)))
         )),
-        /* @__PURE__ */ import_react26.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react26.default.createElement("span", null, "Progress: ", Math.round(progressValue), "%"), /* @__PURE__ */ import_react26.default.createElement(
+        /* @__PURE__ */ import_react28.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react28.default.createElement("span", null, "Progress: ", Math.round(progressValue), "%"), /* @__PURE__ */ import_react28.default.createElement(
           "input",
           {
             type: "range",
@@ -37907,7 +38795,7 @@ function ProgressBarPreviewPage() {
           ["Tail Icon", showTailIcon, setShowTailIcon],
           ["Helper", showHelper, setShowHelper],
           ["Shimmering", shimmering, setShimmering]
-        ].map(([labelText, checked, setChecked]) => /* @__PURE__ */ import_react26.default.createElement(
+        ].map(([labelText, checked, setChecked]) => /* @__PURE__ */ import_react28.default.createElement(
           "label",
           {
             key: labelText,
@@ -37925,11 +38813,11 @@ function ProgressBarPreviewPage() {
               backgroundColor: colors.primitive.palette.base.white
             }
           },
-          /* @__PURE__ */ import_react26.default.createElement("span", null, labelText),
-          /* @__PURE__ */ import_react26.default.createElement("input", { type: "checkbox", checked: Boolean(checked), onChange: (event) => setChecked(event.target.checked) })
+          /* @__PURE__ */ import_react28.default.createElement("span", null, labelText),
+          /* @__PURE__ */ import_react28.default.createElement("input", { type: "checkbox", checked: Boolean(checked), onChange: (event) => setChecked(event.target.checked) })
         ))
       ),
-      /* @__PURE__ */ import_react26.default.createElement(
+      /* @__PURE__ */ import_react28.default.createElement(
         "section",
         {
           style: {
@@ -37944,7 +38832,7 @@ function ProgressBarPreviewPage() {
             justifyItems: "start"
           }
         },
-        /* @__PURE__ */ import_react26.default.createElement(
+        /* @__PURE__ */ import_react28.default.createElement(
           "h2",
           {
             style: {
@@ -37958,7 +38846,7 @@ function ProgressBarPreviewPage() {
           },
           "Live Preview"
         ),
-        /* @__PURE__ */ import_react26.default.createElement(
+        /* @__PURE__ */ import_react28.default.createElement(
           ProgressBar,
           {
             direction,
@@ -37976,7 +38864,7 @@ function ProgressBarPreviewPage() {
           }
         )
       ),
-      /* @__PURE__ */ import_react26.default.createElement(
+      /* @__PURE__ */ import_react28.default.createElement(
         "section",
         {
           style: {
@@ -37990,7 +38878,7 @@ function ProgressBarPreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react26.default.createElement(
+        /* @__PURE__ */ import_react28.default.createElement(
           "h2",
           {
             style: {
@@ -38004,7 +38892,7 @@ function ProgressBarPreviewPage() {
           },
           "Figma Variant Matrix"
         ),
-        DIRECTIONS2.map((dir) => /* @__PURE__ */ import_react26.default.createElement("div", { key: dir, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react26.default.createElement(
+        DIRECTIONS2.map((dir) => /* @__PURE__ */ import_react28.default.createElement("div", { key: dir, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react28.default.createElement(
           "span",
           {
             style: {
@@ -38019,7 +38907,7 @@ function ProgressBarPreviewPage() {
             }
           },
           toTitle14(dir)
-        ), TARGETS2.map((tar) => /* @__PURE__ */ import_react26.default.createElement(
+        ), TARGETS2.map((tar) => /* @__PURE__ */ import_react28.default.createElement(
           ProgressBar,
           {
             key: `${dir}-${tar}`,
@@ -38040,11 +38928,11 @@ function ProgressBarPreviewPage() {
 }
 
 // components/ProgressCircle/ProgressCircle.preview.tsx
-var import_react27 = __toESM(require_react());
+var import_react29 = __toESM(require_react());
 
 // components/ProgressCircle/ProgressCircle.tsx
-var palette19 = colors.primitive.palette;
-var textBase14 = colors.semantic.theme.text.base;
+var palette20 = colors.primitive.palette;
+var textBase15 = colors.semantic.theme.text.base;
 var PROGRESS_MIN3 = spacing.scale["0"];
 var PROGRESS_MAX3 = spacing.scale["10"] * spacing.scale["10"];
 var SIZE_CONFIG9 = {
@@ -38074,9 +38962,9 @@ var SIZE_CONFIG9 = {
   }
 };
 var COLOR_TO_STROKE = {
-  green: palette19.green["8"],
-  purple: palette19.purple["8"],
-  red: palette19.red["8"]
+  green: palette20.green["8"],
+  purple: palette20.purple["8"],
+  red: palette20.red["8"]
 };
 function clampProgress2(value) {
   return Math.max(PROGRESS_MIN3, Math.min(PROGRESS_MAX3, value));
@@ -38104,8 +38992,8 @@ function ProgressCircle({
   const radius2 = (config.circleSize - config.strokeWidth) / spacing.scale["2"];
   const circumference = spacing.scale["2"] * Math.PI * radius2;
   const dashOffset = circumference - progress / PROGRESS_MAX3 * circumference;
-  const trackColor = palette19.gray["2"];
-  const fillColor = disabled ? palette19.gray["4"] : COLOR_TO_STROKE[color];
+  const trackColor = palette20.gray["2"];
+  const fillColor = disabled ? palette20.gray["4"] : COLOR_TO_STROKE[color];
   const shouldShowLabel = typeof showLabel === "boolean" ? showLabel : config.showLabelByDefault;
   const progressText = label ?? `${Math.round(progress)}%`;
   return /* @__PURE__ */ React.createElement(
@@ -38180,7 +39068,7 @@ function ProgressCircle({
           width: config.labelWidth,
           left: `calc(50% - ${config.labelWidth / spacing.scale["2"]}px)`,
           top: `calc(50% - ${typography.scale.captionL.medium.lineHeight / spacing.scale["2"]}px)`,
-          color: disabled ? textBase14.staticDarkQuaternary : textBase14.staticDark,
+          color: disabled ? textBase15.staticDarkQuaternary : textBase15.staticDark,
           textAlign: "center",
           whiteSpace: "nowrap",
           ...{
@@ -38207,12 +39095,12 @@ function toTitle15(value) {
   return value.replace(/^./, (char) => char.toUpperCase());
 }
 function ProgressCirclePreviewPage() {
-  const [size, setSize] = (0, import_react27.useState)("md");
-  const [color, setColor] = (0, import_react27.useState)("green");
-  const [interactionState, setInteractionState] = (0, import_react27.useState)("default");
-  const [progressValue, setProgressValue] = (0, import_react27.useState)(spacing.scale["50"]);
-  const [showLabel, setShowLabel] = (0, import_react27.useState)(true);
-  return /* @__PURE__ */ import_react27.default.createElement(
+  const [size, setSize] = (0, import_react29.useState)("md");
+  const [color, setColor] = (0, import_react29.useState)("green");
+  const [interactionState, setInteractionState] = (0, import_react29.useState)("default");
+  const [progressValue, setProgressValue] = (0, import_react29.useState)(spacing.scale["50"]);
+  const [showLabel, setShowLabel] = (0, import_react29.useState)(true);
+  return /* @__PURE__ */ import_react29.default.createElement(
     "main",
     {
       style: {
@@ -38223,7 +39111,7 @@ function ProgressCirclePreviewPage() {
         fontFamily: typography.scale.bodyM.medium.fontFamily
       }
     },
-    /* @__PURE__ */ import_react27.default.createElement(
+    /* @__PURE__ */ import_react29.default.createElement(
       "section",
       {
         style: {
@@ -38233,7 +39121,7 @@ function ProgressCirclePreviewPage() {
           gap: spacing.scale["24"]
         }
       },
-      /* @__PURE__ */ import_react27.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react27.default.createElement(
+      /* @__PURE__ */ import_react29.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react29.default.createElement(
         "h1",
         {
           style: {
@@ -38246,7 +39134,7 @@ function ProgressCirclePreviewPage() {
           }
         },
         "Progress Circle Preview"
-      ), /* @__PURE__ */ import_react27.default.createElement(
+      ), /* @__PURE__ */ import_react29.default.createElement(
         "p",
         {
           style: {
@@ -38261,7 +39149,7 @@ function ProgressCirclePreviewPage() {
         },
         "Figma Variant(`Size=xs|sm|md|lg`)\uC640 Circle \uB0B4\uBD80 \uCD95(`Color`, `Progress`) \uAC80\uC99D \uD654\uBA74"
       )),
-      /* @__PURE__ */ import_react27.default.createElement(
+      /* @__PURE__ */ import_react29.default.createElement(
         "section",
         {
           style: {
@@ -38276,7 +39164,7 @@ function ProgressCirclePreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react27.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react27.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react27.default.createElement(
+        /* @__PURE__ */ import_react29.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react29.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react29.default.createElement(
           "select",
           {
             value: size,
@@ -38290,9 +39178,9 @@ function ProgressCirclePreviewPage() {
               paddingInline: spacing.scale["12"]
             }
           },
-          SIZES12.map((item) => /* @__PURE__ */ import_react27.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
+          SIZES12.map((item) => /* @__PURE__ */ import_react29.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
         )),
-        /* @__PURE__ */ import_react27.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react27.default.createElement("span", null, "Color"), /* @__PURE__ */ import_react27.default.createElement(
+        /* @__PURE__ */ import_react29.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react29.default.createElement("span", null, "Color"), /* @__PURE__ */ import_react29.default.createElement(
           "select",
           {
             value: color,
@@ -38306,9 +39194,9 @@ function ProgressCirclePreviewPage() {
               paddingInline: spacing.scale["12"]
             }
           },
-          COLORS3.map((item) => /* @__PURE__ */ import_react27.default.createElement("option", { key: item, value: item }, toTitle15(item)))
+          COLORS3.map((item) => /* @__PURE__ */ import_react29.default.createElement("option", { key: item, value: item }, toTitle15(item)))
         )),
-        /* @__PURE__ */ import_react27.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react27.default.createElement("span", null, "Interaction State"), /* @__PURE__ */ import_react27.default.createElement(
+        /* @__PURE__ */ import_react29.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react29.default.createElement("span", null, "Interaction State"), /* @__PURE__ */ import_react29.default.createElement(
           "select",
           {
             value: interactionState,
@@ -38322,9 +39210,9 @@ function ProgressCirclePreviewPage() {
               paddingInline: spacing.scale["12"]
             }
           },
-          INTERACTION_STATES4.map((item) => /* @__PURE__ */ import_react27.default.createElement("option", { key: item, value: item }, toTitle15(item)))
+          INTERACTION_STATES4.map((item) => /* @__PURE__ */ import_react29.default.createElement("option", { key: item, value: item }, toTitle15(item)))
         )),
-        /* @__PURE__ */ import_react27.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react27.default.createElement("span", null, "Progress: ", Math.round(progressValue), "%"), /* @__PURE__ */ import_react27.default.createElement(
+        /* @__PURE__ */ import_react29.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react29.default.createElement("span", null, "Progress: ", Math.round(progressValue), "%"), /* @__PURE__ */ import_react29.default.createElement(
           "input",
           {
             type: "range",
@@ -38335,7 +39223,7 @@ function ProgressCirclePreviewPage() {
             onChange: (event) => setProgressValue(Number(event.target.value))
           }
         )),
-        /* @__PURE__ */ import_react27.default.createElement(
+        /* @__PURE__ */ import_react29.default.createElement(
           "label",
           {
             style: {
@@ -38352,11 +39240,11 @@ function ProgressCirclePreviewPage() {
               backgroundColor: colors.primitive.palette.base.white
             }
           },
-          /* @__PURE__ */ import_react27.default.createElement("span", null, "Show Label"),
-          /* @__PURE__ */ import_react27.default.createElement("input", { type: "checkbox", checked: showLabel, onChange: (event) => setShowLabel(event.target.checked) })
+          /* @__PURE__ */ import_react29.default.createElement("span", null, "Show Label"),
+          /* @__PURE__ */ import_react29.default.createElement("input", { type: "checkbox", checked: showLabel, onChange: (event) => setShowLabel(event.target.checked) })
         )
       ),
-      /* @__PURE__ */ import_react27.default.createElement(
+      /* @__PURE__ */ import_react29.default.createElement(
         "section",
         {
           style: {
@@ -38371,7 +39259,7 @@ function ProgressCirclePreviewPage() {
             justifyItems: "center"
           }
         },
-        /* @__PURE__ */ import_react27.default.createElement(
+        /* @__PURE__ */ import_react29.default.createElement(
           "h2",
           {
             style: {
@@ -38386,7 +39274,7 @@ function ProgressCirclePreviewPage() {
           },
           "Live Preview"
         ),
-        /* @__PURE__ */ import_react27.default.createElement(
+        /* @__PURE__ */ import_react29.default.createElement(
           ProgressCircle,
           {
             size,
@@ -38397,7 +39285,7 @@ function ProgressCirclePreviewPage() {
           }
         )
       ),
-      /* @__PURE__ */ import_react27.default.createElement(
+      /* @__PURE__ */ import_react29.default.createElement(
         "section",
         {
           style: {
@@ -38411,7 +39299,7 @@ function ProgressCirclePreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react27.default.createElement(
+        /* @__PURE__ */ import_react29.default.createElement(
           "h2",
           {
             style: {
@@ -38425,7 +39313,7 @@ function ProgressCirclePreviewPage() {
           },
           "Size Matrix"
         ),
-        /* @__PURE__ */ import_react27.default.createElement(
+        /* @__PURE__ */ import_react29.default.createElement(
           "div",
           {
             style: {
@@ -38436,7 +39324,7 @@ function ProgressCirclePreviewPage() {
               justifyItems: "center"
             }
           },
-          SIZES12.map((item) => /* @__PURE__ */ import_react27.default.createElement("div", { key: item, style: { display: "grid", gap: spacing.scale["8"], justifyItems: "center" } }, /* @__PURE__ */ import_react27.default.createElement(
+          SIZES12.map((item) => /* @__PURE__ */ import_react29.default.createElement("div", { key: item, style: { display: "grid", gap: spacing.scale["8"], justifyItems: "center" } }, /* @__PURE__ */ import_react29.default.createElement(
             "span",
             {
               style: {
@@ -38451,7 +39339,7 @@ function ProgressCirclePreviewPage() {
               }
             },
             item.toUpperCase()
-          ), /* @__PURE__ */ import_react27.default.createElement(
+          ), /* @__PURE__ */ import_react29.default.createElement(
             ProgressCircle,
             {
               size: item,
@@ -38468,10 +39356,10 @@ function ProgressCirclePreviewPage() {
 }
 
 // components/QuantityStepper/QuantityStepper.preview.tsx
-var import_react29 = __toESM(require_react());
+var import_react31 = __toESM(require_react());
 
 // components/QuantityStepper/QuantityStepper.tsx
-var import_react28 = __toESM(require_react());
+var import_react30 = __toESM(require_react());
 var SIZE_CONFIG10 = {
   lg: {
     actionSize: spacing.scale["40"],
@@ -38490,8 +39378,8 @@ var SIZE_CONFIG10 = {
     textTypography: typography.scale.captionL.medium
   }
 };
-var palette20 = colors.primitive.palette;
-var textBase15 = colors.semantic.theme.text.base;
+var palette21 = colors.primitive.palette;
+var textBase16 = colors.semantic.theme.text.base;
 function toTypographyStyle8(token) {
   return {
     fontFamily: token.fontFamily,
@@ -38521,18 +39409,18 @@ function getResolvedState(forcedState, disabled, hovered, focused) {
 }
 function resolveContainerBackground(state) {
   if (state === "hover") {
-    return palette20.gray["2a"];
+    return palette21.gray["2a"];
   }
   if (state === "disabled") {
-    return palette20.gray["1"];
+    return palette21.gray["1"];
   }
-  return palette20.gray["1a"];
+  return palette21.gray["1a"];
 }
 function resolveContainerBorderColor(state) {
   if (state === "focused") {
     return border.color.theme.action.focusLight;
   }
-  return palette20.base.transparent;
+  return palette21.base.transparent;
 }
 function resolveContainerShadow(state) {
   if (state === "focused") {
@@ -38543,7 +39431,7 @@ function resolveContainerShadow(state) {
 function StepperIcon({ type, size, color }) {
   const addPath = "M9.16667 4.16667H10.8333V9.16667H15.8333V10.8333H10.8333V15.8333H9.16667V10.8333H4.16667V9.16667H9.16667V4.16667Z";
   const subtractPath = "M4.16667 9.16667H15.8333V10.8333H4.16667V9.16667Z";
-  return /* @__PURE__ */ import_react28.default.createElement(
+  return /* @__PURE__ */ import_react30.default.createElement(
     "svg",
     {
       "aria-hidden": "true",
@@ -38556,7 +39444,7 @@ function StepperIcon({ type, size, color }) {
         color
       }
     },
-    /* @__PURE__ */ import_react28.default.createElement("path", { d: type === "add" ? addPath : subtractPath, fill: "currentColor" })
+    /* @__PURE__ */ import_react30.default.createElement("path", { d: type === "add" ? addPath : subtractPath, fill: "currentColor" })
   );
 }
 function StepActionButton({
@@ -38567,7 +39455,7 @@ function StepActionButton({
   onClick,
   ariaLabel
 }) {
-  return /* @__PURE__ */ import_react28.default.createElement(
+  return /* @__PURE__ */ import_react30.default.createElement(
     "button",
     {
       type: "button",
@@ -38583,13 +39471,13 @@ function StepActionButton({
         borderStyle: "solid",
         borderWidth: border.width["0"],
         borderRadius: sizeConfig.actionRadius,
-        backgroundColor: palette20.base.transparent,
+        backgroundColor: palette21.base.transparent,
         padding: spacing.scale["0"],
         margin: spacing.scale["0"],
         cursor: disabled ? "default" : "pointer"
       }
     },
-    /* @__PURE__ */ import_react28.default.createElement(StepperIcon, { type, size: sizeConfig.iconSize, color: iconColor })
+    /* @__PURE__ */ import_react30.default.createElement(StepperIcon, { type, size: sizeConfig.iconSize, color: iconColor })
   );
 }
 function QuantityStepper({
@@ -38616,13 +39504,13 @@ function QuantityStepper({
   onKeyDown,
   ...props
 }) {
-  const rootRef = (0, import_react28.useRef)(null);
+  const rootRef = (0, import_react30.useRef)(null);
   const sizeConfig = SIZE_CONFIG10[size];
   const isControlled = typeof value === "number";
-  const [internalValue, setInternalValue] = (0, import_react28.useState)(defaultValue);
-  const [hovered, setHovered] = (0, import_react28.useState)(false);
-  const [focused, setFocused] = (0, import_react28.useState)(false);
-  const currentValue = (0, import_react28.useMemo)(
+  const [internalValue, setInternalValue] = (0, import_react30.useState)(defaultValue);
+  const [hovered, setHovered] = (0, import_react30.useState)(false);
+  const [focused, setFocused] = (0, import_react30.useState)(false);
+  const currentValue = (0, import_react30.useMemo)(
     () => clampValue(isControlled ? value : internalValue, min, max),
     [internalValue, isControlled, max, min, value]
   );
@@ -38630,9 +39518,9 @@ function QuantityStepper({
   const containerRadius = shape === "pill" ? radius.scale.full : sizeConfig.containerRoundedRadius;
   const atMin = currentValue <= min;
   const atMax = currentValue >= max;
-  const textColor = resolvedState === "disabled" ? textBase15.staticDarkQuaternary : textBase15.staticDark;
-  const enabledIconColor = textBase15.staticDark;
-  const disabledIconColor = textBase15.staticDarkQuaternary;
+  const textColor = resolvedState === "disabled" ? textBase16.staticDarkQuaternary : textBase16.staticDark;
+  const enabledIconColor = textBase16.staticDark;
+  const disabledIconColor = textBase16.staticDarkQuaternary;
   function applyValue(next, changeType) {
     const clamped = clampValue(next, min, max);
     if (!isControlled) {
@@ -38657,7 +39545,7 @@ function QuantityStepper({
     }
     applyValue(currentValue + step, "increase");
   }
-  return /* @__PURE__ */ import_react28.default.createElement(
+  return /* @__PURE__ */ import_react30.default.createElement(
     "div",
     {
       ref: rootRef,
@@ -38723,7 +39611,7 @@ function QuantityStepper({
       },
       ...props
     },
-    /* @__PURE__ */ import_react28.default.createElement(
+    /* @__PURE__ */ import_react30.default.createElement(
       StepActionButton,
       {
         type: "subtract",
@@ -38734,7 +39622,7 @@ function QuantityStepper({
         ariaLabel: decreaseAriaLabel
       }
     ),
-    /* @__PURE__ */ import_react28.default.createElement(
+    /* @__PURE__ */ import_react30.default.createElement(
       "span",
       {
         style: {
@@ -38749,7 +39637,7 @@ function QuantityStepper({
       },
       currentValue
     ),
-    /* @__PURE__ */ import_react28.default.createElement(
+    /* @__PURE__ */ import_react30.default.createElement(
       StepActionButton,
       {
         type: "add",
@@ -38771,23 +39659,23 @@ function toTitle16(value) {
   return value.replace(/^./, (char) => char.toUpperCase());
 }
 function QuantityStepperPreviewPage() {
-  const [size, setSize] = (0, import_react29.useState)("lg");
-  const [shape, setShape] = (0, import_react29.useState)("rounded");
-  const [state, setState] = (0, import_react29.useState)("auto");
-  const [value, setValue] = (0, import_react29.useState)(spacing.scale["2"]);
-  const [min, setMin] = (0, import_react29.useState)(spacing.scale["0"]);
-  const [max, setMax] = (0, import_react29.useState)(spacing.scale["10"]);
-  const [step, setStep] = (0, import_react29.useState)(spacing.scale["1"]);
-  const [disabled, setDisabled] = (0, import_react29.useState)(false);
-  const [lastAction, setLastAction] = (0, import_react29.useState)("None");
-  const forcedState = (0, import_react29.useMemo)(() => {
+  const [size, setSize] = (0, import_react31.useState)("lg");
+  const [shape, setShape] = (0, import_react31.useState)("rounded");
+  const [state, setState] = (0, import_react31.useState)("auto");
+  const [value, setValue] = (0, import_react31.useState)(spacing.scale["2"]);
+  const [min, setMin] = (0, import_react31.useState)(spacing.scale["0"]);
+  const [max, setMax] = (0, import_react31.useState)(spacing.scale["10"]);
+  const [step, setStep] = (0, import_react31.useState)(spacing.scale["1"]);
+  const [disabled, setDisabled] = (0, import_react31.useState)(false);
+  const [lastAction, setLastAction] = (0, import_react31.useState)("None");
+  const forcedState = (0, import_react31.useMemo)(() => {
     if (state === "auto") {
       return disabled ? "disabled" : void 0;
     }
     return state;
   }, [disabled, state]);
-  const clampedValue = (0, import_react29.useMemo)(() => Math.max(min, Math.min(max, value)), [max, min, value]);
-  return /* @__PURE__ */ import_react29.default.createElement(
+  const clampedValue = (0, import_react31.useMemo)(() => Math.max(min, Math.min(max, value)), [max, min, value]);
+  return /* @__PURE__ */ import_react31.default.createElement(
     "main",
     {
       style: {
@@ -38798,7 +39686,7 @@ function QuantityStepperPreviewPage() {
         fontFamily: typography.scale.bodyM.medium.fontFamily
       }
     },
-    /* @__PURE__ */ import_react29.default.createElement(
+    /* @__PURE__ */ import_react31.default.createElement(
       "section",
       {
         style: {
@@ -38808,7 +39696,7 @@ function QuantityStepperPreviewPage() {
           gap: spacing.scale["24"]
         }
       },
-      /* @__PURE__ */ import_react29.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react29.default.createElement(
+      /* @__PURE__ */ import_react31.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react31.default.createElement(
         "h1",
         {
           style: {
@@ -38821,7 +39709,7 @@ function QuantityStepperPreviewPage() {
           }
         },
         "Quantity Stepper Preview"
-      ), /* @__PURE__ */ import_react29.default.createElement(
+      ), /* @__PURE__ */ import_react31.default.createElement(
         "p",
         {
           style: {
@@ -38836,7 +39724,7 @@ function QuantityStepperPreviewPage() {
         },
         "Figma Variant(`size`, `shape`, `state`)\uACFC \uAC12 \uC99D\uAC10 \uB3D9\uC791/\uC811\uADFC\uC131 \uC0C1\uD0DC\uB97C \uAC80\uC99D\uD569\uB2C8\uB2E4."
       )),
-      /* @__PURE__ */ import_react29.default.createElement(
+      /* @__PURE__ */ import_react31.default.createElement(
         "section",
         {
           style: {
@@ -38851,7 +39739,7 @@ function QuantityStepperPreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react29.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react29.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react29.default.createElement(
+        /* @__PURE__ */ import_react31.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react31.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react31.default.createElement(
           "select",
           {
             value: size,
@@ -38865,9 +39753,9 @@ function QuantityStepperPreviewPage() {
               paddingInline: spacing.scale["12"]
             }
           },
-          SIZES13.map((item) => /* @__PURE__ */ import_react29.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
+          SIZES13.map((item) => /* @__PURE__ */ import_react31.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
         )),
-        /* @__PURE__ */ import_react29.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react29.default.createElement("span", null, "Shape"), /* @__PURE__ */ import_react29.default.createElement(
+        /* @__PURE__ */ import_react31.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react31.default.createElement("span", null, "Shape"), /* @__PURE__ */ import_react31.default.createElement(
           "select",
           {
             value: shape,
@@ -38881,9 +39769,9 @@ function QuantityStepperPreviewPage() {
               paddingInline: spacing.scale["12"]
             }
           },
-          SHAPES4.map((item) => /* @__PURE__ */ import_react29.default.createElement("option", { key: item, value: item }, toTitle16(item)))
+          SHAPES4.map((item) => /* @__PURE__ */ import_react31.default.createElement("option", { key: item, value: item }, toTitle16(item)))
         )),
-        /* @__PURE__ */ import_react29.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react29.default.createElement("span", null, "State"), /* @__PURE__ */ import_react29.default.createElement(
+        /* @__PURE__ */ import_react31.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react31.default.createElement("span", null, "State"), /* @__PURE__ */ import_react31.default.createElement(
           "select",
           {
             value: state,
@@ -38897,9 +39785,9 @@ function QuantityStepperPreviewPage() {
               paddingInline: spacing.scale["12"]
             }
           },
-          STATES8.map((item) => /* @__PURE__ */ import_react29.default.createElement("option", { key: item, value: item }, toTitle16(item)))
+          STATES8.map((item) => /* @__PURE__ */ import_react31.default.createElement("option", { key: item, value: item }, toTitle16(item)))
         )),
-        /* @__PURE__ */ import_react29.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react29.default.createElement("span", null, "Value"), /* @__PURE__ */ import_react29.default.createElement(
+        /* @__PURE__ */ import_react31.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react31.default.createElement("span", null, "Value"), /* @__PURE__ */ import_react31.default.createElement(
           "input",
           {
             type: "number",
@@ -38915,7 +39803,7 @@ function QuantityStepperPreviewPage() {
             }
           }
         )),
-        /* @__PURE__ */ import_react29.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react29.default.createElement("span", null, "Min"), /* @__PURE__ */ import_react29.default.createElement(
+        /* @__PURE__ */ import_react31.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react31.default.createElement("span", null, "Min"), /* @__PURE__ */ import_react31.default.createElement(
           "input",
           {
             type: "number",
@@ -38931,7 +39819,7 @@ function QuantityStepperPreviewPage() {
             }
           }
         )),
-        /* @__PURE__ */ import_react29.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react29.default.createElement("span", null, "Max"), /* @__PURE__ */ import_react29.default.createElement(
+        /* @__PURE__ */ import_react31.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react31.default.createElement("span", null, "Max"), /* @__PURE__ */ import_react31.default.createElement(
           "input",
           {
             type: "number",
@@ -38947,7 +39835,7 @@ function QuantityStepperPreviewPage() {
             }
           }
         )),
-        /* @__PURE__ */ import_react29.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react29.default.createElement("span", null, "Step"), /* @__PURE__ */ import_react29.default.createElement(
+        /* @__PURE__ */ import_react31.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react31.default.createElement("span", null, "Step"), /* @__PURE__ */ import_react31.default.createElement(
           "input",
           {
             type: "number",
@@ -38964,7 +39852,7 @@ function QuantityStepperPreviewPage() {
             }
           }
         )),
-        /* @__PURE__ */ import_react29.default.createElement(
+        /* @__PURE__ */ import_react31.default.createElement(
           "label",
           {
             style: {
@@ -38980,11 +39868,11 @@ function QuantityStepperPreviewPage() {
               gap: spacing.scale["8"]
             }
           },
-          /* @__PURE__ */ import_react29.default.createElement("span", null, "Disabled"),
-          /* @__PURE__ */ import_react29.default.createElement("input", { type: "checkbox", checked: disabled, onChange: (event) => setDisabled(event.target.checked) })
+          /* @__PURE__ */ import_react31.default.createElement("span", null, "Disabled"),
+          /* @__PURE__ */ import_react31.default.createElement("input", { type: "checkbox", checked: disabled, onChange: (event) => setDisabled(event.target.checked) })
         )
       ),
-      /* @__PURE__ */ import_react29.default.createElement(
+      /* @__PURE__ */ import_react31.default.createElement(
         "section",
         {
           style: {
@@ -38999,7 +39887,7 @@ function QuantityStepperPreviewPage() {
             justifyItems: "start"
           }
         },
-        /* @__PURE__ */ import_react29.default.createElement(
+        /* @__PURE__ */ import_react31.default.createElement(
           "h2",
           {
             style: {
@@ -39013,7 +39901,7 @@ function QuantityStepperPreviewPage() {
           },
           "Live Preview"
         ),
-        /* @__PURE__ */ import_react29.default.createElement(
+        /* @__PURE__ */ import_react31.default.createElement(
           QuantityStepper,
           {
             size,
@@ -39032,7 +39920,7 @@ function QuantityStepperPreviewPage() {
             onIncrease: (next) => setLastAction(`Increase: ${next}`)
           }
         ),
-        /* @__PURE__ */ import_react29.default.createElement(
+        /* @__PURE__ */ import_react31.default.createElement(
           "p",
           {
             style: {
@@ -39049,7 +39937,7 @@ function QuantityStepperPreviewPage() {
           lastAction
         )
       ),
-      /* @__PURE__ */ import_react29.default.createElement(
+      /* @__PURE__ */ import_react31.default.createElement(
         "section",
         {
           style: {
@@ -39063,7 +39951,7 @@ function QuantityStepperPreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react29.default.createElement(
+        /* @__PURE__ */ import_react31.default.createElement(
           "h2",
           {
             style: {
@@ -39077,7 +39965,7 @@ function QuantityStepperPreviewPage() {
           },
           "Variant Matrix"
         ),
-        SIZES13.map((sizeItem) => /* @__PURE__ */ import_react29.default.createElement("div", { key: sizeItem, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react29.default.createElement(
+        SIZES13.map((sizeItem) => /* @__PURE__ */ import_react31.default.createElement("div", { key: sizeItem, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react31.default.createElement(
           "span",
           {
             style: {
@@ -39093,7 +39981,7 @@ function QuantityStepperPreviewPage() {
           },
           "Size ",
           sizeItem.toUpperCase()
-        ), /* @__PURE__ */ import_react29.default.createElement("div", { style: { display: "flex", alignItems: "center", gap: spacing.scale["12"], flexWrap: "wrap" } }, SHAPES4.map((shapeItem) => /* @__PURE__ */ import_react29.default.createElement(
+        ), /* @__PURE__ */ import_react31.default.createElement("div", { style: { display: "flex", alignItems: "center", gap: spacing.scale["12"], flexWrap: "wrap" } }, SHAPES4.map((shapeItem) => /* @__PURE__ */ import_react31.default.createElement(
           QuantityStepper,
           {
             key: `${sizeItem}-${shapeItem}`,
@@ -39114,11 +40002,11 @@ function QuantityStepperPreviewPage() {
 }
 
 // components/Radio/Radio.preview.tsx
-var import_react31 = __toESM(require_react());
+var import_react33 = __toESM(require_react());
 
 // components/Radio/Radio.tsx
-var import_react30 = __toESM(require_react());
-var palette21 = colors.primitive.palette;
+var import_react32 = __toESM(require_react());
+var palette22 = colors.primitive.palette;
 var SIZE_CONFIG11 = {
   sm: {
     controlSize: spacing.scale["16"],
@@ -39158,16 +40046,16 @@ function Radio({
   onClick,
   ariaLabel
 }) {
-  const [hovered, setHovered] = (0, import_react30.useState)(false);
-  const [focused, setFocused] = (0, import_react30.useState)(false);
+  const [hovered, setHovered] = (0, import_react32.useState)(false);
+  const [focused, setFocused] = (0, import_react32.useState)(false);
   const config = SIZE_CONFIG11[size];
   const visualState = resolveVisualState7(state, disabled, hovered, focused);
   const isDisabled = visualState === "disabled";
   const backgroundColor = (() => {
     if (isDisabled && !checked) {
-      return palette21.gray["3"];
+      return palette22.gray["3"];
     }
-    return palette21.base.white;
+    return palette22.base.white;
   })();
   const borderWidth = (() => {
     if (isDisabled && !checked) {
@@ -39180,15 +40068,15 @@ function Radio({
   })();
   const borderColor = (() => {
     if (isDisabled && checked) {
-      return palette21.gray["2"];
+      return palette22.gray["2"];
     }
     if (checked) {
-      return palette21.purple["8"];
+      return palette22.purple["8"];
     }
     if (visualState === "hover") {
-      return palette21.gray["4"];
+      return palette22.gray["4"];
     }
-    return palette21.gray["3"];
+    return palette22.gray["3"];
   })();
   const boxShadow = (() => {
     if (isDisabled) {
@@ -39208,7 +40096,7 @@ function Radio({
     }
     onClick?.();
   };
-  return /* @__PURE__ */ import_react30.default.createElement(
+  return /* @__PURE__ */ import_react32.default.createElement(
     "button",
     {
       id,
@@ -39243,7 +40131,7 @@ function Radio({
         ...style
       }
     },
-    checked ? /* @__PURE__ */ import_react30.default.createElement(
+    checked ? /* @__PURE__ */ import_react32.default.createElement(
       "span",
       {
         "aria-hidden": "true",
@@ -39251,7 +40139,7 @@ function Radio({
           width: config.dotSize,
           height: config.dotSize,
           borderRadius: radius.scale.full,
-          backgroundColor: isDisabled ? palette21.gray["3"] : palette21.purple["8"],
+          backgroundColor: isDisabled ? palette22.gray["3"] : palette22.purple["8"],
           display: "block"
         }
       }
@@ -39262,27 +40150,27 @@ function Radio({
 // components/Radio/Radio.preview.tsx
 var SIZES14 = ["sm", "md"];
 var STATES9 = ["auto", "default", "hover", "focus", "disabled"];
-var palette22 = colors.primitive.palette;
-var textBase16 = colors.semantic.theme.text.base;
+var palette23 = colors.primitive.palette;
+var textBase17 = colors.semantic.theme.text.base;
 function toTitle17(value) {
   return value.charAt(0).toUpperCase() + value.slice(1);
 }
 function RadioPreviewPage() {
-  const [size, setSize] = (0, import_react31.useState)("sm");
-  const [state, setState] = (0, import_react31.useState)("auto");
-  const [checked, setChecked] = (0, import_react31.useState)(false);
-  return /* @__PURE__ */ import_react31.default.createElement(
+  const [size, setSize] = (0, import_react33.useState)("sm");
+  const [state, setState] = (0, import_react33.useState)("auto");
+  const [checked, setChecked] = (0, import_react33.useState)(false);
+  return /* @__PURE__ */ import_react33.default.createElement(
     "main",
     {
       style: {
         minHeight: spacing.scale["844"],
-        backgroundColor: palette22.base.white,
-        color: textBase16.staticDark,
+        backgroundColor: palette23.base.white,
+        color: textBase17.staticDark,
         padding: spacing.scale["24"],
         fontFamily: typography.scale.bodyM.medium.fontFamily
       }
     },
-    /* @__PURE__ */ import_react31.default.createElement(
+    /* @__PURE__ */ import_react33.default.createElement(
       "section",
       {
         style: {
@@ -39292,7 +40180,7 @@ function RadioPreviewPage() {
           gap: spacing.scale["24"]
         }
       },
-      /* @__PURE__ */ import_react31.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react31.default.createElement(
+      /* @__PURE__ */ import_react33.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react33.default.createElement(
         "h1",
         {
           style: {
@@ -39305,12 +40193,12 @@ function RadioPreviewPage() {
           }
         },
         "Radio Preview"
-      ), /* @__PURE__ */ import_react31.default.createElement(
+      ), /* @__PURE__ */ import_react33.default.createElement(
         "p",
         {
           style: {
             margin: spacing.scale["0"],
-            color: textBase16.staticDarkSecondary,
+            color: textBase17.staticDarkSecondary,
             fontFamily: typography.scale.bodyS.regular.fontFamily,
             fontSize: typography.scale.bodyS.regular.fontSize,
             fontWeight: typography.scale.bodyS.regular.fontWeight,
@@ -39320,22 +40208,22 @@ function RadioPreviewPage() {
         },
         "Figma variant(Size/Active/State) \uB300\uC751 \uC778\uD130\uB799\uC158 \uAC80\uC99D"
       )),
-      /* @__PURE__ */ import_react31.default.createElement(
+      /* @__PURE__ */ import_react33.default.createElement(
         "section",
         {
           style: {
             borderStyle: "solid",
             borderWidth: border.width["1"],
-            borderColor: palette22.gray["3"],
+            borderColor: palette23.gray["3"],
             borderRadius: radius.scale.xl,
-            backgroundColor: palette22.gray["1"],
+            backgroundColor: palette23.gray["1"],
             padding: spacing.scale["16"],
             display: "grid",
             gridTemplateColumns: `repeat(auto-fit, minmax(${spacing.scale["224"]}px, 1fr))`,
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react31.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react31.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react31.default.createElement(
+        /* @__PURE__ */ import_react33.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react33.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react33.default.createElement(
           "select",
           {
             value: size,
@@ -39344,16 +40232,16 @@ function RadioPreviewPage() {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette22.gray["3"],
+              borderColor: palette23.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
-              backgroundColor: palette22.base.white,
-              color: textBase16.staticDark
+              backgroundColor: palette23.base.white,
+              color: textBase17.staticDark
             }
           },
-          SIZES14.map((item) => /* @__PURE__ */ import_react31.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
+          SIZES14.map((item) => /* @__PURE__ */ import_react33.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
         )),
-        /* @__PURE__ */ import_react31.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react31.default.createElement("span", null, "State"), /* @__PURE__ */ import_react31.default.createElement(
+        /* @__PURE__ */ import_react33.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react33.default.createElement("span", null, "State"), /* @__PURE__ */ import_react33.default.createElement(
           "select",
           {
             value: state,
@@ -39362,34 +40250,34 @@ function RadioPreviewPage() {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette22.gray["3"],
+              borderColor: palette23.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
-              backgroundColor: palette22.base.white,
-              color: textBase16.staticDark
+              backgroundColor: palette23.base.white,
+              color: textBase17.staticDark
             }
           },
-          STATES9.map((item) => /* @__PURE__ */ import_react31.default.createElement("option", { key: item, value: item }, toTitle17(item)))
+          STATES9.map((item) => /* @__PURE__ */ import_react33.default.createElement("option", { key: item, value: item }, toTitle17(item)))
         )),
-        /* @__PURE__ */ import_react31.default.createElement(
+        /* @__PURE__ */ import_react33.default.createElement(
           "label",
           {
             style: {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette22.gray["3"],
+              borderColor: palette23.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "space-between",
               gap: spacing.scale["8"],
-              backgroundColor: palette22.base.white
+              backgroundColor: palette23.base.white
             }
           },
-          /* @__PURE__ */ import_react31.default.createElement("span", null, "Active"),
-          /* @__PURE__ */ import_react31.default.createElement(
+          /* @__PURE__ */ import_react33.default.createElement("span", null, "Active"),
+          /* @__PURE__ */ import_react33.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -39399,21 +40287,21 @@ function RadioPreviewPage() {
           )
         )
       ),
-      /* @__PURE__ */ import_react31.default.createElement(
+      /* @__PURE__ */ import_react33.default.createElement(
         "section",
         {
           style: {
             borderStyle: "solid",
             borderWidth: border.width["1"],
-            borderColor: palette22.gray["3"],
+            borderColor: palette23.gray["3"],
             borderRadius: radius.scale.xl,
-            backgroundColor: palette22.gray["1"],
+            backgroundColor: palette23.gray["1"],
             padding: spacing.scale["24"],
             display: "grid",
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react31.default.createElement(
+        /* @__PURE__ */ import_react33.default.createElement(
           "h2",
           {
             style: {
@@ -39427,7 +40315,7 @@ function RadioPreviewPage() {
           },
           "Active Selection"
         ),
-        /* @__PURE__ */ import_react31.default.createElement(
+        /* @__PURE__ */ import_react33.default.createElement(
           Radio,
           {
             size,
@@ -39438,21 +40326,21 @@ function RadioPreviewPage() {
           }
         )
       ),
-      /* @__PURE__ */ import_react31.default.createElement(
+      /* @__PURE__ */ import_react33.default.createElement(
         "section",
         {
           style: {
             borderStyle: "solid",
             borderWidth: border.width["1"],
-            borderColor: palette22.gray["3"],
+            borderColor: palette23.gray["3"],
             borderRadius: radius.scale.xl,
-            backgroundColor: palette22.gray["1"],
+            backgroundColor: palette23.gray["1"],
             padding: spacing.scale["24"],
             display: "grid",
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react31.default.createElement(
+        /* @__PURE__ */ import_react33.default.createElement(
           "h2",
           {
             style: {
@@ -39466,7 +40354,7 @@ function RadioPreviewPage() {
           },
           "Variant Matrix"
         ),
-        /* @__PURE__ */ import_react31.default.createElement(
+        /* @__PURE__ */ import_react33.default.createElement(
           "div",
           {
             style: {
@@ -39474,7 +40362,7 @@ function RadioPreviewPage() {
               gap: spacing.scale["16"]
             }
           },
-          SIZES14.map((sizeItem) => /* @__PURE__ */ import_react31.default.createElement("div", { key: sizeItem, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react31.default.createElement(
+          SIZES14.map((sizeItem) => /* @__PURE__ */ import_react33.default.createElement("div", { key: sizeItem, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react33.default.createElement(
             "h3",
             {
               style: {
@@ -39488,7 +40376,7 @@ function RadioPreviewPage() {
             },
             "Size ",
             sizeItem.toUpperCase()
-          ), /* @__PURE__ */ import_react31.default.createElement(
+          ), /* @__PURE__ */ import_react33.default.createElement(
             "div",
             {
               style: {
@@ -39497,7 +40385,7 @@ function RadioPreviewPage() {
                 gap: spacing.scale["12"]
               }
             },
-            ["default", "hover", "focus", "disabled"].map((stateItem) => /* @__PURE__ */ import_react31.default.createElement(
+            ["default", "hover", "focus", "disabled"].map((stateItem) => /* @__PURE__ */ import_react33.default.createElement(
               "div",
               {
                 key: `${sizeItem}-inactive-${stateItem}`,
@@ -39507,13 +40395,13 @@ function RadioPreviewPage() {
                   padding: spacing.scale["12"],
                   borderStyle: "solid",
                   borderWidth: border.width["1"],
-                  borderColor: palette22.gray["3"],
+                  borderColor: palette23.gray["3"],
                   borderRadius: radius.scale.md,
-                  backgroundColor: palette22.base.white,
+                  backgroundColor: palette23.base.white,
                   justifyItems: "start"
                 }
               },
-              /* @__PURE__ */ import_react31.default.createElement(
+              /* @__PURE__ */ import_react33.default.createElement(
                 "span",
                 {
                   style: {
@@ -39522,15 +40410,15 @@ function RadioPreviewPage() {
                     fontWeight: typography.scale.captionM.regular.fontWeight,
                     lineHeight: `${typography.scale.captionM.regular.lineHeight}px`,
                     letterSpacing: `${typography.scale.captionM.regular.letterSpacing}px`,
-                    color: textBase16.staticDarkSecondary
+                    color: textBase17.staticDarkSecondary
                   }
                 },
                 "Inactive / ",
                 toTitle17(stateItem)
               ),
-              /* @__PURE__ */ import_react31.default.createElement(Radio, { size: sizeItem, checked: false, state: stateItem, ariaLabel: "Matrix radio inactive" })
+              /* @__PURE__ */ import_react33.default.createElement(Radio, { size: sizeItem, checked: false, state: stateItem, ariaLabel: "Matrix radio inactive" })
             )),
-            ["default", "hover", "focus", "disabled"].map((stateItem) => /* @__PURE__ */ import_react31.default.createElement(
+            ["default", "hover", "focus", "disabled"].map((stateItem) => /* @__PURE__ */ import_react33.default.createElement(
               "div",
               {
                 key: `${sizeItem}-active-${stateItem}`,
@@ -39540,13 +40428,13 @@ function RadioPreviewPage() {
                   padding: spacing.scale["12"],
                   borderStyle: "solid",
                   borderWidth: border.width["1"],
-                  borderColor: palette22.gray["3"],
+                  borderColor: palette23.gray["3"],
                   borderRadius: radius.scale.md,
-                  backgroundColor: palette22.base.white,
+                  backgroundColor: palette23.base.white,
                   justifyItems: "start"
                 }
               },
-              /* @__PURE__ */ import_react31.default.createElement(
+              /* @__PURE__ */ import_react33.default.createElement(
                 "span",
                 {
                   style: {
@@ -39555,13 +40443,13 @@ function RadioPreviewPage() {
                     fontWeight: typography.scale.captionM.regular.fontWeight,
                     lineHeight: `${typography.scale.captionM.regular.lineHeight}px`,
                     letterSpacing: `${typography.scale.captionM.regular.letterSpacing}px`,
-                    color: textBase16.staticDarkSecondary
+                    color: textBase17.staticDarkSecondary
                   }
                 },
                 "Active / ",
                 toTitle17(stateItem)
               ),
-              /* @__PURE__ */ import_react31.default.createElement(Radio, { size: sizeItem, checked: true, state: stateItem, ariaLabel: "Matrix radio active" })
+              /* @__PURE__ */ import_react33.default.createElement(Radio, { size: sizeItem, checked: true, state: stateItem, ariaLabel: "Matrix radio active" })
             ))
           )))
         )
@@ -39571,11 +40459,11 @@ function RadioPreviewPage() {
 }
 
 // components/RadioLabel/RadioLabel.preview.tsx
-var import_react33 = __toESM(require_react());
+var import_react35 = __toESM(require_react());
 
 // components/RadioLabel/RadioLabel.tsx
-var import_react32 = __toESM(require_react());
-var textBase17 = colors.semantic.theme.text.base;
+var import_react34 = __toESM(require_react());
+var textBase18 = colors.semantic.theme.text.base;
 var SIZE_CONFIG12 = {
   sm: {
     gap: spacing.scale["8"],
@@ -39625,8 +40513,8 @@ function RadioLabel({
   disabled = false,
   onCheckedChange
 }) {
-  const [hovered, setHovered] = (0, import_react32.useState)(false);
-  const [focused, setFocused] = (0, import_react32.useState)(false);
+  const [hovered, setHovered] = (0, import_react34.useState)(false);
+  const [focused, setFocused] = (0, import_react34.useState)(false);
   const config = SIZE_CONFIG12[size];
   const visualState = resolveVisualState8(state, disabled, hovered, focused);
   const isDisabled = visualState === "disabled";
@@ -39638,7 +40526,7 @@ function RadioLabel({
       onCheckedChange?.(true);
     }
   };
-  return /* @__PURE__ */ import_react32.default.createElement(
+  return /* @__PURE__ */ import_react34.default.createElement(
     "div",
     {
       id,
@@ -39670,7 +40558,7 @@ function RadioLabel({
         ...style
       }
     },
-    /* @__PURE__ */ import_react32.default.createElement(
+    /* @__PURE__ */ import_react34.default.createElement(
       "span",
       {
         style: {
@@ -39682,7 +40570,7 @@ function RadioLabel({
           paddingBottom: spacing.scale["0"]
         }
       },
-      /* @__PURE__ */ import_react32.default.createElement(
+      /* @__PURE__ */ import_react34.default.createElement(
         Radio,
         {
           size,
@@ -39696,7 +40584,7 @@ function RadioLabel({
         }
       )
     ),
-    /* @__PURE__ */ import_react32.default.createElement(
+    /* @__PURE__ */ import_react34.default.createElement(
       "span",
       {
         style: {
@@ -39708,21 +40596,21 @@ function RadioLabel({
           whiteSpace: "nowrap"
         }
       },
-      /* @__PURE__ */ import_react32.default.createElement(
+      /* @__PURE__ */ import_react34.default.createElement(
         "span",
         {
           style: {
-            color: textBase17.staticDark,
+            color: textBase18.staticDark,
             ...toTypographyStyle9(config.labelTypography)
           }
         },
         label
       ),
-      showCaption ? /* @__PURE__ */ import_react32.default.createElement(
+      showCaption ? /* @__PURE__ */ import_react34.default.createElement(
         "span",
         {
           style: {
-            color: textBase17.staticDarkSecondary,
+            color: textBase18.staticDarkSecondary,
             ...toTypographyStyle9(config.captionTypography)
           }
         },
@@ -39735,574 +40623,23 @@ function RadioLabel({
 // components/RadioLabel/RadioLabel.preview.tsx
 var SIZES15 = ["sm", "md"];
 var STATES10 = ["auto", "default", "hover", "focus", "disabled"];
-var palette23 = colors.primitive.palette;
-var textBase18 = colors.semantic.theme.text.base;
+var palette24 = colors.primitive.palette;
+var textBase19 = colors.semantic.theme.text.base;
 function toTitle18(value) {
   return value.charAt(0).toUpperCase() + value.slice(1);
 }
 function RadioLabelPreviewPage() {
-  const [size, setSize] = (0, import_react33.useState)("sm");
-  const [state, setState] = (0, import_react33.useState)("auto");
-  const [checked, setChecked] = (0, import_react33.useState)(false);
-  const [showCaption, setShowCaption] = (0, import_react33.useState)(true);
-  return /* @__PURE__ */ import_react33.default.createElement(
-    "main",
-    {
-      style: {
-        minHeight: spacing.scale["844"],
-        backgroundColor: palette23.base.white,
-        color: textBase18.staticDark,
-        padding: spacing.scale["24"],
-        fontFamily: typography.scale.bodyM.medium.fontFamily
-      }
-    },
-    /* @__PURE__ */ import_react33.default.createElement(
-      "section",
-      {
-        style: {
-          maxWidth: spacing.scale["1024"],
-          marginInline: "auto",
-          display: "grid",
-          gap: spacing.scale["24"]
-        }
-      },
-      /* @__PURE__ */ import_react33.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react33.default.createElement(
-        "h1",
-        {
-          style: {
-            margin: spacing.scale["0"],
-            fontFamily: typography.scale.h3.bold.fontFamily,
-            fontSize: typography.scale.h3.bold.fontSize,
-            fontWeight: typography.scale.h3.bold.fontWeight,
-            lineHeight: `${typography.scale.h3.bold.lineHeight}px`,
-            letterSpacing: `${typography.scale.h3.bold.letterSpacing}px`
-          }
-        },
-        "Radio Label Preview"
-      ), /* @__PURE__ */ import_react33.default.createElement(
-        "p",
-        {
-          style: {
-            margin: spacing.scale["0"],
-            color: textBase18.staticDarkSecondary,
-            fontFamily: typography.scale.bodyS.regular.fontFamily,
-            fontSize: typography.scale.bodyS.regular.fontSize,
-            fontWeight: typography.scale.bodyS.regular.fontWeight,
-            lineHeight: `${typography.scale.bodyS.regular.lineHeight}px`,
-            letterSpacing: `${typography.scale.bodyS.regular.letterSpacing}px`
-          }
-        },
-        "Figma variant(Size/Active/State) + Caption \uD1A0\uAE00 \uAC80\uC99D"
-      )),
-      /* @__PURE__ */ import_react33.default.createElement(
-        "section",
-        {
-          style: {
-            borderStyle: "solid",
-            borderWidth: border.width["1"],
-            borderColor: palette23.gray["3"],
-            borderRadius: radius.scale.xl,
-            backgroundColor: palette23.gray["1"],
-            padding: spacing.scale["16"],
-            display: "grid",
-            gridTemplateColumns: `repeat(auto-fit, minmax(${spacing.scale["224"]}px, 1fr))`,
-            gap: spacing.scale["12"]
-          }
-        },
-        /* @__PURE__ */ import_react33.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react33.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react33.default.createElement(
-          "select",
-          {
-            value: size,
-            onChange: (event) => setSize(event.target.value),
-            style: {
-              minHeight: spacing.scale["40"],
-              borderStyle: "solid",
-              borderWidth: border.width["1"],
-              borderColor: palette23.gray["3"],
-              borderRadius: radius.scale.md,
-              paddingInline: spacing.scale["12"],
-              backgroundColor: palette23.base.white,
-              color: textBase18.staticDark
-            }
-          },
-          SIZES15.map((item) => /* @__PURE__ */ import_react33.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
-        )),
-        /* @__PURE__ */ import_react33.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react33.default.createElement("span", null, "State"), /* @__PURE__ */ import_react33.default.createElement(
-          "select",
-          {
-            value: state,
-            onChange: (event) => setState(event.target.value),
-            style: {
-              minHeight: spacing.scale["40"],
-              borderStyle: "solid",
-              borderWidth: border.width["1"],
-              borderColor: palette23.gray["3"],
-              borderRadius: radius.scale.md,
-              paddingInline: spacing.scale["12"],
-              backgroundColor: palette23.base.white,
-              color: textBase18.staticDark
-            }
-          },
-          STATES10.map((item) => /* @__PURE__ */ import_react33.default.createElement("option", { key: item, value: item }, toTitle18(item)))
-        )),
-        /* @__PURE__ */ import_react33.default.createElement(
-          "label",
-          {
-            style: {
-              minHeight: spacing.scale["40"],
-              borderStyle: "solid",
-              borderWidth: border.width["1"],
-              borderColor: palette23.gray["3"],
-              borderRadius: radius.scale.md,
-              paddingInline: spacing.scale["12"],
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              gap: spacing.scale["8"],
-              backgroundColor: palette23.base.white
-            }
-          },
-          /* @__PURE__ */ import_react33.default.createElement("span", null, "Active"),
-          /* @__PURE__ */ import_react33.default.createElement(
-            "input",
-            {
-              type: "checkbox",
-              checked,
-              onChange: (event) => setChecked(event.target.checked)
-            }
-          )
-        ),
-        /* @__PURE__ */ import_react33.default.createElement(
-          "label",
-          {
-            style: {
-              minHeight: spacing.scale["40"],
-              borderStyle: "solid",
-              borderWidth: border.width["1"],
-              borderColor: palette23.gray["3"],
-              borderRadius: radius.scale.md,
-              paddingInline: spacing.scale["12"],
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              gap: spacing.scale["8"],
-              backgroundColor: palette23.base.white
-            }
-          },
-          /* @__PURE__ */ import_react33.default.createElement("span", null, "Caption"),
-          /* @__PURE__ */ import_react33.default.createElement(
-            "input",
-            {
-              type: "checkbox",
-              checked: showCaption,
-              onChange: (event) => setShowCaption(event.target.checked)
-            }
-          )
-        )
-      ),
-      /* @__PURE__ */ import_react33.default.createElement(
-        "section",
-        {
-          style: {
-            borderStyle: "solid",
-            borderWidth: border.width["1"],
-            borderColor: palette23.gray["3"],
-            borderRadius: radius.scale.xl,
-            backgroundColor: palette23.gray["1"],
-            padding: spacing.scale["24"],
-            display: "grid",
-            gap: spacing.scale["16"]
-          }
-        },
-        /* @__PURE__ */ import_react33.default.createElement(
-          "h2",
-          {
-            style: {
-              margin: spacing.scale["0"],
-              fontFamily: typography.scale.h5.semiBold.fontFamily,
-              fontSize: typography.scale.h5.semiBold.fontSize,
-              fontWeight: typography.scale.h5.semiBold.fontWeight,
-              lineHeight: `${typography.scale.h5.semiBold.lineHeight}px`,
-              letterSpacing: `${typography.scale.h5.semiBold.letterSpacing}px`
-            }
-          },
-          "Active Selection"
-        ),
-        /* @__PURE__ */ import_react33.default.createElement(
-          RadioLabel,
-          {
-            size,
-            checked,
-            state: state === "auto" ? void 0 : state,
-            label: "Radio label",
-            caption: "Caption",
-            showCaption,
-            onCheckedChange: setChecked
-          }
-        )
-      ),
-      /* @__PURE__ */ import_react33.default.createElement(
-        "section",
-        {
-          style: {
-            borderStyle: "solid",
-            borderWidth: border.width["1"],
-            borderColor: palette23.gray["3"],
-            borderRadius: radius.scale.xl,
-            backgroundColor: palette23.gray["1"],
-            padding: spacing.scale["24"],
-            display: "grid",
-            gap: spacing.scale["16"]
-          }
-        },
-        /* @__PURE__ */ import_react33.default.createElement(
-          "h2",
-          {
-            style: {
-              margin: spacing.scale["0"],
-              fontFamily: typography.scale.h5.semiBold.fontFamily,
-              fontSize: typography.scale.h5.semiBold.fontSize,
-              fontWeight: typography.scale.h5.semiBold.fontWeight,
-              lineHeight: `${typography.scale.h5.semiBold.lineHeight}px`,
-              letterSpacing: `${typography.scale.h5.semiBold.letterSpacing}px`
-            }
-          },
-          "Variant Matrix"
-        ),
-        /* @__PURE__ */ import_react33.default.createElement("div", { style: { display: "grid", gap: spacing.scale["16"] } }, SIZES15.map((sizeItem) => /* @__PURE__ */ import_react33.default.createElement("div", { key: sizeItem, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react33.default.createElement(
-          "h3",
-          {
-            style: {
-              margin: spacing.scale["0"],
-              fontFamily: typography.scale.bodyM.semiBold.fontFamily,
-              fontSize: typography.scale.bodyM.semiBold.fontSize,
-              fontWeight: typography.scale.bodyM.semiBold.fontWeight,
-              lineHeight: `${typography.scale.bodyM.semiBold.lineHeight}px`,
-              letterSpacing: `${typography.scale.bodyM.semiBold.letterSpacing}px`
-            }
-          },
-          "Size ",
-          sizeItem.toUpperCase()
-        ), /* @__PURE__ */ import_react33.default.createElement(
-          "div",
-          {
-            style: {
-              display: "grid",
-              gridTemplateColumns: `repeat(2, minmax(${spacing.scale["288"]}px, 1fr))`,
-              gap: spacing.scale["12"]
-            }
-          },
-          ["default", "hover", "focus", "disabled"].map((stateItem) => /* @__PURE__ */ import_react33.default.createElement(
-            "div",
-            {
-              key: `${sizeItem}-inactive-${stateItem}`,
-              style: {
-                display: "grid",
-                gap: spacing.scale["8"],
-                padding: spacing.scale["12"],
-                borderStyle: "solid",
-                borderWidth: border.width["1"],
-                borderColor: palette23.gray["3"],
-                borderRadius: radius.scale.md,
-                backgroundColor: palette23.base.white
-              }
-            },
-            /* @__PURE__ */ import_react33.default.createElement(
-              "span",
-              {
-                style: {
-                  fontFamily: typography.scale.captionM.regular.fontFamily,
-                  fontSize: typography.scale.captionM.regular.fontSize,
-                  fontWeight: typography.scale.captionM.regular.fontWeight,
-                  lineHeight: `${typography.scale.captionM.regular.lineHeight}px`,
-                  letterSpacing: `${typography.scale.captionM.regular.letterSpacing}px`,
-                  color: textBase18.staticDarkSecondary
-                }
-              },
-              "Inactive / ",
-              toTitle18(stateItem)
-            ),
-            /* @__PURE__ */ import_react33.default.createElement(
-              RadioLabel,
-              {
-                size: sizeItem,
-                checked: false,
-                state: stateItem,
-                label: "Radio label",
-                caption: "Caption"
-              }
-            )
-          )),
-          ["default", "hover", "focus", "disabled"].map((stateItem) => /* @__PURE__ */ import_react33.default.createElement(
-            "div",
-            {
-              key: `${sizeItem}-active-${stateItem}`,
-              style: {
-                display: "grid",
-                gap: spacing.scale["8"],
-                padding: spacing.scale["12"],
-                borderStyle: "solid",
-                borderWidth: border.width["1"],
-                borderColor: palette23.gray["3"],
-                borderRadius: radius.scale.md,
-                backgroundColor: palette23.base.white
-              }
-            },
-            /* @__PURE__ */ import_react33.default.createElement(
-              "span",
-              {
-                style: {
-                  fontFamily: typography.scale.captionM.regular.fontFamily,
-                  fontSize: typography.scale.captionM.regular.fontSize,
-                  fontWeight: typography.scale.captionM.regular.fontWeight,
-                  lineHeight: `${typography.scale.captionM.regular.lineHeight}px`,
-                  letterSpacing: `${typography.scale.captionM.regular.letterSpacing}px`,
-                  color: textBase18.staticDarkSecondary
-                }
-              },
-              "Active / ",
-              toTitle18(stateItem)
-            ),
-            /* @__PURE__ */ import_react33.default.createElement(
-              RadioLabel,
-              {
-                size: sizeItem,
-                checked: true,
-                state: stateItem,
-                label: "Radio label",
-                caption: "Caption"
-              }
-            )
-          ))
-        ))))
-      )
-    )
-  );
-}
-
-// components/SearchInput/SearchInput.preview.tsx
-var import_react35 = __toESM(require_react());
-
-// components/SearchInput/SearchInput.tsx
-var import_react34 = __toESM(require_react());
-var palette24 = colors.primitive.palette;
-var textBase19 = colors.semantic.theme.text.base;
-var SEARCH_ICON_SRC = "/components/SearchInput/assets/search-line.png";
-var INFO_ICON_SRC2 = "/components/SearchInput/assets/info-line.png";
-function toTypographyStyle10(token) {
-  return {
-    fontFamily: token.fontFamily,
-    fontSize: token.fontSize,
-    fontWeight: token.fontWeight,
-    lineHeight: `${token.lineHeight}px`,
-    letterSpacing: `${token.letterSpacing}px`
-  };
-}
-function resolveState3(forcedState, disabled, value) {
-  if (disabled || forcedState === "disabled") {
-    return "disabled";
-  }
-  if (forcedState) {
-    return forcedState;
-  }
-  if (value.trim().length > 0) {
-    return "filled";
-  }
-  return "default";
-}
-function IconImage3({ src, size, disabled }) {
-  return /* @__PURE__ */ import_react34.default.createElement(
-    "span",
-    {
-      "aria-hidden": "true",
-      style: {
-        width: size,
-        height: size,
-        flexShrink: 0,
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
-        opacity: disabled ? 0.5 : 1
-      }
-    },
-    /* @__PURE__ */ import_react34.default.createElement("img", { src, alt: "", style: { width: "100%", height: "100%", display: "block" } })
-  );
-}
-function SearchInput({
-  id,
-  className,
-  style,
-  state,
-  disabled = false,
-  placeholder = "Placeholder",
-  value,
-  defaultValue = "",
-  badgeLabel = "\u2318K",
-  showLeadIcon = true,
-  showTailIcon = true,
-  leadIcon,
-  tailIcon,
-  inputAriaLabel = "Search input",
-  onValueChange,
-  ...rest
-}) {
-  const [uncontrolledValue, setUncontrolledValue] = (0, import_react34.useState)(defaultValue);
-  const resolvedValue = value ?? uncontrolledValue;
-  const resolvedState = resolveState3(state, disabled, resolvedValue);
-  const componentDisabled = resolvedState === "disabled";
-  const textColor = resolvedState === "disabled" ? textBase19.staticDarkQuaternary : resolvedState === "filled" ? textBase19.staticDark : textBase19.staticDarkTertiary;
-  const badgeColor = resolvedState === "disabled" ? textBase19.staticDarkQuaternary : textBase19.staticDarkSecondary;
-  const handleInputChange = (event) => {
-    if (value === void 0) {
-      setUncontrolledValue(event.target.value);
-    }
-    onValueChange?.(event.target.value);
-  };
-  return /* @__PURE__ */ import_react34.default.createElement(
-    "div",
-    {
-      id,
-      className,
-      style: {
-        width: spacing.scale["390"],
-        display: "inline-flex",
-        alignItems: "center",
-        minHeight: spacing.scale["40"],
-        paddingInline: spacing.scale["12"],
-        paddingBlock: spacing.scale["0"],
-        backgroundColor: palette24.base.white,
-        ...style
-      },
-      ...rest
-    },
-    /* @__PURE__ */ import_react34.default.createElement(
-      "div",
-      {
-        style: {
-          width: "100%",
-          display: "flex",
-          alignItems: "center",
-          gap: spacing.scale["4"],
-          minWidth: spacing.scale["0"]
-        }
-      },
-      /* @__PURE__ */ import_react34.default.createElement(
-        "div",
-        {
-          style: {
-            display: "flex",
-            alignItems: "center",
-            gap: spacing.scale["4"],
-            flex: "1 0 0",
-            minWidth: spacing.scale["0"]
-          }
-        },
-        showLeadIcon ? /* @__PURE__ */ import_react34.default.createElement(import_react34.default.Fragment, null, leadIcon ?? /* @__PURE__ */ import_react34.default.createElement(IconImage3, { src: SEARCH_ICON_SRC, size: spacing.scale["16"], disabled: componentDisabled })) : null,
-        /* @__PURE__ */ import_react34.default.createElement(
-          "div",
-          {
-            style: {
-              display: "flex",
-              alignItems: "center",
-              flex: "1 0 0",
-              minWidth: spacing.scale["0"],
-              paddingInline: spacing.scale["4"],
-              paddingBlock: spacing.scale["0"]
-            }
-          },
-          /* @__PURE__ */ import_react34.default.createElement(
-            "input",
-            {
-              "aria-label": inputAriaLabel,
-              value: resolvedValue,
-              placeholder,
-              disabled: componentDisabled,
-              onChange: handleInputChange,
-              style: {
-                width: "100%",
-                border: "none",
-                outline: "none",
-                backgroundColor: "transparent",
-                color: textColor,
-                padding: spacing.scale["0"],
-                margin: spacing.scale["0"],
-                ...toTypographyStyle10(typography.scale.captionL.regular)
-              }
-            }
-          )
-        )
-      ),
-      /* @__PURE__ */ import_react34.default.createElement(
-        "div",
-        {
-          style: {
-            display: "inline-flex",
-            alignItems: "center",
-            paddingInline: spacing.scale["4"]
-          }
-        },
-        /* @__PURE__ */ import_react34.default.createElement(
-          "div",
-          {
-            style: {
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: palette24.gray["2"],
-              borderRadius: radius.scale.sm,
-              paddingInline: spacing.primitive["3"],
-              paddingBlock: spacing.scale["2"]
-            }
-          },
-          /* @__PURE__ */ import_react34.default.createElement(
-            "div",
-            {
-              style: {
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                paddingInline: spacing.primitive["3"],
-                paddingBlock: spacing.scale["0"]
-              }
-            },
-            /* @__PURE__ */ import_react34.default.createElement(
-              "span",
-              {
-                style: {
-                  color: badgeColor,
-                  ...toTypographyStyle10(typography.scale.captionM.medium),
-                  whiteSpace: "nowrap"
-                }
-              },
-              badgeLabel
-            )
-          )
-        )
-      ),
-      showTailIcon ? /* @__PURE__ */ import_react34.default.createElement(import_react34.default.Fragment, null, tailIcon ?? /* @__PURE__ */ import_react34.default.createElement(IconImage3, { src: INFO_ICON_SRC2, size: spacing.scale["20"], disabled: componentDisabled })) : null
-    )
-  );
-}
-
-// components/SearchInput/SearchInput.preview.tsx
-var STATES11 = ["auto", "default", "filled", "disabled"];
-var palette25 = colors.primitive.palette;
-var textBase20 = colors.semantic.theme.text.base;
-function toTitle19(value) {
-  return value.charAt(0).toUpperCase() + value.slice(1);
-}
-function SearchInputPreviewPage() {
+  const [size, setSize] = (0, import_react35.useState)("sm");
   const [state, setState] = (0, import_react35.useState)("auto");
-  const [value, setValue] = (0, import_react35.useState)("");
-  const [showLeadIcon, setShowLeadIcon] = (0, import_react35.useState)(true);
-  const [showTailIcon, setShowTailIcon] = (0, import_react35.useState)(true);
+  const [checked, setChecked] = (0, import_react35.useState)(false);
+  const [showCaption, setShowCaption] = (0, import_react35.useState)(true);
   return /* @__PURE__ */ import_react35.default.createElement(
     "main",
     {
       style: {
         minHeight: spacing.scale["844"],
-        backgroundColor: palette25.base.white,
-        color: textBase20.staticDark,
+        backgroundColor: palette24.base.white,
+        color: textBase19.staticDark,
         padding: spacing.scale["24"],
         fontFamily: typography.scale.bodyM.medium.fontFamily
       }
@@ -40329,13 +40666,13 @@ function SearchInputPreviewPage() {
             letterSpacing: `${typography.scale.h3.bold.letterSpacing}px`
           }
         },
-        "Search Input Preview"
+        "Radio Label Preview"
       ), /* @__PURE__ */ import_react35.default.createElement(
         "p",
         {
           style: {
             margin: spacing.scale["0"],
-            color: textBase20.staticDarkSecondary,
+            color: textBase19.staticDarkSecondary,
             fontFamily: typography.scale.bodyS.regular.fontFamily,
             fontSize: typography.scale.bodyS.regular.fontSize,
             fontWeight: typography.scale.bodyS.regular.fontWeight,
@@ -40343,7 +40680,7 @@ function SearchInputPreviewPage() {
             letterSpacing: `${typography.scale.bodyS.regular.letterSpacing}px`
           }
         },
-        "Figma \uCD95(State=Default/Filled/Disabled)\uC640 \uC785\uB825 \uAC12 \uC0C1\uD0DC\uB97C \uAC80\uC99D"
+        "Figma variant(Size/Active/State) + Caption \uD1A0\uAE00 \uAC80\uC99D"
       )),
       /* @__PURE__ */ import_react35.default.createElement(
         "section",
@@ -40351,15 +40688,33 @@ function SearchInputPreviewPage() {
           style: {
             borderStyle: "solid",
             borderWidth: border.width["1"],
-            borderColor: palette25.gray["3"],
+            borderColor: palette24.gray["3"],
             borderRadius: radius.scale.xl,
-            backgroundColor: palette25.gray["1"],
+            backgroundColor: palette24.gray["1"],
             padding: spacing.scale["16"],
             display: "grid",
             gridTemplateColumns: `repeat(auto-fit, minmax(${spacing.scale["224"]}px, 1fr))`,
             gap: spacing.scale["12"]
           }
         },
+        /* @__PURE__ */ import_react35.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react35.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react35.default.createElement(
+          "select",
+          {
+            value: size,
+            onChange: (event) => setSize(event.target.value),
+            style: {
+              minHeight: spacing.scale["40"],
+              borderStyle: "solid",
+              borderWidth: border.width["1"],
+              borderColor: palette24.gray["3"],
+              borderRadius: radius.scale.md,
+              paddingInline: spacing.scale["12"],
+              backgroundColor: palette24.base.white,
+              color: textBase19.staticDark
+            }
+          },
+          SIZES15.map((item) => /* @__PURE__ */ import_react35.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
+        )),
         /* @__PURE__ */ import_react35.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react35.default.createElement("span", null, "State"), /* @__PURE__ */ import_react35.default.createElement(
           "select",
           {
@@ -40369,32 +40724,14 @@ function SearchInputPreviewPage() {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette25.gray["3"],
+              borderColor: palette24.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
-              backgroundColor: palette25.base.white,
-              color: textBase20.staticDark
+              backgroundColor: palette24.base.white,
+              color: textBase19.staticDark
             }
           },
-          STATES11.map((item) => /* @__PURE__ */ import_react35.default.createElement("option", { key: item, value: item }, toTitle19(item)))
-        )),
-        /* @__PURE__ */ import_react35.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react35.default.createElement("span", null, "Value"), /* @__PURE__ */ import_react35.default.createElement(
-          "input",
-          {
-            value,
-            onChange: (event) => setValue(event.target.value),
-            placeholder: "Placeholder",
-            style: {
-              minHeight: spacing.scale["40"],
-              borderStyle: "solid",
-              borderWidth: border.width["1"],
-              borderColor: palette25.gray["3"],
-              borderRadius: radius.scale.md,
-              paddingInline: spacing.scale["12"],
-              backgroundColor: palette25.base.white,
-              color: textBase20.staticDark
-            }
-          }
+          STATES10.map((item) => /* @__PURE__ */ import_react35.default.createElement("option", { key: item, value: item }, toTitle18(item)))
         )),
         /* @__PURE__ */ import_react35.default.createElement(
           "label",
@@ -40403,18 +40740,25 @@ function SearchInputPreviewPage() {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette25.gray["3"],
+              borderColor: palette24.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "space-between",
               gap: spacing.scale["8"],
-              backgroundColor: palette25.base.white
+              backgroundColor: palette24.base.white
             }
           },
-          /* @__PURE__ */ import_react35.default.createElement("span", null, "Lead Icon"),
-          /* @__PURE__ */ import_react35.default.createElement("input", { type: "checkbox", checked: showLeadIcon, onChange: (event) => setShowLeadIcon(event.target.checked) })
+          /* @__PURE__ */ import_react35.default.createElement("span", null, "Active"),
+          /* @__PURE__ */ import_react35.default.createElement(
+            "input",
+            {
+              type: "checkbox",
+              checked,
+              onChange: (event) => setChecked(event.target.checked)
+            }
+          )
         ),
         /* @__PURE__ */ import_react35.default.createElement(
           "label",
@@ -40423,18 +40767,25 @@ function SearchInputPreviewPage() {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette25.gray["3"],
+              borderColor: palette24.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "space-between",
               gap: spacing.scale["8"],
-              backgroundColor: palette25.base.white
+              backgroundColor: palette24.base.white
             }
           },
-          /* @__PURE__ */ import_react35.default.createElement("span", null, "Tail Icon"),
-          /* @__PURE__ */ import_react35.default.createElement("input", { type: "checkbox", checked: showTailIcon, onChange: (event) => setShowTailIcon(event.target.checked) })
+          /* @__PURE__ */ import_react35.default.createElement("span", null, "Caption"),
+          /* @__PURE__ */ import_react35.default.createElement(
+            "input",
+            {
+              type: "checkbox",
+              checked: showCaption,
+              onChange: (event) => setShowCaption(event.target.checked)
+            }
+          )
         )
       ),
       /* @__PURE__ */ import_react35.default.createElement(
@@ -40443,9 +40794,9 @@ function SearchInputPreviewPage() {
           style: {
             borderStyle: "solid",
             borderWidth: border.width["1"],
-            borderColor: palette25.gray["3"],
+            borderColor: palette24.gray["3"],
             borderRadius: radius.scale.xl,
-            backgroundColor: palette25.gray["1"],
+            backgroundColor: palette24.gray["1"],
             padding: spacing.scale["24"],
             display: "grid",
             gap: spacing.scale["16"]
@@ -40463,9 +40814,546 @@ function SearchInputPreviewPage() {
               letterSpacing: `${typography.scale.h5.semiBold.letterSpacing}px`
             }
           },
-          "Interactive"
+          "Active Selection"
         ),
         /* @__PURE__ */ import_react35.default.createElement(
+          RadioLabel,
+          {
+            size,
+            checked,
+            state: state === "auto" ? void 0 : state,
+            label: "Radio label",
+            caption: "Caption",
+            showCaption,
+            onCheckedChange: setChecked
+          }
+        )
+      ),
+      /* @__PURE__ */ import_react35.default.createElement(
+        "section",
+        {
+          style: {
+            borderStyle: "solid",
+            borderWidth: border.width["1"],
+            borderColor: palette24.gray["3"],
+            borderRadius: radius.scale.xl,
+            backgroundColor: palette24.gray["1"],
+            padding: spacing.scale["24"],
+            display: "grid",
+            gap: spacing.scale["16"]
+          }
+        },
+        /* @__PURE__ */ import_react35.default.createElement(
+          "h2",
+          {
+            style: {
+              margin: spacing.scale["0"],
+              fontFamily: typography.scale.h5.semiBold.fontFamily,
+              fontSize: typography.scale.h5.semiBold.fontSize,
+              fontWeight: typography.scale.h5.semiBold.fontWeight,
+              lineHeight: `${typography.scale.h5.semiBold.lineHeight}px`,
+              letterSpacing: `${typography.scale.h5.semiBold.letterSpacing}px`
+            }
+          },
+          "Variant Matrix"
+        ),
+        /* @__PURE__ */ import_react35.default.createElement("div", { style: { display: "grid", gap: spacing.scale["16"] } }, SIZES15.map((sizeItem) => /* @__PURE__ */ import_react35.default.createElement("div", { key: sizeItem, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react35.default.createElement(
+          "h3",
+          {
+            style: {
+              margin: spacing.scale["0"],
+              fontFamily: typography.scale.bodyM.semiBold.fontFamily,
+              fontSize: typography.scale.bodyM.semiBold.fontSize,
+              fontWeight: typography.scale.bodyM.semiBold.fontWeight,
+              lineHeight: `${typography.scale.bodyM.semiBold.lineHeight}px`,
+              letterSpacing: `${typography.scale.bodyM.semiBold.letterSpacing}px`
+            }
+          },
+          "Size ",
+          sizeItem.toUpperCase()
+        ), /* @__PURE__ */ import_react35.default.createElement(
+          "div",
+          {
+            style: {
+              display: "grid",
+              gridTemplateColumns: `repeat(2, minmax(${spacing.scale["288"]}px, 1fr))`,
+              gap: spacing.scale["12"]
+            }
+          },
+          ["default", "hover", "focus", "disabled"].map((stateItem) => /* @__PURE__ */ import_react35.default.createElement(
+            "div",
+            {
+              key: `${sizeItem}-inactive-${stateItem}`,
+              style: {
+                display: "grid",
+                gap: spacing.scale["8"],
+                padding: spacing.scale["12"],
+                borderStyle: "solid",
+                borderWidth: border.width["1"],
+                borderColor: palette24.gray["3"],
+                borderRadius: radius.scale.md,
+                backgroundColor: palette24.base.white
+              }
+            },
+            /* @__PURE__ */ import_react35.default.createElement(
+              "span",
+              {
+                style: {
+                  fontFamily: typography.scale.captionM.regular.fontFamily,
+                  fontSize: typography.scale.captionM.regular.fontSize,
+                  fontWeight: typography.scale.captionM.regular.fontWeight,
+                  lineHeight: `${typography.scale.captionM.regular.lineHeight}px`,
+                  letterSpacing: `${typography.scale.captionM.regular.letterSpacing}px`,
+                  color: textBase19.staticDarkSecondary
+                }
+              },
+              "Inactive / ",
+              toTitle18(stateItem)
+            ),
+            /* @__PURE__ */ import_react35.default.createElement(
+              RadioLabel,
+              {
+                size: sizeItem,
+                checked: false,
+                state: stateItem,
+                label: "Radio label",
+                caption: "Caption"
+              }
+            )
+          )),
+          ["default", "hover", "focus", "disabled"].map((stateItem) => /* @__PURE__ */ import_react35.default.createElement(
+            "div",
+            {
+              key: `${sizeItem}-active-${stateItem}`,
+              style: {
+                display: "grid",
+                gap: spacing.scale["8"],
+                padding: spacing.scale["12"],
+                borderStyle: "solid",
+                borderWidth: border.width["1"],
+                borderColor: palette24.gray["3"],
+                borderRadius: radius.scale.md,
+                backgroundColor: palette24.base.white
+              }
+            },
+            /* @__PURE__ */ import_react35.default.createElement(
+              "span",
+              {
+                style: {
+                  fontFamily: typography.scale.captionM.regular.fontFamily,
+                  fontSize: typography.scale.captionM.regular.fontSize,
+                  fontWeight: typography.scale.captionM.regular.fontWeight,
+                  lineHeight: `${typography.scale.captionM.regular.lineHeight}px`,
+                  letterSpacing: `${typography.scale.captionM.regular.letterSpacing}px`,
+                  color: textBase19.staticDarkSecondary
+                }
+              },
+              "Active / ",
+              toTitle18(stateItem)
+            ),
+            /* @__PURE__ */ import_react35.default.createElement(
+              RadioLabel,
+              {
+                size: sizeItem,
+                checked: true,
+                state: stateItem,
+                label: "Radio label",
+                caption: "Caption"
+              }
+            )
+          ))
+        ))))
+      )
+    )
+  );
+}
+
+// components/SearchInput/SearchInput.preview.tsx
+var import_react37 = __toESM(require_react());
+
+// components/SearchInput/SearchInput.tsx
+var import_react36 = __toESM(require_react());
+var palette25 = colors.primitive.palette;
+var textBase20 = colors.semantic.theme.text.base;
+var SEARCH_ICON_SRC = "/components/SearchInput/assets/search-line.png";
+var INFO_ICON_SRC2 = "/components/SearchInput/assets/info-line.png";
+function toTypographyStyle10(token) {
+  return {
+    fontFamily: token.fontFamily,
+    fontSize: token.fontSize,
+    fontWeight: token.fontWeight,
+    lineHeight: `${token.lineHeight}px`,
+    letterSpacing: `${token.letterSpacing}px`
+  };
+}
+function resolveState4(forcedState, disabled, value) {
+  if (disabled || forcedState === "disabled") {
+    return "disabled";
+  }
+  if (forcedState) {
+    return forcedState;
+  }
+  if (value.trim().length > 0) {
+    return "filled";
+  }
+  return "default";
+}
+function IconImage3({ src, size, disabled }) {
+  return /* @__PURE__ */ import_react36.default.createElement(
+    "span",
+    {
+      "aria-hidden": "true",
+      style: {
+        width: size,
+        height: size,
+        flexShrink: 0,
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        opacity: disabled ? 0.5 : 1
+      }
+    },
+    /* @__PURE__ */ import_react36.default.createElement("img", { src, alt: "", style: { width: "100%", height: "100%", display: "block" } })
+  );
+}
+function SearchInput({
+  id,
+  className,
+  style,
+  state,
+  disabled = false,
+  placeholder = "Placeholder",
+  value,
+  defaultValue = "",
+  badgeLabel = "\u2318K",
+  showLeadIcon = true,
+  showTailIcon = true,
+  leadIcon,
+  tailIcon,
+  inputAriaLabel = "Search input",
+  onValueChange,
+  ...rest
+}) {
+  const [uncontrolledValue, setUncontrolledValue] = (0, import_react36.useState)(defaultValue);
+  const resolvedValue = value ?? uncontrolledValue;
+  const resolvedState = resolveState4(state, disabled, resolvedValue);
+  const componentDisabled = resolvedState === "disabled";
+  const textColor = resolvedState === "disabled" ? textBase20.staticDarkQuaternary : resolvedState === "filled" ? textBase20.staticDark : textBase20.staticDarkTertiary;
+  const badgeColor = resolvedState === "disabled" ? textBase20.staticDarkQuaternary : textBase20.staticDarkSecondary;
+  const handleInputChange = (event) => {
+    if (value === void 0) {
+      setUncontrolledValue(event.target.value);
+    }
+    onValueChange?.(event.target.value);
+  };
+  return /* @__PURE__ */ import_react36.default.createElement(
+    "div",
+    {
+      id,
+      className,
+      style: {
+        width: spacing.scale["390"],
+        display: "inline-flex",
+        alignItems: "center",
+        minHeight: spacing.scale["40"],
+        paddingInline: spacing.scale["12"],
+        paddingBlock: spacing.scale["0"],
+        backgroundColor: palette25.base.white,
+        ...style
+      },
+      ...rest
+    },
+    /* @__PURE__ */ import_react36.default.createElement(
+      "div",
+      {
+        style: {
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+          gap: spacing.scale["4"],
+          minWidth: spacing.scale["0"]
+        }
+      },
+      /* @__PURE__ */ import_react36.default.createElement(
+        "div",
+        {
+          style: {
+            display: "flex",
+            alignItems: "center",
+            gap: spacing.scale["4"],
+            flex: "1 0 0",
+            minWidth: spacing.scale["0"]
+          }
+        },
+        showLeadIcon ? /* @__PURE__ */ import_react36.default.createElement(import_react36.default.Fragment, null, leadIcon ?? /* @__PURE__ */ import_react36.default.createElement(IconImage3, { src: SEARCH_ICON_SRC, size: spacing.scale["16"], disabled: componentDisabled })) : null,
+        /* @__PURE__ */ import_react36.default.createElement(
+          "div",
+          {
+            style: {
+              display: "flex",
+              alignItems: "center",
+              flex: "1 0 0",
+              minWidth: spacing.scale["0"],
+              paddingInline: spacing.scale["4"],
+              paddingBlock: spacing.scale["0"]
+            }
+          },
+          /* @__PURE__ */ import_react36.default.createElement(
+            "input",
+            {
+              "aria-label": inputAriaLabel,
+              value: resolvedValue,
+              placeholder,
+              disabled: componentDisabled,
+              onChange: handleInputChange,
+              style: {
+                width: "100%",
+                border: "none",
+                outline: "none",
+                backgroundColor: "transparent",
+                color: textColor,
+                padding: spacing.scale["0"],
+                margin: spacing.scale["0"],
+                ...toTypographyStyle10(typography.scale.captionL.regular)
+              }
+            }
+          )
+        )
+      ),
+      /* @__PURE__ */ import_react36.default.createElement(
+        "div",
+        {
+          style: {
+            display: "inline-flex",
+            alignItems: "center",
+            paddingInline: spacing.scale["4"]
+          }
+        },
+        /* @__PURE__ */ import_react36.default.createElement(
+          "div",
+          {
+            style: {
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: palette25.gray["2"],
+              borderRadius: radius.scale.sm,
+              paddingInline: spacing.primitive["3"],
+              paddingBlock: spacing.scale["2"]
+            }
+          },
+          /* @__PURE__ */ import_react36.default.createElement(
+            "div",
+            {
+              style: {
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                paddingInline: spacing.primitive["3"],
+                paddingBlock: spacing.scale["0"]
+              }
+            },
+            /* @__PURE__ */ import_react36.default.createElement(
+              "span",
+              {
+                style: {
+                  color: badgeColor,
+                  ...toTypographyStyle10(typography.scale.captionM.medium),
+                  whiteSpace: "nowrap"
+                }
+              },
+              badgeLabel
+            )
+          )
+        )
+      ),
+      showTailIcon ? /* @__PURE__ */ import_react36.default.createElement(import_react36.default.Fragment, null, tailIcon ?? /* @__PURE__ */ import_react36.default.createElement(IconImage3, { src: INFO_ICON_SRC2, size: spacing.scale["20"], disabled: componentDisabled })) : null
+    )
+  );
+}
+
+// components/SearchInput/SearchInput.preview.tsx
+var STATES11 = ["auto", "default", "filled", "disabled"];
+var palette26 = colors.primitive.palette;
+var textBase21 = colors.semantic.theme.text.base;
+function toTitle19(value) {
+  return value.charAt(0).toUpperCase() + value.slice(1);
+}
+function SearchInputPreviewPage() {
+  const [state, setState] = (0, import_react37.useState)("auto");
+  const [value, setValue] = (0, import_react37.useState)("");
+  const [showLeadIcon, setShowLeadIcon] = (0, import_react37.useState)(true);
+  const [showTailIcon, setShowTailIcon] = (0, import_react37.useState)(true);
+  return /* @__PURE__ */ import_react37.default.createElement(
+    "main",
+    {
+      style: {
+        minHeight: spacing.scale["844"],
+        backgroundColor: palette26.base.white,
+        color: textBase21.staticDark,
+        padding: spacing.scale["24"],
+        fontFamily: typography.scale.bodyM.medium.fontFamily
+      }
+    },
+    /* @__PURE__ */ import_react37.default.createElement(
+      "section",
+      {
+        style: {
+          maxWidth: spacing.scale["1024"],
+          marginInline: "auto",
+          display: "grid",
+          gap: spacing.scale["24"]
+        }
+      },
+      /* @__PURE__ */ import_react37.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react37.default.createElement(
+        "h1",
+        {
+          style: {
+            margin: spacing.scale["0"],
+            fontFamily: typography.scale.h3.bold.fontFamily,
+            fontSize: typography.scale.h3.bold.fontSize,
+            fontWeight: typography.scale.h3.bold.fontWeight,
+            lineHeight: `${typography.scale.h3.bold.lineHeight}px`,
+            letterSpacing: `${typography.scale.h3.bold.letterSpacing}px`
+          }
+        },
+        "Search Input Preview"
+      ), /* @__PURE__ */ import_react37.default.createElement(
+        "p",
+        {
+          style: {
+            margin: spacing.scale["0"],
+            color: textBase21.staticDarkSecondary,
+            fontFamily: typography.scale.bodyS.regular.fontFamily,
+            fontSize: typography.scale.bodyS.regular.fontSize,
+            fontWeight: typography.scale.bodyS.regular.fontWeight,
+            lineHeight: `${typography.scale.bodyS.regular.lineHeight}px`,
+            letterSpacing: `${typography.scale.bodyS.regular.letterSpacing}px`
+          }
+        },
+        "Figma \uCD95(State=Default/Filled/Disabled)\uC640 \uC785\uB825 \uAC12 \uC0C1\uD0DC\uB97C \uAC80\uC99D"
+      )),
+      /* @__PURE__ */ import_react37.default.createElement(
+        "section",
+        {
+          style: {
+            borderStyle: "solid",
+            borderWidth: border.width["1"],
+            borderColor: palette26.gray["3"],
+            borderRadius: radius.scale.xl,
+            backgroundColor: palette26.gray["1"],
+            padding: spacing.scale["16"],
+            display: "grid",
+            gridTemplateColumns: `repeat(auto-fit, minmax(${spacing.scale["224"]}px, 1fr))`,
+            gap: spacing.scale["12"]
+          }
+        },
+        /* @__PURE__ */ import_react37.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react37.default.createElement("span", null, "State"), /* @__PURE__ */ import_react37.default.createElement(
+          "select",
+          {
+            value: state,
+            onChange: (event) => setState(event.target.value),
+            style: {
+              minHeight: spacing.scale["40"],
+              borderStyle: "solid",
+              borderWidth: border.width["1"],
+              borderColor: palette26.gray["3"],
+              borderRadius: radius.scale.md,
+              paddingInline: spacing.scale["12"],
+              backgroundColor: palette26.base.white,
+              color: textBase21.staticDark
+            }
+          },
+          STATES11.map((item) => /* @__PURE__ */ import_react37.default.createElement("option", { key: item, value: item }, toTitle19(item)))
+        )),
+        /* @__PURE__ */ import_react37.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react37.default.createElement("span", null, "Value"), /* @__PURE__ */ import_react37.default.createElement(
+          "input",
+          {
+            value,
+            onChange: (event) => setValue(event.target.value),
+            placeholder: "Placeholder",
+            style: {
+              minHeight: spacing.scale["40"],
+              borderStyle: "solid",
+              borderWidth: border.width["1"],
+              borderColor: palette26.gray["3"],
+              borderRadius: radius.scale.md,
+              paddingInline: spacing.scale["12"],
+              backgroundColor: palette26.base.white,
+              color: textBase21.staticDark
+            }
+          }
+        )),
+        /* @__PURE__ */ import_react37.default.createElement(
+          "label",
+          {
+            style: {
+              minHeight: spacing.scale["40"],
+              borderStyle: "solid",
+              borderWidth: border.width["1"],
+              borderColor: palette26.gray["3"],
+              borderRadius: radius.scale.md,
+              paddingInline: spacing.scale["12"],
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: spacing.scale["8"],
+              backgroundColor: palette26.base.white
+            }
+          },
+          /* @__PURE__ */ import_react37.default.createElement("span", null, "Lead Icon"),
+          /* @__PURE__ */ import_react37.default.createElement("input", { type: "checkbox", checked: showLeadIcon, onChange: (event) => setShowLeadIcon(event.target.checked) })
+        ),
+        /* @__PURE__ */ import_react37.default.createElement(
+          "label",
+          {
+            style: {
+              minHeight: spacing.scale["40"],
+              borderStyle: "solid",
+              borderWidth: border.width["1"],
+              borderColor: palette26.gray["3"],
+              borderRadius: radius.scale.md,
+              paddingInline: spacing.scale["12"],
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: spacing.scale["8"],
+              backgroundColor: palette26.base.white
+            }
+          },
+          /* @__PURE__ */ import_react37.default.createElement("span", null, "Tail Icon"),
+          /* @__PURE__ */ import_react37.default.createElement("input", { type: "checkbox", checked: showTailIcon, onChange: (event) => setShowTailIcon(event.target.checked) })
+        )
+      ),
+      /* @__PURE__ */ import_react37.default.createElement(
+        "section",
+        {
+          style: {
+            borderStyle: "solid",
+            borderWidth: border.width["1"],
+            borderColor: palette26.gray["3"],
+            borderRadius: radius.scale.xl,
+            backgroundColor: palette26.gray["1"],
+            padding: spacing.scale["24"],
+            display: "grid",
+            gap: spacing.scale["16"]
+          }
+        },
+        /* @__PURE__ */ import_react37.default.createElement(
+          "h2",
+          {
+            style: {
+              margin: spacing.scale["0"],
+              fontFamily: typography.scale.h5.semiBold.fontFamily,
+              fontSize: typography.scale.h5.semiBold.fontSize,
+              fontWeight: typography.scale.h5.semiBold.fontWeight,
+              lineHeight: `${typography.scale.h5.semiBold.lineHeight}px`,
+              letterSpacing: `${typography.scale.h5.semiBold.letterSpacing}px`
+            }
+          },
+          "Interactive"
+        ),
+        /* @__PURE__ */ import_react37.default.createElement(
           SearchInput,
           {
             state: state === "auto" ? void 0 : state,
@@ -40475,7 +41363,7 @@ function SearchInputPreviewPage() {
             showTailIcon
           }
         ),
-        /* @__PURE__ */ import_react35.default.createElement("div", { style: { display: "grid", gap: spacing.scale["8"] } }, ["default", "filled", "disabled"].map((item) => /* @__PURE__ */ import_react35.default.createElement(
+        /* @__PURE__ */ import_react37.default.createElement("div", { style: { display: "grid", gap: spacing.scale["8"] } }, ["default", "filled", "disabled"].map((item) => /* @__PURE__ */ import_react37.default.createElement(
           SearchInput,
           {
             key: item,
@@ -40491,12 +41379,12 @@ function SearchInputPreviewPage() {
 }
 
 // components/SelectInput/SelectInput.preview.tsx
-var import_react37 = __toESM(require_react());
+var import_react39 = __toESM(require_react());
 
 // components/SelectInput/SelectInput.tsx
-var import_react36 = __toESM(require_react());
-var palette26 = colors.primitive.palette;
-var textBase21 = colors.semantic.theme.text.base;
+var import_react38 = __toESM(require_react());
+var palette27 = colors.primitive.palette;
+var textBase22 = colors.semantic.theme.text.base;
 var textStatus3 = colors.semantic.theme.text.status;
 var DEFAULT_ITEMS2 = [
   { id: "option-1", label: "Anna Green", supportText: "@anna_green", avatarLabel: "AG" },
@@ -40548,24 +41436,24 @@ function resolveVisualState9(forcedState, disabled, hovered, focused, hasValue) 
 }
 function getFieldBorderColor2(target, state) {
   if (state === "disabled") {
-    return palette26.gray["2"];
+    return palette27.gray["2"];
   }
   if (target === "destructive") {
     if (state === "hover") {
-      return palette26.red["5"];
+      return palette27.red["5"];
     }
     if (state === "focus") {
-      return palette26.red["6"];
+      return palette27.red["6"];
     }
-    return palette26.red["4"];
+    return palette27.red["4"];
   }
   if (state === "hover") {
-    return palette26.gray["4"];
+    return palette27.gray["4"];
   }
   if (state === "focus") {
-    return palette26.purple["6"];
+    return palette27.purple["6"];
   }
-  return palette26.gray["3"];
+  return palette27.gray["3"];
 }
 function getFieldFocusShadow2(target, state) {
   if (state !== "focus") {
@@ -40576,49 +41464,49 @@ function getFieldFocusShadow2(target, state) {
 function getAvatarBackground(optionId) {
   switch (optionId) {
     case "option-1":
-      return palette26.orange["3"];
+      return palette27.orange["3"];
     case "option-2":
-      return palette26.purple["3"];
+      return palette27.purple["3"];
     case "option-3":
-      return palette26.blue["3"];
+      return palette27.blue["3"];
     case "option-4":
-      return palette26.orange["4"];
+      return palette27.orange["4"];
     case "option-5":
-      return palette26.red["3"];
+      return palette27.red["3"];
     case "option-6":
-      return palette26.red["4"];
+      return palette27.red["4"];
     case "option-7":
-      return palette26.purple["4"];
+      return palette27.purple["4"];
     default:
-      return palette26.gray["3"];
+      return palette27.gray["3"];
   }
 }
 function getChipBackground(optionId) {
   switch (optionId) {
     case "option-2":
-      return palette26.blue["2"];
+      return palette27.blue["2"];
     case "option-3":
-      return palette26.red["2"];
+      return palette27.red["2"];
     case "option-6":
-      return palette26.purple["2"];
+      return palette27.purple["2"];
     default:
-      return palette26.gray["2"];
+      return palette27.gray["2"];
   }
 }
 function getChipTextColor(optionId) {
   switch (optionId) {
     case "option-2":
-      return palette26.blue["11"];
+      return palette27.blue["11"];
     case "option-3":
-      return palette26.red["11"];
+      return palette27.red["11"];
     case "option-6":
-      return palette26.purple["11"];
+      return palette27.purple["11"];
     default:
-      return textBase21.staticDarkSecondary;
+      return textBase22.staticDarkSecondary;
   }
 }
 function UserIcon({ color }) {
-  return /* @__PURE__ */ import_react36.default.createElement(
+  return /* @__PURE__ */ import_react38.default.createElement(
     "span",
     {
       "aria-hidden": "true",
@@ -40632,7 +41520,7 @@ function UserIcon({ color }) {
         flexShrink: 0
       }
     },
-    /* @__PURE__ */ import_react36.default.createElement("svg", { width: "20", height: "20", viewBox: "0 0 20 20", fill: "none" }, /* @__PURE__ */ import_react36.default.createElement("circle", { cx: "10", cy: "6.5", r: "2.75", stroke: "currentColor", strokeWidth: border.width["1"] }), /* @__PURE__ */ import_react36.default.createElement(
+    /* @__PURE__ */ import_react38.default.createElement("svg", { width: "20", height: "20", viewBox: "0 0 20 20", fill: "none" }, /* @__PURE__ */ import_react38.default.createElement("circle", { cx: "10", cy: "6.5", r: "2.75", stroke: "currentColor", strokeWidth: border.width["1"] }), /* @__PURE__ */ import_react38.default.createElement(
       "path",
       {
         d: "M3.75 15.875C4.347 13.055 6.86 11 10 11C13.14 11 15.653 13.055 16.25 15.875",
@@ -40645,7 +41533,7 @@ function UserIcon({ color }) {
 }
 function InfoIcon({ color, size = "md" }) {
   const iconSize = size === "sm" ? spacing.scale["16"] : spacing.scale["20"];
-  return /* @__PURE__ */ import_react36.default.createElement(
+  return /* @__PURE__ */ import_react38.default.createElement(
     "span",
     {
       "aria-hidden": "true",
@@ -40659,11 +41547,11 @@ function InfoIcon({ color, size = "md" }) {
         flexShrink: 0
       }
     },
-    /* @__PURE__ */ import_react36.default.createElement("svg", { width: iconSize, height: iconSize, viewBox: "0 0 20 20", fill: "none" }, /* @__PURE__ */ import_react36.default.createElement("circle", { cx: "10", cy: "10", r: "6.75", stroke: "currentColor", strokeWidth: border.width["1"] }), /* @__PURE__ */ import_react36.default.createElement("path", { d: "M10 9.25V13", stroke: "currentColor", strokeWidth: border.width["1"], strokeLinecap: "round" }), /* @__PURE__ */ import_react36.default.createElement("circle", { cx: "10", cy: "6.75", r: "0.875", fill: "currentColor" }))
+    /* @__PURE__ */ import_react38.default.createElement("svg", { width: iconSize, height: iconSize, viewBox: "0 0 20 20", fill: "none" }, /* @__PURE__ */ import_react38.default.createElement("circle", { cx: "10", cy: "10", r: "6.75", stroke: "currentColor", strokeWidth: border.width["1"] }), /* @__PURE__ */ import_react38.default.createElement("path", { d: "M10 9.25V13", stroke: "currentColor", strokeWidth: border.width["1"], strokeLinecap: "round" }), /* @__PURE__ */ import_react38.default.createElement("circle", { cx: "10", cy: "6.75", r: "0.875", fill: "currentColor" }))
   );
 }
 function CheckIcon({ color }) {
-  return /* @__PURE__ */ import_react36.default.createElement(
+  return /* @__PURE__ */ import_react38.default.createElement(
     "span",
     {
       "aria-hidden": "true",
@@ -40677,7 +41565,7 @@ function CheckIcon({ color }) {
         flexShrink: 0
       }
     },
-    /* @__PURE__ */ import_react36.default.createElement("svg", { width: "20", height: "20", viewBox: "0 0 20 20", fill: "none" }, /* @__PURE__ */ import_react36.default.createElement(
+    /* @__PURE__ */ import_react38.default.createElement("svg", { width: "20", height: "20", viewBox: "0 0 20 20", fill: "none" }, /* @__PURE__ */ import_react38.default.createElement(
       "path",
       {
         d: "M5.5 10.5L8.5 13.5L14.5 7.5",
@@ -40695,7 +41583,7 @@ function Avatar({
   src,
   dimmed = false
 }) {
-  return /* @__PURE__ */ import_react36.default.createElement(
+  return /* @__PURE__ */ import_react38.default.createElement(
     "span",
     {
       "aria-hidden": "true",
@@ -40704,7 +41592,7 @@ function Avatar({
         height: spacing.scale["20"],
         borderRadius: radius.scale.full,
         backgroundColor: getAvatarBackground(optionId),
-        color: textBase21.staticDark,
+        color: textBase22.staticDark,
         display: "inline-flex",
         alignItems: "center",
         justifyContent: "center",
@@ -40713,7 +41601,7 @@ function Avatar({
         overflow: "hidden"
       }
     },
-    src ? /* @__PURE__ */ import_react36.default.createElement(
+    src ? /* @__PURE__ */ import_react38.default.createElement(
       "img",
       {
         alt: "",
@@ -40725,11 +41613,11 @@ function Avatar({
           objectFit: "cover"
         }
       }
-    ) : /* @__PURE__ */ import_react36.default.createElement("span", { style: toTypographyStyle11(typography.scale.captionS.medium) }, label.slice(0, 2))
+    ) : /* @__PURE__ */ import_react38.default.createElement("span", { style: toTypographyStyle11(typography.scale.captionS.medium) }, label.slice(0, 2))
   );
 }
 function ShortcutBadge({ label, disabled }) {
-  return /* @__PURE__ */ import_react36.default.createElement(
+  return /* @__PURE__ */ import_react38.default.createElement(
     "div",
     {
       style: {
@@ -40739,20 +41627,20 @@ function ShortcutBadge({ label, disabled }) {
         paddingBlock: spacing.scale["0"]
       }
     },
-    /* @__PURE__ */ import_react36.default.createElement(
+    /* @__PURE__ */ import_react38.default.createElement(
       "div",
       {
         style: {
           display: "inline-flex",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: palette26.gray["2"],
+          backgroundColor: palette27.gray["2"],
           borderRadius: radius.scale.sm,
           paddingInline: spacing.scale["2"],
           paddingBlock: spacing.scale["0"]
         }
       },
-      /* @__PURE__ */ import_react36.default.createElement(
+      /* @__PURE__ */ import_react38.default.createElement(
         "div",
         {
           style: {
@@ -40763,11 +41651,11 @@ function ShortcutBadge({ label, disabled }) {
             paddingBlock: spacing.scale["0"]
           }
         },
-        /* @__PURE__ */ import_react36.default.createElement(
+        /* @__PURE__ */ import_react38.default.createElement(
           "span",
           {
             style: {
-              color: disabled ? textBase21.staticDarkQuaternary : textBase21.staticDarkSecondary,
+              color: disabled ? textBase22.staticDarkQuaternary : textBase22.staticDarkSecondary,
               ...toTypographyStyle11(typography.scale.captionL.medium),
               whiteSpace: "nowrap"
             }
@@ -40814,15 +41702,15 @@ function SelectInput({
   onMouseLeave,
   ...rest
 }) {
-  const [hovered, setHovered] = (0, import_react36.useState)(false);
-  const [focused, setFocused] = (0, import_react36.useState)(false);
-  const [uncontrolledOpen, setUncontrolledOpen] = (0, import_react36.useState)(defaultOpen);
-  const [uncontrolledSelectedId, setUncontrolledSelectedId] = (0, import_react36.useState)(defaultSelectedId);
-  const [uncontrolledSelectedIds, setUncontrolledSelectedIds] = (0, import_react36.useState)(defaultSelectedIds);
-  const [hoveredOptionId, setHoveredOptionId] = (0, import_react36.useState)(null);
-  const menuId = (0, import_react36.useId)();
-  const rootRef = (0, import_react36.useRef)(null);
-  const normalizedItems = (0, import_react36.useMemo)(() => {
+  const [hovered, setHovered] = (0, import_react38.useState)(false);
+  const [focused, setFocused] = (0, import_react38.useState)(false);
+  const [uncontrolledOpen, setUncontrolledOpen] = (0, import_react38.useState)(defaultOpen);
+  const [uncontrolledSelectedId, setUncontrolledSelectedId] = (0, import_react38.useState)(defaultSelectedId);
+  const [uncontrolledSelectedIds, setUncontrolledSelectedIds] = (0, import_react38.useState)(defaultSelectedIds);
+  const [hoveredOptionId, setHoveredOptionId] = (0, import_react38.useState)(null);
+  const menuId = (0, import_react38.useId)();
+  const rootRef = (0, import_react38.useRef)(null);
+  const normalizedItems = (0, import_react38.useMemo)(() => {
     if (!items || items.length === 0) {
       return DEFAULT_ITEMS2;
     }
@@ -40841,10 +41729,10 @@ function SelectInput({
   const interactive = state === void 0;
   const fieldBorderColor = getFieldBorderColor2(target, resolvedState);
   const fieldFocusShadow = getFieldFocusShadow2(target, resolvedState);
-  const fieldContentColor = componentDisabled ? textBase21.staticDarkQuaternary : target === "destructive" && hasValue && type !== "multi-select" ? textStatus3.destructive : textBase21.staticDark;
-  const placeholderColor = componentDisabled ? textBase21.staticDarkQuaternary : textBase21.staticDarkTertiary;
-  const supportTextColor = componentDisabled ? textBase21.staticDarkQuaternary : textBase21.staticDarkTertiary;
-  const helperColor = componentDisabled ? textBase21.staticDarkQuaternary : target === "destructive" ? textStatus3.destructive : textBase21.staticDarkTertiary;
+  const fieldContentColor = componentDisabled ? textBase22.staticDarkQuaternary : target === "destructive" && hasValue && type !== "multi-select" ? textStatus3.destructive : textBase22.staticDark;
+  const placeholderColor = componentDisabled ? textBase22.staticDarkQuaternary : textBase22.staticDarkTertiary;
+  const supportTextColor = componentDisabled ? textBase22.staticDarkQuaternary : textBase22.staticDarkTertiary;
+  const helperColor = componentDisabled ? textBase22.staticDarkQuaternary : target === "destructive" ? textStatus3.destructive : textBase22.staticDarkTertiary;
   const controlShadow = componentDisabled ? "none" : shadows.elevation.xs.css;
   const fieldTypography = toTypographyStyle11(typography.scale.captionL.regular);
   const mediumTypography = toTypographyStyle11(typography.scale.captionL.medium);
@@ -40902,7 +41790,7 @@ function SelectInput({
   const renderTextContent = () => {
     if (type === "multi-select") {
       if (!hasValue) {
-        return /* @__PURE__ */ import_react36.default.createElement(
+        return /* @__PURE__ */ import_react38.default.createElement(
           "div",
           {
             style: {
@@ -40914,7 +41802,7 @@ function SelectInput({
               paddingBlock: spacing.scale["0"]
             }
           },
-          /* @__PURE__ */ import_react36.default.createElement(
+          /* @__PURE__ */ import_react38.default.createElement(
             "span",
             {
               style: {
@@ -40927,7 +41815,7 @@ function SelectInput({
           )
         );
       }
-      return /* @__PURE__ */ import_react36.default.createElement(
+      return /* @__PURE__ */ import_react38.default.createElement(
         "div",
         {
           style: {
@@ -40940,7 +41828,7 @@ function SelectInput({
             paddingBlock: spacing.scale["0"]
           }
         },
-        displayedChips.map((item) => /* @__PURE__ */ import_react36.default.createElement(
+        displayedChips.map((item) => /* @__PURE__ */ import_react38.default.createElement(
           "div",
           {
             key: item.id,
@@ -40951,7 +41839,7 @@ function SelectInput({
               gap: spacing.scale["0"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette26.gray["2a"],
+              borderColor: palette27.gray["2a"],
               borderRadius: radius.scale.sm,
               backgroundColor: getChipBackground(item.id),
               paddingInline: spacing.primitive["3"],
@@ -40959,7 +41847,7 @@ function SelectInput({
               flexShrink: 0
             }
           },
-          /* @__PURE__ */ import_react36.default.createElement(
+          /* @__PURE__ */ import_react38.default.createElement(
             "span",
             {
               style: {
@@ -40971,7 +41859,7 @@ function SelectInput({
             item.label.split(" ")[0]
           )
         )),
-        remainingChipCount > 0 ? /* @__PURE__ */ import_react36.default.createElement(
+        remainingChipCount > 0 ? /* @__PURE__ */ import_react38.default.createElement(
           "span",
           {
             style: {
@@ -40987,7 +41875,7 @@ function SelectInput({
       );
     }
     if (!selectedItem) {
-      return /* @__PURE__ */ import_react36.default.createElement(
+      return /* @__PURE__ */ import_react38.default.createElement(
         "div",
         {
           style: {
@@ -40999,7 +41887,7 @@ function SelectInput({
             paddingBlock: spacing.scale["0"]
           }
         },
-        /* @__PURE__ */ import_react36.default.createElement(
+        /* @__PURE__ */ import_react38.default.createElement(
           "span",
           {
             style: {
@@ -41012,7 +41900,7 @@ function SelectInput({
         )
       );
     }
-    return /* @__PURE__ */ import_react36.default.createElement(
+    return /* @__PURE__ */ import_react38.default.createElement(
       "div",
       {
         style: {
@@ -41025,7 +41913,7 @@ function SelectInput({
           paddingBlock: spacing.scale["0"]
         }
       },
-      /* @__PURE__ */ import_react36.default.createElement(
+      /* @__PURE__ */ import_react38.default.createElement(
         "span",
         {
           style: {
@@ -41036,7 +41924,7 @@ function SelectInput({
         },
         selectedItem.label
       ),
-      selectedItem.supportText ? /* @__PURE__ */ import_react36.default.createElement(
+      selectedItem.supportText ? /* @__PURE__ */ import_react38.default.createElement(
         "span",
         {
           style: {
@@ -41049,8 +41937,8 @@ function SelectInput({
       ) : null
     );
   };
-  const triggerIconColor = componentDisabled ? textBase21.staticDarkQuaternary : hasValue ? fieldContentColor : placeholderColor;
-  return /* @__PURE__ */ import_react36.default.createElement(
+  const triggerIconColor = componentDisabled ? textBase22.staticDarkQuaternary : hasValue ? fieldContentColor : placeholderColor;
+  return /* @__PURE__ */ import_react38.default.createElement(
     "div",
     {
       id,
@@ -41079,7 +41967,7 @@ function SelectInput({
       },
       ...rest
     },
-    showLabel ? /* @__PURE__ */ import_react36.default.createElement(
+    showLabel ? /* @__PURE__ */ import_react38.default.createElement(
       "div",
       {
         style: {
@@ -41090,7 +41978,7 @@ function SelectInput({
           padding: spacing.scale["0"]
         }
       },
-      /* @__PURE__ */ import_react36.default.createElement(
+      /* @__PURE__ */ import_react38.default.createElement(
         "div",
         {
           style: {
@@ -41102,11 +41990,11 @@ function SelectInput({
             whiteSpace: "nowrap"
           }
         },
-        /* @__PURE__ */ import_react36.default.createElement("span", { style: { color: textBase21.staticDark, ...mediumTypography } }, label),
-        /* @__PURE__ */ import_react36.default.createElement("span", { style: { color: textBase21.staticDarkTertiary, ...mediumTypography } }, optionalLabel)
+        /* @__PURE__ */ import_react38.default.createElement("span", { style: { color: textBase22.staticDark, ...mediumTypography } }, label),
+        /* @__PURE__ */ import_react38.default.createElement("span", { style: { color: textBase22.staticDarkTertiary, ...mediumTypography } }, optionalLabel)
       )
     ) : null,
-    /* @__PURE__ */ import_react36.default.createElement(
+    /* @__PURE__ */ import_react38.default.createElement(
       "div",
       {
         style: {
@@ -41117,7 +42005,7 @@ function SelectInput({
           boxShadow: controlShadow
         }
       },
-      isOpen ? /* @__PURE__ */ import_react36.default.createElement(
+      isOpen ? /* @__PURE__ */ import_react38.default.createElement(
         "div",
         {
           id: menuId,
@@ -41128,10 +42016,10 @@ function SelectInput({
             top: sizeStyle.dropdownTop,
             left: spacing.scale["0"],
             right: spacing.scale["0"],
-            backgroundColor: palette26.base.white,
+            backgroundColor: palette27.base.white,
             borderStyle: "solid",
             borderWidth: border.width["1"],
-            borderColor: palette26.gray["3"],
+            borderColor: palette27.gray["3"],
             borderRadius: sizeStyle.fieldRadius,
             boxShadow: shadows.elevation.lg.css,
             paddingInline: spacing.scale["0"],
@@ -41145,8 +42033,8 @@ function SelectInput({
         },
         normalizedItems.map((item) => {
           const selected = type === "multi-select" ? selectedIds.includes(item.id) : item.id === selectedId;
-          const activeBackground = selected || hoveredOptionId === item.id ? palette26.gray["1a"] : palette26.base.transparent;
-          return /* @__PURE__ */ import_react36.default.createElement(
+          const activeBackground = selected || hoveredOptionId === item.id ? palette27.gray["1a"] : palette27.base.transparent;
+          return /* @__PURE__ */ import_react38.default.createElement(
             "div",
             {
               key: item.id,
@@ -41159,7 +42047,7 @@ function SelectInput({
                 paddingBlock: spacing.scale["2"]
               }
             },
-            /* @__PURE__ */ import_react36.default.createElement(
+            /* @__PURE__ */ import_react38.default.createElement(
               "button",
               {
                 type: "button",
@@ -41179,15 +42067,15 @@ function SelectInput({
                   borderWidth: border.width["0"],
                   borderRadius: radius.scale.sm,
                   backgroundColor: activeBackground,
-                  color: textBase21.staticDark,
+                  color: textBase22.staticDark,
                   textAlign: "left",
                   cursor: componentDisabled ? "not-allowed" : "pointer"
                 },
                 disabled: componentDisabled
               },
-              type === "multi-select" ? /* @__PURE__ */ import_react36.default.createElement("span", { style: { display: "inline-flex", padding: spacing.scale["2"], flexShrink: 0 } }, /* @__PURE__ */ import_react36.default.createElement(Checkbox, { size: "sm", checked: selected, ariaLabel: `${item.label} checkbox` })) : null,
-              /* @__PURE__ */ import_react36.default.createElement(Avatar, { optionId: item.id, label: item.avatarLabel ?? item.label, src: item.avatarSrc }),
-              /* @__PURE__ */ import_react36.default.createElement(
+              type === "multi-select" ? /* @__PURE__ */ import_react38.default.createElement("span", { style: { display: "inline-flex", padding: spacing.scale["2"], flexShrink: 0 } }, /* @__PURE__ */ import_react38.default.createElement(Checkbox, { size: "sm", checked: selected, ariaLabel: `${item.label} checkbox` })) : null,
+              /* @__PURE__ */ import_react38.default.createElement(Avatar, { optionId: item.id, label: item.avatarLabel ?? item.label, src: item.avatarSrc }),
+              /* @__PURE__ */ import_react38.default.createElement(
                 "span",
                 {
                   style: {
@@ -41200,9 +42088,9 @@ function SelectInput({
                     paddingBlock: spacing.scale["0"]
                   }
                 },
-                /* @__PURE__ */ import_react36.default.createElement("span", { style: { ...fieldTypography, color: textBase21.staticDark, whiteSpace: "nowrap" } }, item.label),
-                item.supportText ? /* @__PURE__ */ import_react36.default.createElement("span", { style: { ...captionMTypography, color: textBase21.staticDarkTertiary, whiteSpace: "nowrap" } }, item.supportText) : null,
-                type === "multi-select" && item.badgeLabel ? /* @__PURE__ */ import_react36.default.createElement(
+                /* @__PURE__ */ import_react38.default.createElement("span", { style: { ...fieldTypography, color: textBase22.staticDark, whiteSpace: "nowrap" } }, item.label),
+                item.supportText ? /* @__PURE__ */ import_react38.default.createElement("span", { style: { ...captionMTypography, color: textBase22.staticDarkTertiary, whiteSpace: "nowrap" } }, item.supportText) : null,
+                type === "multi-select" && item.badgeLabel ? /* @__PURE__ */ import_react38.default.createElement(
                   "span",
                   {
                     style: {
@@ -41211,21 +42099,21 @@ function SelectInput({
                       justifyContent: "center",
                       borderStyle: "solid",
                       borderWidth: border.width["1"],
-                      borderColor: palette26.gray["2a"],
+                      borderColor: palette27.gray["2a"],
                       borderRadius: radius.scale.xs,
-                      backgroundColor: palette26.red["2"],
+                      backgroundColor: palette27.red["2"],
                       paddingInline: spacing.scale["2"],
                       paddingBlock: spacing.scale["0"]
                     }
                   },
-                  /* @__PURE__ */ import_react36.default.createElement("span", { style: { ...captionMMediumTypography, color: palette26.red["11"], whiteSpace: "nowrap" } }, item.badgeLabel)
+                  /* @__PURE__ */ import_react38.default.createElement("span", { style: { ...captionMMediumTypography, color: palette27.red["11"], whiteSpace: "nowrap" } }, item.badgeLabel)
                 ) : null
               ),
-              type !== "multi-select" && selected ? /* @__PURE__ */ import_react36.default.createElement(CheckIcon, { color: textBase21.staticDarkSecondary }) : null
+              type !== "multi-select" && selected ? /* @__PURE__ */ import_react38.default.createElement(CheckIcon, { color: textBase22.staticDarkSecondary }) : null
             )
           );
         }),
-        normalizedItems.length > 5 ? /* @__PURE__ */ import_react36.default.createElement(
+        normalizedItems.length > 5 ? /* @__PURE__ */ import_react38.default.createElement(
           "div",
           {
             "aria-hidden": "true",
@@ -41239,14 +42127,14 @@ function SelectInput({
               pointerEvents: "none"
             }
           },
-          /* @__PURE__ */ import_react36.default.createElement(
+          /* @__PURE__ */ import_react38.default.createElement(
             "div",
             {
               style: {
                 width: spacing.scale["4"],
                 height: spacing.scale["112"],
                 borderRadius: radius.scale.full,
-                backgroundColor: palette26.gray["2"],
+                backgroundColor: palette27.gray["2"],
                 marginTop: spacing.scale["6"],
                 marginInline: "auto"
               }
@@ -41254,7 +42142,7 @@ function SelectInput({
           )
         ) : null
       ) : null,
-      /* @__PURE__ */ import_react36.default.createElement(
+      /* @__PURE__ */ import_react38.default.createElement(
         "button",
         {
           type: "button",
@@ -41282,13 +42170,13 @@ function SelectInput({
             borderWidth: border.width["1"],
             borderColor: fieldBorderColor,
             borderRadius: sizeStyle.fieldRadius,
-            backgroundColor: palette26.base.white,
+            backgroundColor: palette27.base.white,
             boxShadow: fieldFocusShadow,
             textAlign: "left",
             cursor: componentDisabled ? "not-allowed" : "pointer"
           }
         },
-        /* @__PURE__ */ import_react36.default.createElement(
+        /* @__PURE__ */ import_react38.default.createElement(
           "div",
           {
             style: {
@@ -41299,7 +42187,7 @@ function SelectInput({
               minWidth: spacing.scale["0"]
             }
           },
-          type === "avatar" ? /* @__PURE__ */ import_react36.default.createElement(
+          type === "avatar" ? /* @__PURE__ */ import_react38.default.createElement(
             Avatar,
             {
               optionId: selectedItem?.id ?? "option-1",
@@ -41307,14 +42195,14 @@ function SelectInput({
               src: selectedItem?.avatarSrc,
               dimmed: componentDisabled
             }
-          ) : showLeadIcon ? leadIcon ? /* @__PURE__ */ import_react36.default.createElement(import_react36.default.Fragment, null, leadIcon) : /* @__PURE__ */ import_react36.default.createElement(UserIcon, { color: triggerIconColor }) : null,
+          ) : showLeadIcon ? leadIcon ? /* @__PURE__ */ import_react38.default.createElement(import_react38.default.Fragment, null, leadIcon) : /* @__PURE__ */ import_react38.default.createElement(UserIcon, { color: triggerIconColor }) : null,
           renderTextContent(),
-          showShortcutBadge ? /* @__PURE__ */ import_react36.default.createElement(ShortcutBadge, { label: shortcutLabel, disabled: componentDisabled }) : null,
-          showTailIcon ? tailIcon ? /* @__PURE__ */ import_react36.default.createElement(import_react36.default.Fragment, null, tailIcon) : /* @__PURE__ */ import_react36.default.createElement(InfoIcon, { color: triggerIconColor }) : null
+          showShortcutBadge ? /* @__PURE__ */ import_react38.default.createElement(ShortcutBadge, { label: shortcutLabel, disabled: componentDisabled }) : null,
+          showTailIcon ? tailIcon ? /* @__PURE__ */ import_react38.default.createElement(import_react38.default.Fragment, null, tailIcon) : /* @__PURE__ */ import_react38.default.createElement(InfoIcon, { color: triggerIconColor }) : null
         )
       )
     ),
-    showHelper ? /* @__PURE__ */ import_react36.default.createElement(
+    showHelper ? /* @__PURE__ */ import_react38.default.createElement(
       "div",
       {
         style: {
@@ -41326,8 +42214,8 @@ function SelectInput({
           paddingBlock: spacing.scale["2"]
         }
       },
-      /* @__PURE__ */ import_react36.default.createElement(InfoIcon, { color: helperColor, size: "sm" }),
-      /* @__PURE__ */ import_react36.default.createElement("span", { style: { color: helperColor, ...fieldTypography, whiteSpace: "nowrap" } }, helperText)
+      /* @__PURE__ */ import_react38.default.createElement(InfoIcon, { color: helperColor, size: "sm" }),
+      /* @__PURE__ */ import_react38.default.createElement("span", { style: { color: helperColor, ...fieldTypography, whiteSpace: "nowrap" } }, helperText)
     ) : null
   );
 }
@@ -41343,24 +42231,24 @@ var MATRIX_STATES_BY_TARGET = {
 };
 var PRESET_SELECTED_ID = "option-2";
 var PRESET_MULTI_SELECTED_IDS = ["option-2", "option-3", "option-6", "option-1", "option-7"];
-var palette27 = colors.primitive.palette;
-var textBase22 = colors.semantic.theme.text.base;
+var palette28 = colors.primitive.palette;
+var textBase23 = colors.semantic.theme.text.base;
 function toTitle20(value) {
   return value.split("-").map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join(" ");
 }
 function SelectInputPreviewPage() {
-  const [type, setType] = (0, import_react37.useState)("default");
-  const [size, setSize] = (0, import_react37.useState)("md");
-  const [target, setTarget] = (0, import_react37.useState)("default");
-  const [state, setState] = (0, import_react37.useState)("auto");
-  const [showLabel, setShowLabel] = (0, import_react37.useState)(true);
-  const [showHelper, setShowHelper] = (0, import_react37.useState)(true);
-  const [showShortcutBadge, setShowShortcutBadge] = (0, import_react37.useState)(true);
-  const [showLeadIcon, setShowLeadIcon] = (0, import_react37.useState)(true);
-  const [showTailIcon, setShowTailIcon] = (0, import_react37.useState)(true);
-  const [selectedId, setSelectedId] = (0, import_react37.useState)();
-  const [selectedIds, setSelectedIds] = (0, import_react37.useState)([]);
-  const effectiveSingleSelectedId = (0, import_react37.useMemo)(() => {
+  const [type, setType] = (0, import_react39.useState)("default");
+  const [size, setSize] = (0, import_react39.useState)("md");
+  const [target, setTarget] = (0, import_react39.useState)("default");
+  const [state, setState] = (0, import_react39.useState)("auto");
+  const [showLabel, setShowLabel] = (0, import_react39.useState)(true);
+  const [showHelper, setShowHelper] = (0, import_react39.useState)(true);
+  const [showShortcutBadge, setShowShortcutBadge] = (0, import_react39.useState)(true);
+  const [showLeadIcon, setShowLeadIcon] = (0, import_react39.useState)(true);
+  const [showTailIcon, setShowTailIcon] = (0, import_react39.useState)(true);
+  const [selectedId, setSelectedId] = (0, import_react39.useState)();
+  const [selectedIds, setSelectedIds] = (0, import_react39.useState)([]);
+  const effectiveSingleSelectedId = (0, import_react39.useMemo)(() => {
     if (type === "multi-select") {
       return void 0;
     }
@@ -41372,7 +42260,7 @@ function SelectInputPreviewPage() {
     }
     return void 0;
   }, [selectedId, state, type]);
-  const effectiveMultiSelectedIds = (0, import_react37.useMemo)(() => {
+  const effectiveMultiSelectedIds = (0, import_react39.useMemo)(() => {
     if (type !== "multi-select") {
       return [];
     }
@@ -41384,18 +42272,18 @@ function SelectInputPreviewPage() {
     }
     return [];
   }, [selectedIds, state, type]);
-  return /* @__PURE__ */ import_react37.default.createElement(
+  return /* @__PURE__ */ import_react39.default.createElement(
     "main",
     {
       style: {
         minHeight: spacing.scale["844"],
-        backgroundColor: palette27.base.white,
-        color: textBase22.staticDark,
+        backgroundColor: palette28.base.white,
+        color: textBase23.staticDark,
         padding: spacing.scale["24"],
         fontFamily: typography.scale.bodyM.medium.fontFamily
       }
     },
-    /* @__PURE__ */ import_react37.default.createElement(
+    /* @__PURE__ */ import_react39.default.createElement(
       "section",
       {
         style: {
@@ -41405,7 +42293,7 @@ function SelectInputPreviewPage() {
           gap: spacing.scale["24"]
         }
       },
-      /* @__PURE__ */ import_react37.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react37.default.createElement(
+      /* @__PURE__ */ import_react39.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react39.default.createElement(
         "h1",
         {
           style: {
@@ -41418,12 +42306,12 @@ function SelectInputPreviewPage() {
           }
         },
         "Select Input Preview"
-      ), /* @__PURE__ */ import_react37.default.createElement(
+      ), /* @__PURE__ */ import_react39.default.createElement(
         "p",
         {
           style: {
             margin: spacing.scale["0"],
-            color: textBase22.staticDarkSecondary,
+            color: textBase23.staticDarkSecondary,
             fontFamily: typography.scale.bodyS.regular.fontFamily,
             fontSize: typography.scale.bodyS.regular.fontSize,
             fontWeight: typography.scale.bodyS.regular.fontWeight,
@@ -41433,22 +42321,22 @@ function SelectInputPreviewPage() {
         },
         "Figma Variant \uCD95(Size, Target, Type, State)\uACFC interaction \uC0C1\uD0DC\uB97C \uAC80\uC99D\uD569\uB2C8\uB2E4."
       )),
-      /* @__PURE__ */ import_react37.default.createElement(
+      /* @__PURE__ */ import_react39.default.createElement(
         "section",
         {
           style: {
             borderStyle: "solid",
             borderWidth: border.width["1"],
-            borderColor: palette27.gray["3"],
+            borderColor: palette28.gray["3"],
             borderRadius: radius.scale.xl,
-            backgroundColor: palette27.gray["1"],
+            backgroundColor: palette28.gray["1"],
             padding: spacing.scale["16"],
             display: "grid",
             gridTemplateColumns: `repeat(auto-fit, minmax(${spacing.scale["224"]}px, 1fr))`,
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react37.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react37.default.createElement("span", null, "Type"), /* @__PURE__ */ import_react37.default.createElement(
+        /* @__PURE__ */ import_react39.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react39.default.createElement("span", null, "Type"), /* @__PURE__ */ import_react39.default.createElement(
           "select",
           {
             value: type,
@@ -41457,16 +42345,16 @@ function SelectInputPreviewPage() {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette27.gray["3"],
+              borderColor: palette28.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
-              backgroundColor: palette27.base.white,
-              color: textBase22.staticDark
+              backgroundColor: palette28.base.white,
+              color: textBase23.staticDark
             }
           },
-          TYPES10.map((item) => /* @__PURE__ */ import_react37.default.createElement("option", { key: item, value: item }, toTitle20(item)))
+          TYPES10.map((item) => /* @__PURE__ */ import_react39.default.createElement("option", { key: item, value: item }, toTitle20(item)))
         )),
-        /* @__PURE__ */ import_react37.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react37.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react37.default.createElement(
+        /* @__PURE__ */ import_react39.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react39.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react39.default.createElement(
           "select",
           {
             value: size,
@@ -41475,16 +42363,16 @@ function SelectInputPreviewPage() {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette27.gray["3"],
+              borderColor: palette28.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
-              backgroundColor: palette27.base.white,
-              color: textBase22.staticDark
+              backgroundColor: palette28.base.white,
+              color: textBase23.staticDark
             }
           },
-          SIZES16.map((item) => /* @__PURE__ */ import_react37.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
+          SIZES16.map((item) => /* @__PURE__ */ import_react39.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
         )),
-        /* @__PURE__ */ import_react37.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react37.default.createElement("span", null, "Target"), /* @__PURE__ */ import_react37.default.createElement(
+        /* @__PURE__ */ import_react39.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react39.default.createElement("span", null, "Target"), /* @__PURE__ */ import_react39.default.createElement(
           "select",
           {
             value: target,
@@ -41493,16 +42381,16 @@ function SelectInputPreviewPage() {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette27.gray["3"],
+              borderColor: palette28.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
-              backgroundColor: palette27.base.white,
-              color: textBase22.staticDark
+              backgroundColor: palette28.base.white,
+              color: textBase23.staticDark
             }
           },
-          TARGETS3.map((item) => /* @__PURE__ */ import_react37.default.createElement("option", { key: item, value: item }, toTitle20(item)))
+          TARGETS3.map((item) => /* @__PURE__ */ import_react39.default.createElement("option", { key: item, value: item }, toTitle20(item)))
         )),
-        /* @__PURE__ */ import_react37.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react37.default.createElement("span", null, "State"), /* @__PURE__ */ import_react37.default.createElement(
+        /* @__PURE__ */ import_react39.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react39.default.createElement("span", null, "State"), /* @__PURE__ */ import_react39.default.createElement(
           "select",
           {
             value: state,
@@ -41511,14 +42399,14 @@ function SelectInputPreviewPage() {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette27.gray["3"],
+              borderColor: palette28.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
-              backgroundColor: palette27.base.white,
-              color: textBase22.staticDark
+              backgroundColor: palette28.base.white,
+              color: textBase23.staticDark
             }
           },
-          STATES12.map((item) => /* @__PURE__ */ import_react37.default.createElement("option", { key: item, value: item }, toTitle20(item)))
+          STATES12.map((item) => /* @__PURE__ */ import_react39.default.createElement("option", { key: item, value: item }, toTitle20(item)))
         )),
         [
           ["Label", showLabel, setShowLabel],
@@ -41526,7 +42414,7 @@ function SelectInputPreviewPage() {
           ["Shortcut Badge", showShortcutBadge, setShowShortcutBadge],
           ["Lead Icon", showLeadIcon, setShowLeadIcon],
           ["Tail Icon", showTailIcon, setShowTailIcon]
-        ].map(([labelText, checked, setChecked]) => /* @__PURE__ */ import_react37.default.createElement(
+        ].map(([labelText, checked, setChecked]) => /* @__PURE__ */ import_react39.default.createElement(
           "label",
           {
             key: labelText,
@@ -41534,18 +42422,18 @@ function SelectInputPreviewPage() {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette27.gray["3"],
+              borderColor: palette28.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "space-between",
               gap: spacing.scale["8"],
-              backgroundColor: palette27.base.white
+              backgroundColor: palette28.base.white
             }
           },
-          /* @__PURE__ */ import_react37.default.createElement("span", null, labelText),
-          /* @__PURE__ */ import_react37.default.createElement(
+          /* @__PURE__ */ import_react39.default.createElement("span", null, labelText),
+          /* @__PURE__ */ import_react39.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -41555,21 +42443,21 @@ function SelectInputPreviewPage() {
           )
         ))
       ),
-      /* @__PURE__ */ import_react37.default.createElement(
+      /* @__PURE__ */ import_react39.default.createElement(
         "section",
         {
           style: {
             borderStyle: "solid",
             borderWidth: border.width["1"],
-            borderColor: palette27.gray["3"],
+            borderColor: palette28.gray["3"],
             borderRadius: radius.scale.xl,
-            backgroundColor: palette27.gray["1"],
+            backgroundColor: palette28.gray["1"],
             padding: spacing.scale["24"],
             display: "grid",
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react37.default.createElement(
+        /* @__PURE__ */ import_react39.default.createElement(
           "h2",
           {
             style: {
@@ -41583,7 +42471,7 @@ function SelectInputPreviewPage() {
           },
           "Interactive"
         ),
-        /* @__PURE__ */ import_react37.default.createElement(
+        /* @__PURE__ */ import_react39.default.createElement(
           SelectInput,
           {
             type,
@@ -41602,21 +42490,21 @@ function SelectInputPreviewPage() {
           }
         )
       ),
-      /* @__PURE__ */ import_react37.default.createElement(
+      /* @__PURE__ */ import_react39.default.createElement(
         "section",
         {
           style: {
             borderStyle: "solid",
             borderWidth: border.width["1"],
-            borderColor: palette27.gray["3"],
+            borderColor: palette28.gray["3"],
             borderRadius: radius.scale.xl,
-            backgroundColor: palette27.gray["1"],
+            backgroundColor: palette28.gray["1"],
             padding: spacing.scale["24"],
             display: "grid",
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react37.default.createElement(
+        /* @__PURE__ */ import_react39.default.createElement(
           "h2",
           {
             style: {
@@ -41630,12 +42518,12 @@ function SelectInputPreviewPage() {
           },
           "Variant Matrix"
         ),
-        /* @__PURE__ */ import_react37.default.createElement("div", { style: { display: "grid", gap: spacing.scale["16"] } }, TARGETS3.map((matrixTarget) => /* @__PURE__ */ import_react37.default.createElement("div", { key: matrixTarget, style: { display: "grid", gap: spacing.scale["12"] } }, /* @__PURE__ */ import_react37.default.createElement(
+        /* @__PURE__ */ import_react39.default.createElement("div", { style: { display: "grid", gap: spacing.scale["16"] } }, TARGETS3.map((matrixTarget) => /* @__PURE__ */ import_react39.default.createElement("div", { key: matrixTarget, style: { display: "grid", gap: spacing.scale["12"] } }, /* @__PURE__ */ import_react39.default.createElement(
           "h3",
           {
             style: {
               margin: spacing.scale["0"],
-              color: textBase22.staticDarkSecondary,
+              color: textBase23.staticDarkSecondary,
               fontFamily: typography.scale.bodyS.medium.fontFamily,
               fontSize: typography.scale.bodyS.medium.fontSize,
               fontWeight: typography.scale.bodyS.medium.fontWeight,
@@ -41645,11 +42533,11 @@ function SelectInputPreviewPage() {
           },
           "Target: ",
           toTitle20(matrixTarget)
-        ), SIZES16.map((matrixSize) => /* @__PURE__ */ import_react37.default.createElement("div", { key: `${matrixTarget}-${matrixSize}`, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react37.default.createElement(
+        ), SIZES16.map((matrixSize) => /* @__PURE__ */ import_react39.default.createElement("div", { key: `${matrixTarget}-${matrixSize}`, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react39.default.createElement(
           "span",
           {
             style: {
-              color: textBase22.staticDarkSecondary,
+              color: textBase23.staticDarkSecondary,
               fontFamily: typography.scale.captionL.medium.fontFamily,
               fontSize: typography.scale.captionL.medium.fontSize,
               fontWeight: typography.scale.captionL.medium.fontWeight,
@@ -41659,11 +42547,11 @@ function SelectInputPreviewPage() {
           },
           "Size: ",
           matrixSize.toUpperCase()
-        ), /* @__PURE__ */ import_react37.default.createElement("div", { style: { display: "grid", gap: spacing.scale["12"] } }, TYPES10.map((matrixType) => /* @__PURE__ */ import_react37.default.createElement("div", { key: `${matrixTarget}-${matrixSize}-${matrixType}`, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react37.default.createElement(
+        ), /* @__PURE__ */ import_react39.default.createElement("div", { style: { display: "grid", gap: spacing.scale["12"] } }, TYPES10.map((matrixType) => /* @__PURE__ */ import_react39.default.createElement("div", { key: `${matrixTarget}-${matrixSize}-${matrixType}`, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react39.default.createElement(
           "span",
           {
             style: {
-              color: textBase22.staticDarkSecondary,
+              color: textBase23.staticDarkSecondary,
               ...toTypographyStyle12(typography.scale.captionM.medium)
             }
           },
@@ -41675,7 +42563,7 @@ function SelectInputPreviewPage() {
           } : {
             selectedId: matrixState === "filled" || matrixState === "focus" ? PRESET_SELECTED_ID : void 0
           };
-          return /* @__PURE__ */ import_react37.default.createElement(
+          return /* @__PURE__ */ import_react39.default.createElement(
             SelectInput,
             {
               key: `${matrixTarget}-${matrixSize}-${matrixType}-${matrixState}`,
@@ -41701,13 +42589,1926 @@ function toTypographyStyle12(token) {
   };
 }
 
+// components/TabMenu/TabMenu.preview.tsx
+var import_react41 = __toESM(require_react());
+
+// components/TabMenu/TabMenu.tsx
+var import_react40 = __toESM(require_react());
+var SIZE_CONFIG13 = {
+  lg: {
+    fillPaddingX: spacing.scale["16"],
+    fillPaddingY: spacing.scale["12"],
+    fillRadius: radius.scale.xl,
+    fillTypography: typography.scale.bodyS.medium,
+    linePaddingTop: spacing.scale["10"],
+    linePaddingBottom: spacing.scale["14"],
+    lineTypography: typography.scale.bodyS.medium,
+    segmentedRootRadius: radius.scale.xl,
+    segmentedItemRadius: radius.scale.lg,
+    segmentedPaddingX: spacing.scale["12"],
+    segmentedPaddingY: spacing.scale["10"],
+    segmentedTypography: typography.scale.bodyS.medium,
+    badgePaddingX: spacing.scale["8"],
+    badgePaddingY: spacing.scale["2"],
+    badgeRadius: radius.scale.md,
+    badgeTypography: typography.scale.captionL.medium,
+    labelWrapPaddingX: spacing.scale["4"]
+  },
+  md: {
+    fillPaddingX: spacing.scale["12"],
+    fillPaddingY: spacing.scale["8"],
+    fillRadius: radius.scale.xl,
+    fillTypography: typography.scale.bodyS.medium,
+    linePaddingTop: spacing.scale["6"],
+    linePaddingBottom: spacing.scale["10"],
+    lineTypography: typography.scale.bodyS.medium,
+    segmentedRootRadius: radius.scale.xl,
+    segmentedItemRadius: radius.scale.lg,
+    segmentedPaddingX: spacing.scale["10"],
+    segmentedPaddingY: spacing.scale["6"],
+    segmentedTypography: typography.scale.bodyS.medium,
+    badgePaddingX: spacing.scale["8"],
+    badgePaddingY: spacing.scale["2"],
+    badgeRadius: radius.scale.md,
+    badgeTypography: typography.scale.captionL.medium,
+    labelWrapPaddingX: spacing.scale["4"]
+  },
+  sm: {
+    fillPaddingX: spacing.scale["12"],
+    fillPaddingY: spacing.scale["6"],
+    fillRadius: radius.scale.lg,
+    fillTypography: typography.scale.captionL.medium,
+    linePaddingTop: spacing.primitive["5"],
+    linePaddingBottom: spacing.primitive["7"],
+    lineTypography: typography.scale.captionL.medium,
+    segmentedRootRadius: radius.scale.lg,
+    segmentedItemRadius: radius.scale.md,
+    segmentedPaddingX: spacing.scale["8"],
+    segmentedPaddingY: spacing.scale["4"],
+    segmentedTypography: typography.scale.captionL.medium,
+    badgePaddingX: spacing.scale["6"],
+    badgePaddingY: spacing.scale["2"],
+    badgeRadius: radius.scale.sm,
+    badgeTypography: typography.scale.captionM.medium,
+    labelWrapPaddingX: spacing.scale["4"]
+  }
+};
+var ITEM_GAP_BY_TYPE = {
+  fill: spacing.scale["8"],
+  line: spacing.scale["24"],
+  segmented: spacing.scale["2"]
+};
+var DEFAULT_ITEMS3 = [
+  { id: "tab-01", label: "Label" },
+  { id: "tab-02", label: "Label", badge: "12" },
+  { id: "tab-03", label: "Label" },
+  { id: "tab-04", label: "Label", badge: "08" },
+  { id: "tab-05", label: "Label" },
+  { id: "tab-06", label: "Label" },
+  { id: "tab-07", label: "Label" },
+  { id: "tab-08", label: "Label" },
+  { id: "tab-09", label: "Label" },
+  { id: "tab-10", label: "Label" }
+];
+var SEGMENTED_DEFAULT_ITEMS = DEFAULT_ITEMS3.slice(0, 5);
+var textBase24 = colors.semantic.theme.text.base;
+var backgroundButton = colors.semantic.theme.background.button;
+var overlayBackground = colors.semantic.theme.background.overlay;
+function toTypographyStyle13(token) {
+  return {
+    fontFamily: token.fontFamily,
+    fontSize: token.fontSize,
+    fontWeight: token.fontWeight,
+    lineHeight: `${token.lineHeight}px`,
+    letterSpacing: `${token.letterSpacing}px`
+  };
+}
+function getDefaultItems(type) {
+  return type === "segmented" ? SEGMENTED_DEFAULT_ITEMS : DEFAULT_ITEMS3;
+}
+function findInitialSelectedId(items, preferredId) {
+  if (preferredId) {
+    const preferredItem = items.find((item) => item.id === preferredId && !item.disabled);
+    if (preferredItem) {
+      return preferredItem.id;
+    }
+  }
+  const second = items[1];
+  if (second && !second.disabled) {
+    return second.id;
+  }
+  const firstEnabled = items.find((item) => !item.disabled);
+  if (firstEnabled) {
+    return firstEnabled.id;
+  }
+  return items[0]?.id ?? "";
+}
+function resolveItemState2(item, globalDisabled, forceState) {
+  if (globalDisabled || item.disabled || item.state === "disabled" || forceState === "disabled") {
+    return "disabled";
+  }
+  if (item.state && item.state !== "default") {
+    return item.state;
+  }
+  if (forceState && forceState !== "default") {
+    return forceState;
+  }
+  return "default";
+}
+function getTextColor(selected) {
+  return selected ? textBase24.staticDark : textBase24.staticDarkSecondary;
+}
+function getTypographyToken(type, config) {
+  if (type === "line") {
+    return config.lineTypography;
+  }
+  if (type === "segmented") {
+    return config.segmentedTypography;
+  }
+  return config.fillTypography;
+}
+function TabMenu({
+  type = "fill",
+  size = "md",
+  items,
+  selectedId,
+  defaultSelectedId,
+  forceItemState,
+  disabled = false,
+  onSelectedIdChange,
+  className,
+  style,
+  ...rest
+}) {
+  const config = SIZE_CONFIG13[size];
+  const resolvedItems = (0, import_react40.useMemo)(() => items ?? getDefaultItems(type), [items, type]);
+  const fallbackSelectedId = (0, import_react40.useMemo)(
+    () => findInitialSelectedId(resolvedItems, defaultSelectedId),
+    [resolvedItems, defaultSelectedId]
+  );
+  const isControlled = selectedId !== void 0;
+  const [internalSelectedId, setInternalSelectedId] = (0, import_react40.useState)(fallbackSelectedId);
+  (0, import_react40.useEffect)(() => {
+    if (isControlled) {
+      return;
+    }
+    setInternalSelectedId((previous) => {
+      const stillExists = resolvedItems.some((item) => item.id === previous && !item.disabled);
+      return stillExists ? previous : fallbackSelectedId;
+    });
+  }, [fallbackSelectedId, isControlled, resolvedItems]);
+  const currentSelectedId = isControlled ? selectedId : internalSelectedId;
+  const itemRefs = (0, import_react40.useRef)([]);
+  const rootStyle = type === "segmented" ? {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: ITEM_GAP_BY_TYPE.segmented,
+    padding: spacing.scale["2"],
+    borderRadius: config.segmentedRootRadius,
+    backgroundColor: overlayBackground.custom
+  } : {
+    display: "inline-flex",
+    alignItems: "flex-start",
+    gap: ITEM_GAP_BY_TYPE[type],
+    padding: spacing.scale["0"]
+  };
+  const handleSelection = (item, itemState) => {
+    if (itemState === "disabled") {
+      return;
+    }
+    if (!isControlled) {
+      setInternalSelectedId(item.id);
+    }
+    onSelectedIdChange?.(item.id);
+  };
+  const moveByKeyboard = (currentIndex, direction) => {
+    const enabledIndices = resolvedItems.map((item, index) => ({ item, index })).filter(({ item }) => resolveItemState2(item, disabled, forceItemState) !== "disabled").map(({ index }) => index);
+    if (enabledIndices.length === 0) {
+      return;
+    }
+    const currentEnabledIndex = enabledIndices.indexOf(currentIndex);
+    const safeIndex = currentEnabledIndex === -1 ? 0 : currentEnabledIndex;
+    const nextEnabledIndex = (safeIndex + direction + enabledIndices.length) % enabledIndices.length;
+    const targetIndex = enabledIndices[nextEnabledIndex];
+    const targetItem = resolvedItems[targetIndex];
+    if (!targetItem) {
+      return;
+    }
+    handleSelection(targetItem, "default");
+    itemRefs.current[targetIndex]?.focus();
+  };
+  const moveToEdgeByKeyboard = (edge) => {
+    const enabledItems = resolvedItems.map((item, index) => ({ item, index })).filter(({ item }) => resolveItemState2(item, disabled, forceItemState) !== "disabled");
+    if (enabledItems.length === 0) {
+      return;
+    }
+    const target = edge === "first" ? enabledItems[0] : enabledItems[enabledItems.length - 1];
+    handleSelection(target.item, "default");
+    itemRefs.current[target.index]?.focus();
+  };
+  return /* @__PURE__ */ import_react40.default.createElement(
+    "div",
+    {
+      ...rest,
+      className,
+      role: "tablist",
+      "aria-orientation": "horizontal",
+      "aria-disabled": disabled || void 0,
+      style: {
+        ...rootStyle,
+        ...style
+      }
+    },
+    resolvedItems.map((item, index) => {
+      const itemState = resolveItemState2(item, disabled, forceItemState);
+      const isItemDisabled = itemState === "disabled";
+      const isSelected = !isItemDisabled && item.id === currentSelectedId;
+      const labelColor = getTextColor(isSelected);
+      const showBadge = typeof item.badge === "string" && item.badge.trim().length > 0;
+      const textTypography = getTypographyToken(type, config);
+      const buttonStyle = type === "fill" ? {
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: spacing.scale["0"],
+        paddingInline: config.fillPaddingX,
+        paddingBlock: config.fillPaddingY,
+        borderRadius: config.fillRadius,
+        borderStyle: "solid",
+        borderWidth: border.width["0"],
+        borderColor: colors.primitive.palette.base.transparent,
+        backgroundColor: isSelected ? backgroundButton.tertiary : colors.primitive.palette.base.transparent,
+        boxShadow: "none"
+      } : type === "line" ? {
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: spacing.scale["8"],
+        paddingInline: spacing.scale["0"],
+        paddingTop: config.linePaddingTop,
+        paddingBottom: config.linePaddingBottom,
+        borderStyle: "solid",
+        borderWidth: border.width["0"],
+        borderBottomStyle: "solid",
+        borderBottomWidth: isSelected ? border.width["2"] : border.width["0"],
+        borderBottomColor: isSelected ? border.color.theme.select.primary : colors.primitive.palette.base.transparent,
+        borderRadius: spacing.scale["0"],
+        backgroundColor: colors.primitive.palette.base.transparent,
+        boxShadow: "none"
+      } : {
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: spacing.scale["0"],
+        flex: "1 0 0",
+        minWidth: spacing.scale["0"],
+        paddingInline: config.segmentedPaddingX,
+        paddingBlock: config.segmentedPaddingY,
+        borderRadius: config.segmentedItemRadius,
+        borderStyle: "solid",
+        borderWidth: isSelected ? border.width["1"] : border.width["0"],
+        borderColor: isSelected ? border.color.theme.action.normal : colors.primitive.palette.base.transparent,
+        backgroundColor: isSelected ? backgroundButton.secondary : colors.primitive.palette.base.transparent,
+        boxShadow: isSelected ? shadows.elevation.xs.css : "none"
+      };
+      const textWrapStyle = type === "line" ? {
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        paddingInline: spacing.scale["0"],
+        paddingBlock: spacing.scale["0"]
+      } : {
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        paddingInline: config.labelWrapPaddingX,
+        paddingBlock: spacing.scale["0"]
+      };
+      return /* @__PURE__ */ import_react40.default.createElement(
+        "button",
+        {
+          key: item.id,
+          ref: (node) => {
+            itemRefs.current[index] = node;
+          },
+          type: "button",
+          role: "tab",
+          "aria-selected": isSelected,
+          "aria-disabled": isItemDisabled || void 0,
+          tabIndex: isSelected ? 0 : -1,
+          disabled: isItemDisabled,
+          onClick: () => handleSelection(item, itemState),
+          onKeyDown: (event) => {
+            if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+              event.preventDefault();
+              moveByKeyboard(index, 1);
+              return;
+            }
+            if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+              event.preventDefault();
+              moveByKeyboard(index, -1);
+              return;
+            }
+            if (event.key === "Home") {
+              event.preventDefault();
+              moveToEdgeByKeyboard("first");
+              return;
+            }
+            if (event.key === "End") {
+              event.preventDefault();
+              moveToEdgeByKeyboard("last");
+            }
+          },
+          style: {
+            ...buttonStyle,
+            cursor: isItemDisabled ? "default" : "pointer"
+          }
+        },
+        /* @__PURE__ */ import_react40.default.createElement("span", { style: textWrapStyle }, /* @__PURE__ */ import_react40.default.createElement(
+          "span",
+          {
+            style: {
+              ...toTypographyStyle13(textTypography),
+              color: labelColor,
+              textAlign: "center",
+              whiteSpace: "nowrap"
+            }
+          },
+          item.label
+        )),
+        showBadge && /* @__PURE__ */ import_react40.default.createElement(
+          "span",
+          {
+            style: type === "line" ? {
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              paddingInline: spacing.scale["0"],
+              paddingBlock: spacing.scale["0"]
+            } : {
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              paddingInline: config.labelWrapPaddingX,
+              paddingBlock: spacing.scale["0"]
+            }
+          },
+          /* @__PURE__ */ import_react40.default.createElement(
+            "span",
+            {
+              style: {
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                paddingInline: config.badgePaddingX,
+                paddingBlock: config.badgePaddingY,
+                borderRadius: config.badgeRadius,
+                backgroundColor: backgroundButton.tertiary
+              }
+            },
+            /* @__PURE__ */ import_react40.default.createElement(
+              "span",
+              {
+                style: {
+                  ...toTypographyStyle13(config.badgeTypography),
+                  color: labelColor,
+                  textAlign: "center",
+                  whiteSpace: "nowrap"
+                }
+              },
+              item.badge
+            )
+          )
+        )
+      );
+    })
+  );
+}
+
+// components/TabMenu/TabMenu.preview.tsx
+var TYPES11 = ["fill", "line", "segmented"];
+var SIZES17 = ["lg", "md", "sm"];
+var STATES13 = ["default", "hover", "focus", "disabled"];
+var LINEAR_ITEMS = [
+  { id: "tab-01", label: "Label" },
+  { id: "tab-02", label: "Label", badge: "12" },
+  { id: "tab-03", label: "Label" },
+  { id: "tab-04", label: "Label", badge: "08" },
+  { id: "tab-05", label: "Label" },
+  { id: "tab-06", label: "Label" },
+  { id: "tab-07", label: "Label" },
+  { id: "tab-08", label: "Label" },
+  { id: "tab-09", label: "Label" },
+  { id: "tab-10", label: "Label" }
+];
+var SEGMENTED_ITEMS = LINEAR_ITEMS.slice(0, 5);
+function toTitle21(value) {
+  return value.replace(/^./, (char) => char.toUpperCase());
+}
+function withBadgeToggle(items, showBadge) {
+  if (showBadge) {
+    return items;
+  }
+  return items.map(({ badge: _badge, ...rest }) => rest);
+}
+function getDefaultSelectedId(items) {
+  return items[1]?.id ?? items[0]?.id ?? "";
+}
+function TabMenuPreviewPage() {
+  const [type, setType] = (0, import_react41.useState)("fill");
+  const [size, setSize] = (0, import_react41.useState)("md");
+  const [state, setState] = (0, import_react41.useState)("default");
+  const [disabled, setDisabled] = (0, import_react41.useState)(false);
+  const [showBadge, setShowBadge] = (0, import_react41.useState)(true);
+  const items = (0, import_react41.useMemo)(() => {
+    const base = type === "segmented" ? SEGMENTED_ITEMS : LINEAR_ITEMS;
+    return withBadgeToggle(base, showBadge);
+  }, [type, showBadge]);
+  const [selectedId, setSelectedId] = (0, import_react41.useState)(getDefaultSelectedId(items));
+  (0, import_react41.useEffect)(() => {
+    const exists = items.some((item) => item.id === selectedId);
+    if (!exists) {
+      setSelectedId(getDefaultSelectedId(items));
+    }
+  }, [items, selectedId]);
+  const tokenNotice = state === "default" ? "Figma Tab Menu\uB294 hover/focus/disabled \uC804\uC6A9 \uC2DC\uAC01 variant\uAC00 \uC5C6\uC5B4 default\uC640 \uB3D9\uC77C\uD55C \uC2DC\uAC01\uAC12\uC744 \uC0AC\uC6A9\uD569\uB2C8\uB2E4." : `${toTitle21(state)} \uAC15\uC81C \uC0C1\uD0DC\uB294 \uC811\uADFC\uC131/\uD589\uB3D9 \uAC80\uC99D\uC6A9\uC774\uBA70, \uC2DC\uAC01\uAC12\uC740 Figma \uAE30\uBCF8 variant\uB97C \uC720\uC9C0\uD569\uB2C8\uB2E4.`;
+  return /* @__PURE__ */ import_react41.default.createElement(
+    "main",
+    {
+      style: {
+        minHeight: "100vh",
+        backgroundColor: colors.semantic.theme.background.surface.default,
+        color: colors.semantic.theme.text.base.primary,
+        padding: spacing.scale["24"],
+        fontFamily: typography.scale.bodyM.medium.fontFamily
+      }
+    },
+    /* @__PURE__ */ import_react41.default.createElement(
+      "section",
+      {
+        style: {
+          maxWidth: spacing.scale["1024"],
+          marginInline: "auto",
+          display: "grid",
+          gap: spacing.scale["24"]
+        }
+      },
+      /* @__PURE__ */ import_react41.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react41.default.createElement(
+        "h1",
+        {
+          style: {
+            margin: spacing.scale["0"],
+            fontFamily: typography.scale.h3.bold.fontFamily,
+            fontSize: typography.scale.h3.bold.fontSize,
+            fontWeight: typography.scale.h3.bold.fontWeight,
+            lineHeight: `${typography.scale.h3.bold.lineHeight}px`,
+            letterSpacing: `${typography.scale.h3.bold.letterSpacing}px`
+          }
+        },
+        "Tab Menu Preview"
+      ), /* @__PURE__ */ import_react41.default.createElement(
+        "p",
+        {
+          style: {
+            margin: spacing.scale["0"],
+            color: colors.semantic.theme.text.base.secondary,
+            fontSize: typography.scale.bodyS.regular.fontSize,
+            fontWeight: typography.scale.bodyS.regular.fontWeight,
+            lineHeight: `${typography.scale.bodyS.regular.lineHeight}px`,
+            letterSpacing: `${typography.scale.bodyS.regular.letterSpacing}px`
+          }
+        },
+        "Figma MCP \uB178\uB4DC `953:18063` \uAE30\uBC18 Type/Size/\uC0C1\uD0DC \uD504\uB9AC\uBDF0"
+      )),
+      /* @__PURE__ */ import_react41.default.createElement(
+        "div",
+        {
+          style: {
+            display: "grid",
+            gridTemplateColumns: `repeat(auto-fit, minmax(${spacing.scale["224"]}px, 1fr))`,
+            gap: spacing.scale["12"]
+          }
+        },
+        /* @__PURE__ */ import_react41.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react41.default.createElement("span", { style: { color: colors.semantic.theme.text.base.secondary } }, "Type"), /* @__PURE__ */ import_react41.default.createElement(
+          "select",
+          {
+            value: type,
+            onChange: (event) => setType(event.target.value),
+            style: {
+              minHeight: spacing.scale["40"],
+              borderStyle: "solid",
+              borderWidth: spacing.scale["1"],
+              borderColor: colors.semantic.theme.border.base.neutral,
+              backgroundColor: colors.semantic.theme.background.input.normal,
+              color: colors.semantic.theme.text.base.primary,
+              paddingInline: spacing.scale["12"],
+              borderRadius: spacing.scale["8"]
+            }
+          },
+          TYPES11.map((item) => /* @__PURE__ */ import_react41.default.createElement("option", { key: item, value: item }, toTitle21(item)))
+        )),
+        /* @__PURE__ */ import_react41.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react41.default.createElement("span", { style: { color: colors.semantic.theme.text.base.secondary } }, "Size"), /* @__PURE__ */ import_react41.default.createElement(
+          "select",
+          {
+            value: size,
+            onChange: (event) => setSize(event.target.value),
+            style: {
+              minHeight: spacing.scale["40"],
+              borderStyle: "solid",
+              borderWidth: spacing.scale["1"],
+              borderColor: colors.semantic.theme.border.base.neutral,
+              backgroundColor: colors.semantic.theme.background.input.normal,
+              color: colors.semantic.theme.text.base.primary,
+              paddingInline: spacing.scale["12"],
+              borderRadius: spacing.scale["8"]
+            }
+          },
+          SIZES17.map((item) => /* @__PURE__ */ import_react41.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
+        )),
+        /* @__PURE__ */ import_react41.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react41.default.createElement("span", { style: { color: colors.semantic.theme.text.base.secondary } }, "State"), /* @__PURE__ */ import_react41.default.createElement(
+          "select",
+          {
+            value: state,
+            onChange: (event) => setState(event.target.value),
+            style: {
+              minHeight: spacing.scale["40"],
+              borderStyle: "solid",
+              borderWidth: spacing.scale["1"],
+              borderColor: colors.semantic.theme.border.base.neutral,
+              backgroundColor: colors.semantic.theme.background.input.normal,
+              color: colors.semantic.theme.text.base.primary,
+              paddingInline: spacing.scale["12"],
+              borderRadius: spacing.scale["8"]
+            }
+          },
+          STATES13.map((item) => /* @__PURE__ */ import_react41.default.createElement("option", { key: item, value: item }, toTitle21(item)))
+        )),
+        /* @__PURE__ */ import_react41.default.createElement(
+          "label",
+          {
+            style: {
+              minHeight: spacing.scale["40"],
+              borderStyle: "solid",
+              borderWidth: spacing.scale["1"],
+              borderColor: colors.semantic.theme.border.base.neutral,
+              borderRadius: spacing.scale["8"],
+              paddingInline: spacing.scale["12"],
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: spacing.scale["8"],
+              backgroundColor: colors.semantic.theme.background.input.normal
+            }
+          },
+          /* @__PURE__ */ import_react41.default.createElement("span", null, "Disabled"),
+          /* @__PURE__ */ import_react41.default.createElement("input", { type: "checkbox", checked: disabled, onChange: (event) => setDisabled(event.target.checked) })
+        ),
+        /* @__PURE__ */ import_react41.default.createElement(
+          "label",
+          {
+            style: {
+              minHeight: spacing.scale["40"],
+              borderStyle: "solid",
+              borderWidth: spacing.scale["1"],
+              borderColor: colors.semantic.theme.border.base.neutral,
+              borderRadius: spacing.scale["8"],
+              paddingInline: spacing.scale["12"],
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: spacing.scale["8"],
+              backgroundColor: colors.semantic.theme.background.input.normal
+            }
+          },
+          /* @__PURE__ */ import_react41.default.createElement("span", null, "Badge"),
+          /* @__PURE__ */ import_react41.default.createElement("input", { type: "checkbox", checked: showBadge, onChange: (event) => setShowBadge(event.target.checked) })
+        ),
+        /* @__PURE__ */ import_react41.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react41.default.createElement("span", { style: { color: colors.semantic.theme.text.base.secondary } }, "Selected"), /* @__PURE__ */ import_react41.default.createElement(
+          "select",
+          {
+            value: selectedId,
+            onChange: (event) => setSelectedId(event.target.value),
+            style: {
+              minHeight: spacing.scale["40"],
+              borderStyle: "solid",
+              borderWidth: spacing.scale["1"],
+              borderColor: colors.semantic.theme.border.base.neutral,
+              backgroundColor: colors.semantic.theme.background.input.normal,
+              color: colors.semantic.theme.text.base.primary,
+              paddingInline: spacing.scale["12"],
+              borderRadius: spacing.scale["8"]
+            }
+          },
+          items.map((item) => /* @__PURE__ */ import_react41.default.createElement("option", { key: item.id, value: item.id }, item.id))
+        ))
+      ),
+      /* @__PURE__ */ import_react41.default.createElement(
+        "section",
+        {
+          style: {
+            borderStyle: "solid",
+            borderWidth: spacing.scale["1"],
+            borderColor: colors.semantic.theme.border.base.neutral,
+            borderRadius: spacing.scale["12"],
+            backgroundColor: colors.semantic.theme.background.surface.neutralSubtle,
+            padding: spacing.scale["24"],
+            display: "grid",
+            gap: spacing.scale["16"]
+          }
+        },
+        /* @__PURE__ */ import_react41.default.createElement(
+          "div",
+          {
+            style: {
+              padding: spacing.scale["16"],
+              borderStyle: "solid",
+              borderWidth: spacing.scale["1"],
+              borderColor: colors.semantic.theme.border.base.neutral,
+              borderRadius: spacing.scale["12"],
+              backgroundColor: colors.semantic.theme.background.surface.default,
+              overflowX: "auto",
+              display: "flex",
+              justifyContent: "flex-start"
+            }
+          },
+          /* @__PURE__ */ import_react41.default.createElement(
+            TabMenu,
+            {
+              type,
+              size,
+              items,
+              selectedId,
+              disabled,
+              forceItemState: state,
+              onSelectedIdChange: setSelectedId
+            }
+          )
+        ),
+        /* @__PURE__ */ import_react41.default.createElement(
+          "p",
+          {
+            style: {
+              margin: spacing.scale["0"],
+              color: colors.semantic.theme.text.base.secondary,
+              fontSize: typography.scale.captionL.regular.fontSize,
+              fontWeight: typography.scale.captionL.regular.fontWeight,
+              lineHeight: `${typography.scale.captionL.regular.lineHeight}px`,
+              letterSpacing: `${typography.scale.captionL.regular.letterSpacing}px`
+            }
+          },
+          tokenNotice
+        )
+      )
+    )
+  );
+}
+
+// components/Toggle/Toggle.preview.tsx
+var import_react43 = __toESM(require_react());
+
+// components/Toggle/Toggle.tsx
+var import_react42 = __toESM(require_react());
+var SIZE_CONFIG14 = {
+  sm: {
+    trackWidth: spacing.scale["28"],
+    trackHeight: spacing.scale["16"],
+    knobSize: spacing.scale["12"],
+    insetPadding: spacing.scale["2"],
+    activeInset: spacing.scale["14"]
+  },
+  md: {
+    trackWidth: spacing.scale["20"] + spacing.scale["14"],
+    trackHeight: spacing.scale["20"],
+    knobSize: spacing.scale["16"],
+    insetPadding: spacing.scale["2"],
+    activeInset: spacing.scale["16"]
+  }
+};
+var toggleBackground = colors.semantic.theme.background.toggle;
+function resolveVisualState10(forcedState, disabled, hovered, focused) {
+  if (disabled || forcedState === "disabled") {
+    return "disabled";
+  }
+  if (forcedState && forcedState !== "default") {
+    return forcedState;
+  }
+  if (focused) {
+    return "focus";
+  }
+  if (hovered) {
+    return "hover";
+  }
+  return "default";
+}
+function resolveTrackColor(checked, visualState) {
+  if (visualState === "disabled") {
+    return checked ? toggleBackground.activeDisabled : toggleBackground.disabled;
+  }
+  if (visualState === "hover") {
+    return checked ? toggleBackground.activeHover : toggleBackground.hover;
+  }
+  return checked ? toggleBackground.active : toggleBackground.default;
+}
+function resolveKnobColor(checked, visualState) {
+  if (visualState === "disabled" && !checked) {
+    return toggleBackground.handleDisabled;
+  }
+  return toggleBackground.handle;
+}
+function resolveTrackShadow(visualState) {
+  if (visualState !== "focus") {
+    return "none";
+  }
+  return shadows.focusRing.light.css;
+}
+function resolveKnobShadow(visualState) {
+  if (visualState === "disabled") {
+    return "none";
+  }
+  return shadows.elevation.xs.css;
+}
+function Toggle({
+  size = "md",
+  checked,
+  defaultChecked = false,
+  disabled = false,
+  state,
+  onCheckedChange,
+  onClick,
+  onFocus,
+  onBlur,
+  onMouseEnter,
+  onMouseLeave,
+  style,
+  ...rest
+}) {
+  const isControlled = checked !== void 0;
+  const [internalChecked, setInternalChecked] = (0, import_react42.useState)(defaultChecked);
+  const [hovered, setHovered] = (0, import_react42.useState)(false);
+  const [focused, setFocused] = (0, import_react42.useState)(false);
+  (0, import_react42.useEffect)(() => {
+    if (isControlled) {
+      return;
+    }
+    setInternalChecked(defaultChecked);
+  }, [defaultChecked, isControlled]);
+  const resolvedChecked = isControlled ? Boolean(checked) : internalChecked;
+  const visualState = resolveVisualState10(state, disabled, hovered, focused);
+  const isDisabled = visualState === "disabled";
+  const config = SIZE_CONFIG14[size];
+  const knobPadding = (0, import_react42.useMemo)(() => {
+    return resolvedChecked ? {
+      paddingLeft: config.activeInset,
+      paddingRight: config.insetPadding
+    } : {
+      paddingLeft: config.insetPadding,
+      paddingRight: config.activeInset
+    };
+  }, [config.activeInset, config.insetPadding, resolvedChecked]);
+  const handleToggle = (event) => {
+    if (isDisabled) {
+      event.preventDefault();
+      return;
+    }
+    const nextChecked = !resolvedChecked;
+    if (!isControlled) {
+      setInternalChecked(nextChecked);
+    }
+    onCheckedChange?.(nextChecked);
+    onClick?.(event);
+  };
+  return /* @__PURE__ */ import_react42.default.createElement(
+    "button",
+    {
+      ...rest,
+      type: "button",
+      role: "switch",
+      "aria-checked": resolvedChecked,
+      "aria-disabled": isDisabled || void 0,
+      disabled: isDisabled,
+      onClick: handleToggle,
+      onFocus: (event) => {
+        setFocused(true);
+        onFocus?.(event);
+      },
+      onBlur: (event) => {
+        setFocused(false);
+        onBlur?.(event);
+      },
+      onMouseEnter: (event) => {
+        setHovered(true);
+        onMouseEnter?.(event);
+      },
+      onMouseLeave: (event) => {
+        setHovered(false);
+        onMouseLeave?.(event);
+      },
+      style: {
+        width: config.trackWidth,
+        height: config.trackHeight,
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: resolvedChecked ? "flex-end" : "flex-start",
+        gap: spacing.scale["0"],
+        paddingTop: config.insetPadding,
+        paddingBottom: config.insetPadding,
+        borderStyle: "solid",
+        borderWidth: border.width["0"],
+        borderRadius: radius.scale.full,
+        backgroundColor: resolveTrackColor(resolvedChecked, visualState),
+        boxShadow: resolveTrackShadow(visualState),
+        cursor: isDisabled ? "not-allowed" : "pointer",
+        boxSizing: "border-box",
+        ...knobPadding,
+        ...style
+      }
+    },
+    /* @__PURE__ */ import_react42.default.createElement(
+      "span",
+      {
+        "aria-hidden": "true",
+        style: {
+          width: config.knobSize,
+          height: config.knobSize,
+          borderRadius: radius.scale.full,
+          backgroundColor: resolveKnobColor(resolvedChecked, visualState),
+          boxShadow: resolveKnobShadow(visualState),
+          display: "inline-block",
+          flexShrink: 0
+        }
+      }
+    )
+  );
+}
+
+// components/Toggle/Toggle.preview.tsx
+var SIZES18 = ["sm", "md"];
+var STATES14 = ["auto", "default", "hover", "focus", "disabled"];
+var ACTIVE_OPTIONS = [false, true];
+var textBase25 = colors.semantic.theme.text.base;
+var palette29 = colors.primitive.palette;
+function toTitle22(value) {
+  return value.charAt(0).toUpperCase() + value.slice(1);
+}
+function TogglePreviewPage() {
+  const [size, setSize] = (0, import_react43.useState)("md");
+  const [state, setState] = (0, import_react43.useState)("auto");
+  const [checked, setChecked] = (0, import_react43.useState)(false);
+  const [disabled, setDisabled] = (0, import_react43.useState)(false);
+  const forcedState = (0, import_react43.useMemo)(() => {
+    if (disabled) {
+      return "disabled";
+    }
+    if (state === "auto") {
+      return void 0;
+    }
+    return state;
+  }, [disabled, state]);
+  return /* @__PURE__ */ import_react43.default.createElement(
+    "main",
+    {
+      style: {
+        minHeight: spacing.scale["844"],
+        backgroundColor: palette29.base.white,
+        color: textBase25.staticDark,
+        padding: spacing.scale["24"],
+        fontFamily: typography.scale.bodyM.medium.fontFamily
+      }
+    },
+    /* @__PURE__ */ import_react43.default.createElement(
+      "section",
+      {
+        style: {
+          maxWidth: spacing.scale["1024"],
+          marginInline: "auto",
+          display: "grid",
+          gap: spacing.scale["24"]
+        }
+      },
+      /* @__PURE__ */ import_react43.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react43.default.createElement(
+        "h1",
+        {
+          style: {
+            margin: spacing.scale["0"],
+            fontFamily: typography.scale.h3.bold.fontFamily,
+            fontSize: typography.scale.h3.bold.fontSize,
+            fontWeight: typography.scale.h3.bold.fontWeight,
+            lineHeight: `${typography.scale.h3.bold.lineHeight}px`,
+            letterSpacing: `${typography.scale.h3.bold.letterSpacing}px`
+          }
+        },
+        "Toggle Preview"
+      ), /* @__PURE__ */ import_react43.default.createElement(
+        "p",
+        {
+          style: {
+            margin: spacing.scale["0"],
+            color: textBase25.staticDarkSecondary,
+            fontFamily: typography.scale.bodyS.regular.fontFamily,
+            fontSize: typography.scale.bodyS.regular.fontSize,
+            fontWeight: typography.scale.bodyS.regular.fontWeight,
+            lineHeight: `${typography.scale.bodyS.regular.lineHeight}px`,
+            letterSpacing: `${typography.scale.bodyS.regular.letterSpacing}px`
+          }
+        },
+        "Figma variant(`Size`, `Active`, `State`) \uAE30\uBC18 Toggle \uC778\uD130\uB799\uC158 \uAC80\uC99D"
+      )),
+      /* @__PURE__ */ import_react43.default.createElement(
+        "section",
+        {
+          style: {
+            borderStyle: "solid",
+            borderWidth: border.width["1"],
+            borderColor: palette29.gray["3"],
+            borderRadius: radius.scale.xl,
+            backgroundColor: palette29.gray["1"],
+            padding: spacing.scale["16"],
+            display: "grid",
+            gridTemplateColumns: `repeat(auto-fit, minmax(${spacing.scale["224"]}px, 1fr))`,
+            gap: spacing.scale["12"]
+          }
+        },
+        /* @__PURE__ */ import_react43.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react43.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react43.default.createElement(
+          "select",
+          {
+            value: size,
+            onChange: (event) => setSize(event.target.value),
+            style: {
+              minHeight: spacing.scale["40"],
+              borderStyle: "solid",
+              borderWidth: border.width["1"],
+              borderColor: palette29.gray["3"],
+              borderRadius: radius.scale.md,
+              paddingInline: spacing.scale["12"],
+              backgroundColor: palette29.base.white,
+              color: textBase25.staticDark
+            }
+          },
+          SIZES18.map((item) => /* @__PURE__ */ import_react43.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
+        )),
+        /* @__PURE__ */ import_react43.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react43.default.createElement("span", null, "State"), /* @__PURE__ */ import_react43.default.createElement(
+          "select",
+          {
+            value: state,
+            onChange: (event) => setState(event.target.value),
+            style: {
+              minHeight: spacing.scale["40"],
+              borderStyle: "solid",
+              borderWidth: border.width["1"],
+              borderColor: palette29.gray["3"],
+              borderRadius: radius.scale.md,
+              paddingInline: spacing.scale["12"],
+              backgroundColor: palette29.base.white,
+              color: textBase25.staticDark
+            }
+          },
+          STATES14.map((item) => /* @__PURE__ */ import_react43.default.createElement("option", { key: item, value: item }, toTitle22(item)))
+        )),
+        /* @__PURE__ */ import_react43.default.createElement(
+          "label",
+          {
+            style: {
+              minHeight: spacing.scale["40"],
+              borderStyle: "solid",
+              borderWidth: border.width["1"],
+              borderColor: palette29.gray["3"],
+              borderRadius: radius.scale.md,
+              paddingInline: spacing.scale["12"],
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: spacing.scale["8"],
+              backgroundColor: palette29.base.white
+            }
+          },
+          /* @__PURE__ */ import_react43.default.createElement("span", null, "Active"),
+          /* @__PURE__ */ import_react43.default.createElement("input", { type: "checkbox", checked, onChange: (event) => setChecked(event.target.checked) })
+        ),
+        /* @__PURE__ */ import_react43.default.createElement(
+          "label",
+          {
+            style: {
+              minHeight: spacing.scale["40"],
+              borderStyle: "solid",
+              borderWidth: border.width["1"],
+              borderColor: palette29.gray["3"],
+              borderRadius: radius.scale.md,
+              paddingInline: spacing.scale["12"],
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: spacing.scale["8"],
+              backgroundColor: palette29.base.white
+            }
+          },
+          /* @__PURE__ */ import_react43.default.createElement("span", null, "Disabled"),
+          /* @__PURE__ */ import_react43.default.createElement("input", { type: "checkbox", checked: disabled, onChange: (event) => setDisabled(event.target.checked) })
+        )
+      ),
+      /* @__PURE__ */ import_react43.default.createElement(
+        "section",
+        {
+          style: {
+            borderStyle: "solid",
+            borderWidth: border.width["1"],
+            borderColor: palette29.gray["3"],
+            borderRadius: radius.scale.xl,
+            backgroundColor: palette29.gray["1"],
+            padding: spacing.scale["24"],
+            display: "grid",
+            gap: spacing.scale["16"]
+          }
+        },
+        /* @__PURE__ */ import_react43.default.createElement(
+          "h2",
+          {
+            style: {
+              margin: spacing.scale["0"],
+              fontFamily: typography.scale.h5.semiBold.fontFamily,
+              fontSize: typography.scale.h5.semiBold.fontSize,
+              fontWeight: typography.scale.h5.semiBold.fontWeight,
+              lineHeight: `${typography.scale.h5.semiBold.lineHeight}px`,
+              letterSpacing: `${typography.scale.h5.semiBold.letterSpacing}px`
+            }
+          },
+          "Active Selection"
+        ),
+        /* @__PURE__ */ import_react43.default.createElement(Toggle, { size, checked, disabled, state: forcedState, onCheckedChange: setChecked, "aria-label": "Preview toggle" })
+      ),
+      /* @__PURE__ */ import_react43.default.createElement(
+        "section",
+        {
+          style: {
+            borderStyle: "solid",
+            borderWidth: border.width["1"],
+            borderColor: palette29.gray["3"],
+            borderRadius: radius.scale.xl,
+            backgroundColor: palette29.gray["1"],
+            padding: spacing.scale["24"],
+            display: "grid",
+            gap: spacing.scale["16"]
+          }
+        },
+        /* @__PURE__ */ import_react43.default.createElement(
+          "h2",
+          {
+            style: {
+              margin: spacing.scale["0"],
+              fontFamily: typography.scale.h5.semiBold.fontFamily,
+              fontSize: typography.scale.h5.semiBold.fontSize,
+              fontWeight: typography.scale.h5.semiBold.fontWeight,
+              lineHeight: `${typography.scale.h5.semiBold.lineHeight}px`,
+              letterSpacing: `${typography.scale.h5.semiBold.letterSpacing}px`
+            }
+          },
+          "Variant Matrix"
+        ),
+        /* @__PURE__ */ import_react43.default.createElement("div", { style: { display: "grid", gap: spacing.scale["16"] } }, SIZES18.map((sizeItem) => /* @__PURE__ */ import_react43.default.createElement("div", { key: sizeItem, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react43.default.createElement(
+          "span",
+          {
+            style: {
+              color: textBase25.staticDarkSecondary,
+              fontFamily: typography.scale.captionL.medium.fontFamily,
+              fontSize: typography.scale.captionL.medium.fontSize,
+              fontWeight: typography.scale.captionL.medium.fontWeight,
+              lineHeight: `${typography.scale.captionL.medium.lineHeight}px`,
+              letterSpacing: `${typography.scale.captionL.medium.letterSpacing}px`
+            }
+          },
+          "Size ",
+          sizeItem.toUpperCase()
+        ), ["default", "hover", "focus", "disabled"].map((stateItem) => /* @__PURE__ */ import_react43.default.createElement(
+          "div",
+          {
+            key: `${sizeItem}-${stateItem}`,
+            style: {
+              display: "grid",
+              gridTemplateColumns: `${spacing.scale["96"]}px 1fr 1fr`,
+              alignItems: "center",
+              gap: spacing.scale["12"]
+            }
+          },
+          /* @__PURE__ */ import_react43.default.createElement(
+            "span",
+            {
+              style: {
+                color: textBase25.staticDarkSecondary,
+                fontFamily: typography.scale.captionL.regular.fontFamily,
+                fontSize: typography.scale.captionL.regular.fontSize,
+                fontWeight: typography.scale.captionL.regular.fontWeight,
+                lineHeight: `${typography.scale.captionL.regular.lineHeight}px`,
+                letterSpacing: `${typography.scale.captionL.regular.letterSpacing}px`
+              }
+            },
+            toTitle22(stateItem)
+          ),
+          ACTIVE_OPTIONS.map((activeItem) => /* @__PURE__ */ import_react43.default.createElement(
+            "div",
+            {
+              key: `${sizeItem}-${stateItem}-${activeItem ? "on" : "off"}`,
+              style: {
+                display: "inline-flex",
+                alignItems: "center",
+                gap: spacing.scale["8"]
+              }
+            },
+            /* @__PURE__ */ import_react43.default.createElement(Toggle, { size: sizeItem, checked: activeItem, state: stateItem, "aria-label": `${sizeItem}-${stateItem}-${activeItem ? "on" : "off"}` }),
+            /* @__PURE__ */ import_react43.default.createElement(
+              "span",
+              {
+                style: {
+                  color: textBase25.staticDarkSecondary,
+                  fontFamily: typography.scale.captionM.medium.fontFamily,
+                  fontSize: typography.scale.captionM.medium.fontSize,
+                  fontWeight: typography.scale.captionM.medium.fontWeight,
+                  lineHeight: `${typography.scale.captionM.medium.lineHeight}px`,
+                  letterSpacing: `${typography.scale.captionM.medium.letterSpacing}px`
+                }
+              },
+              activeItem ? "Active=True" : "Active=False"
+            )
+          ))
+        )))))
+      )
+    )
+  );
+}
+
+// components/Tooltip/Tooltip.preview.tsx
+var import_react45 = __toESM(require_react());
+
+// components/Tooltip/Tooltip.tsx
+var import_react44 = __toESM(require_react());
+var SIZE_CONFIG15 = {
+  sm: {
+    paddingX: spacing.scale["8"],
+    paddingY: spacing.scale["4"],
+    radiusValue: radius.scale.sm,
+    textTypography: typography.scale.captionM.regular
+  },
+  md: {
+    paddingX: spacing.scale["12"],
+    paddingY: spacing.scale["8"],
+    radiusValue: radius.scale.sm,
+    textTypography: typography.scale.captionM.regular
+  },
+  lg: {
+    paddingX: spacing.scale["16"],
+    paddingY: spacing.scale["12"],
+    radiusValue: radius.scale.md,
+    textTypography: typography.scale.captionM.regular,
+    headlineTypography: typography.scale.captionM.medium,
+    descriptionTypography: typography.scale.captionM.regular
+  }
+};
+var ARROW_WIDTH = spacing.scale["14"];
+var ARROW_HEIGHT = spacing.scale["4"];
+var ARROW_SIDE_WIDTH = spacing.scale["4"];
+var ARROW_SIDE_HEIGHT = spacing.scale["14"];
+var ARROW_CONTAINER_SIZE = spacing.scale["6"];
+var ARROW_OFFSET = spacing.scale["10"];
+var TOOLTIP_MAX_WIDTH = spacing.scale["320"];
+var LG_TEXT_MAX_WIDTH = spacing.scale["192"] + spacing.scale["8"];
+var TRIGGER_SIZE = spacing.scale["24"];
+var TRIGGER_ICON_SIZE = spacing.scale["14"];
+var TRIGGER_TOOLTIP_OFFSET = spacing.scale["24"] + spacing.scale["6"];
+var boxBackground = colors.semantic.theme.background.surface.default;
+var boxBorderColor = border.color.theme.action.normal;
+var textBase26 = colors.semantic.theme.text.base;
+var iconBase2 = colors.semantic.theme.icon.base;
+var LG_SUPPORTED_PLACEMENTS = /* @__PURE__ */ new Set([
+  "bottomLeft",
+  "bottomCenter",
+  "bottomRight",
+  "topLeft",
+  "topCenter",
+  "topRight"
+]);
+function toTypographyStyle14(token) {
+  return {
+    fontFamily: token.fontFamily,
+    fontSize: token.fontSize,
+    fontWeight: token.fontWeight,
+    lineHeight: `${token.lineHeight}px`,
+    letterSpacing: `${token.letterSpacing}px`
+  };
+}
+function normalizePlacement(size, placement) {
+  if (size !== "lg") {
+    return placement;
+  }
+  if (LG_SUPPORTED_PLACEMENTS.has(placement)) {
+    return placement;
+  }
+  return "topCenter";
+}
+function resolveArrowAlign(placement) {
+  if (placement === "bottomLeft" || placement === "topLeft") {
+    return "flex-start";
+  }
+  if (placement === "bottomRight" || placement === "topRight") {
+    return "flex-end";
+  }
+  return "center";
+}
+function TooltipArrow({
+  direction,
+  backgroundColor,
+  borderColor
+}) {
+  if (direction === "up") {
+    return /* @__PURE__ */ import_react44.default.createElement("svg", { width: ARROW_WIDTH, height: ARROW_HEIGHT, viewBox: `0 0 ${ARROW_WIDTH} ${ARROW_HEIGHT}`, "aria-hidden": "true", style: { display: "block" } }, /* @__PURE__ */ import_react44.default.createElement("path", { d: `M 0 ${ARROW_HEIGHT} L ${ARROW_WIDTH / 2} 0 L ${ARROW_WIDTH} ${ARROW_HEIGHT} Z`, fill: backgroundColor, stroke: borderColor, strokeWidth: border.width["1"] }));
+  }
+  if (direction === "down") {
+    return /* @__PURE__ */ import_react44.default.createElement("svg", { width: ARROW_WIDTH, height: ARROW_HEIGHT, viewBox: `0 0 ${ARROW_WIDTH} ${ARROW_HEIGHT}`, "aria-hidden": "true", style: { display: "block" } }, /* @__PURE__ */ import_react44.default.createElement("path", { d: `M 0 0 L ${ARROW_WIDTH / 2} ${ARROW_HEIGHT} L ${ARROW_WIDTH} 0 Z`, fill: backgroundColor, stroke: borderColor, strokeWidth: border.width["1"] }));
+  }
+  if (direction === "left") {
+    return /* @__PURE__ */ import_react44.default.createElement(
+      "svg",
+      {
+        width: ARROW_SIDE_WIDTH,
+        height: ARROW_SIDE_HEIGHT,
+        viewBox: `0 0 ${ARROW_SIDE_WIDTH} ${ARROW_SIDE_HEIGHT}`,
+        "aria-hidden": "true",
+        style: { display: "block" }
+      },
+      /* @__PURE__ */ import_react44.default.createElement("path", { d: `M ${ARROW_SIDE_WIDTH} 0 L 0 ${ARROW_SIDE_HEIGHT / 2} L ${ARROW_SIDE_WIDTH} ${ARROW_SIDE_HEIGHT} Z`, fill: backgroundColor, stroke: borderColor, strokeWidth: border.width["1"] })
+    );
+  }
+  return /* @__PURE__ */ import_react44.default.createElement(
+    "svg",
+    {
+      width: ARROW_SIDE_WIDTH,
+      height: ARROW_SIDE_HEIGHT,
+      viewBox: `0 0 ${ARROW_SIDE_WIDTH} ${ARROW_SIDE_HEIGHT}`,
+      "aria-hidden": "true",
+      style: { display: "block" }
+    },
+    /* @__PURE__ */ import_react44.default.createElement("path", { d: `M 0 0 L ${ARROW_SIDE_WIDTH} ${ARROW_SIDE_HEIGHT / 2} L 0 ${ARROW_SIDE_HEIGHT} Z`, fill: backgroundColor, stroke: borderColor, strokeWidth: border.width["1"] })
+  );
+}
+function TooltipBox({
+  size,
+  text,
+  headline,
+  description
+}) {
+  const config = SIZE_CONFIG15[size];
+  if (size === "lg") {
+    return /* @__PURE__ */ import_react44.default.createElement(
+      "div",
+      {
+        style: {
+          display: "inline-flex",
+          alignItems: "center",
+          justifyContent: "center",
+          paddingInline: config.paddingX,
+          paddingBlock: config.paddingY,
+          borderStyle: "solid",
+          borderWidth: border.width["1"],
+          borderColor: boxBorderColor,
+          borderRadius: config.radiusValue,
+          backgroundColor: boxBackground,
+          boxShadow: shadows.tooltip.sm.css,
+          boxSizing: "border-box"
+        }
+      },
+      /* @__PURE__ */ import_react44.default.createElement(
+        "div",
+        {
+          style: {
+            display: "grid",
+            gap: spacing.scale["4"]
+          }
+        },
+        /* @__PURE__ */ import_react44.default.createElement(
+          "p",
+          {
+            style: {
+              margin: spacing.scale["0"],
+              maxWidth: LG_TEXT_MAX_WIDTH,
+              color: textBase26.staticDark,
+              whiteSpace: "normal",
+              ...toTypographyStyle14(config.headlineTypography ?? typography.scale.captionM.medium)
+            }
+          },
+          headline
+        ),
+        /* @__PURE__ */ import_react44.default.createElement(
+          "p",
+          {
+            style: {
+              margin: spacing.scale["0"],
+              maxWidth: LG_TEXT_MAX_WIDTH,
+              color: textBase26.staticDarkSecondary,
+              whiteSpace: "normal",
+              ...toTypographyStyle14(config.descriptionTypography ?? typography.scale.captionM.regular)
+            }
+          },
+          description
+        )
+      )
+    );
+  }
+  return /* @__PURE__ */ import_react44.default.createElement(
+    "div",
+    {
+      style: {
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        paddingInline: config.paddingX,
+        paddingBlock: config.paddingY,
+        borderStyle: "solid",
+        borderWidth: border.width["1"],
+        borderColor: boxBorderColor,
+        borderRadius: config.radiusValue,
+        backgroundColor: boxBackground,
+        boxShadow: shadows.tooltip.sm.css,
+        boxSizing: "border-box"
+      }
+    },
+    /* @__PURE__ */ import_react44.default.createElement(
+      "p",
+      {
+        style: {
+          margin: spacing.scale["0"],
+          color: textBase26.staticDark,
+          whiteSpace: "nowrap",
+          ...toTypographyStyle14(config.textTypography)
+        }
+      },
+      text
+    )
+  );
+}
+function ArrowWrapper({ placement }) {
+  const align = resolveArrowAlign(placement);
+  if (placement === "leftSide" || placement === "rightSide") {
+    return /* @__PURE__ */ import_react44.default.createElement(
+      "div",
+      {
+        style: {
+          width: ARROW_CONTAINER_SIZE,
+          alignSelf: "stretch",
+          display: "inline-flex",
+          alignItems: "center",
+          justifyContent: placement === "leftSide" ? "flex-end" : "flex-start",
+          overflow: "hidden"
+        }
+      },
+      /* @__PURE__ */ import_react44.default.createElement(TooltipArrow, { direction: placement === "leftSide" ? "left" : "right", backgroundColor: boxBackground, borderColor: boxBorderColor })
+    );
+  }
+  const isTop = placement === "topLeft" || placement === "topCenter" || placement === "topRight";
+  return /* @__PURE__ */ import_react44.default.createElement(
+    "div",
+    {
+      style: {
+        height: ARROW_CONTAINER_SIZE,
+        width: "100%",
+        display: "inline-flex",
+        alignItems: isTop ? "flex-end" : "flex-start",
+        justifyContent: align,
+        paddingLeft: align === "flex-start" ? ARROW_OFFSET : spacing.scale["0"],
+        paddingRight: align === "flex-end" ? ARROW_OFFSET : spacing.scale["0"],
+        overflow: "hidden",
+        boxSizing: "border-box"
+      }
+    },
+    /* @__PURE__ */ import_react44.default.createElement(TooltipArrow, { direction: isTop ? "up" : "down", backgroundColor: boxBackground, borderColor: boxBorderColor })
+  );
+}
+function Tooltip({
+  size = "sm",
+  placement = "bottomCenter",
+  text = "Tooltip text",
+  headline = "Tooltip headline",
+  description = "Tooltips display informative text when users hover over, focus on, or tap an element",
+  className,
+  style,
+  ...rest
+}) {
+  const resolvedPlacement = normalizePlacement(size, placement);
+  const isSidePlacement = resolvedPlacement === "leftSide" || resolvedPlacement === "rightSide";
+  const isTopPlacement = resolvedPlacement === "topLeft" || resolvedPlacement === "topCenter" || resolvedPlacement === "topRight";
+  const box = /* @__PURE__ */ import_react44.default.createElement(TooltipBox, { size, text, headline, description });
+  const arrow = /* @__PURE__ */ import_react44.default.createElement(ArrowWrapper, { placement: resolvedPlacement });
+  return /* @__PURE__ */ import_react44.default.createElement(
+    "div",
+    {
+      ...rest,
+      role: "tooltip",
+      className,
+      style: {
+        display: "inline-flex",
+        maxWidth: TOOLTIP_MAX_WIDTH,
+        alignItems: "stretch",
+        flexDirection: isSidePlacement ? "row" : "column",
+        ...isTopPlacement && !isSidePlacement ? { isolation: "isolate" } : {},
+        ...style
+      }
+    },
+    isSidePlacement ? resolvedPlacement === "leftSide" ? /* @__PURE__ */ import_react44.default.createElement(import_react44.default.Fragment, null, arrow, box) : /* @__PURE__ */ import_react44.default.createElement(import_react44.default.Fragment, null, box, arrow) : isTopPlacement ? /* @__PURE__ */ import_react44.default.createElement(import_react44.default.Fragment, null, arrow, box) : /* @__PURE__ */ import_react44.default.createElement(import_react44.default.Fragment, null, box, arrow)
+  );
+}
+function TooltipTrigger({
+  active,
+  defaultActive = false,
+  disabled = false,
+  onActiveChange,
+  showTooltipOnActive = true,
+  tooltipProps,
+  tooltipStyle,
+  onClick,
+  className,
+  style,
+  ...rest
+}) {
+  const isControlled = active !== void 0;
+  const [internalActive, setInternalActive] = (0, import_react44.useState)(defaultActive);
+  const resolvedActive = isControlled ? Boolean(active) : internalActive;
+  const tooltipId = (0, import_react44.useId)();
+  const visibleTooltip = showTooltipOnActive && resolvedActive;
+  const resolvedTooltipProps = {
+    size: "sm",
+    placement: "bottomCenter",
+    text: "Tooltip text",
+    ...tooltipProps
+  };
+  const handleToggle = (event) => {
+    if (disabled) {
+      event.preventDefault();
+      return;
+    }
+    const next = !resolvedActive;
+    if (!isControlled) {
+      setInternalActive(next);
+    }
+    onActiveChange?.(next);
+    onClick?.(event);
+  };
+  const iconBackgroundColor = resolvedActive ? iconBase2.staticDark : iconBase2.staticDarkQuaternary;
+  return /* @__PURE__ */ import_react44.default.createElement(
+    "button",
+    {
+      ...rest,
+      type: "button",
+      "aria-pressed": resolvedActive,
+      "aria-disabled": disabled || void 0,
+      "aria-describedby": visibleTooltip ? tooltipId : void 0,
+      disabled,
+      onClick: handleToggle,
+      className,
+      style: {
+        width: TRIGGER_SIZE,
+        height: TRIGGER_SIZE,
+        borderStyle: "solid",
+        borderWidth: border.width["0"],
+        borderRadius: radius.scale.full,
+        backgroundColor: colors.primitive.palette.base.transparent,
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        position: "relative",
+        cursor: disabled ? "not-allowed" : "pointer",
+        boxSizing: "border-box",
+        ...style
+      }
+    },
+    /* @__PURE__ */ import_react44.default.createElement(
+      "span",
+      {
+        "aria-hidden": "true",
+        style: {
+          width: TRIGGER_ICON_SIZE,
+          height: TRIGGER_ICON_SIZE,
+          borderRadius: radius.scale.full,
+          backgroundColor: iconBackgroundColor,
+          display: "inline-flex",
+          alignItems: "center",
+          justifyContent: "center",
+          color: iconBase2.staticWhite,
+          ...toTypographyStyle14(typography.scale.captionS.medium),
+          lineHeight: `${TRIGGER_ICON_SIZE}px`,
+          textAlign: "center",
+          userSelect: "none"
+        }
+      },
+      "i"
+    ),
+    visibleTooltip ? /* @__PURE__ */ import_react44.default.createElement(
+      Tooltip,
+      {
+        ...resolvedTooltipProps,
+        id: tooltipId,
+        style: {
+          position: "absolute",
+          left: "50%",
+          transform: "translateX(-50%)",
+          bottom: TRIGGER_TOOLTIP_OFFSET,
+          ...tooltipStyle
+        }
+      }
+    ) : null
+  );
+}
+
+// components/Tooltip/Tooltip.preview.tsx
+var SIZES19 = ["sm", "md", "lg"];
+var PLACEMENTS = [
+  "bottomLeft",
+  "bottomCenter",
+  "bottomRight",
+  "topLeft",
+  "topCenter",
+  "topRight",
+  "rightSide",
+  "leftSide"
+];
+var LG_PLACEMENTS = ["bottomLeft", "bottomCenter", "bottomRight", "topLeft", "topCenter", "topRight"];
+var textBase27 = colors.semantic.theme.text.base;
+var palette30 = colors.primitive.palette;
+function toTitle23(value) {
+  return value.replace(/([A-Z])/g, " $1").replace(/^./, (char) => char.toUpperCase()).trim();
+}
+function getSupportedPlacements(size) {
+  if (size === "lg") {
+    return LG_PLACEMENTS;
+  }
+  return PLACEMENTS;
+}
+function TooltipPreviewPage() {
+  const [size, setSize] = (0, import_react45.useState)("sm");
+  const [placement, setPlacement] = (0, import_react45.useState)("bottomCenter");
+  const [triggerActive, setTriggerActive] = (0, import_react45.useState)(false);
+  const [triggerDisabled, setTriggerDisabled] = (0, import_react45.useState)(false);
+  const supportedPlacements = (0, import_react45.useMemo)(() => getSupportedPlacements(size), [size]);
+  const resolvedPlacement = supportedPlacements.includes(placement) ? placement : supportedPlacements[0];
+  return /* @__PURE__ */ import_react45.default.createElement(
+    "main",
+    {
+      style: {
+        minHeight: spacing.scale["844"],
+        backgroundColor: palette30.base.white,
+        color: textBase27.staticDark,
+        padding: spacing.scale["24"],
+        fontFamily: typography.scale.bodyM.medium.fontFamily
+      }
+    },
+    /* @__PURE__ */ import_react45.default.createElement(
+      "section",
+      {
+        style: {
+          maxWidth: spacing.scale["1024"],
+          marginInline: "auto",
+          display: "grid",
+          gap: spacing.scale["24"]
+        }
+      },
+      /* @__PURE__ */ import_react45.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react45.default.createElement(
+        "h1",
+        {
+          style: {
+            margin: spacing.scale["0"],
+            fontFamily: typography.scale.h3.bold.fontFamily,
+            fontSize: typography.scale.h3.bold.fontSize,
+            fontWeight: typography.scale.h3.bold.fontWeight,
+            lineHeight: `${typography.scale.h3.bold.lineHeight}px`,
+            letterSpacing: `${typography.scale.h3.bold.letterSpacing}px`
+          }
+        },
+        "Tooltip Preview"
+      ), /* @__PURE__ */ import_react45.default.createElement(
+        "p",
+        {
+          style: {
+            margin: spacing.scale["0"],
+            color: textBase27.staticDarkSecondary,
+            fontFamily: typography.scale.bodyS.regular.fontFamily,
+            fontSize: typography.scale.bodyS.regular.fontSize,
+            fontWeight: typography.scale.bodyS.regular.fontWeight,
+            lineHeight: `${typography.scale.bodyS.regular.lineHeight}px`,
+            letterSpacing: `${typography.scale.bodyS.regular.letterSpacing}px`
+          }
+        },
+        "Figma MCP \uB178\uB4DC `1428:49982`(Tooltip), `575:31201`(Tooltip Trigger) variant \uAC80\uC99D"
+      )),
+      /* @__PURE__ */ import_react45.default.createElement(
+        "section",
+        {
+          style: {
+            borderStyle: "solid",
+            borderWidth: border.width["1"],
+            borderColor: palette30.gray["3"],
+            borderRadius: radius.scale.xl,
+            backgroundColor: palette30.gray["1"],
+            padding: spacing.scale["16"],
+            display: "grid",
+            gridTemplateColumns: `repeat(auto-fit, minmax(${spacing.scale["224"]}px, 1fr))`,
+            gap: spacing.scale["12"]
+          }
+        },
+        /* @__PURE__ */ import_react45.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react45.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react45.default.createElement(
+          "select",
+          {
+            value: size,
+            onChange: (event) => setSize(event.target.value),
+            style: {
+              minHeight: spacing.scale["40"],
+              borderStyle: "solid",
+              borderWidth: border.width["1"],
+              borderColor: palette30.gray["3"],
+              borderRadius: radius.scale.md,
+              paddingInline: spacing.scale["12"],
+              backgroundColor: palette30.base.white,
+              color: textBase27.staticDark
+            }
+          },
+          SIZES19.map((item) => /* @__PURE__ */ import_react45.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
+        )),
+        /* @__PURE__ */ import_react45.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react45.default.createElement("span", null, "Placement"), /* @__PURE__ */ import_react45.default.createElement(
+          "select",
+          {
+            value: resolvedPlacement,
+            onChange: (event) => setPlacement(event.target.value),
+            style: {
+              minHeight: spacing.scale["40"],
+              borderStyle: "solid",
+              borderWidth: border.width["1"],
+              borderColor: palette30.gray["3"],
+              borderRadius: radius.scale.md,
+              paddingInline: spacing.scale["12"],
+              backgroundColor: palette30.base.white,
+              color: textBase27.staticDark
+            }
+          },
+          supportedPlacements.map((item) => /* @__PURE__ */ import_react45.default.createElement("option", { key: item, value: item }, toTitle23(item)))
+        )),
+        /* @__PURE__ */ import_react45.default.createElement(
+          "label",
+          {
+            style: {
+              minHeight: spacing.scale["40"],
+              borderStyle: "solid",
+              borderWidth: border.width["1"],
+              borderColor: palette30.gray["3"],
+              borderRadius: radius.scale.md,
+              paddingInline: spacing.scale["12"],
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: spacing.scale["8"],
+              backgroundColor: palette30.base.white
+            }
+          },
+          /* @__PURE__ */ import_react45.default.createElement("span", null, "Trigger Active"),
+          /* @__PURE__ */ import_react45.default.createElement("input", { type: "checkbox", checked: triggerActive, onChange: (event) => setTriggerActive(event.target.checked) })
+        ),
+        /* @__PURE__ */ import_react45.default.createElement(
+          "label",
+          {
+            style: {
+              minHeight: spacing.scale["40"],
+              borderStyle: "solid",
+              borderWidth: border.width["1"],
+              borderColor: palette30.gray["3"],
+              borderRadius: radius.scale.md,
+              paddingInline: spacing.scale["12"],
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: spacing.scale["8"],
+              backgroundColor: palette30.base.white
+            }
+          },
+          /* @__PURE__ */ import_react45.default.createElement("span", null, "Trigger Disabled"),
+          /* @__PURE__ */ import_react45.default.createElement("input", { type: "checkbox", checked: triggerDisabled, onChange: (event) => setTriggerDisabled(event.target.checked) })
+        )
+      ),
+      /* @__PURE__ */ import_react45.default.createElement(
+        "section",
+        {
+          style: {
+            borderStyle: "solid",
+            borderWidth: border.width["1"],
+            borderColor: palette30.gray["3"],
+            borderRadius: radius.scale.xl,
+            backgroundColor: palette30.gray["1"],
+            padding: spacing.scale["24"],
+            display: "grid",
+            gap: spacing.scale["16"]
+          }
+        },
+        /* @__PURE__ */ import_react45.default.createElement(
+          "h2",
+          {
+            style: {
+              margin: spacing.scale["0"],
+              fontFamily: typography.scale.h5.semiBold.fontFamily,
+              fontSize: typography.scale.h5.semiBold.fontSize,
+              fontWeight: typography.scale.h5.semiBold.fontWeight,
+              lineHeight: `${typography.scale.h5.semiBold.lineHeight}px`,
+              letterSpacing: `${typography.scale.h5.semiBold.letterSpacing}px`
+            }
+          },
+          "Active Selection"
+        ),
+        /* @__PURE__ */ import_react45.default.createElement(
+          "div",
+          {
+            style: {
+              minHeight: spacing.scale["192"],
+              display: "grid",
+              placeItems: "center",
+              borderStyle: "dashed",
+              borderWidth: border.width["1"],
+              borderColor: palette30.gray["4"],
+              borderRadius: radius.scale.lg,
+              padding: spacing.scale["16"],
+              backgroundColor: palette30.base.white
+            }
+          },
+          /* @__PURE__ */ import_react45.default.createElement(Tooltip, { size, placement: resolvedPlacement })
+        ),
+        /* @__PURE__ */ import_react45.default.createElement(
+          "div",
+          {
+            style: {
+              minHeight: spacing.scale["120"],
+              display: "grid",
+              placeItems: "center",
+              borderStyle: "dashed",
+              borderWidth: border.width["1"],
+              borderColor: palette30.gray["4"],
+              borderRadius: radius.scale.lg,
+              padding: spacing.scale["16"],
+              backgroundColor: palette30.base.white
+            }
+          },
+          /* @__PURE__ */ import_react45.default.createElement(TooltipTrigger, { active: triggerActive, disabled: triggerDisabled, onActiveChange: setTriggerActive })
+        )
+      ),
+      /* @__PURE__ */ import_react45.default.createElement(
+        "section",
+        {
+          style: {
+            borderStyle: "solid",
+            borderWidth: border.width["1"],
+            borderColor: palette30.gray["3"],
+            borderRadius: radius.scale.xl,
+            backgroundColor: palette30.gray["1"],
+            padding: spacing.scale["24"],
+            display: "grid",
+            gap: spacing.scale["16"]
+          }
+        },
+        /* @__PURE__ */ import_react45.default.createElement(
+          "h2",
+          {
+            style: {
+              margin: spacing.scale["0"],
+              fontFamily: typography.scale.h5.semiBold.fontFamily,
+              fontSize: typography.scale.h5.semiBold.fontSize,
+              fontWeight: typography.scale.h5.semiBold.fontWeight,
+              lineHeight: `${typography.scale.h5.semiBold.lineHeight}px`,
+              letterSpacing: `${typography.scale.h5.semiBold.letterSpacing}px`
+            }
+          },
+          "Tooltip Variant Matrix"
+        ),
+        /* @__PURE__ */ import_react45.default.createElement("div", { style: { display: "grid", gap: spacing.scale["20"] } }, SIZES19.map((sizeItem) => {
+          const placements = getSupportedPlacements(sizeItem);
+          return /* @__PURE__ */ import_react45.default.createElement("div", { key: sizeItem, style: { display: "grid", gap: spacing.scale["12"] } }, /* @__PURE__ */ import_react45.default.createElement(
+            "span",
+            {
+              style: {
+                color: textBase27.staticDarkSecondary,
+                fontFamily: typography.scale.captionL.medium.fontFamily,
+                fontSize: typography.scale.captionL.medium.fontSize,
+                fontWeight: typography.scale.captionL.medium.fontWeight,
+                lineHeight: `${typography.scale.captionL.medium.lineHeight}px`,
+                letterSpacing: `${typography.scale.captionL.medium.letterSpacing}px`
+              }
+            },
+            "Size ",
+            sizeItem.toUpperCase()
+          ), /* @__PURE__ */ import_react45.default.createElement(
+            "div",
+            {
+              style: {
+                display: "grid",
+                gridTemplateColumns: `repeat(auto-fit, minmax(${spacing.scale["224"]}px, 1fr))`,
+                gap: spacing.scale["12"]
+              }
+            },
+            placements.map((placementItem) => /* @__PURE__ */ import_react45.default.createElement(
+              "div",
+              {
+                key: `${sizeItem}-${placementItem}`,
+                style: {
+                  borderStyle: "solid",
+                  borderWidth: border.width["1"],
+                  borderColor: palette30.gray["3"],
+                  borderRadius: radius.scale.md,
+                  backgroundColor: palette30.base.white,
+                  padding: spacing.scale["12"],
+                  display: "grid",
+                  gap: spacing.scale["8"]
+                }
+              },
+              /* @__PURE__ */ import_react45.default.createElement(
+                "span",
+                {
+                  style: {
+                    color: textBase27.staticDarkSecondary,
+                    fontFamily: typography.scale.captionM.medium.fontFamily,
+                    fontSize: typography.scale.captionM.medium.fontSize,
+                    fontWeight: typography.scale.captionM.medium.fontWeight,
+                    lineHeight: `${typography.scale.captionM.medium.lineHeight}px`,
+                    letterSpacing: `${typography.scale.captionM.medium.letterSpacing}px`
+                  }
+                },
+                toTitle23(placementItem)
+              ),
+              /* @__PURE__ */ import_react45.default.createElement("div", { style: { minHeight: spacing.scale["80"], display: "grid", placeItems: "center" } }, /* @__PURE__ */ import_react45.default.createElement(Tooltip, { size: sizeItem, placement: placementItem }))
+            ))
+          ));
+        }))
+      ),
+      /* @__PURE__ */ import_react45.default.createElement(
+        "section",
+        {
+          style: {
+            borderStyle: "solid",
+            borderWidth: border.width["1"],
+            borderColor: palette30.gray["3"],
+            borderRadius: radius.scale.xl,
+            backgroundColor: palette30.gray["1"],
+            padding: spacing.scale["24"],
+            display: "grid",
+            gap: spacing.scale["16"]
+          }
+        },
+        /* @__PURE__ */ import_react45.default.createElement(
+          "h2",
+          {
+            style: {
+              margin: spacing.scale["0"],
+              fontFamily: typography.scale.h5.semiBold.fontFamily,
+              fontSize: typography.scale.h5.semiBold.fontSize,
+              fontWeight: typography.scale.h5.semiBold.fontWeight,
+              lineHeight: `${typography.scale.h5.semiBold.lineHeight}px`,
+              letterSpacing: `${typography.scale.h5.semiBold.letterSpacing}px`
+            }
+          },
+          "Trigger Variant Matrix"
+        ),
+        /* @__PURE__ */ import_react45.default.createElement("div", { style: { display: "grid", gridTemplateColumns: `repeat(2, minmax(${spacing.scale["224"]}px, 1fr))`, gap: spacing.scale["12"] } }, [false, true].map((activeItem) => /* @__PURE__ */ import_react45.default.createElement(
+          "div",
+          {
+            key: activeItem ? "trigger-on" : "trigger-off",
+            style: {
+              borderStyle: "solid",
+              borderWidth: border.width["1"],
+              borderColor: palette30.gray["3"],
+              borderRadius: radius.scale.md,
+              backgroundColor: palette30.base.white,
+              padding: spacing.scale["12"],
+              display: "grid",
+              gap: spacing.scale["8"]
+            }
+          },
+          /* @__PURE__ */ import_react45.default.createElement(
+            "span",
+            {
+              style: {
+                color: textBase27.staticDarkSecondary,
+                fontFamily: typography.scale.captionM.medium.fontFamily,
+                fontSize: typography.scale.captionM.medium.fontSize,
+                fontWeight: typography.scale.captionM.medium.fontWeight,
+                lineHeight: `${typography.scale.captionM.medium.lineHeight}px`,
+                letterSpacing: `${typography.scale.captionM.medium.letterSpacing}px`
+              }
+            },
+            "Active=",
+            String(activeItem)
+          ),
+          /* @__PURE__ */ import_react45.default.createElement("div", { style: { minHeight: spacing.scale["80"], display: "grid", placeItems: "center" } }, /* @__PURE__ */ import_react45.default.createElement(TooltipTrigger, { active: activeItem }))
+        )))
+      )
+    )
+  );
+}
+
 // components/TableCell/TableCell.preview.tsx
-var import_react39 = __toESM(require_react());
+var import_react47 = __toESM(require_react());
 
 // components/TableCell/TableCell.tsx
-var import_react38 = __toESM(require_react());
-var palette28 = colors.primitive.palette;
-var textBase23 = colors.semantic.theme.text.base;
+var import_react46 = __toESM(require_react());
+var palette31 = colors.primitive.palette;
+var textBase28 = colors.semantic.theme.text.base;
 var DEFAULT_LEAD_TITLE = "Title";
 var DEFAULT_LEAD_CAPTION = "Caption";
 var DEFAULT_BADGE_LABEL = "Badge";
@@ -41724,7 +44525,7 @@ var DEFAULT_AVATARS = [
 ];
 var DEFAULT_CHART_POINTS = [14, 14, 24, 46, 40, 56, 82];
 var HUNDRED = spacing.scale["40"] + spacing.scale["40"] + spacing.scale["20"];
-var SIZE_CONFIG13 = {
+var SIZE_CONFIG16 = {
   lg: {
     rowHeight: spacing.scale["64"],
     textPaddingX: spacing.scale["12"],
@@ -41858,7 +44659,7 @@ var WIDTH_BY_TYPE = {
     sm: spacing.scale["160"] + spacing.scale["20"]
   }
 };
-function toTypographyStyle13(token) {
+function toTypographyStyle15(token) {
   return {
     fontFamily: token.fontFamily,
     fontSize: token.fontSize,
@@ -41870,32 +44671,32 @@ function toTypographyStyle13(token) {
 function getBadgeToneStyle(tone) {
   if (tone === "green") {
     return {
-      backgroundColor: palette28.green["2"],
-      color: palette28.green["11"]
+      backgroundColor: palette31.green["2"],
+      color: palette31.green["11"]
     };
   }
   if (tone === "gray") {
     return {
-      backgroundColor: palette28.gray["2"],
-      color: textBase23.staticDarkSecondary
+      backgroundColor: palette31.gray["2"],
+      color: textBase28.staticDarkSecondary
     };
   }
   return {
-    backgroundColor: palette28.blue["2"],
-    color: palette28.blue["11"]
+    backgroundColor: palette31.blue["2"],
+    color: palette31.blue["11"]
   };
 }
 function getAvatarToneStyle(tone) {
   if (tone === "orange") {
-    return { backgroundColor: palette28.orange["3"], color: palette28.orange["11"] };
+    return { backgroundColor: palette31.orange["3"], color: palette31.orange["11"] };
   }
   if (tone === "blue") {
-    return { backgroundColor: palette28.blue["3"], color: palette28.blue["11"] };
+    return { backgroundColor: palette31.blue["3"], color: palette31.blue["11"] };
   }
   if (tone === "gray") {
-    return { backgroundColor: palette28.gray["3"], color: textBase23.staticDarkSecondary };
+    return { backgroundColor: palette31.gray["3"], color: textBase28.staticDarkSecondary };
   }
-  return { backgroundColor: palette28.purple["3"], color: palette28.purple["11"] };
+  return { backgroundColor: palette31.purple["3"], color: palette31.purple["11"] };
 }
 function getJustifyContent(direction) {
   if (direction === "center") {
@@ -41939,10 +44740,10 @@ function resolveDirectionTextAlignment(direction) {
 function VerticalDotsIcon({ size, color }) {
   const dotRadius = size / 8;
   const centerX = size / 2;
-  return /* @__PURE__ */ import_react38.default.createElement("svg", { "aria-hidden": "true", viewBox: "0 0 20 20", style: { width: size, height: size, display: "block" } }, /* @__PURE__ */ import_react38.default.createElement("circle", { cx: centerX, cy: size * 0.25, r: dotRadius, fill: color }), /* @__PURE__ */ import_react38.default.createElement("circle", { cx: centerX, cy: size * 0.5, r: dotRadius, fill: color }), /* @__PURE__ */ import_react38.default.createElement("circle", { cx: centerX, cy: size * 0.75, r: dotRadius, fill: color }));
+  return /* @__PURE__ */ import_react46.default.createElement("svg", { "aria-hidden": "true", viewBox: "0 0 20 20", style: { width: size, height: size, display: "block" } }, /* @__PURE__ */ import_react46.default.createElement("circle", { cx: centerX, cy: size * 0.25, r: dotRadius, fill: color }), /* @__PURE__ */ import_react46.default.createElement("circle", { cx: centerX, cy: size * 0.5, r: dotRadius, fill: color }), /* @__PURE__ */ import_react46.default.createElement("circle", { cx: centerX, cy: size * 0.75, r: dotRadius, fill: color }));
 }
 function RefreshIcon({ size, color }) {
-  return /* @__PURE__ */ import_react38.default.createElement("svg", { "aria-hidden": "true", viewBox: "0 0 20 20", style: { width: size, height: size, display: "block" } }, /* @__PURE__ */ import_react38.default.createElement(
+  return /* @__PURE__ */ import_react46.default.createElement("svg", { "aria-hidden": "true", viewBox: "0 0 20 20", style: { width: size, height: size, display: "block" } }, /* @__PURE__ */ import_react46.default.createElement(
     "path",
     {
       d: "M10 3.25C6.272 3.25 3.25 6.272 3.25 10C3.25 13.728 6.272 16.75 10 16.75C12.393 16.75 14.495 15.505 15.694 13.625",
@@ -41951,7 +44752,7 @@ function RefreshIcon({ size, color }) {
       strokeWidth: border.width["2"],
       strokeLinecap: "round"
     }
-  ), /* @__PURE__ */ import_react38.default.createElement(
+  ), /* @__PURE__ */ import_react46.default.createElement(
     "path",
     {
       d: "M15.75 7.75V3.75H11.75",
@@ -41964,7 +44765,7 @@ function RefreshIcon({ size, color }) {
   ));
 }
 function TrashIcon({ size, color }) {
-  return /* @__PURE__ */ import_react38.default.createElement("svg", { "aria-hidden": "true", viewBox: "0 0 20 20", style: { width: size, height: size, display: "block" } }, /* @__PURE__ */ import_react38.default.createElement(
+  return /* @__PURE__ */ import_react46.default.createElement("svg", { "aria-hidden": "true", viewBox: "0 0 20 20", style: { width: size, height: size, display: "block" } }, /* @__PURE__ */ import_react46.default.createElement(
     "path",
     {
       d: "M4.75 5.75H15.25",
@@ -41973,7 +44774,7 @@ function TrashIcon({ size, color }) {
       strokeWidth: border.width["2"],
       strokeLinecap: "round"
     }
-  ), /* @__PURE__ */ import_react38.default.createElement(
+  ), /* @__PURE__ */ import_react46.default.createElement(
     "path",
     {
       d: "M7.5 5.75V4.75C7.5 4.198 7.948 3.75 8.5 3.75H11.5C12.052 3.75 12.5 4.198 12.5 4.75V5.75",
@@ -41982,7 +44783,7 @@ function TrashIcon({ size, color }) {
       strokeWidth: border.width["2"],
       strokeLinecap: "round"
     }
-  ), /* @__PURE__ */ import_react38.default.createElement(
+  ), /* @__PURE__ */ import_react46.default.createElement(
     "path",
     {
       d: "M6.5 7.75V14.25C6.5 14.802 6.948 15.25 7.5 15.25H12.5C13.052 15.25 13.5 14.802 13.5 14.25V7.75",
@@ -41994,20 +44795,20 @@ function TrashIcon({ size, color }) {
   ));
 }
 function SpinnerIcon({ size }) {
-  return /* @__PURE__ */ import_react38.default.createElement("svg", { "aria-hidden": "true", viewBox: "0 0 20 20", style: { width: size, height: size, display: "block" } }, /* @__PURE__ */ import_react38.default.createElement("circle", { cx: "10", cy: "10", r: "6.5", fill: "none", stroke: palette28.gray["3"], strokeWidth: border.width["2"] }), /* @__PURE__ */ import_react38.default.createElement(
+  return /* @__PURE__ */ import_react46.default.createElement("svg", { "aria-hidden": "true", viewBox: "0 0 20 20", style: { width: size, height: size, display: "block" } }, /* @__PURE__ */ import_react46.default.createElement("circle", { cx: "10", cy: "10", r: "6.5", fill: "none", stroke: palette31.gray["3"], strokeWidth: border.width["2"] }), /* @__PURE__ */ import_react46.default.createElement(
     "path",
     {
       d: "M10 3.5C12.45 3.5 14.582 4.854 15.683 6.852",
       fill: "none",
-      stroke: palette28.gray["7"],
+      stroke: palette31.gray["7"],
       strokeWidth: border.width["2"],
       strokeLinecap: "round"
     }
   ));
 }
 function CircleCheckboxIcon({ size, checked }) {
-  const strokeColor = checked ? palette28.green["8"] : palette28.gray["8"];
-  return /* @__PURE__ */ import_react38.default.createElement("svg", { "aria-hidden": "true", viewBox: "0 0 20 20", style: { width: size, height: size, display: "block" } }, /* @__PURE__ */ import_react38.default.createElement("circle", { cx: "10", cy: "10", r: "7", fill: "none", stroke: strokeColor, strokeWidth: border.width["2"] }), /* @__PURE__ */ import_react38.default.createElement(
+  const strokeColor = checked ? palette31.green["8"] : palette31.gray["8"];
+  return /* @__PURE__ */ import_react46.default.createElement("svg", { "aria-hidden": "true", viewBox: "0 0 20 20", style: { width: size, height: size, display: "block" } }, /* @__PURE__ */ import_react46.default.createElement("circle", { cx: "10", cy: "10", r: "7", fill: "none", stroke: strokeColor, strokeWidth: border.width["2"] }), /* @__PURE__ */ import_react46.default.createElement(
     "path",
     {
       d: "M6.5 10.5L9 13L13.5 8.5",
@@ -42027,7 +44828,7 @@ function IconButton({
   icon,
   gap
 }) {
-  return /* @__PURE__ */ import_react38.default.createElement(
+  return /* @__PURE__ */ import_react46.default.createElement(
     "button",
     {
       type: "button",
@@ -42042,8 +44843,8 @@ function IconButton({
         borderStyle: "solid",
         borderWidth: border.width["0"],
         borderRadius: radiusValue,
-        backgroundColor: palette28.base.transparent,
-        color: textBase23.staticDarkSecondary,
+        backgroundColor: palette31.base.transparent,
+        color: textBase28.staticDarkSecondary,
         cursor: disabled || !onClick ? "default" : "pointer"
       }
     },
@@ -42057,7 +44858,7 @@ function AvatarItem({
   imageSrc
 }) {
   const toneStyle = getAvatarToneStyle(tone);
-  return /* @__PURE__ */ import_react38.default.createElement(
+  return /* @__PURE__ */ import_react46.default.createElement(
     "span",
     {
       "aria-hidden": "true",
@@ -42074,7 +44875,7 @@ function AvatarItem({
         flexShrink: 0
       }
     },
-    imageSrc ? /* @__PURE__ */ import_react38.default.createElement(
+    imageSrc ? /* @__PURE__ */ import_react46.default.createElement(
       "img",
       {
         src: imageSrc,
@@ -42086,11 +44887,11 @@ function AvatarItem({
           display: "block"
         }
       }
-    ) : /* @__PURE__ */ import_react38.default.createElement(
+    ) : /* @__PURE__ */ import_react46.default.createElement(
       "span",
       {
         style: {
-          ...toTypographyStyle13(size >= spacing.scale["32"] ? typography.scale.captionL.medium : typography.scale.captionM.medium),
+          ...toTypographyStyle15(size >= spacing.scale["32"] ? typography.scale.captionL.medium : typography.scale.captionM.medium),
           lineHeight: `${size}px`
         }
       },
@@ -42104,12 +44905,12 @@ function renderChart(points) {
   const step = 100 / (clamped.length - 1);
   const linePoints = clamped.map((point, index) => `${(index * step).toFixed(2)},${(100 - point).toFixed(2)}`).join(" ");
   const areaPoints = `0,100 ${linePoints} 100,100`;
-  return /* @__PURE__ */ import_react38.default.createElement("svg", { "aria-hidden": "true", viewBox: "0 0 100 100", preserveAspectRatio: "none", style: { width: "100%", height: "100%", display: "block" } }, /* @__PURE__ */ import_react38.default.createElement("polygon", { points: areaPoints, fill: palette28.blue["2"] }), /* @__PURE__ */ import_react38.default.createElement(
+  return /* @__PURE__ */ import_react46.default.createElement("svg", { "aria-hidden": "true", viewBox: "0 0 100 100", preserveAspectRatio: "none", style: { width: "100%", height: "100%", display: "block" } }, /* @__PURE__ */ import_react46.default.createElement("polygon", { points: areaPoints, fill: palette31.blue["2"] }), /* @__PURE__ */ import_react46.default.createElement(
     "polyline",
     {
       points: linePoints,
       fill: "none",
-      stroke: palette28.blue["8"],
+      stroke: palette31.blue["8"],
       strokeWidth: border.width["2"],
       strokeLinecap: "round",
       strokeLinejoin: "round"
@@ -42124,7 +44925,7 @@ function renderTextBlock({
   stretched
 }) {
   const directionStyle = resolveDirectionTextAlignment(direction);
-  return /* @__PURE__ */ import_react38.default.createElement(
+  return /* @__PURE__ */ import_react46.default.createElement(
     "div",
     {
       style: {
@@ -42139,23 +44940,23 @@ function renderTextBlock({
         textAlign: directionStyle.textAlign
       }
     },
-    /* @__PURE__ */ import_react38.default.createElement(
+    /* @__PURE__ */ import_react46.default.createElement(
       "span",
       {
         style: {
-          ...toTypographyStyle13(typography.scale.captionL.regular),
-          color: textBase23.staticDark,
+          ...toTypographyStyle15(typography.scale.captionL.regular),
+          color: textBase28.staticDark,
           width: stretched ? "100%" : "auto"
         }
       },
       title
     ),
-    showCaption ? /* @__PURE__ */ import_react38.default.createElement(
+    showCaption ? /* @__PURE__ */ import_react46.default.createElement(
       "span",
       {
         style: {
-          ...toTypographyStyle13(typography.scale.captionM.regular),
-          color: textBase23.staticDarkSecondary,
+          ...toTypographyStyle15(typography.scale.captionM.regular),
+          color: textBase28.staticDarkSecondary,
           width: stretched ? "100%" : "auto"
         }
       },
@@ -42198,7 +44999,7 @@ function TableCell({
   progressLabel,
   chartPoints
 }) {
-  const config = SIZE_CONFIG13[size];
+  const config = SIZE_CONFIG16[size];
   const rowHeight = config.rowHeight;
   const rowWidth = WIDTH_BY_TYPE[type][size];
   const cellPaddingX = getCellPaddingX(type, config);
@@ -42217,7 +45018,7 @@ function TableCell({
     if (type === "leadPrimary") {
       const leadTextTypography = typography.scale.captionL.medium;
       const leadCaptionTypography = typography.scale.captionM.regular;
-      return /* @__PURE__ */ import_react38.default.createElement(import_react38.default.Fragment, null, showLeadIcon ? /* @__PURE__ */ import_react38.default.createElement(
+      return /* @__PURE__ */ import_react46.default.createElement(import_react46.default.Fragment, null, showLeadIcon ? /* @__PURE__ */ import_react46.default.createElement(
         "span",
         {
           "aria-hidden": "true",
@@ -42228,14 +45029,14 @@ function TableCell({
             padding: config.leadIconPadding,
             borderStyle: "solid",
             borderWidth: config.leadIconContainerBorderWidth,
-            borderColor: config.leadIconHasContainer ? palette28.gray["2a"] : palette28.base.transparent,
+            borderColor: config.leadIconHasContainer ? palette31.gray["2a"] : palette31.base.transparent,
             borderRadius: config.leadIconHasContainer ? radius.scale.full : radius.scale["0"],
-            backgroundColor: palette28.base.white,
+            backgroundColor: palette31.base.white,
             flexShrink: spacing.scale["0"]
           }
         },
-        leadIcon ?? /* @__PURE__ */ import_react38.default.createElement(VerticalDotsIcon, { size: config.leadIconSize, color: textBase23.staticDarkSecondary })
-      ) : null, /* @__PURE__ */ import_react38.default.createElement(
+        leadIcon ?? /* @__PURE__ */ import_react46.default.createElement(VerticalDotsIcon, { size: config.leadIconSize, color: textBase28.staticDarkSecondary })
+      ) : null, /* @__PURE__ */ import_react46.default.createElement(
         "div",
         {
           style: {
@@ -42247,8 +45048,8 @@ function TableCell({
             flex: direction === "left" ? "1 0 0" : void 0
           }
         },
-        showAvatar ? /* @__PURE__ */ import_react38.default.createElement(AvatarItem, { size: config.leadAvatarSize, label: avatarLabel, imageSrc: avatarSrc, tone: "gray" }) : null,
-        /* @__PURE__ */ import_react38.default.createElement(
+        showAvatar ? /* @__PURE__ */ import_react46.default.createElement(AvatarItem, { size: config.leadAvatarSize, label: avatarLabel, imageSrc: avatarSrc, tone: "gray" }) : null,
+        /* @__PURE__ */ import_react46.default.createElement(
           "div",
           {
             style: {
@@ -42262,37 +45063,37 @@ function TableCell({
               flex: direction === "left" ? "1 0 0" : void 0
             }
           },
-          /* @__PURE__ */ import_react38.default.createElement(
+          /* @__PURE__ */ import_react46.default.createElement(
             "span",
             {
               style: {
-                ...toTypographyStyle13(leadTextTypography),
-                color: textBase23.staticDark,
+                ...toTypographyStyle15(leadTextTypography),
+                color: textBase28.staticDark,
                 width: direction === "left" ? "100%" : "auto"
               }
             },
             title
           ),
-          resolvedShowCaption ? /* @__PURE__ */ import_react38.default.createElement(
+          resolvedShowCaption ? /* @__PURE__ */ import_react46.default.createElement(
             "span",
             {
               style: {
-                ...toTypographyStyle13(leadCaptionTypography),
-                color: textBase23.staticDarkSecondary,
+                ...toTypographyStyle15(leadCaptionTypography),
+                color: textBase28.staticDarkSecondary,
                 width: direction === "left" ? "100%" : "auto"
               }
             },
             caption
           ) : null
         )
-      ), showTailButton ? /* @__PURE__ */ import_react38.default.createElement(
+      ), showTailButton ? /* @__PURE__ */ import_react46.default.createElement(
         IconButton,
         {
           padding: config.iconButtonPadding,
           radiusValue: config.iconButtonRadius,
           disabled,
           onClick: void 0,
-          icon: tailIcon ?? /* @__PURE__ */ import_react38.default.createElement(VerticalDotsIcon, { size: config.iconSize, color: textBase23.staticDarkSecondary }),
+          icon: tailIcon ?? /* @__PURE__ */ import_react46.default.createElement(VerticalDotsIcon, { size: config.iconSize, color: textBase28.staticDarkSecondary }),
           gap: config.iconButtonGap
         }
       ) : null);
@@ -42307,20 +45108,20 @@ function TableCell({
       });
     }
     if (type === "button") {
-      return /* @__PURE__ */ import_react38.default.createElement(
+      return /* @__PURE__ */ import_react46.default.createElement(
         IconButton,
         {
           padding: config.iconButtonPadding,
           radiusValue: config.iconButtonRadius,
           disabled,
           onClick: void 0,
-          icon: buttonIcon ?? /* @__PURE__ */ import_react38.default.createElement(VerticalDotsIcon, { size: config.iconSize, color: textBase23.staticDarkSecondary }),
+          icon: buttonIcon ?? /* @__PURE__ */ import_react46.default.createElement(VerticalDotsIcon, { size: config.iconSize, color: textBase28.staticDarkSecondary }),
           gap: config.iconButtonGap
         }
       );
     }
     if (type === "circleCheckbox") {
-      return /* @__PURE__ */ import_react38.default.createElement(
+      return /* @__PURE__ */ import_react46.default.createElement(
         "button",
         {
           type: "button",
@@ -42339,15 +45140,15 @@ function TableCell({
             borderStyle: "solid",
             borderWidth: border.width["0"],
             borderRadius: radius.scale.full,
-            backgroundColor: palette28.base.transparent,
+            backgroundColor: palette31.base.transparent,
             cursor: disabled || !onCheckedChange ? "default" : "pointer"
           }
         },
-        /* @__PURE__ */ import_react38.default.createElement(CircleCheckboxIcon, { size: spacing.scale["20"], checked })
+        /* @__PURE__ */ import_react46.default.createElement(CircleCheckboxIcon, { size: spacing.scale["20"], checked })
       );
     }
     if (type === "checkbox") {
-      return /* @__PURE__ */ import_react38.default.createElement(
+      return /* @__PURE__ */ import_react46.default.createElement(
         "span",
         {
           style: {
@@ -42359,7 +45160,7 @@ function TableCell({
             flexShrink: spacing.scale["0"]
           }
         },
-        /* @__PURE__ */ import_react38.default.createElement(
+        /* @__PURE__ */ import_react46.default.createElement(
           Checkbox,
           {
             size: "sm",
@@ -42372,7 +45173,7 @@ function TableCell({
       );
     }
     if (type === "radioButton") {
-      return /* @__PURE__ */ import_react38.default.createElement(
+      return /* @__PURE__ */ import_react46.default.createElement(
         "span",
         {
           style: {
@@ -42384,7 +45185,7 @@ function TableCell({
             flexShrink: spacing.scale["0"]
           }
         },
-        /* @__PURE__ */ import_react38.default.createElement(
+        /* @__PURE__ */ import_react46.default.createElement(
           Radio,
           {
             size: "sm",
@@ -42397,24 +45198,24 @@ function TableCell({
       );
     }
     if (type === "buttonGroup") {
-      return /* @__PURE__ */ import_react38.default.createElement(import_react38.default.Fragment, null, /* @__PURE__ */ import_react38.default.createElement(
+      return /* @__PURE__ */ import_react46.default.createElement(import_react46.default.Fragment, null, /* @__PURE__ */ import_react46.default.createElement(
         IconButton,
         {
           padding: config.iconButtonPadding,
           radiusValue: config.iconButtonRadius,
           disabled,
           onClick: void 0,
-          icon: buttonGroupPrimaryIcon ?? /* @__PURE__ */ import_react38.default.createElement(RefreshIcon, { size: config.iconSize, color: textBase23.staticDarkSecondary }),
+          icon: buttonGroupPrimaryIcon ?? /* @__PURE__ */ import_react46.default.createElement(RefreshIcon, { size: config.iconSize, color: textBase28.staticDarkSecondary }),
           gap: config.iconButtonGap
         }
-      ), /* @__PURE__ */ import_react38.default.createElement(
+      ), /* @__PURE__ */ import_react46.default.createElement(
         IconButton,
         {
           padding: config.iconButtonPadding,
           radiusValue: config.iconButtonRadius,
           disabled,
           onClick: void 0,
-          icon: buttonGroupSecondaryIcon ?? /* @__PURE__ */ import_react38.default.createElement(TrashIcon, { size: config.iconSize, color: textBase23.staticDarkSecondary }),
+          icon: buttonGroupSecondaryIcon ?? /* @__PURE__ */ import_react46.default.createElement(TrashIcon, { size: config.iconSize, color: textBase28.staticDarkSecondary }),
           gap: config.iconButtonGap
         }
       ));
@@ -42424,7 +45225,7 @@ function TableCell({
       const trackPaddingStart = spacing.scale["2"];
       const trackPaddingEnd = spacing.scale["14"];
       const trackPaddingBlock = spacing.scale["2"];
-      return /* @__PURE__ */ import_react38.default.createElement(
+      return /* @__PURE__ */ import_react46.default.createElement(
         "button",
         {
           type: "button",
@@ -42443,11 +45244,11 @@ function TableCell({
             borderStyle: "solid",
             borderWidth: border.width["0"],
             borderRadius: radius.scale.full,
-            backgroundColor: toggleChecked ? palette28.green["8"] : palette28.gray["5"],
+            backgroundColor: toggleChecked ? palette31.green["8"] : palette31.gray["5"],
             cursor: disabled || !onToggleCheckedChange ? "default" : "pointer"
           }
         },
-        /* @__PURE__ */ import_react38.default.createElement(
+        /* @__PURE__ */ import_react46.default.createElement(
           "span",
           {
             "aria-hidden": "true",
@@ -42455,7 +45256,7 @@ function TableCell({
               width: handleSize,
               height: handleSize,
               borderRadius: radius.scale.full,
-              backgroundColor: palette28.base.white,
+              backgroundColor: palette31.base.white,
               boxShadow: shadows.elevation.xs.css,
               display: "block",
               flexShrink: spacing.scale["0"]
@@ -42466,7 +45267,7 @@ function TableCell({
     }
     if (type === "badge") {
       const badgeTone = getBadgeToneStyle("blue");
-      return /* @__PURE__ */ import_react38.default.createElement(
+      return /* @__PURE__ */ import_react46.default.createElement(
         "span",
         {
           style: {
@@ -42480,14 +45281,14 @@ function TableCell({
             color: badgeTone.color
           }
         },
-        /* @__PURE__ */ import_react38.default.createElement("span", { style: toTypographyStyle13(typography.scale.captionM.medium) }, badgeLabel)
+        /* @__PURE__ */ import_react46.default.createElement("span", { style: toTypographyStyle15(typography.scale.captionM.medium) }, badgeLabel)
       );
     }
     if (type === "badgeGroup") {
       const items = badges && badges.length > 0 ? badges : DEFAULT_BADGES;
-      return /* @__PURE__ */ import_react38.default.createElement(import_react38.default.Fragment, null, items.map((item, index) => {
+      return /* @__PURE__ */ import_react46.default.createElement(import_react46.default.Fragment, null, items.map((item, index) => {
         const toneStyle = getBadgeToneStyle(item.tone ?? "blue");
-        return /* @__PURE__ */ import_react38.default.createElement(
+        return /* @__PURE__ */ import_react46.default.createElement(
           "span",
           {
             key: `${item.label}-${index}`,
@@ -42502,12 +45303,12 @@ function TableCell({
               color: toneStyle.color
             }
           },
-          /* @__PURE__ */ import_react38.default.createElement("span", { style: toTypographyStyle13(typography.scale.captionM.medium) }, item.label)
+          /* @__PURE__ */ import_react46.default.createElement("span", { style: toTypographyStyle15(typography.scale.captionM.medium) }, item.label)
         );
       }));
     }
     if (type === "avatar") {
-      return /* @__PURE__ */ import_react38.default.createElement(
+      return /* @__PURE__ */ import_react46.default.createElement(
         AvatarItem,
         {
           size: config.avatarSize,
@@ -42519,7 +45320,7 @@ function TableCell({
     }
     if (type === "avatarGroup") {
       const items = avatars && avatars.length > 0 ? avatars : DEFAULT_AVATARS;
-      return /* @__PURE__ */ import_react38.default.createElement(
+      return /* @__PURE__ */ import_react46.default.createElement(
         "div",
         {
           style: {
@@ -42530,7 +45331,7 @@ function TableCell({
             paddingBlock: spacing.scale["0"]
           }
         },
-        items.map((item) => /* @__PURE__ */ import_react38.default.createElement(
+        items.map((item) => /* @__PURE__ */ import_react46.default.createElement(
           "span",
           {
             key: item.id,
@@ -42540,7 +45341,7 @@ function TableCell({
               borderRadius: radius.scale.full,
               borderStyle: "solid",
               borderWidth: border.width["2"],
-              borderColor: palette28.base.white,
+              borderColor: palette31.base.white,
               marginRight: -config.avatarGroupOverlap,
               overflow: "hidden",
               display: "inline-flex",
@@ -42549,7 +45350,7 @@ function TableCell({
               flexShrink: spacing.scale["0"]
             }
           },
-          /* @__PURE__ */ import_react38.default.createElement(
+          /* @__PURE__ */ import_react46.default.createElement(
             AvatarItem,
             {
               size: config.avatarSize,
@@ -42559,7 +45360,7 @@ function TableCell({
             }
           )
         )),
-        /* @__PURE__ */ import_react38.default.createElement(
+        /* @__PURE__ */ import_react46.default.createElement(
           "span",
           {
             style: {
@@ -42568,23 +45369,23 @@ function TableCell({
               borderRadius: radius.scale.full,
               borderStyle: "solid",
               borderWidth: border.width["2"],
-              borderColor: palette28.base.white,
+              borderColor: palette31.base.white,
               marginRight: -config.avatarGroupOverlap,
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: palette28.orange["2"],
-              color: palette28.orange["11"],
+              backgroundColor: palette31.orange["2"],
+              color: palette31.orange["11"],
               flexShrink: spacing.scale["0"]
             }
           },
-          /* @__PURE__ */ import_react38.default.createElement("span", { style: toTypographyStyle13(config.avatarOverflowTypography) }, avatarOverflowLabel)
+          /* @__PURE__ */ import_react46.default.createElement("span", { style: toTypographyStyle15(config.avatarOverflowTypography) }, avatarOverflowLabel)
         )
       );
     }
     if (type === "progress") {
       const resolvedLabel = progressLabel ?? `${Math.round(resolvedProgress)}%`;
-      return /* @__PURE__ */ import_react38.default.createElement(
+      return /* @__PURE__ */ import_react46.default.createElement(
         "div",
         {
           style: {
@@ -42596,20 +45397,20 @@ function TableCell({
             flex: "1 0 0"
           }
         },
-        /* @__PURE__ */ import_react38.default.createElement(
+        /* @__PURE__ */ import_react46.default.createElement(
           "span",
           {
             "aria-hidden": "true",
             style: {
               height: spacing.scale["8"],
               borderRadius: radius.scale.full,
-              backgroundColor: palette28.gray["2"],
+              backgroundColor: palette31.gray["2"],
               overflow: "hidden",
               minWidth: spacing.scale["0"],
               flex: "1 0 0"
             }
           },
-          /* @__PURE__ */ import_react38.default.createElement(
+          /* @__PURE__ */ import_react46.default.createElement(
             "span",
             {
               style: {
@@ -42617,12 +45418,12 @@ function TableCell({
                 width: `${resolvedProgress}%`,
                 height: "100%",
                 borderRadius: radius.scale.full,
-                backgroundColor: palette28.green["8"]
+                backgroundColor: palette31.green["8"]
               }
             }
           )
         ),
-        /* @__PURE__ */ import_react38.default.createElement(
+        /* @__PURE__ */ import_react46.default.createElement(
           "span",
           {
             style: {
@@ -42634,14 +45435,14 @@ function TableCell({
               paddingBlock: spacing.scale["2"]
             }
           },
-          /* @__PURE__ */ import_react38.default.createElement("span", { style: { ...toTypographyStyle13(typography.scale.captionL.regular), color: textBase23.staticDark } }, resolvedLabel),
-          /* @__PURE__ */ import_react38.default.createElement(SpinnerIcon, { size: spacing.scale["16"] })
+          /* @__PURE__ */ import_react46.default.createElement("span", { style: { ...toTypographyStyle15(typography.scale.captionL.regular), color: textBase28.staticDark } }, resolvedLabel),
+          /* @__PURE__ */ import_react46.default.createElement(SpinnerIcon, { size: spacing.scale["16"] })
         )
       );
     }
-    return /* @__PURE__ */ import_react38.default.createElement("div", { style: { width: "100%", height: "100%", minWidth: spacing.scale["0"], minHeight: spacing.scale["0"] } }, renderChart(chartPoints ?? DEFAULT_CHART_POINTS));
+    return /* @__PURE__ */ import_react46.default.createElement("div", { style: { width: "100%", height: "100%", minWidth: spacing.scale["0"], minHeight: spacing.scale["0"] } }, renderChart(chartPoints ?? DEFAULT_CHART_POINTS));
   })();
-  return /* @__PURE__ */ import_react38.default.createElement(
+  return /* @__PURE__ */ import_react46.default.createElement(
     "div",
     {
       id,
@@ -42657,8 +45458,8 @@ function TableCell({
         paddingBlock: type === "chart" ? config.chartPaddingY : spacing.scale["0"],
         borderBottomStyle: "solid",
         borderBottomWidth: border.width["1"],
-        borderBottomColor: palette28.gray["2"],
-        backgroundColor: palette28.base.white,
+        borderBottomColor: palette31.gray["2"],
+        backgroundColor: palette31.base.white,
         boxSizing: "border-box",
         opacity: disabled ? 0.6 : 1,
         ...style
@@ -42670,7 +45471,7 @@ function TableCell({
 }
 
 // components/TableCell/TableCell.preview.tsx
-var TYPES11 = [
+var TYPES12 = [
   "leadPrimary",
   "text",
   "button",
@@ -42686,12 +45487,12 @@ var TYPES11 = [
   "progress",
   "chart"
 ];
-var SIZES17 = ["lg", "md", "sm"];
+var SIZES20 = ["lg", "md", "sm"];
 var DIRECTIONS3 = ["left", "center", "right"];
 var HUNDRED2 = spacing.scale["40"] + spacing.scale["40"] + spacing.scale["20"];
-var palette29 = colors.primitive.palette;
-var textBase24 = colors.semantic.theme.text.base;
-function toTitle21(value) {
+var palette32 = colors.primitive.palette;
+var textBase29 = colors.semantic.theme.text.base;
+function toTitle24(value) {
   if (value === "leadPrimary") {
     return "Lead [Primary]";
   }
@@ -42722,36 +45523,36 @@ function toTypography(token) {
   };
 }
 function TableCellPreviewPage() {
-  const [type, setType] = (0, import_react39.useState)("leadPrimary");
-  const [size, setSize] = (0, import_react39.useState)("md");
-  const [direction, setDirection] = (0, import_react39.useState)("left");
-  const [disabled, setDisabled] = (0, import_react39.useState)(false);
-  const [showLeadIcon, setShowLeadIcon] = (0, import_react39.useState)(false);
-  const [showAvatar, setShowAvatar] = (0, import_react39.useState)(true);
-  const [showTailButton, setShowTailButton] = (0, import_react39.useState)(true);
-  const [showCaption, setShowCaption] = (0, import_react39.useState)(true);
-  const [checked, setChecked] = (0, import_react39.useState)(false);
-  const [radioChecked, setRadioChecked] = (0, import_react39.useState)(false);
-  const [toggleChecked, setToggleChecked] = (0, import_react39.useState)(false);
-  const [progressValue, setProgressValue] = (0, import_react39.useState)(spacing.scale["48"] + spacing.scale["2"]);
+  const [type, setType] = (0, import_react47.useState)("leadPrimary");
+  const [size, setSize] = (0, import_react47.useState)("md");
+  const [direction, setDirection] = (0, import_react47.useState)("left");
+  const [disabled, setDisabled] = (0, import_react47.useState)(false);
+  const [showLeadIcon, setShowLeadIcon] = (0, import_react47.useState)(false);
+  const [showAvatar, setShowAvatar] = (0, import_react47.useState)(true);
+  const [showTailButton, setShowTailButton] = (0, import_react47.useState)(true);
+  const [showCaption, setShowCaption] = (0, import_react47.useState)(true);
+  const [checked, setChecked] = (0, import_react47.useState)(false);
+  const [radioChecked, setRadioChecked] = (0, import_react47.useState)(false);
+  const [toggleChecked, setToggleChecked] = (0, import_react47.useState)(false);
+  const [progressValue, setProgressValue] = (0, import_react47.useState)(spacing.scale["48"] + spacing.scale["2"]);
   const showLeadOptions = type === "leadPrimary";
   const showTextOptions = type === "text";
   const showCheckboxOptions = type === "checkbox" || type === "circleCheckbox";
   const showRadioOptions = type === "radioButton";
   const showToggleOptions = type === "toggle";
   const showProgressOptions = type === "progress";
-  return /* @__PURE__ */ import_react39.default.createElement(
+  return /* @__PURE__ */ import_react47.default.createElement(
     "main",
     {
       style: {
         minHeight: spacing.scale["844"],
-        backgroundColor: palette29.base.white,
-        color: textBase24.staticDark,
+        backgroundColor: palette32.base.white,
+        color: textBase29.staticDark,
         padding: spacing.scale["24"],
         fontFamily: typography.scale.bodyM.medium.fontFamily
       }
     },
-    /* @__PURE__ */ import_react39.default.createElement(
+    /* @__PURE__ */ import_react47.default.createElement(
       "section",
       {
         style: {
@@ -42761,7 +45562,7 @@ function TableCellPreviewPage() {
           gap: spacing.scale["24"]
         }
       },
-      /* @__PURE__ */ import_react39.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react39.default.createElement(
+      /* @__PURE__ */ import_react47.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react47.default.createElement(
         "h1",
         {
           style: {
@@ -42770,33 +45571,33 @@ function TableCellPreviewPage() {
           }
         },
         "Table Cell Preview"
-      ), /* @__PURE__ */ import_react39.default.createElement(
+      ), /* @__PURE__ */ import_react47.default.createElement(
         "p",
         {
           style: {
             margin: spacing.scale["0"],
-            color: textBase24.staticDarkSecondary,
+            color: textBase29.staticDarkSecondary,
             ...toTypography(typography.scale.bodyS.regular)
           }
         },
         "Figma Variant(Type/Size/Direction)\uC640 \uC140 \uB0B4\uBD80 \uD1A0\uD070 \uAD6C\uC131\uC744 \uAC80\uC99D\uD569\uB2C8\uB2E4."
       )),
-      /* @__PURE__ */ import_react39.default.createElement(
+      /* @__PURE__ */ import_react47.default.createElement(
         "section",
         {
           style: {
             borderStyle: "solid",
             borderWidth: border.width["1"],
-            borderColor: palette29.gray["3"],
+            borderColor: palette32.gray["3"],
             borderRadius: radius.scale.xl,
-            backgroundColor: palette29.gray["1"],
+            backgroundColor: palette32.gray["1"],
             padding: spacing.scale["16"],
             display: "grid",
             gridTemplateColumns: `repeat(auto-fit, minmax(${spacing.scale["224"]}px, 1fr))`,
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react39.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react39.default.createElement("span", null, "Type"), /* @__PURE__ */ import_react39.default.createElement(
+        /* @__PURE__ */ import_react47.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react47.default.createElement("span", null, "Type"), /* @__PURE__ */ import_react47.default.createElement(
           "select",
           {
             value: type,
@@ -42805,16 +45606,16 @@ function TableCellPreviewPage() {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette29.gray["3"],
+              borderColor: palette32.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
-              backgroundColor: palette29.base.white,
-              color: textBase24.staticDark
+              backgroundColor: palette32.base.white,
+              color: textBase29.staticDark
             }
           },
-          TYPES11.map((item) => /* @__PURE__ */ import_react39.default.createElement("option", { key: item, value: item }, toTitle21(item)))
+          TYPES12.map((item) => /* @__PURE__ */ import_react47.default.createElement("option", { key: item, value: item }, toTitle24(item)))
         )),
-        /* @__PURE__ */ import_react39.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react39.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react39.default.createElement(
+        /* @__PURE__ */ import_react47.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react47.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react47.default.createElement(
           "select",
           {
             value: size,
@@ -42823,16 +45624,16 @@ function TableCellPreviewPage() {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette29.gray["3"],
+              borderColor: palette32.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
-              backgroundColor: palette29.base.white,
-              color: textBase24.staticDark
+              backgroundColor: palette32.base.white,
+              color: textBase29.staticDark
             }
           },
-          SIZES17.map((item) => /* @__PURE__ */ import_react39.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
+          SIZES20.map((item) => /* @__PURE__ */ import_react47.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
         )),
-        /* @__PURE__ */ import_react39.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react39.default.createElement("span", null, "Direction"), /* @__PURE__ */ import_react39.default.createElement(
+        /* @__PURE__ */ import_react47.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react47.default.createElement("span", null, "Direction"), /* @__PURE__ */ import_react47.default.createElement(
           "select",
           {
             value: direction,
@@ -42841,34 +45642,34 @@ function TableCellPreviewPage() {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette29.gray["3"],
+              borderColor: palette32.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
-              backgroundColor: palette29.base.white,
-              color: textBase24.staticDark
+              backgroundColor: palette32.base.white,
+              color: textBase29.staticDark
             }
           },
-          DIRECTIONS3.map((item) => /* @__PURE__ */ import_react39.default.createElement("option", { key: item, value: item }, toTitle21(item)))
+          DIRECTIONS3.map((item) => /* @__PURE__ */ import_react47.default.createElement("option", { key: item, value: item }, toTitle24(item)))
         )),
-        /* @__PURE__ */ import_react39.default.createElement(
+        /* @__PURE__ */ import_react47.default.createElement(
           "label",
           {
             style: {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette29.gray["3"],
+              borderColor: palette32.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "space-between",
               gap: spacing.scale["8"],
-              backgroundColor: palette29.base.white
+              backgroundColor: palette32.base.white
             }
           },
-          /* @__PURE__ */ import_react39.default.createElement("span", null, "Disabled"),
-          /* @__PURE__ */ import_react39.default.createElement(
+          /* @__PURE__ */ import_react47.default.createElement("span", null, "Disabled"),
+          /* @__PURE__ */ import_react47.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -42877,25 +45678,25 @@ function TableCellPreviewPage() {
             }
           )
         ),
-        showLeadOptions ? /* @__PURE__ */ import_react39.default.createElement(import_react39.default.Fragment, null, /* @__PURE__ */ import_react39.default.createElement(
+        showLeadOptions ? /* @__PURE__ */ import_react47.default.createElement(import_react47.default.Fragment, null, /* @__PURE__ */ import_react47.default.createElement(
           "label",
           {
             style: {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette29.gray["3"],
+              borderColor: palette32.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "space-between",
               gap: spacing.scale["8"],
-              backgroundColor: palette29.base.white
+              backgroundColor: palette32.base.white
             }
           },
-          /* @__PURE__ */ import_react39.default.createElement("span", null, "Lead Icon"),
-          /* @__PURE__ */ import_react39.default.createElement(
+          /* @__PURE__ */ import_react47.default.createElement("span", null, "Lead Icon"),
+          /* @__PURE__ */ import_react47.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -42903,25 +45704,25 @@ function TableCellPreviewPage() {
               onChange: (event) => setShowLeadIcon(event.target.checked)
             }
           )
-        ), /* @__PURE__ */ import_react39.default.createElement(
+        ), /* @__PURE__ */ import_react47.default.createElement(
           "label",
           {
             style: {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette29.gray["3"],
+              borderColor: palette32.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "space-between",
               gap: spacing.scale["8"],
-              backgroundColor: palette29.base.white
+              backgroundColor: palette32.base.white
             }
           },
-          /* @__PURE__ */ import_react39.default.createElement("span", null, "Avatar"),
-          /* @__PURE__ */ import_react39.default.createElement(
+          /* @__PURE__ */ import_react47.default.createElement("span", null, "Avatar"),
+          /* @__PURE__ */ import_react47.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -42929,25 +45730,25 @@ function TableCellPreviewPage() {
               onChange: (event) => setShowAvatar(event.target.checked)
             }
           )
-        ), /* @__PURE__ */ import_react39.default.createElement(
+        ), /* @__PURE__ */ import_react47.default.createElement(
           "label",
           {
             style: {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette29.gray["3"],
+              borderColor: palette32.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "space-between",
               gap: spacing.scale["8"],
-              backgroundColor: palette29.base.white
+              backgroundColor: palette32.base.white
             }
           },
-          /* @__PURE__ */ import_react39.default.createElement("span", null, "Tail Button"),
-          /* @__PURE__ */ import_react39.default.createElement(
+          /* @__PURE__ */ import_react47.default.createElement("span", null, "Tail Button"),
+          /* @__PURE__ */ import_react47.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -42955,25 +45756,25 @@ function TableCellPreviewPage() {
               onChange: (event) => setShowTailButton(event.target.checked)
             }
           )
-        ), /* @__PURE__ */ import_react39.default.createElement(
+        ), /* @__PURE__ */ import_react47.default.createElement(
           "label",
           {
             style: {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette29.gray["3"],
+              borderColor: palette32.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "space-between",
               gap: spacing.scale["8"],
-              backgroundColor: palette29.base.white
+              backgroundColor: palette32.base.white
             }
           },
-          /* @__PURE__ */ import_react39.default.createElement("span", null, "Caption"),
-          /* @__PURE__ */ import_react39.default.createElement(
+          /* @__PURE__ */ import_react47.default.createElement("span", null, "Caption"),
+          /* @__PURE__ */ import_react47.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -42982,25 +45783,25 @@ function TableCellPreviewPage() {
             }
           )
         )) : null,
-        showTextOptions ? /* @__PURE__ */ import_react39.default.createElement(
+        showTextOptions ? /* @__PURE__ */ import_react47.default.createElement(
           "label",
           {
             style: {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette29.gray["3"],
+              borderColor: palette32.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "space-between",
               gap: spacing.scale["8"],
-              backgroundColor: palette29.base.white
+              backgroundColor: palette32.base.white
             }
           },
-          /* @__PURE__ */ import_react39.default.createElement("span", null, "Caption"),
-          /* @__PURE__ */ import_react39.default.createElement(
+          /* @__PURE__ */ import_react47.default.createElement("span", null, "Caption"),
+          /* @__PURE__ */ import_react47.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -43009,25 +45810,25 @@ function TableCellPreviewPage() {
             }
           )
         ) : null,
-        showCheckboxOptions ? /* @__PURE__ */ import_react39.default.createElement(
+        showCheckboxOptions ? /* @__PURE__ */ import_react47.default.createElement(
           "label",
           {
             style: {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette29.gray["3"],
+              borderColor: palette32.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "space-between",
               gap: spacing.scale["8"],
-              backgroundColor: palette29.base.white
+              backgroundColor: palette32.base.white
             }
           },
-          /* @__PURE__ */ import_react39.default.createElement("span", null, "Checked"),
-          /* @__PURE__ */ import_react39.default.createElement(
+          /* @__PURE__ */ import_react47.default.createElement("span", null, "Checked"),
+          /* @__PURE__ */ import_react47.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -43036,25 +45837,25 @@ function TableCellPreviewPage() {
             }
           )
         ) : null,
-        showRadioOptions ? /* @__PURE__ */ import_react39.default.createElement(
+        showRadioOptions ? /* @__PURE__ */ import_react47.default.createElement(
           "label",
           {
             style: {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette29.gray["3"],
+              borderColor: palette32.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "space-between",
               gap: spacing.scale["8"],
-              backgroundColor: palette29.base.white
+              backgroundColor: palette32.base.white
             }
           },
-          /* @__PURE__ */ import_react39.default.createElement("span", null, "Checked"),
-          /* @__PURE__ */ import_react39.default.createElement(
+          /* @__PURE__ */ import_react47.default.createElement("span", null, "Checked"),
+          /* @__PURE__ */ import_react47.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -43063,25 +45864,25 @@ function TableCellPreviewPage() {
             }
           )
         ) : null,
-        showToggleOptions ? /* @__PURE__ */ import_react39.default.createElement(
+        showToggleOptions ? /* @__PURE__ */ import_react47.default.createElement(
           "label",
           {
             style: {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette29.gray["3"],
+              borderColor: palette32.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "space-between",
               gap: spacing.scale["8"],
-              backgroundColor: palette29.base.white
+              backgroundColor: palette32.base.white
             }
           },
-          /* @__PURE__ */ import_react39.default.createElement("span", null, "Checked"),
-          /* @__PURE__ */ import_react39.default.createElement(
+          /* @__PURE__ */ import_react47.default.createElement("span", null, "Checked"),
+          /* @__PURE__ */ import_react47.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -43090,7 +45891,7 @@ function TableCellPreviewPage() {
             }
           )
         ) : null,
-        showProgressOptions ? /* @__PURE__ */ import_react39.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react39.default.createElement("span", null, "Progress (", Math.round(progressValue), "%)"), /* @__PURE__ */ import_react39.default.createElement(
+        showProgressOptions ? /* @__PURE__ */ import_react47.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react47.default.createElement("span", null, "Progress (", Math.round(progressValue), "%)"), /* @__PURE__ */ import_react47.default.createElement(
           "input",
           {
             type: "range",
@@ -43102,22 +45903,22 @@ function TableCellPreviewPage() {
           }
         )) : null
       ),
-      /* @__PURE__ */ import_react39.default.createElement(
+      /* @__PURE__ */ import_react47.default.createElement(
         "section",
         {
           style: {
             borderStyle: "solid",
             borderWidth: border.width["1"],
-            borderColor: palette29.gray["3"],
+            borderColor: palette32.gray["3"],
             borderRadius: radius.scale.xl,
-            backgroundColor: palette29.gray["1"],
+            backgroundColor: palette32.gray["1"],
             padding: spacing.scale["24"],
             display: "grid",
             gap: spacing.scale["16"],
             justifyItems: "start"
           }
         },
-        /* @__PURE__ */ import_react39.default.createElement(
+        /* @__PURE__ */ import_react47.default.createElement(
           "h2",
           {
             style: {
@@ -43127,7 +45928,7 @@ function TableCellPreviewPage() {
           },
           "Selected Variant"
         ),
-        /* @__PURE__ */ import_react39.default.createElement(
+        /* @__PURE__ */ import_react47.default.createElement(
           TableCell,
           {
             type,
@@ -43148,21 +45949,21 @@ function TableCellPreviewPage() {
           }
         )
       ),
-      /* @__PURE__ */ import_react39.default.createElement(
+      /* @__PURE__ */ import_react47.default.createElement(
         "section",
         {
           style: {
             borderStyle: "solid",
             borderWidth: border.width["1"],
-            borderColor: palette29.gray["3"],
+            borderColor: palette32.gray["3"],
             borderRadius: radius.scale.xl,
-            backgroundColor: palette29.gray["1"],
+            backgroundColor: palette32.gray["1"],
             padding: spacing.scale["24"],
             display: "grid",
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react39.default.createElement(
+        /* @__PURE__ */ import_react47.default.createElement(
           "h2",
           {
             style: {
@@ -43172,7 +45973,7 @@ function TableCellPreviewPage() {
           },
           "Direction Matrix"
         ),
-        /* @__PURE__ */ import_react39.default.createElement(
+        /* @__PURE__ */ import_react47.default.createElement(
           "div",
           {
             style: {
@@ -43180,7 +45981,7 @@ function TableCellPreviewPage() {
               gap: spacing.scale["12"]
             }
           },
-          DIRECTIONS3.map((item) => /* @__PURE__ */ import_react39.default.createElement(
+          DIRECTIONS3.map((item) => /* @__PURE__ */ import_react47.default.createElement(
             "div",
             {
               key: item,
@@ -43189,8 +45990,8 @@ function TableCellPreviewPage() {
                 gap: spacing.scale["4"]
               }
             },
-            /* @__PURE__ */ import_react39.default.createElement("span", { style: { ...toTypography(typography.scale.captionM.medium), color: textBase24.staticDarkSecondary } }, toTitle21(item)),
-            /* @__PURE__ */ import_react39.default.createElement(
+            /* @__PURE__ */ import_react47.default.createElement("span", { style: { ...toTypography(typography.scale.captionM.medium), color: textBase29.staticDarkSecondary } }, toTitle24(item)),
+            /* @__PURE__ */ import_react47.default.createElement(
               TableCell,
               {
                 type,
@@ -43218,14 +46019,14 @@ function TableCellPreviewPage() {
 }
 
 // components/TableHeader/TableHeader.preview.tsx
-var import_react41 = __toESM(require_react());
+var import_react49 = __toESM(require_react());
 
 // components/TableHeader/TableHeader.tsx
-var import_react40 = __toESM(require_react());
-var palette30 = colors.primitive.palette;
-var textBase25 = colors.semantic.theme.text.base;
+var import_react48 = __toESM(require_react());
+var palette33 = colors.primitive.palette;
+var textBase30 = colors.semantic.theme.text.base;
 var HEADER_WIDTH = spacing.scale["224"] + spacing.scale["56"];
-function toTypographyStyle14(token) {
+function toTypographyStyle16(token) {
   return {
     fontFamily: token.fontFamily,
     fontSize: token.fontSize,
@@ -43235,7 +46036,7 @@ function toTypographyStyle14(token) {
   };
 }
 function SortIcon({ size, color }) {
-  return /* @__PURE__ */ import_react40.default.createElement("svg", { "aria-hidden": "true", viewBox: "0 0 20 20", style: { width: size, height: size, display: "block" } }, /* @__PURE__ */ import_react40.default.createElement(
+  return /* @__PURE__ */ import_react48.default.createElement("svg", { "aria-hidden": "true", viewBox: "0 0 20 20", style: { width: size, height: size, display: "block" } }, /* @__PURE__ */ import_react48.default.createElement(
     "path",
     {
       d: "M6.5 8L10 4.5L13.5 8",
@@ -43245,7 +46046,7 @@ function SortIcon({ size, color }) {
       strokeLinecap: "round",
       strokeLinejoin: "round"
     }
-  ), /* @__PURE__ */ import_react40.default.createElement(
+  ), /* @__PURE__ */ import_react48.default.createElement(
     "path",
     {
       d: "M6.5 12L10 15.5L13.5 12",
@@ -43301,7 +46102,7 @@ function TableHeader({
   onCheckboxCheckedChange,
   onSortClick
 }) {
-  return /* @__PURE__ */ import_react40.default.createElement(
+  return /* @__PURE__ */ import_react48.default.createElement(
     "div",
     {
       id,
@@ -43313,14 +46114,14 @@ function TableHeader({
         alignItems: "center",
         gap: spacing.scale["12"],
         paddingInline: spacing.scale["12"],
-        backgroundColor: palette30.gray["1"],
+        backgroundColor: palette33.gray["1"],
         boxSizing: "border-box",
         opacity: disabled ? 0.6 : 1,
         ...style
       },
       "aria-disabled": disabled || void 0
     },
-    showCheckbox ? /* @__PURE__ */ import_react40.default.createElement(
+    showCheckbox ? /* @__PURE__ */ import_react48.default.createElement(
       "span",
       {
         style: {
@@ -43332,7 +46133,7 @@ function TableHeader({
           flexShrink: spacing.scale["0"]
         }
       },
-      /* @__PURE__ */ import_react40.default.createElement(
+      /* @__PURE__ */ import_react48.default.createElement(
         Checkbox,
         {
           size: "sm",
@@ -43343,17 +46144,17 @@ function TableHeader({
         }
       )
     ) : null,
-    /* @__PURE__ */ import_react40.default.createElement("div", { style: getTextContainerStyle(direction) }, /* @__PURE__ */ import_react40.default.createElement(
+    /* @__PURE__ */ import_react48.default.createElement("div", { style: getTextContainerStyle(direction) }, /* @__PURE__ */ import_react48.default.createElement(
       "span",
       {
         style: {
-          ...toTypographyStyle14(typography.scale.captionL.regular),
-          color: textBase25.staticDarkSecondary,
+          ...toTypographyStyle16(typography.scale.captionL.regular),
+          color: textBase30.staticDarkSecondary,
           whiteSpace: "nowrap"
         }
       },
       title
-    ), showSortIcon ? /* @__PURE__ */ import_react40.default.createElement(
+    ), showSortIcon ? /* @__PURE__ */ import_react48.default.createElement(
       "button",
       {
         type: "button",
@@ -43369,22 +46170,22 @@ function TableHeader({
           borderStyle: "solid",
           borderWidth: border.width["0"],
           borderRadius: spacing.scale["0"],
-          backgroundColor: palette30.base.transparent,
-          color: textBase25.staticDarkSecondary,
+          backgroundColor: palette33.base.transparent,
+          color: textBase30.staticDarkSecondary,
           cursor: disabled || !onSortClick ? "default" : "pointer"
         },
         "aria-label": "Sort column"
       },
-      /* @__PURE__ */ import_react40.default.createElement(SortIcon, { size: spacing.scale["16"], color: textBase25.staticDarkSecondary })
+      /* @__PURE__ */ import_react48.default.createElement(SortIcon, { size: spacing.scale["16"], color: textBase30.staticDarkSecondary })
     ) : null)
   );
 }
 
 // components/TableHeader/TableHeader.preview.tsx
 var DIRECTIONS4 = ["left", "center", "right"];
-var palette31 = colors.primitive.palette;
-var textBase26 = colors.semantic.theme.text.base;
-function toTitle22(value) {
+var palette34 = colors.primitive.palette;
+var textBase31 = colors.semantic.theme.text.base;
+function toTitle25(value) {
   return value.charAt(0).toUpperCase() + value.slice(1);
 }
 function toTypography2(token) {
@@ -43397,24 +46198,24 @@ function toTypography2(token) {
   };
 }
 function TableHeaderPreviewPage() {
-  const [direction, setDirection] = (0, import_react41.useState)("left");
-  const [disabled, setDisabled] = (0, import_react41.useState)(false);
-  const [showCheckbox, setShowCheckbox] = (0, import_react41.useState)(true);
-  const [checkboxChecked, setCheckboxChecked] = (0, import_react41.useState)(false);
-  const [showSortIcon, setShowSortIcon] = (0, import_react41.useState)(false);
-  const [title, setTitle] = (0, import_react41.useState)("Header");
-  return /* @__PURE__ */ import_react41.default.createElement(
+  const [direction, setDirection] = (0, import_react49.useState)("left");
+  const [disabled, setDisabled] = (0, import_react49.useState)(false);
+  const [showCheckbox, setShowCheckbox] = (0, import_react49.useState)(true);
+  const [checkboxChecked, setCheckboxChecked] = (0, import_react49.useState)(false);
+  const [showSortIcon, setShowSortIcon] = (0, import_react49.useState)(false);
+  const [title, setTitle] = (0, import_react49.useState)("Header");
+  return /* @__PURE__ */ import_react49.default.createElement(
     "main",
     {
       style: {
         minHeight: spacing.scale["844"],
-        backgroundColor: palette31.base.white,
-        color: textBase26.staticDark,
+        backgroundColor: palette34.base.white,
+        color: textBase31.staticDark,
         padding: spacing.scale["24"],
         fontFamily: typography.scale.bodyM.medium.fontFamily
       }
     },
-    /* @__PURE__ */ import_react41.default.createElement(
+    /* @__PURE__ */ import_react49.default.createElement(
       "section",
       {
         style: {
@@ -43424,7 +46225,7 @@ function TableHeaderPreviewPage() {
           gap: spacing.scale["24"]
         }
       },
-      /* @__PURE__ */ import_react41.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react41.default.createElement(
+      /* @__PURE__ */ import_react49.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react49.default.createElement(
         "h1",
         {
           style: {
@@ -43433,33 +46234,33 @@ function TableHeaderPreviewPage() {
           }
         },
         "Table Header Preview"
-      ), /* @__PURE__ */ import_react41.default.createElement(
+      ), /* @__PURE__ */ import_react49.default.createElement(
         "p",
         {
           style: {
             margin: spacing.scale["0"],
-            color: textBase26.staticDarkSecondary,
+            color: textBase31.staticDarkSecondary,
             ...toTypography2(typography.scale.bodyS.regular)
           }
         },
         "Figma Variant(Direction) \uBC0F \uD5E4\uB354 \uBCF4\uC870 \uC694\uC18C(checkbox/sort icon) \uAD6C\uC131\uC744 \uAC80\uC99D\uD569\uB2C8\uB2E4."
       )),
-      /* @__PURE__ */ import_react41.default.createElement(
+      /* @__PURE__ */ import_react49.default.createElement(
         "section",
         {
           style: {
             borderStyle: "solid",
             borderWidth: border.width["1"],
-            borderColor: palette31.gray["3"],
+            borderColor: palette34.gray["3"],
             borderRadius: radius.scale.xl,
-            backgroundColor: palette31.gray["1"],
+            backgroundColor: palette34.gray["1"],
             padding: spacing.scale["16"],
             display: "grid",
             gridTemplateColumns: `repeat(auto-fit, minmax(${spacing.scale["224"]}px, 1fr))`,
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react41.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react41.default.createElement("span", null, "Direction"), /* @__PURE__ */ import_react41.default.createElement(
+        /* @__PURE__ */ import_react49.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react49.default.createElement("span", null, "Direction"), /* @__PURE__ */ import_react49.default.createElement(
           "select",
           {
             value: direction,
@@ -43468,16 +46269,16 @@ function TableHeaderPreviewPage() {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette31.gray["3"],
+              borderColor: palette34.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
-              backgroundColor: palette31.base.white,
-              color: textBase26.staticDark
+              backgroundColor: palette34.base.white,
+              color: textBase31.staticDark
             }
           },
-          DIRECTIONS4.map((item) => /* @__PURE__ */ import_react41.default.createElement("option", { key: item, value: item }, toTitle22(item)))
+          DIRECTIONS4.map((item) => /* @__PURE__ */ import_react49.default.createElement("option", { key: item, value: item }, toTitle25(item)))
         )),
-        /* @__PURE__ */ import_react41.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react41.default.createElement("span", null, "Title"), /* @__PURE__ */ import_react41.default.createElement(
+        /* @__PURE__ */ import_react49.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react49.default.createElement("span", null, "Title"), /* @__PURE__ */ import_react49.default.createElement(
           "input",
           {
             type: "text",
@@ -43487,33 +46288,33 @@ function TableHeaderPreviewPage() {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette31.gray["3"],
+              borderColor: palette34.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
-              backgroundColor: palette31.base.white,
-              color: textBase26.staticDark
+              backgroundColor: palette34.base.white,
+              color: textBase31.staticDark
             }
           }
         )),
-        /* @__PURE__ */ import_react41.default.createElement(
+        /* @__PURE__ */ import_react49.default.createElement(
           "label",
           {
             style: {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette31.gray["3"],
+              borderColor: palette34.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "space-between",
               gap: spacing.scale["8"],
-              backgroundColor: palette31.base.white
+              backgroundColor: palette34.base.white
             }
           },
-          /* @__PURE__ */ import_react41.default.createElement("span", null, "Disabled"),
-          /* @__PURE__ */ import_react41.default.createElement(
+          /* @__PURE__ */ import_react49.default.createElement("span", null, "Disabled"),
+          /* @__PURE__ */ import_react49.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -43522,25 +46323,25 @@ function TableHeaderPreviewPage() {
             }
           )
         ),
-        /* @__PURE__ */ import_react41.default.createElement(
+        /* @__PURE__ */ import_react49.default.createElement(
           "label",
           {
             style: {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette31.gray["3"],
+              borderColor: palette34.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "space-between",
               gap: spacing.scale["8"],
-              backgroundColor: palette31.base.white
+              backgroundColor: palette34.base.white
             }
           },
-          /* @__PURE__ */ import_react41.default.createElement("span", null, "Show Checkbox"),
-          /* @__PURE__ */ import_react41.default.createElement(
+          /* @__PURE__ */ import_react49.default.createElement("span", null, "Show Checkbox"),
+          /* @__PURE__ */ import_react49.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -43549,25 +46350,25 @@ function TableHeaderPreviewPage() {
             }
           )
         ),
-        /* @__PURE__ */ import_react41.default.createElement(
+        /* @__PURE__ */ import_react49.default.createElement(
           "label",
           {
             style: {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette31.gray["3"],
+              borderColor: palette34.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "space-between",
               gap: spacing.scale["8"],
-              backgroundColor: showCheckbox ? palette31.base.white : palette31.gray["2"]
+              backgroundColor: showCheckbox ? palette34.base.white : palette34.gray["2"]
             }
           },
-          /* @__PURE__ */ import_react41.default.createElement("span", null, "Checkbox Checked"),
-          /* @__PURE__ */ import_react41.default.createElement(
+          /* @__PURE__ */ import_react49.default.createElement("span", null, "Checkbox Checked"),
+          /* @__PURE__ */ import_react49.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -43577,25 +46378,25 @@ function TableHeaderPreviewPage() {
             }
           )
         ),
-        /* @__PURE__ */ import_react41.default.createElement(
+        /* @__PURE__ */ import_react49.default.createElement(
           "label",
           {
             style: {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette31.gray["3"],
+              borderColor: palette34.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "space-between",
               gap: spacing.scale["8"],
-              backgroundColor: palette31.base.white
+              backgroundColor: palette34.base.white
             }
           },
-          /* @__PURE__ */ import_react41.default.createElement("span", null, "Show Sort Icon"),
-          /* @__PURE__ */ import_react41.default.createElement(
+          /* @__PURE__ */ import_react49.default.createElement("span", null, "Show Sort Icon"),
+          /* @__PURE__ */ import_react49.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -43605,22 +46406,22 @@ function TableHeaderPreviewPage() {
           )
         )
       ),
-      /* @__PURE__ */ import_react41.default.createElement(
+      /* @__PURE__ */ import_react49.default.createElement(
         "section",
         {
           style: {
             borderStyle: "solid",
             borderWidth: border.width["1"],
-            borderColor: palette31.gray["3"],
+            borderColor: palette34.gray["3"],
             borderRadius: radius.scale.xl,
-            backgroundColor: palette31.gray["1"],
+            backgroundColor: palette34.gray["1"],
             padding: spacing.scale["24"],
             display: "grid",
             gap: spacing.scale["16"],
             justifyItems: "start"
           }
         },
-        /* @__PURE__ */ import_react41.default.createElement(
+        /* @__PURE__ */ import_react49.default.createElement(
           "h2",
           {
             style: {
@@ -43630,7 +46431,7 @@ function TableHeaderPreviewPage() {
           },
           "Selected Variant"
         ),
-        /* @__PURE__ */ import_react41.default.createElement(
+        /* @__PURE__ */ import_react49.default.createElement(
           TableHeader,
           {
             direction,
@@ -43644,21 +46445,21 @@ function TableHeaderPreviewPage() {
           }
         )
       ),
-      /* @__PURE__ */ import_react41.default.createElement(
+      /* @__PURE__ */ import_react49.default.createElement(
         "section",
         {
           style: {
             borderStyle: "solid",
             borderWidth: border.width["1"],
-            borderColor: palette31.gray["3"],
+            borderColor: palette34.gray["3"],
             borderRadius: radius.scale.xl,
-            backgroundColor: palette31.gray["1"],
+            backgroundColor: palette34.gray["1"],
             padding: spacing.scale["24"],
             display: "grid",
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react41.default.createElement(
+        /* @__PURE__ */ import_react49.default.createElement(
           "h2",
           {
             style: {
@@ -43668,7 +46469,7 @@ function TableHeaderPreviewPage() {
           },
           "Direction Matrix"
         ),
-        /* @__PURE__ */ import_react41.default.createElement("div", { style: { display: "grid", gap: spacing.scale["12"] } }, DIRECTIONS4.map((item) => /* @__PURE__ */ import_react41.default.createElement("div", { key: item, style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react41.default.createElement("span", { style: { ...toTypography2(typography.scale.captionM.medium), color: textBase26.staticDarkSecondary } }, toTitle22(item)), /* @__PURE__ */ import_react41.default.createElement(
+        /* @__PURE__ */ import_react49.default.createElement("div", { style: { display: "grid", gap: spacing.scale["12"] } }, DIRECTIONS4.map((item) => /* @__PURE__ */ import_react49.default.createElement("div", { key: item, style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react49.default.createElement("span", { style: { ...toTypography2(typography.scale.captionM.medium), color: textBase31.staticDarkSecondary } }, toTitle25(item)), /* @__PURE__ */ import_react49.default.createElement(
           TableHeader,
           {
             direction: item,
@@ -43687,11 +46488,11 @@ function TableHeaderPreviewPage() {
 }
 
 // components/TaskCard/TaskCard.preview.tsx
-var import_react43 = __toESM(require_react());
+var import_react51 = __toESM(require_react());
 
 // components/TaskCard/TaskCard.tsx
-var import_react42 = __toESM(require_react());
-var palette32 = colors.primitive.palette;
+var import_react50 = __toESM(require_react());
+var palette35 = colors.primitive.palette;
 var textTokens7 = colors.semantic.theme.text.base;
 function getTypographyStyle3(token) {
   return {
@@ -43702,7 +46503,7 @@ function getTypographyStyle3(token) {
     letterSpacing: `${token.letterSpacing}px`
   };
 }
-function resolveState4(forcedState, hovered, interactive) {
+function resolveState5(forcedState, hovered, interactive) {
   if (forcedState) {
     return forcedState;
   }
@@ -43712,7 +46513,7 @@ function resolveState4(forcedState, hovered, interactive) {
   return "default";
 }
 function Badge2({ label }) {
-  return /* @__PURE__ */ import_react42.default.createElement(
+  return /* @__PURE__ */ import_react50.default.createElement(
     "div",
     {
       style: {
@@ -43722,10 +46523,10 @@ function Badge2({ label }) {
         paddingInline: spacing.scale["4"],
         paddingBlock: spacing.scale["2"],
         borderRadius: radius.scale.md,
-        backgroundColor: palette32.gray["2"]
+        backgroundColor: palette35.gray["2"]
       }
     },
-    /* @__PURE__ */ import_react42.default.createElement(
+    /* @__PURE__ */ import_react50.default.createElement(
       "span",
       {
         style: {
@@ -43758,8 +46559,8 @@ function TaskCard({
   onKeyDown,
   ...props
 }) {
-  const [hovered, setHovered] = (0, import_react42.useState)(false);
-  const resolvedState = resolveState4(state, hovered, interactive);
+  const [hovered, setHovered] = (0, import_react50.useState)(false);
+  const resolvedState = resolveState5(state, hovered, interactive);
   const isInteractive = Boolean(onClick) || interactive;
   const handleKeyDown = (event) => {
     if (!onClick) {
@@ -43772,7 +46573,7 @@ function TaskCard({
     }
     onKeyDown?.(event);
   };
-  return /* @__PURE__ */ import_react42.default.createElement(
+  return /* @__PURE__ */ import_react50.default.createElement(
     "article",
     {
       className,
@@ -43801,9 +46602,9 @@ function TaskCard({
         padding: spacing.scale["16"],
         borderStyle: "solid",
         borderWidth: border.width["1"],
-        borderColor: palette32.gray["3"],
+        borderColor: palette35.gray["3"],
         borderRadius: radius.scale.lg,
-        backgroundColor: resolvedState === "hover" ? palette32.gray["1"] : palette32.base.white,
+        backgroundColor: resolvedState === "hover" ? palette35.gray["1"] : palette35.base.white,
         boxShadow: shadows.elevation.xs.css,
         boxSizing: "border-box",
         cursor: isInteractive ? "pointer" : "default",
@@ -43811,7 +46612,7 @@ function TaskCard({
       },
       ...props
     },
-    /* @__PURE__ */ import_react42.default.createElement(
+    /* @__PURE__ */ import_react50.default.createElement(
       "div",
       {
         style: {
@@ -43822,7 +46623,7 @@ function TaskCard({
           gap: spacing.scale["4"]
         }
       },
-      /* @__PURE__ */ import_react42.default.createElement(
+      /* @__PURE__ */ import_react50.default.createElement(
         "h3",
         {
           style: {
@@ -43834,7 +46635,7 @@ function TaskCard({
         },
         headline
       ),
-      /* @__PURE__ */ import_react42.default.createElement(
+      /* @__PURE__ */ import_react50.default.createElement(
         "p",
         {
           style: {
@@ -43846,7 +46647,7 @@ function TaskCard({
         },
         description
       ),
-      /* @__PURE__ */ import_react42.default.createElement(
+      /* @__PURE__ */ import_react50.default.createElement(
         "p",
         {
           style: {
@@ -43859,7 +46660,7 @@ function TaskCard({
         caption
       )
     ),
-    /* @__PURE__ */ import_react42.default.createElement(
+    /* @__PURE__ */ import_react50.default.createElement(
       "div",
       {
         style: {
@@ -43870,38 +46671,38 @@ function TaskCard({
           gap: spacing.scale["8"]
         }
       },
-      tags.map((tag) => /* @__PURE__ */ import_react42.default.createElement(Badge2, { key: tag, label: tag }))
+      tags.map((tag) => /* @__PURE__ */ import_react50.default.createElement(Badge2, { key: tag, label: tag }))
     )
   );
 }
 
 // components/TaskCard/TaskCard.preview.tsx
-var STATES13 = ["auto", "default", "hover"];
-var palette33 = colors.primitive.palette;
+var STATES15 = ["auto", "default", "hover"];
+var palette36 = colors.primitive.palette;
 var textTokens8 = colors.semantic.theme.text.base;
-function toTitle23(value) {
+function toTitle26(value) {
   return value.charAt(0).toUpperCase() + value.slice(1);
 }
 function TaskCardPreviewPage() {
-  const [state, setState] = (0, import_react43.useState)("auto");
-  const [interactive, setInteractive] = (0, import_react43.useState)(true);
-  const [showDescription, setShowDescription] = (0, import_react43.useState)(true);
-  const [showSecondTag, setShowSecondTag] = (0, import_react43.useState)(true);
-  const tags = (0, import_react43.useMemo)(() => {
+  const [state, setState] = (0, import_react51.useState)("auto");
+  const [interactive, setInteractive] = (0, import_react51.useState)(true);
+  const [showDescription, setShowDescription] = (0, import_react51.useState)(true);
+  const [showSecondTag, setShowSecondTag] = (0, import_react51.useState)(true);
+  const tags = (0, import_react51.useMemo)(() => {
     return showSecondTag ? ["Design", "Hiring"] : ["Design"];
   }, [showSecondTag]);
-  return /* @__PURE__ */ import_react43.default.createElement(
+  return /* @__PURE__ */ import_react51.default.createElement(
     "main",
     {
       style: {
         minHeight: spacing.scale["844"],
-        backgroundColor: palette33.base.white,
+        backgroundColor: palette36.base.white,
         color: textTokens8.staticDark,
         padding: spacing.scale["24"],
         fontFamily: typography.scale.bodyM.medium.fontFamily
       }
     },
-    /* @__PURE__ */ import_react43.default.createElement(
+    /* @__PURE__ */ import_react51.default.createElement(
       "section",
       {
         style: {
@@ -43911,7 +46712,7 @@ function TaskCardPreviewPage() {
           gap: spacing.scale["24"]
         }
       },
-      /* @__PURE__ */ import_react43.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react43.default.createElement(
+      /* @__PURE__ */ import_react51.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react51.default.createElement(
         "h1",
         {
           style: {
@@ -43924,7 +46725,7 @@ function TaskCardPreviewPage() {
           }
         },
         "Task Card Preview"
-      ), /* @__PURE__ */ import_react43.default.createElement(
+      ), /* @__PURE__ */ import_react51.default.createElement(
         "p",
         {
           style: {
@@ -43939,22 +46740,22 @@ function TaskCardPreviewPage() {
         },
         "Figma state(Default/Hover) \uBC0F hover \uC0C1\uD638\uC791\uC6A9 \uAC80\uC99D"
       )),
-      /* @__PURE__ */ import_react43.default.createElement(
+      /* @__PURE__ */ import_react51.default.createElement(
         "section",
         {
           style: {
             borderStyle: "solid",
             borderWidth: border.width["1"],
-            borderColor: palette33.gray["3"],
+            borderColor: palette36.gray["3"],
             borderRadius: radius.scale.xl,
-            backgroundColor: palette33.gray["1"],
+            backgroundColor: palette36.gray["1"],
             padding: spacing.scale["16"],
             display: "grid",
             gridTemplateColumns: `repeat(auto-fit, minmax(${spacing.scale["224"]}px, 1fr))`,
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react43.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react43.default.createElement("span", null, "State"), /* @__PURE__ */ import_react43.default.createElement(
+        /* @__PURE__ */ import_react51.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react51.default.createElement("span", null, "State"), /* @__PURE__ */ import_react51.default.createElement(
           "select",
           {
             value: state,
@@ -43963,91 +46764,91 @@ function TaskCardPreviewPage() {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette33.gray["3"],
+              borderColor: palette36.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
-              backgroundColor: palette33.base.white,
+              backgroundColor: palette36.base.white,
               color: textTokens8.staticDark
             }
           },
-          STATES13.map((item) => /* @__PURE__ */ import_react43.default.createElement("option", { key: item, value: item }, toTitle23(item)))
+          STATES15.map((item) => /* @__PURE__ */ import_react51.default.createElement("option", { key: item, value: item }, toTitle26(item)))
         )),
-        /* @__PURE__ */ import_react43.default.createElement(
+        /* @__PURE__ */ import_react51.default.createElement(
           "label",
           {
             style: {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette33.gray["3"],
+              borderColor: palette36.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "space-between",
               gap: spacing.scale["8"],
-              backgroundColor: palette33.base.white
+              backgroundColor: palette36.base.white
             }
           },
-          /* @__PURE__ */ import_react43.default.createElement("span", null, "Interactive"),
-          /* @__PURE__ */ import_react43.default.createElement("input", { type: "checkbox", checked: interactive, onChange: (event) => setInteractive(event.target.checked) })
+          /* @__PURE__ */ import_react51.default.createElement("span", null, "Interactive"),
+          /* @__PURE__ */ import_react51.default.createElement("input", { type: "checkbox", checked: interactive, onChange: (event) => setInteractive(event.target.checked) })
         ),
-        /* @__PURE__ */ import_react43.default.createElement(
+        /* @__PURE__ */ import_react51.default.createElement(
           "label",
           {
             style: {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette33.gray["3"],
+              borderColor: palette36.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "space-between",
               gap: spacing.scale["8"],
-              backgroundColor: palette33.base.white
+              backgroundColor: palette36.base.white
             }
           },
-          /* @__PURE__ */ import_react43.default.createElement("span", null, "Description"),
-          /* @__PURE__ */ import_react43.default.createElement("input", { type: "checkbox", checked: showDescription, onChange: (event) => setShowDescription(event.target.checked) })
+          /* @__PURE__ */ import_react51.default.createElement("span", null, "Description"),
+          /* @__PURE__ */ import_react51.default.createElement("input", { type: "checkbox", checked: showDescription, onChange: (event) => setShowDescription(event.target.checked) })
         ),
-        /* @__PURE__ */ import_react43.default.createElement(
+        /* @__PURE__ */ import_react51.default.createElement(
           "label",
           {
             style: {
               minHeight: spacing.scale["40"],
               borderStyle: "solid",
               borderWidth: border.width["1"],
-              borderColor: palette33.gray["3"],
+              borderColor: palette36.gray["3"],
               borderRadius: radius.scale.md,
               paddingInline: spacing.scale["12"],
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "space-between",
               gap: spacing.scale["8"],
-              backgroundColor: palette33.base.white
+              backgroundColor: palette36.base.white
             }
           },
-          /* @__PURE__ */ import_react43.default.createElement("span", null, "Second Tag"),
-          /* @__PURE__ */ import_react43.default.createElement("input", { type: "checkbox", checked: showSecondTag, onChange: (event) => setShowSecondTag(event.target.checked) })
+          /* @__PURE__ */ import_react51.default.createElement("span", null, "Second Tag"),
+          /* @__PURE__ */ import_react51.default.createElement("input", { type: "checkbox", checked: showSecondTag, onChange: (event) => setShowSecondTag(event.target.checked) })
         )
       ),
-      /* @__PURE__ */ import_react43.default.createElement(
+      /* @__PURE__ */ import_react51.default.createElement(
         "section",
         {
           style: {
             borderStyle: "solid",
             borderWidth: border.width["1"],
-            borderColor: palette33.gray["3"],
+            borderColor: palette36.gray["3"],
             borderRadius: radius.scale.xl,
-            backgroundColor: palette33.gray["1"],
+            backgroundColor: palette36.gray["1"],
             padding: spacing.scale["24"],
             display: "grid",
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react43.default.createElement(
+        /* @__PURE__ */ import_react51.default.createElement(
           "h2",
           {
             style: {
@@ -44061,7 +46862,7 @@ function TaskCardPreviewPage() {
           },
           "Active Selection"
         ),
-        /* @__PURE__ */ import_react43.default.createElement(
+        /* @__PURE__ */ import_react51.default.createElement(
           TaskCard,
           {
             state: state === "auto" ? void 0 : state,
@@ -44071,21 +46872,21 @@ function TaskCardPreviewPage() {
           }
         )
       ),
-      /* @__PURE__ */ import_react43.default.createElement(
+      /* @__PURE__ */ import_react51.default.createElement(
         "section",
         {
           style: {
             borderStyle: "solid",
             borderWidth: border.width["1"],
-            borderColor: palette33.gray["3"],
+            borderColor: palette36.gray["3"],
             borderRadius: radius.scale.xl,
-            backgroundColor: palette33.gray["1"],
+            backgroundColor: palette36.gray["1"],
             padding: spacing.scale["24"],
             display: "grid",
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react43.default.createElement(
+        /* @__PURE__ */ import_react51.default.createElement(
           "h2",
           {
             style: {
@@ -44099,15 +46900,15 @@ function TaskCardPreviewPage() {
           },
           "Variant Matrix"
         ),
-        /* @__PURE__ */ import_react43.default.createElement("div", { style: { display: "grid", gap: spacing.scale["12"] } }, /* @__PURE__ */ import_react43.default.createElement(TaskCard, { state: "default", interactive: false }), /* @__PURE__ */ import_react43.default.createElement(TaskCard, { state: "hover", interactive: false }))
+        /* @__PURE__ */ import_react51.default.createElement("div", { style: { display: "grid", gap: spacing.scale["12"] } }, /* @__PURE__ */ import_react51.default.createElement(TaskCard, { state: "default", interactive: false }), /* @__PURE__ */ import_react51.default.createElement(TaskCard, { state: "hover", interactive: false }))
       )
     )
   );
 }
 
 // component-explorer-entry.tsx
-var palette34 = colors.primitive.palette;
-var textBase27 = colors.semantic.theme.text.base;
+var palette37 = colors.primitive.palette;
+var textBase32 = colors.semantic.theme.text.base;
 var COMPONENTS = [
   { id: "Accordion", label: "Accordion", Preview: AccordionPreviewPage },
   { id: "Badge", label: "Badge", Preview: BadgePreviewPage },
@@ -44120,6 +46921,7 @@ var COMPONENTS = [
   { id: "CheckboxLabel", label: "Checkbox Label", Preview: CheckboxLabelPreviewPage },
   { id: "Dropdown", label: "Dropdown", Preview: DropdownPreviewPage },
   { id: "FeatureCard", label: "Feature Card", Preview: FeatureCardPreviewPage },
+  { id: "Icons", label: "Icons", Preview: IconsPreviewPage },
   { id: "Input", label: "Input", Preview: InputPreviewPage },
   { id: "NavigationBar", label: "Navigation Bar", Preview: NavigationBarPreviewPage },
   { id: "Pagenation", label: "Pagenation", Preview: PagenationPreviewPage },
@@ -44130,6 +46932,9 @@ var COMPONENTS = [
   { id: "RadioLabel", label: "Radio Label", Preview: RadioLabelPreviewPage },
   { id: "SearchInput", label: "Search Input", Preview: SearchInputPreviewPage },
   { id: "SelectInput", label: "Select Input", Preview: SelectInputPreviewPage },
+  { id: "TabMenu", label: "Tab Menu", Preview: TabMenuPreviewPage },
+  { id: "Toggle", label: "Toggle", Preview: TogglePreviewPage },
+  { id: "Tooltip", label: "Tooltip", Preview: TooltipPreviewPage },
   { id: "TableCell", label: "Table Cell", Preview: TableCellPreviewPage },
   { id: "TableHeader", label: "Table Header", Preview: TableHeaderPreviewPage },
   { id: "TaskCard", label: "Task Card", Preview: TaskCardPreviewPage }
@@ -44321,7 +47126,7 @@ var APP_CSS = `
     }
   }
 `;
-function textStyle(token) {
+function textStyle2(token) {
   return {
     fontFamily: token.fontFamily,
     fontSize: token.fontSize,
@@ -44331,12 +47136,12 @@ function textStyle(token) {
   };
 }
 function StatsChips({ label, values }) {
-  return /* @__PURE__ */ import_react44.default.createElement("div", { style: { display: "grid", gap: spacing.scale["6"] } }, /* @__PURE__ */ import_react44.default.createElement("div", { style: { ...textStyle(typography.scale.captionM.medium), color: textBase27.staticDarkSecondary } }, label), /* @__PURE__ */ import_react44.default.createElement("div", { className: "chip-wrap" }, values.length > 0 ? values.map((value) => /* @__PURE__ */ import_react44.default.createElement("span", { key: `${label}-${value}`, className: "chip" }, value)) : /* @__PURE__ */ import_react44.default.createElement("span", { className: "chip" }, "\uC5C6\uC74C")));
+  return /* @__PURE__ */ import_react52.default.createElement("div", { style: { display: "grid", gap: spacing.scale["6"] } }, /* @__PURE__ */ import_react52.default.createElement("div", { style: { ...textStyle2(typography.scale.captionM.medium), color: textBase32.staticDarkSecondary } }, label), /* @__PURE__ */ import_react52.default.createElement("div", { className: "chip-wrap" }, values.length > 0 ? values.map((value) => /* @__PURE__ */ import_react52.default.createElement("span", { key: `${label}-${value}`, className: "chip" }, value)) : /* @__PURE__ */ import_react52.default.createElement("span", { className: "chip" }, "\uC5C6\uC74C")));
 }
 function ExplorerApp() {
-  const [keyword, setKeyword] = (0, import_react44.useState)("");
-  const [selectedId, setSelectedId] = (0, import_react44.useState)(COMPONENTS[0].id);
-  const filteredComponents = (0, import_react44.useMemo)(() => {
+  const [keyword, setKeyword] = (0, import_react52.useState)("");
+  const [selectedId, setSelectedId] = (0, import_react52.useState)(COMPONENTS[0].id);
+  const filteredComponents = (0, import_react52.useMemo)(() => {
     const normalized = keyword.trim().toLowerCase();
     if (!normalized) {
       return COMPONENTS;
@@ -44345,7 +47150,7 @@ function ExplorerApp() {
       return component.label.toLowerCase().includes(normalized) || component.id.toLowerCase().includes(normalized);
     });
   }, [keyword]);
-  const activeId = (0, import_react44.useMemo)(() => {
+  const activeId = (0, import_react52.useMemo)(() => {
     const hasSelected = filteredComponents.some((component) => component.id === selectedId);
     if (hasSelected) {
       return selectedId;
@@ -44355,29 +47160,29 @@ function ExplorerApp() {
   const selectedComponent = COMPONENTS.find((component) => component.id === activeId) ?? COMPONENTS[0];
   const SelectedPreview = selectedComponent.Preview;
   const metadata = componentMetadata[selectedComponent.id];
-  return /* @__PURE__ */ import_react44.default.createElement(import_react44.default.Fragment, null, /* @__PURE__ */ import_react44.default.createElement("style", null, APP_CSS), /* @__PURE__ */ import_react44.default.createElement("div", { className: "explorer-layout" }, /* @__PURE__ */ import_react44.default.createElement("aside", { className: "panel left-panel" }, /* @__PURE__ */ import_react44.default.createElement("header", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react44.default.createElement(
+  return /* @__PURE__ */ import_react52.default.createElement(import_react52.default.Fragment, null, /* @__PURE__ */ import_react52.default.createElement("style", null, APP_CSS), /* @__PURE__ */ import_react52.default.createElement("div", { className: "explorer-layout" }, /* @__PURE__ */ import_react52.default.createElement("aside", { className: "panel left-panel" }, /* @__PURE__ */ import_react52.default.createElement("header", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react52.default.createElement(
     "h1",
     {
       style: {
         margin: spacing.scale["0"],
-        ...textStyle(typography.scale.h5.semiBold),
-        color: textBase27.staticDark
+        ...textStyle2(typography.scale.h5.semiBold),
+        color: textBase32.staticDark
       }
     },
     "309 Design Explorer"
-  ), /* @__PURE__ */ import_react44.default.createElement(
+  ), /* @__PURE__ */ import_react52.default.createElement(
     "p",
     {
       style: {
         margin: spacing.scale["0"],
-        ...textStyle(typography.scale.captionM.regular),
-        color: textBase27.staticDarkSecondary
+        ...textStyle2(typography.scale.captionM.regular),
+        color: textBase32.staticDarkSecondary
       }
     },
     "\uCEF4\uD3EC\uB10C\uD2B8 ",
     COMPONENTS.length,
     "\uAC1C"
-  )), /* @__PURE__ */ import_react44.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react44.default.createElement("span", { style: { ...textStyle(typography.scale.captionM.medium), color: textBase27.staticDarkSecondary } }, "\uAC80\uC0C9"), /* @__PURE__ */ import_react44.default.createElement(
+  )), /* @__PURE__ */ import_react52.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react52.default.createElement("span", { style: { ...textStyle2(typography.scale.captionM.medium), color: textBase32.staticDarkSecondary } }, "\uAC80\uC0C9"), /* @__PURE__ */ import_react52.default.createElement(
     "input",
     {
       type: "text",
@@ -44388,18 +47193,18 @@ function ExplorerApp() {
         minHeight: spacing.scale["40"],
         borderStyle: "solid",
         borderWidth: border.width["1"],
-        borderColor: palette34.gray["3"],
+        borderColor: palette37.gray["3"],
         borderRadius: radius.scale.md,
         paddingInline: spacing.scale["12"],
-        backgroundColor: palette34.base.white,
-        color: textBase27.staticDark,
+        backgroundColor: palette37.base.white,
+        color: textBase32.staticDark,
         outline: "none",
-        ...textStyle(typography.scale.captionL.regular)
+        ...textStyle2(typography.scale.captionL.regular)
       }
     }
-  )), /* @__PURE__ */ import_react44.default.createElement("div", { className: "component-list" }, filteredComponents.length > 0 ? filteredComponents.map((component) => {
+  )), /* @__PURE__ */ import_react52.default.createElement("div", { className: "component-list" }, filteredComponents.length > 0 ? filteredComponents.map((component) => {
     const active = component.id === activeId;
-    return /* @__PURE__ */ import_react44.default.createElement(
+    return /* @__PURE__ */ import_react52.default.createElement(
       "button",
       {
         key: component.id,
@@ -44407,83 +47212,83 @@ function ExplorerApp() {
         className: `component-item${active ? " active" : ""}`,
         onClick: () => setSelectedId(component.id)
       },
-      /* @__PURE__ */ import_react44.default.createElement("span", { style: { ...textStyle(typography.scale.captionL.medium) } }, component.label),
-      /* @__PURE__ */ import_react44.default.createElement("span", { style: { ...textStyle(typography.scale.captionM.regular), opacity: 0.75 } }, component.id)
+      /* @__PURE__ */ import_react52.default.createElement("span", { style: { ...textStyle2(typography.scale.captionL.medium) } }, component.label),
+      /* @__PURE__ */ import_react52.default.createElement("span", { style: { ...textStyle2(typography.scale.captionM.regular), opacity: 0.75 } }, component.id)
     );
-  }) : /* @__PURE__ */ import_react44.default.createElement(
+  }) : /* @__PURE__ */ import_react52.default.createElement(
     "div",
     {
       style: {
         borderStyle: "solid",
         borderWidth: border.width["1"],
-        borderColor: palette34.gray["3"],
+        borderColor: palette37.gray["3"],
         borderRadius: radius.scale.md,
-        backgroundColor: palette34.base.white,
+        backgroundColor: palette37.base.white,
         padding: spacing.scale["12"],
-        color: textBase27.staticDarkSecondary,
-        ...textStyle(typography.scale.captionL.regular)
+        color: textBase32.staticDarkSecondary,
+        ...textStyle2(typography.scale.captionL.regular)
       }
     },
     "\uAC80\uC0C9 \uACB0\uACFC\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4."
-  ))), /* @__PURE__ */ import_react44.default.createElement("main", { className: "panel main-panel" }, /* @__PURE__ */ import_react44.default.createElement(
+  ))), /* @__PURE__ */ import_react52.default.createElement("main", { className: "panel main-panel" }, /* @__PURE__ */ import_react52.default.createElement(
     "header",
     {
       style: {
         borderStyle: "solid",
         borderWidth: border.width["1"],
-        borderColor: palette34.gray["3"],
+        borderColor: palette37.gray["3"],
         borderRadius: radius.scale.xl,
-        backgroundColor: palette34.base.white,
+        backgroundColor: palette37.base.white,
         padding: spacing.scale["12"],
         display: "grid",
         gap: spacing.scale["4"]
       }
     },
-    /* @__PURE__ */ import_react44.default.createElement(
+    /* @__PURE__ */ import_react52.default.createElement(
       "h2",
       {
         style: {
           margin: spacing.scale["0"],
-          ...textStyle(typography.scale.h6.medium),
-          color: textBase27.staticDark
+          ...textStyle2(typography.scale.h6.medium),
+          color: textBase32.staticDark
         }
       },
       selectedComponent.label,
       " Preview"
     ),
-    /* @__PURE__ */ import_react44.default.createElement(
+    /* @__PURE__ */ import_react52.default.createElement(
       "p",
       {
         style: {
           margin: spacing.scale["0"],
-          ...textStyle(typography.scale.captionM.regular),
-          color: textBase27.staticDarkSecondary
+          ...textStyle2(typography.scale.captionM.regular),
+          color: textBase32.staticDarkSecondary
         }
       },
       "\uC88C\uCE21 \uBAA9\uB85D\uC5D0\uC11C \uCEF4\uD3EC\uB10C\uD2B8\uB97C \uC120\uD0DD\uD558\uBA74 \uD504\uB9AC\uBDF0\uC640 \uBA54\uD0C0\uB370\uC774\uD130\uAC00 \uB3D9\uAE30\uD654\uB429\uB2C8\uB2E4."
     )
-  ), /* @__PURE__ */ import_react44.default.createElement("section", { className: "preview-shell" }, /* @__PURE__ */ import_react44.default.createElement(SelectedPreview, null))), /* @__PURE__ */ import_react44.default.createElement("aside", { className: "panel right-panel" }, /* @__PURE__ */ import_react44.default.createElement("header", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react44.default.createElement(
+  ), /* @__PURE__ */ import_react52.default.createElement("section", { className: "preview-shell" }, /* @__PURE__ */ import_react52.default.createElement(SelectedPreview, null))), /* @__PURE__ */ import_react52.default.createElement("aside", { className: "panel right-panel" }, /* @__PURE__ */ import_react52.default.createElement("header", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react52.default.createElement(
     "h3",
     {
       style: {
         margin: spacing.scale["0"],
-        ...textStyle(typography.scale.h6.medium),
-        color: textBase27.staticDark
+        ...textStyle2(typography.scale.h6.medium),
+        color: textBase32.staticDark
       }
     },
     "Token & Style Inspector"
-  ), /* @__PURE__ */ import_react44.default.createElement(
+  ), /* @__PURE__ */ import_react52.default.createElement(
     "p",
     {
       style: {
         margin: spacing.scale["0"],
-        ...textStyle(typography.scale.captionM.regular),
-        color: textBase27.staticDarkSecondary
+        ...textStyle2(typography.scale.captionM.regular),
+        color: textBase32.staticDarkSecondary
       }
     },
     selectedComponent.id,
     " \uAE30\uC900 \uCD94\uCD9C \uC815\uBCF4"
-  )), /* @__PURE__ */ import_react44.default.createElement("div", { className: "meta-scroll" }, /* @__PURE__ */ import_react44.default.createElement("section", { className: "meta-card" }, /* @__PURE__ */ import_react44.default.createElement("div", { style: { ...textStyle(typography.scale.captionM.medium), color: textBase27.staticDarkSecondary } }, "\uD30C\uC77C \uACBD\uB85C"), /* @__PURE__ */ import_react44.default.createElement("div", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react44.default.createElement("div", { className: "token-item" }, "Source: ", metadata.sourcePath), /* @__PURE__ */ import_react44.default.createElement("div", { className: "token-item" }, "Docs: ", metadata.docsPath))), /* @__PURE__ */ import_react44.default.createElement("section", { className: "meta-card" }, /* @__PURE__ */ import_react44.default.createElement("div", { style: { ...textStyle(typography.scale.captionM.medium), color: textBase27.staticDarkSecondary } }, "\uC0AC\uC6A9 \uD1A0\uD070 (", metadata.tokens.length, ")"), /* @__PURE__ */ import_react44.default.createElement("ul", { className: "token-list" }, metadata.tokens.length > 0 ? metadata.tokens.map((token) => /* @__PURE__ */ import_react44.default.createElement("li", { key: token, className: "token-item" }, token)) : /* @__PURE__ */ import_react44.default.createElement("li", { className: "token-item" }, "\uD1A0\uD070 \uC815\uBCF4\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4."))), /* @__PURE__ */ import_react44.default.createElement("section", { className: "meta-card" }, /* @__PURE__ */ import_react44.default.createElement("div", { style: { ...textStyle(typography.scale.captionM.medium), color: textBase27.staticDarkSecondary } }, "\uC2A4\uD0C0\uC77C \uC218\uCE58"), /* @__PURE__ */ import_react44.default.createElement(StatsChips, { label: "Spacing Scale", values: metadata.styleNumbers.spacingScale }), /* @__PURE__ */ import_react44.default.createElement(StatsChips, { label: "Spacing Primitive", values: metadata.styleNumbers.spacingPrimitive }), /* @__PURE__ */ import_react44.default.createElement(StatsChips, { label: "Border Width", values: metadata.styleNumbers.borderWidths }), /* @__PURE__ */ import_react44.default.createElement(StatsChips, { label: "Radius Scale", values: metadata.styleNumbers.radiusScale }), /* @__PURE__ */ import_react44.default.createElement(StatsChips, { label: "Typography Scale", values: metadata.styleNumbers.typographyScale }))))));
+  )), /* @__PURE__ */ import_react52.default.createElement("div", { className: "meta-scroll" }, /* @__PURE__ */ import_react52.default.createElement("section", { className: "meta-card" }, /* @__PURE__ */ import_react52.default.createElement("div", { style: { ...textStyle2(typography.scale.captionM.medium), color: textBase32.staticDarkSecondary } }, "\uD30C\uC77C \uACBD\uB85C"), /* @__PURE__ */ import_react52.default.createElement("div", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react52.default.createElement("div", { className: "token-item" }, "Source: ", metadata.sourcePath), /* @__PURE__ */ import_react52.default.createElement("div", { className: "token-item" }, "Docs: ", metadata.docsPath))), /* @__PURE__ */ import_react52.default.createElement("section", { className: "meta-card" }, /* @__PURE__ */ import_react52.default.createElement("div", { style: { ...textStyle2(typography.scale.captionM.medium), color: textBase32.staticDarkSecondary } }, "\uC0AC\uC6A9 \uD1A0\uD070 (", metadata.tokens.length, ")"), /* @__PURE__ */ import_react52.default.createElement("ul", { className: "token-list" }, metadata.tokens.length > 0 ? metadata.tokens.map((token) => /* @__PURE__ */ import_react52.default.createElement("li", { key: token, className: "token-item" }, token)) : /* @__PURE__ */ import_react52.default.createElement("li", { className: "token-item" }, "\uD1A0\uD070 \uC815\uBCF4\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4."))), /* @__PURE__ */ import_react52.default.createElement("section", { className: "meta-card" }, /* @__PURE__ */ import_react52.default.createElement("div", { style: { ...textStyle2(typography.scale.captionM.medium), color: textBase32.staticDarkSecondary } }, "\uC2A4\uD0C0\uC77C \uC218\uCE58"), /* @__PURE__ */ import_react52.default.createElement(StatsChips, { label: "Spacing Scale", values: metadata.styleNumbers.spacingScale }), /* @__PURE__ */ import_react52.default.createElement(StatsChips, { label: "Spacing Primitive", values: metadata.styleNumbers.spacingPrimitive }), /* @__PURE__ */ import_react52.default.createElement(StatsChips, { label: "Border Width", values: metadata.styleNumbers.borderWidths }), /* @__PURE__ */ import_react52.default.createElement(StatsChips, { label: "Radius Scale", values: metadata.styleNumbers.radiusScale }), /* @__PURE__ */ import_react52.default.createElement(StatsChips, { label: "Typography Scale", values: metadata.styleNumbers.typographyScale }))))));
 }
 var rootElement = document.getElementById("root");
 if (!rootElement) {
@@ -44491,7 +47296,7 @@ if (!rootElement) {
 }
 var root = (0, import_client.createRoot)(rootElement);
 root.render(
-  /* @__PURE__ */ import_react44.default.createElement(import_react44.default.StrictMode, null, /* @__PURE__ */ import_react44.default.createElement(ExplorerApp, null))
+  /* @__PURE__ */ import_react52.default.createElement(import_react52.default.StrictMode, null, /* @__PURE__ */ import_react52.default.createElement(ExplorerApp, null))
 );
 /*! Bundled license information:
 

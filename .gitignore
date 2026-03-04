@@ -16,3 +16,7 @@ yarn-error.log*
 # editor
 .vscode/
 .idea/
+
+# deployment local metadata
+.vercel/
+dist/.vercel/

@@ -15,6 +15,7 @@ import CheckboxPreview from './components/Checkbox/Checkbox.preview';
 import CheckboxLabelPreview from './components/CheckboxLabel/CheckboxLabel.preview';
 import DropdownPreview from './components/Dropdown/Dropdown.preview';
 import FeatureCardPreview from './components/FeatureCard/FeatureCard.preview';
+import IconsPreview from './components/Icons/Icons.preview';
 import InputPreview from './components/Input/Input.preview';
 import NavigationBarPreview from './components/NavigationBar/NavigationBar.preview';
 import PagenationPreview from './components/Pagenation/Pagenation.preview';
@@ -25,6 +26,9 @@ import RadioPreview from './components/Radio/Radio.preview';
 import RadioLabelPreview from './components/RadioLabel/RadioLabel.preview';
 import SearchInputPreview from './components/SearchInput/SearchInput.preview';
 import SelectInputPreview from './components/SelectInput/SelectInput.preview';
+import TabMenuPreview from './components/TabMenu/TabMenu.preview';
+import TogglePreview from './components/Toggle/Toggle.preview';
+import TooltipPreview from './components/Tooltip/Tooltip.preview';
 import TableCellPreview from './components/TableCell/TableCell.preview';
 import TableHeaderPreview from './components/TableHeader/TableHeader.preview';
 import TaskCardPreview from './components/TaskCard/TaskCard.preview';
@@ -52,6 +56,7 @@ const COMPONENTS: ComponentEntry[] = [
   { id: 'CheckboxLabel', label: 'Checkbox Label', Preview: CheckboxLabelPreview },
   { id: 'Dropdown', label: 'Dropdown', Preview: DropdownPreview },
   { id: 'FeatureCard', label: 'Feature Card', Preview: FeatureCardPreview },
+  { id: 'Icons', label: 'Icons', Preview: IconsPreview },
   { id: 'Input', label: 'Input', Preview: InputPreview },
   { id: 'NavigationBar', label: 'Navigation Bar', Preview: NavigationBarPreview },
   { id: 'Pagenation', label: 'Pagenation', Preview: PagenationPreview },
@@ -62,6 +67,9 @@ const COMPONENTS: ComponentEntry[] = [
   { id: 'RadioLabel', label: 'Radio Label', Preview: RadioLabelPreview },
   { id: 'SearchInput', label: 'Search Input', Preview: SearchInputPreview },
   { id: 'SelectInput', label: 'Select Input', Preview: SelectInputPreview },
+  { id: 'TabMenu', label: 'Tab Menu', Preview: TabMenuPreview },
+  { id: 'Toggle', label: 'Toggle', Preview: TogglePreview },
+  { id: 'Tooltip', label: 'Tooltip', Preview: TooltipPreview },
   { id: 'TableCell', label: 'Table Cell', Preview: TableCellPreview },
   { id: 'TableHeader', label: 'Table Header', Preview: TableHeaderPreview },
   { id: 'TaskCard', label: 'Task Card', Preview: TaskCardPreview },

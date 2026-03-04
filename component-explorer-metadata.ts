@@ -881,6 +881,72 @@ export const componentMetadata = {
       ]
     }
   },
+  "Icons": {
+    "id": "Icons",
+    "docsPath": "components/Icons/Icons.docs.md",
+    "sourcePath": "components/Icons/Icons.tsx",
+    "tokens": [
+      "border.width.0",
+      "colors.primitive.palette.base.transparent",
+      "colors.semantic.theme.icon.base.staticDark",
+      "colors.semantic.theme.icon.base.staticDarkQuaternary",
+      "colors.semantic.theme.icon.base.staticDarkSecondary",
+      "colors.semantic.theme.icon.base.staticDarkTertiary",
+      "colors.semantic.theme.icon.base.staticWhite",
+      "colors.semantic.theme.icon.base.staticWhiteQuaternary",
+      "colors.semantic.theme.icon.base.staticWhiteSecondary",
+      "colors.semantic.theme.icon.base.staticWhiteTertiary",
+      "colors.semantic.theme.icon.status.destructive",
+      "colors.semantic.theme.icon.status.info",
+      "colors.semantic.theme.icon.status.success",
+      "colors.semantic.theme.icon.status.warning",
+      "radius.scale.md",
+      "shadows.focusRing.light.css",
+      "spacing.scale",
+      "spacing.scale.0",
+      "spacing.scale.14",
+      "spacing.scale.16",
+      "spacing.scale.20",
+      "spacing.scale.24",
+      "spacing.scale.4"
+    ],
+    "styleNumbers": {
+      "spacingScale": [
+        0,
+        4,
+        8,
+        10,
+        12,
+        14,
+        16,
+        20,
+        24,
+        40,
+        120,
+        160,
+        192,
+        844
+      ],
+      "spacingPrimitive": [],
+      "borderWidths": [
+        0,
+        1
+      ],
+      "radiusScale": [
+        "lg",
+        "md",
+        "xl"
+      ],
+      "typographyScale": [
+        "bodyS.regular",
+        "captionL.regular",
+        "captionM.medium",
+        "captionM.regular",
+        "h4.bold",
+        "h6.medium"
+      ]
+    }
+  },
   "Input": {
     "id": "Input",
     "docsPath": "components/Input/Input.docs.md",
@@ -1852,6 +1918,86 @@ export const componentMetadata = {
       ]
     }
   },
+  "TabMenu": {
+    "id": "TabMenu",
+    "docsPath": "components/TabMenu/TabMenu.docs.md",
+    "sourcePath": "components/TabMenu/TabMenu.tsx",
+    "tokens": [
+      "border.color.theme.action.normal",
+      "border.color.theme.select.primary",
+      "border.width.0",
+      "border.width.1",
+      "border.width.2",
+      "colors.primitive.palette.base.transparent",
+      "colors.semantic.theme.background.button.secondary",
+      "colors.semantic.theme.background.button.tertiary",
+      "colors.semantic.theme.background.overlay.custom",
+      "colors.semantic.theme.text.base.staticDark",
+      "colors.semantic.theme.text.base.staticDarkSecondary",
+      "radius.scale.lg",
+      "radius.scale.md",
+      "radius.scale.sm",
+      "radius.scale.xl",
+      "shadows.elevation.xs.css",
+      "spacing.primitive.5",
+      "spacing.primitive.7",
+      "spacing.scale.0",
+      "spacing.scale.10",
+      "spacing.scale.12",
+      "spacing.scale.14",
+      "spacing.scale.16",
+      "spacing.scale.2",
+      "spacing.scale.24",
+      "spacing.scale.4",
+      "spacing.scale.6",
+      "spacing.scale.8",
+      "typography.scale.bodyS.medium",
+      "typography.scale.captionL.medium",
+      "typography.scale.captionM.medium"
+    ],
+    "styleNumbers": {
+      "spacingScale": [
+        0,
+        1,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16,
+        24,
+        40,
+        224,
+        1024
+      ],
+      "spacingPrimitive": [
+        5,
+        7
+      ],
+      "borderWidths": [
+        0,
+        1,
+        2
+      ],
+      "radiusScale": [
+        "lg",
+        "md",
+        "sm",
+        "xl"
+      ],
+      "typographyScale": [
+        "bodyM.medium",
+        "bodyS.medium",
+        "bodyS.regular",
+        "captionL.medium",
+        "captionL.regular",
+        "captionM.medium",
+        "h3.bold"
+      ]
+    }
+  },
   "TaskCard": {
     "id": "TaskCard",
     "docsPath": "components/TaskCard/TaskCard.docs.md",
@@ -1911,6 +2057,155 @@ export const componentMetadata = {
         "captionL.medium",
         "captionL.regular",
         "captionM.medium",
+        "h3.bold",
+        "h5.semiBold"
+      ]
+    }
+  },
+  "Toggle": {
+    "id": "Toggle",
+    "docsPath": "components/Toggle/Toggle.docs.md",
+    "sourcePath": "components/Toggle/Toggle.tsx",
+    "tokens": [
+      "border.width.0",
+      "colors.semantic.theme.background.toggle.active",
+      "colors.semantic.theme.background.toggle.activeDisabled",
+      "colors.semantic.theme.background.toggle.activeHover",
+      "colors.semantic.theme.background.toggle.default",
+      "colors.semantic.theme.background.toggle.disabled",
+      "colors.semantic.theme.background.toggle.handle",
+      "colors.semantic.theme.background.toggle.handleDisabled",
+      "colors.semantic.theme.background.toggle.hover",
+      "radius.scale.full",
+      "shadows.elevation.xs.css",
+      "shadows.focusRing.light.css",
+      "spacing.scale.0",
+      "spacing.scale.12",
+      "spacing.scale.14",
+      "spacing.scale.16",
+      "spacing.scale.2",
+      "spacing.scale.20",
+      "spacing.scale.28"
+    ],
+    "styleNumbers": {
+      "spacingScale": [
+        0,
+        2,
+        4,
+        8,
+        12,
+        14,
+        16,
+        20,
+        24,
+        28,
+        40,
+        96,
+        224,
+        844,
+        1024
+      ],
+      "spacingPrimitive": [],
+      "borderWidths": [
+        0,
+        1
+      ],
+      "radiusScale": [
+        "full",
+        "md",
+        "xl"
+      ],
+      "typographyScale": [
+        "bodyM.medium",
+        "bodyS.regular",
+        "captionL.medium",
+        "captionL.regular",
+        "captionM.medium",
+        "h3.bold",
+        "h5.semiBold"
+      ]
+    }
+  },
+  "Tooltip": {
+    "id": "Tooltip",
+    "docsPath": "components/Tooltip/Tooltip.docs.md",
+    "sourcePath": "components/Tooltip/Tooltip.tsx",
+    "tokens": [
+      "border.color.theme.action.normal",
+      "border.width.0",
+      "border.width.1",
+      "colors.primitive.palette.base.transparent",
+      "colors.semantic.theme.background.surface.default",
+      "colors.semantic.theme.icon.base.staticDark",
+      "colors.semantic.theme.icon.base.staticDarkQuaternary",
+      "colors.semantic.theme.icon.base.staticWhite",
+      "colors.semantic.theme.text.base.staticDark",
+      "colors.semantic.theme.text.base.staticDarkSecondary",
+      "radius.scale.full",
+      "radius.scale.md",
+      "radius.scale.sm",
+      "shadows.tooltip.sm.css",
+      "spacing.scale.0",
+      "spacing.scale.10",
+      "spacing.scale.1024",
+      "spacing.scale.12",
+      "spacing.scale.120",
+      "spacing.scale.14",
+      "spacing.scale.16",
+      "spacing.scale.192",
+      "spacing.scale.224",
+      "spacing.scale.24",
+      "spacing.scale.28",
+      "spacing.scale.320",
+      "spacing.scale.4",
+      "spacing.scale.6",
+      "spacing.scale.8",
+      "spacing.scale.80",
+      "spacing.scale.844",
+      "typography.scale.captionM.medium",
+      "typography.scale.captionM.regular",
+      "typography.scale.captionS.medium"
+    ],
+    "styleNumbers": {
+      "spacingScale": [
+        0,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16,
+        20,
+        24,
+        40,
+        80,
+        120,
+        192,
+        224,
+        320,
+        844,
+        1024
+      ],
+      "spacingPrimitive": [],
+      "borderWidths": [
+        0,
+        1
+      ],
+      "radiusScale": [
+        "full",
+        "lg",
+        "md",
+        "sm",
+        "xl"
+      ],
+      "typographyScale": [
+        "bodyM.medium",
+        "bodyS.regular",
+        "captionL.medium",
+        "captionM.medium",
+        "captionM.regular",
+        "captionS.medium",
         "h3.bold",
         "h5.semiBold"
       ]
