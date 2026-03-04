@@ -20,3 +20,4 @@ yarn-error.log*
 # deployment local metadata
 .vercel/
 dist/.vercel/
+dist/icons/

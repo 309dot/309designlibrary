@@ -2,10 +2,14 @@
 
 ## Purpose
 `Icons`는 Figma 아이콘 라이브러리 노드(`1403:50643`)를 코드에서 재사용하기 위한 기본 아이콘 컴포넌트입니다.
-아이콘 명명 규칙(`name` + `type`)을 이용해 심볼 variant를 구성하고, 상태/접근성/토큰 연동을 통합합니다.
+아이콘 명명 규칙(`name` + `type`)을 이용해 로컬 SVG 자산(`/assets/icons`)을 매핑하고, 상태/접근성/토큰 연동을 통합합니다.
 
 Single Source of Truth:
 - `/Users/309agent/cursor/309-design-library/style-tokens.ts`
+
+Asset Source of Truth:
+- `/Users/309agent/cursor/309-design-library/assets/icons`
+- `/Users/309agent/cursor/309-design-library/components/Icons/icon-catalog.ts` (자동 생성)
 
 ## MCP Extraction Summary
 - Figma `Icons` 섹션은 대규모 심볼 집합으로 구성됨
@@ -48,7 +52,7 @@ Single Source of Truth:
 ## Variants
 - `name: string`
   - Figma 심볼 키(예: `add-circle`, `arrow-right`, `download`)
-  - 컴포넌트 내부에서 `ri-{name}-{type}`로 매핑
+  - 컴포넌트 내부에서 `{name}-{type}.svg` → `{name}.svg` 순서로 fallback 매핑
 - `type: 'line' | 'fill'`
 - `size: '14' | '16' | '20' | '24'`
   - 모두 `spacing.scale` 토큰 기반
@@ -65,6 +69,7 @@ Single Source of Truth:
 - `focus` 상태에서 `shadows.focusRing.light.css` 적용
 - `disabled` 상태는 클릭 차단 + quaternary 색상으로 고정
 - transition 토큰이 정의되지 않아 별도 transition 값은 사용하지 않음
+- SVG는 CSS `mask` 기반으로 렌더링하여 토큰 색상을 일관 적용
 
 ## Accessibility Notes
 - 장식 아이콘(`decorative=true`)은 `aria-hidden` 적용
@@ -102,3 +107,8 @@ export function Example() {
   );
 }
 ```
+
+## Asset Management
+- 아이콘 원본 동기화: `npm run icons:sync`
+- 카탈로그 재생성: `npm run icons:catalog`
+- 빌드시 `explorer:build`, `preview:build`에서 자동 실행

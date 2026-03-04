@@ -3,17 +3,14 @@ import React, { useMemo, useState } from 'react';
 import { border, colors, radius, spacing, typography } from '../../style-tokens';
 
 import { Icons } from './Icons';
-import {
-  ICON_SAMPLE_NAMES,
-  ICON_SIZE_OPTIONS,
-  ICON_TONE_OPTIONS,
-  ICON_TYPE_OPTIONS,
-  ICON_VISUAL_STATE_OPTIONS,
-} from './Icons.types';
+import { iconCatalog } from './icon-catalog';
+import { ICON_SIZE_OPTIONS, ICON_TONE_OPTIONS, ICON_TYPE_OPTIONS, ICON_VISUAL_STATE_OPTIONS } from './Icons.types';
 import type { IconSizeToken, IconTone, IconType, IconVisualState } from './Icons.types';
 
 const textBase = colors.semantic.theme.text.base;
 const palette = colors.primitive.palette;
+const allIconNames = iconCatalog.allNames.filter((item) => !/\s/.test(item));
+const DEFAULT_ICON_NAME = allIconNames.includes('add') ? 'add' : (allIconNames[0] ?? 'question');
 
 function textStyle(token: {
   fontFamily: string;
@@ -32,7 +29,8 @@ function textStyle(token: {
 }
 
 export default function IconsPreviewPage() {
-  const [name, setName] = useState<string>(ICON_SAMPLE_NAMES[0]);
+  const [name, setName] = useState<string>(DEFAULT_ICON_NAME);
+  const [search, setSearch] = useState('');
   const [type, setType] = useState<IconType>('line');
   const [size, setSize] = useState<IconSizeToken>('24');
   const [tone, setTone] = useState<IconTone>('primary');
@@ -41,7 +39,18 @@ export default function IconsPreviewPage() {
   const [disabled, setDisabled] = useState(false);
   const [decorative, setDecorative] = useState(true);
 
-  const gridNames = useMemo(() => ICON_SAMPLE_NAMES.slice(0, spacing.scale['20']), []);
+  const filteredNames = useMemo(() => {
+    const keyword = search.trim().toLowerCase();
+
+    if (!keyword) {
+      return allIconNames;
+    }
+
+    return allIconNames.filter((item) => item.includes(keyword));
+  }, [search]);
+
+  const pickerNames = useMemo(() => filteredNames.slice(0, spacing.scale['320']), [filteredNames]);
+  const gridNames = useMemo(() => filteredNames.slice(0, spacing.scale['48']), [filteredNames]);
 
   return (
     <main
@@ -70,7 +79,7 @@ export default function IconsPreviewPage() {
             ...textStyle(typography.scale.bodyS.regular),
           }}
         >
-          Figma MCP 노드 `1403:50643` 기준 아이콘 심볼 네이밍(`*-line`, `*-fill`)과 24px 기본 규격을 컴포넌트로 반영했습니다.
+          로컬 아이콘 자산(`/assets/icons`) {iconCatalog.allNames.length}종을 기준으로 렌더링합니다.
         </p>
       </header>
 
@@ -88,7 +97,26 @@ export default function IconsPreviewPage() {
         }}
       >
         <label style={{ display: 'grid', gap: spacing.scale['4'] }}>
-          <span style={{ ...textStyle(typography.scale.captionM.medium), color: textBase.staticDarkSecondary }}>Name</span>
+          <span style={{ ...textStyle(typography.scale.captionM.medium), color: textBase.staticDarkSecondary }}>Name Search</span>
+          <input
+            value={search}
+            onChange={(event) => setSearch(event.target.value.toLowerCase())}
+            placeholder="예: arrow, user, weather"
+            style={{
+              minHeight: spacing.scale['40'],
+              borderStyle: 'solid',
+              borderWidth: border.width['1'],
+              borderColor: palette.gray['3'],
+              borderRadius: radius.scale.md,
+              paddingInline: spacing.scale['12'],
+              backgroundColor: palette.base.white,
+              color: textBase.staticDark,
+            }}
+          />
+        </label>
+
+        <label style={{ display: 'grid', gap: spacing.scale['4'] }}>
+          <span style={{ ...textStyle(typography.scale.captionM.medium), color: textBase.staticDarkSecondary }}>{`Name (${pickerNames.length})`}</span>
           <select
             value={name}
             onChange={(event) => setName(event.target.value)}
@@ -103,11 +131,15 @@ export default function IconsPreviewPage() {
               color: textBase.staticDark,
             }}
           >
-            {ICON_SAMPLE_NAMES.map((item) => (
-              <option key={item} value={item}>
-                {item}
-              </option>
-            ))}
+            {pickerNames.length > 0 ? (
+              pickerNames.map((item) => (
+                <option key={item} value={item}>
+                  {item}
+                </option>
+              ))
+            ) : (
+              <option value={name}>{name}</option>
+            )}
           </select>
         </label>
 
@@ -288,7 +320,7 @@ export default function IconsPreviewPage() {
               ...textStyle(typography.scale.captionM.regular),
             }}
           >
-            <div>{`class: ri-${name}-${type}`}</div>
+            <div>{`icon file: ${name}-${type}.svg (fallback 자동)`}</div>
             <div>{`state: ${state}`}</div>
             <div>{`size token: spacing.scale.${size}`}</div>
           </div>
@@ -313,7 +345,7 @@ export default function IconsPreviewPage() {
             ...textStyle(typography.scale.h6.medium),
           }}
         >
-          Sample Grid (Line / Fill)
+          Sample Grid (filtered: {filteredNames.length})
         </h2>
         <div
           style={{

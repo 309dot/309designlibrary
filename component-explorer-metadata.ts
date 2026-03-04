@@ -922,9 +922,11 @@ export const componentMetadata = {
         20,
         24,
         40,
+        48,
         120,
         160,
         192,
+        320,
         844
       ],
       "spacingPrimitive": [],

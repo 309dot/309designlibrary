@@ -1,11 +1,9 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import { border, colors, radius, shadows, spacing } from '../../style-tokens';
+import { iconCatalog } from './icon-catalog';
 
 import type { IconSizeToken, IconTone, IconType, IconVisualState, IconsProps } from './Icons.types';
-
-const REMIX_ICON_STYLESHEET_ID = '309-remixicon-stylesheet';
-const REMIX_ICON_STYLESHEET_URL = 'https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css';
 
 const SIZE_MAP: Record<IconSizeToken, number> = {
   '14': spacing.scale['14'],
@@ -17,6 +15,7 @@ const SIZE_MAP: Record<IconSizeToken, number> = {
 const iconBase = colors.semantic.theme.icon.base;
 const iconStatus = colors.semantic.theme.icon.status;
 const transparent = colors.primitive.palette.base.transparent;
+const iconFileNameSet = new Set(iconCatalog.allNames);
 
 const TONE_MAP: Record<IconTone, string> = {
   primary: iconBase.staticDark,
@@ -33,38 +32,15 @@ const TONE_MAP: Record<IconTone, string> = {
   info: iconStatus.info,
 };
 
-function ensureRemixIconStylesheet() {
-  if (typeof document === 'undefined') {
-    return;
+function normalizeIconName(name: string): string {
+  const withoutPrefix = name.trim().replace(/^ri-/, '').replace(/\.svg$/i, '');
+  const compact = withoutPrefix.replace(/\s+/g, '-').toLowerCase();
+
+  if (!compact) {
+    return 'question';
   }
 
-  const exists = document.getElementById(REMIX_ICON_STYLESHEET_ID);
-
-  if (exists) {
-    return;
-  }
-
-  const link = document.createElement('link');
-  link.id = REMIX_ICON_STYLESHEET_ID;
-  link.rel = 'stylesheet';
-  link.href = REMIX_ICON_STYLESHEET_URL;
-  document.head.appendChild(link);
-}
-
-function normalizeIconName(name: string, type: IconType): string {
-  const withoutPrefix = name.trim().replace(/^ri-/, '');
-
-  if (!withoutPrefix) {
-    return `question-${type}`;
-  }
-
-  const alreadyTyped = withoutPrefix.endsWith('-line') || withoutPrefix.endsWith('-fill');
-
-  if (alreadyTyped) {
-    return withoutPrefix;
-  }
-
-  return `${withoutPrefix}-${type}`;
+  return compact;
 }
 
 function resolveState(forced: IconVisualState | undefined, disabled: boolean, hovered: boolean, focused: boolean): IconVisualState {
@@ -117,6 +93,25 @@ function resolveAriaLabel(name: string, ariaLabel: string | undefined): string {
   return name.trim() || 'icon';
 }
 
+function resolveIconFileName(name: string, type: IconType): string {
+  const normalizedName = normalizeIconName(name);
+  const typedCandidate = normalizedName.endsWith('-line') || normalizedName.endsWith('-fill') ? normalizedName : `${normalizedName}-${type}`;
+  const plainCandidate = typedCandidate.replace(/-(line|fill)$/i, '');
+  const fallbackTyped = `question-${type}`;
+  const fallbackPlain = 'question';
+  const fallbackAny = iconCatalog.allNames[0] ?? 'add-line';
+
+  const candidates = [typedCandidate, normalizedName, plainCandidate, fallbackTyped, fallbackPlain, fallbackAny];
+
+  for (const candidate of candidates) {
+    if (iconFileNameSet.has(candidate)) {
+      return candidate;
+    }
+  }
+
+  return fallbackAny;
+}
+
 export function Icons({
   name,
   type = 'line',
@@ -139,19 +134,15 @@ export function Icons({
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
 
-  useEffect(() => {
-    ensureRemixIconStylesheet();
-  }, []);
-
   const resolvedState = resolveState(state, disabled, hovered, focused);
   const resolvedColor = resolveColor(tone, resolvedState);
-  const iconClass = useMemo(() => `ri-${normalizeIconName(name, type)}`, [name, type]);
+  const iconFileName = useMemo(() => resolveIconFileName(name, type), [name, type]);
   const iconSize = SIZE_MAP[size];
+  const iconUrl = useMemo(() => encodeURI(`/icons/${iconFileName}.svg`), [iconFileName]);
   const interactiveMode = interactive || Boolean(onClick);
 
   const glyph = (
-    <i
-      className={iconClass}
+    <span
       aria-hidden={decorative ? 'true' : undefined}
       style={{
         width: iconSize,
@@ -160,10 +151,18 @@ export function Icons({
         minHeight: iconSize,
         fontSize: iconSize,
         lineHeight: `${iconSize}px`,
-        color: resolvedColor,
         display: 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: resolvedColor,
+        WebkitMaskImage: `url("${iconUrl}")`,
+        maskImage: `url("${iconUrl}")`,
+        WebkitMaskPosition: 'center',
+        maskPosition: 'center',
+        WebkitMaskRepeat: 'no-repeat',
+        maskRepeat: 'no-repeat',
+        WebkitMaskSize: 'contain',
+        maskSize: 'contain',
         ...iconStyle,
       }}
     />

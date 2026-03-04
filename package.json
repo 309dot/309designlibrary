@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "preview:build": "npx esbuild button-preview-entry.tsx --bundle --platform=browser --format=esm --outfile=dist/button-preview.js",
+    "icons:catalog": "node scripts/generate-icon-catalog.mjs",
+    "icons:sync": "node scripts/sync-icons.mjs",
+    "preview:build": "npm run icons:catalog && npx esbuild button-preview-entry.tsx --bundle --platform=browser --format=esm --outfile=dist/button-preview.js && npm run icons:sync",
     "preview:serve": "python3 -m http.server 4173 --directory dist",
-    "explorer:build": "npx esbuild component-explorer-entry.tsx --bundle --platform=browser --format=esm --outfile=dist/component-explorer.js",
+    "explorer:build": "npm run icons:catalog && npx esbuild component-explorer-entry.tsx --bundle --platform=browser --format=esm --outfile=dist/component-explorer.js && npm run icons:sync",
     "explorer:serve": "python3 -m http.server 5000 --directory dist"
   },
   "keywords": [],

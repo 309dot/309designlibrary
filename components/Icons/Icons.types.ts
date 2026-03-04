@@ -18,44 +18,11 @@ export const ICON_TONE_OPTIONS = [
   'info',
 ] as const;
 
-export const ICON_SAMPLE_NAMES = [
-  'add',
-  'add-circle',
-  'alert',
-  'arrow-left',
-  'arrow-right',
-  'arrow-up',
-  'arrow-down',
-  'check',
-  'close',
-  'dashboard',
-  'delete-bin',
-  'download',
-  'error-warning',
-  'eye',
-  'eye-off',
-  'filter',
-  'forbid',
-  'history',
-  'information',
-  'list-settings',
-  'moon',
-  'rainy',
-  'search',
-  'settings',
-  'star',
-  'sun',
-  'time',
-  'user',
-  'notification',
-  'menu',
-] as const;
-
 export type IconType = (typeof ICON_TYPE_OPTIONS)[number];
 export type IconVisualState = (typeof ICON_VISUAL_STATE_OPTIONS)[number];
 export type IconSizeToken = (typeof ICON_SIZE_OPTIONS)[number];
 export type IconTone = (typeof ICON_TONE_OPTIONS)[number];
-export type IconName = (typeof ICON_SAMPLE_NAMES)[number] | (string & {});
+export type IconName = string;
 
 export interface IconsProps {
   name: IconName;
