@@ -7,9 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "icons:catalog": "node scripts/generate-icon-catalog.mjs",
     "icons:sync": "node scripts/sync-icons.mjs",
-    "preview:build": "npm run icons:catalog && npx esbuild button-preview-entry.tsx --bundle --platform=browser --format=esm --outfile=dist/button-preview.js && npm run icons:sync",
+    "components:assets:sync": "node scripts/sync-component-assets.mjs",
+    "assets:sync": "npm run icons:sync && npm run components:assets:sync",
+    "preview:build": "npm run icons:catalog && npx esbuild button-preview-entry.tsx --bundle --platform=browser --format=esm --outfile=dist/button-preview.js && npm run assets:sync",
     "preview:serve": "python3 -m http.server 4173 --directory dist",
-    "explorer:build": "npm run icons:catalog && npx esbuild component-explorer-entry.tsx --bundle --platform=browser --format=esm --outfile=dist/component-explorer.js && npm run icons:sync",
+    "explorer:build": "npm run icons:catalog && npx esbuild component-explorer-entry.tsx --bundle --platform=browser --format=esm --outfile=dist/component-explorer.js && npm run assets:sync",
     "explorer:serve": "python3 -m http.server 5000 --directory dist"
   },
   "keywords": [],

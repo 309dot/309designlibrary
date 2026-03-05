@@ -1,3 +1,4 @@
+import React from 'react';
 import { colors, shadows, spacing, typography } from '../../style-tokens';
 
 import type { ProgressCircleColor, ProgressCircleInteractionState, ProgressCircleProps, ProgressCircleSize } from './ProgressCircle.types';

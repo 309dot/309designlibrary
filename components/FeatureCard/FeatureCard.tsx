@@ -1,3 +1,4 @@
+import React from 'react';
 import type { CSSProperties } from 'react';
 
 import { border, colors, radius, shadows, spacing, typography } from '../../style-tokens';

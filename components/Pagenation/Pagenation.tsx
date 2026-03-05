@@ -1,3 +1,4 @@
+import React from 'react';
 import { border, colors, radius, shadows, spacing, typography } from '../../style-tokens';
 
 import type { PagenationInteractionState, PagenationNumberItem, PagenationProps, PagenationSize, PagenationType } from './Pagenation.types';
@@ -502,4 +503,3 @@ export function Pagenation({
     </div>
   );
 }
-

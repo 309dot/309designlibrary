@@ -1328,7 +1328,7 @@ var require_react_dom_development = __commonJS({
         return dispatcher;
       }
       "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-      var React54 = require_react(), Internals = {
+      var React58 = require_react(), Internals = {
         d: {
           f: noop,
           r: function() {
@@ -1346,7 +1346,7 @@ var require_react_dom_development = __commonJS({
         },
         p: 0,
         findDOMNode: null
-      }, REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), ReactSharedInternals = React54.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
+      }, REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), ReactSharedInternals = React58.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
       "function" === typeof Map && null != Map.prototype && "function" === typeof Map.prototype.forEach && "function" === typeof Set && null != Set.prototype && "function" === typeof Set.prototype.clear && "function" === typeof Set.prototype.forEach || console.error(
         "React depends on Map and Set built-in types. Make sure that you load a polyfill in older browsers. https://reactjs.org/link/react-polyfills"
       );
@@ -2881,7 +2881,7 @@ var require_react_dom_client_development = __commonJS({
         "number" === type && getActiveElement(node.ownerDocument) === node || node.defaultValue === "" + value || (node.defaultValue = "" + value);
       }
       function validateOptionProps(element, props) {
-        null == props.value && ("object" === typeof props.children && null !== props.children ? React54.Children.forEach(props.children, function(child) {
+        null == props.value && ("object" === typeof props.children && null !== props.children ? React58.Children.forEach(props.children, function(child) {
           null == child || "string" === typeof child || "number" === typeof child || "bigint" === typeof child || didWarnInvalidChild || (didWarnInvalidChild = true, console.error(
             "Cannot infer the option value of complex children. Pass a `value` prop or use a plain string as children to <option>."
           ));
@@ -18513,14 +18513,14 @@ var require_react_dom_client_development = __commonJS({
         ));
       }
       "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-      var Scheduler = require_scheduler(), React54 = require_react(), ReactDOM = require_react_dom(), assign = Object.assign, REACT_LEGACY_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.element"), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy");
+      var Scheduler = require_scheduler(), React58 = require_react(), ReactDOM = require_react_dom(), assign = Object.assign, REACT_LEGACY_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.element"), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy");
       /* @__PURE__ */ Symbol.for("react.scope");
       var REACT_ACTIVITY_TYPE = /* @__PURE__ */ Symbol.for("react.activity");
       /* @__PURE__ */ Symbol.for("react.legacy_hidden");
       /* @__PURE__ */ Symbol.for("react.tracing_marker");
       var REACT_MEMO_CACHE_SENTINEL = /* @__PURE__ */ Symbol.for("react.memo_cache_sentinel");
       /* @__PURE__ */ Symbol.for("react.view_transition");
-      var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React54.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
+      var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React58.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
         pending: false,
         data: null,
         method: null,
@@ -21308,7 +21308,7 @@ var require_react_dom_client_development = __commonJS({
         }
       };
       (function() {
-        var isomorphicReactPackageVersion = React54.version;
+        var isomorphicReactPackageVersion = React58.version;
         if ("19.2.4" !== isomorphicReactPackageVersion)
           throw Error(
             'Incompatible React versions: The "react" and "react-dom" packages must have the exact same version. Instead got:\n  - react:      ' + (isomorphicReactPackageVersion + "\n  - react-dom:  19.2.4\nLearn more: https://react.dev/warnings/version-mismatch")
@@ -21449,7 +21449,7 @@ var require_client = __commonJS({
 });
 
 // component-explorer-entry.tsx
-var import_react52 = __toESM(require_react());
+var import_react57 = __toESM(require_react());
 var import_client = __toESM(require_client());
 
 // style-tokens.ts
@@ -34154,9 +34154,10 @@ function DropdownPreviewPage() {
 }
 
 // components/FeatureCard/FeatureCard.preview.tsx
-var import_react21 = __toESM(require_react());
+var import_react22 = __toESM(require_react());
 
 // components/FeatureCard/FeatureCard.tsx
+var import_react21 = __toESM(require_react());
 var palette12 = colors.primitive.palette;
 var textTokens5 = colors.semantic.theme.text.base;
 var gradientSolid04 = colors.gradients.solid["04"];
@@ -34180,7 +34181,7 @@ function ActionButton2({
   appearance
 }) {
   const isPrimary = appearance === "primary";
-  return /* @__PURE__ */ React.createElement(
+  return /* @__PURE__ */ import_react21.default.createElement(
     "button",
     {
       type: "button",
@@ -34202,7 +34203,7 @@ function ActionButton2({
         cursor: "pointer"
       }
     },
-    /* @__PURE__ */ React.createElement(
+    /* @__PURE__ */ import_react21.default.createElement(
       "span",
       {
         style: {
@@ -34221,7 +34222,7 @@ function ActionButton2({
   );
 }
 function DefaultCustomSlot() {
-  return /* @__PURE__ */ React.createElement(
+  return /* @__PURE__ */ import_react21.default.createElement(
     "div",
     {
       style: {
@@ -34239,7 +34240,7 @@ function DefaultCustomSlot() {
         boxSizing: "border-box"
       }
     },
-    /* @__PURE__ */ React.createElement(
+    /* @__PURE__ */ import_react21.default.createElement(
       "span",
       {
         style: {
@@ -34257,7 +34258,7 @@ function resolveAlignmentOrder(alignment) {
   return alignment === "imageFirst" ? ["image", "content"] : ["content", "image"];
 }
 function ImageBlock({ flat, imageSlot }) {
-  return /* @__PURE__ */ React.createElement(
+  return /* @__PURE__ */ import_react21.default.createElement(
     "div",
     {
       style: {
@@ -34284,7 +34285,7 @@ function ContentBlock({
   secondaryAction
 }) {
   const isFlat = type === "flat";
-  return /* @__PURE__ */ React.createElement(
+  return /* @__PURE__ */ import_react21.default.createElement(
     "div",
     {
       style: {
@@ -34299,7 +34300,7 @@ function ContentBlock({
         padding: isFlat ? spacing.scale["0"] : spacing.scale["24"]
       }
     },
-    showBadge ? /* @__PURE__ */ React.createElement(
+    showBadge ? /* @__PURE__ */ import_react21.default.createElement(
       "div",
       {
         style: {
@@ -34310,7 +34311,7 @@ function ContentBlock({
           gap: spacing.scale["8"]
         }
       },
-      /* @__PURE__ */ React.createElement(
+      /* @__PURE__ */ import_react21.default.createElement(
         "div",
         {
           style: {
@@ -34326,7 +34327,7 @@ function ContentBlock({
             backgroundColor: palette12.green["2"]
           }
         },
-        /* @__PURE__ */ React.createElement(
+        /* @__PURE__ */ import_react21.default.createElement(
           "span",
           {
             style: {
@@ -34345,7 +34346,7 @@ function ContentBlock({
         )
       )
     ) : null,
-    /* @__PURE__ */ React.createElement(
+    /* @__PURE__ */ import_react21.default.createElement(
       "div",
       {
         style: {
@@ -34357,7 +34358,7 @@ function ContentBlock({
           padding: spacing.scale["0"]
         }
       },
-      /* @__PURE__ */ React.createElement(
+      /* @__PURE__ */ import_react21.default.createElement(
         "h3",
         {
           style: {
@@ -34369,7 +34370,7 @@ function ContentBlock({
         },
         headline
       ),
-      /* @__PURE__ */ React.createElement(
+      /* @__PURE__ */ import_react21.default.createElement(
         "p",
         {
           style: {
@@ -34382,7 +34383,7 @@ function ContentBlock({
         description
       )
     ),
-    showActions ? /* @__PURE__ */ React.createElement(
+    showActions ? /* @__PURE__ */ import_react21.default.createElement(
       "div",
       {
         style: {
@@ -34393,8 +34394,8 @@ function ContentBlock({
           flexWrap: "wrap"
         }
       },
-      /* @__PURE__ */ React.createElement(ActionButton2, { action: primaryAction, appearance: "primary" }),
-      /* @__PURE__ */ React.createElement(ActionButton2, { action: secondaryAction, appearance: "secondary" })
+      /* @__PURE__ */ import_react21.default.createElement(ActionButton2, { action: primaryAction, appearance: "primary" }),
+      /* @__PURE__ */ import_react21.default.createElement(ActionButton2, { action: secondaryAction, appearance: "secondary" })
     ) : null
   );
 }
@@ -34420,7 +34421,7 @@ function FeatureCard({
     boxSizing: "border-box"
   };
   if (type === "custom") {
-    return /* @__PURE__ */ React.createElement(
+    return /* @__PURE__ */ import_react21.default.createElement(
       "article",
       {
         className,
@@ -34441,13 +34442,13 @@ function FeatureCard({
         },
         ...props
       },
-      customSlot ?? /* @__PURE__ */ React.createElement(DefaultCustomSlot, null)
+      customSlot ?? /* @__PURE__ */ import_react21.default.createElement(DefaultCustomSlot, null)
     );
   }
   const isFlat = type === "flat";
   const [first, second] = resolveAlignmentOrder(alignment);
-  const image = /* @__PURE__ */ React.createElement(ImageBlock, { flat: isFlat, imageSlot });
-  const content = /* @__PURE__ */ React.createElement(
+  const image = /* @__PURE__ */ import_react21.default.createElement(ImageBlock, { flat: isFlat, imageSlot });
+  const content = /* @__PURE__ */ import_react21.default.createElement(
     ContentBlock,
     {
       type,
@@ -34460,7 +34461,7 @@ function FeatureCard({
       secondaryAction
     }
   );
-  return /* @__PURE__ */ React.createElement(
+  return /* @__PURE__ */ import_react21.default.createElement(
     "article",
     {
       className,
@@ -34497,7 +34498,7 @@ function toTitleCase(value) {
 var palette13 = colors.primitive.palette;
 var textTokens6 = colors.semantic.theme.text.base;
 function PreviewCustomSlot() {
-  return /* @__PURE__ */ import_react21.default.createElement(
+  return /* @__PURE__ */ import_react22.default.createElement(
     "div",
     {
       style: {
@@ -34524,18 +34525,18 @@ function PreviewCustomSlot() {
   );
 }
 function FeatureCardPreviewPage() {
-  const [type, setType] = (0, import_react21.useState)("elevated");
-  const [alignment, setAlignment] = (0, import_react21.useState)("imageFirst");
-  const [showBadge, setShowBadge] = (0, import_react21.useState)(true);
-  const [showActions, setShowActions] = (0, import_react21.useState)(true);
-  const [showImage, setShowImage] = (0, import_react21.useState)(true);
+  const [type, setType] = (0, import_react22.useState)("elevated");
+  const [alignment, setAlignment] = (0, import_react22.useState)("imageFirst");
+  const [showBadge, setShowBadge] = (0, import_react22.useState)(true);
+  const [showActions, setShowActions] = (0, import_react22.useState)(true);
+  const [showImage, setShowImage] = (0, import_react22.useState)(true);
   const disabledImage = type === "custom";
   const disabledAlignment = type === "custom";
-  const imageSlot = (0, import_react21.useMemo)(() => {
+  const imageSlot = (0, import_react22.useMemo)(() => {
     if (disabledImage || !showImage) {
       return null;
     }
-    return /* @__PURE__ */ import_react21.default.createElement(
+    return /* @__PURE__ */ import_react22.default.createElement(
       "div",
       {
         style: {
@@ -34546,7 +34547,7 @@ function FeatureCardPreviewPage() {
       }
     );
   }, [disabledImage, showImage]);
-  return /* @__PURE__ */ import_react21.default.createElement(
+  return /* @__PURE__ */ import_react22.default.createElement(
     "main",
     {
       style: {
@@ -34557,7 +34558,7 @@ function FeatureCardPreviewPage() {
         fontFamily: typography.scale.bodyM.medium.fontFamily
       }
     },
-    /* @__PURE__ */ import_react21.default.createElement(
+    /* @__PURE__ */ import_react22.default.createElement(
       "section",
       {
         style: {
@@ -34567,7 +34568,7 @@ function FeatureCardPreviewPage() {
           gap: spacing.scale["24"]
         }
       },
-      /* @__PURE__ */ import_react21.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react21.default.createElement(
+      /* @__PURE__ */ import_react22.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react22.default.createElement(
         "h1",
         {
           style: {
@@ -34580,7 +34581,7 @@ function FeatureCardPreviewPage() {
           }
         },
         "Feature Card Preview"
-      ), /* @__PURE__ */ import_react21.default.createElement(
+      ), /* @__PURE__ */ import_react22.default.createElement(
         "p",
         {
           style: {
@@ -34595,7 +34596,7 @@ function FeatureCardPreviewPage() {
         },
         "Figma variant(Type/Alignment)\uACFC \uC2AC\uB86F \uAE30\uBC18 Custom \uD0C0\uC785\uC744 \uD3EC\uD568\uD55C \uCE74\uB4DC \uAC80\uC99D \uD654\uBA74"
       )),
-      /* @__PURE__ */ import_react21.default.createElement(
+      /* @__PURE__ */ import_react22.default.createElement(
         "section",
         {
           style: {
@@ -34610,7 +34611,7 @@ function FeatureCardPreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react21.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react21.default.createElement("span", null, "Type"), /* @__PURE__ */ import_react21.default.createElement(
+        /* @__PURE__ */ import_react22.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react22.default.createElement("span", null, "Type"), /* @__PURE__ */ import_react22.default.createElement(
           "select",
           {
             value: type,
@@ -34626,9 +34627,9 @@ function FeatureCardPreviewPage() {
               color: textTokens6.staticDark
             }
           },
-          TYPES6.map((item) => /* @__PURE__ */ import_react21.default.createElement("option", { key: item, value: item }, toTitleCase(item)))
+          TYPES6.map((item) => /* @__PURE__ */ import_react22.default.createElement("option", { key: item, value: item }, toTitleCase(item)))
         )),
-        /* @__PURE__ */ import_react21.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react21.default.createElement("span", null, "Alignment"), /* @__PURE__ */ import_react21.default.createElement(
+        /* @__PURE__ */ import_react22.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react22.default.createElement("span", null, "Alignment"), /* @__PURE__ */ import_react22.default.createElement(
           "select",
           {
             value: alignment,
@@ -34645,9 +34646,9 @@ function FeatureCardPreviewPage() {
               color: textTokens6.staticDark
             }
           },
-          ALIGNMENTS.map((item) => /* @__PURE__ */ import_react21.default.createElement("option", { key: item, value: item }, toTitleCase(item)))
+          ALIGNMENTS.map((item) => /* @__PURE__ */ import_react22.default.createElement("option", { key: item, value: item }, toTitleCase(item)))
         )),
-        /* @__PURE__ */ import_react21.default.createElement(
+        /* @__PURE__ */ import_react22.default.createElement(
           "label",
           {
             style: {
@@ -34664,10 +34665,10 @@ function FeatureCardPreviewPage() {
               backgroundColor: palette13.base.white
             }
           },
-          /* @__PURE__ */ import_react21.default.createElement("span", null, "Badge"),
-          /* @__PURE__ */ import_react21.default.createElement("input", { type: "checkbox", checked: showBadge, onChange: (event) => setShowBadge(event.target.checked) })
+          /* @__PURE__ */ import_react22.default.createElement("span", null, "Badge"),
+          /* @__PURE__ */ import_react22.default.createElement("input", { type: "checkbox", checked: showBadge, onChange: (event) => setShowBadge(event.target.checked) })
         ),
-        /* @__PURE__ */ import_react21.default.createElement(
+        /* @__PURE__ */ import_react22.default.createElement(
           "label",
           {
             style: {
@@ -34684,10 +34685,10 @@ function FeatureCardPreviewPage() {
               backgroundColor: palette13.base.white
             }
           },
-          /* @__PURE__ */ import_react21.default.createElement("span", null, "Actions"),
-          /* @__PURE__ */ import_react21.default.createElement("input", { type: "checkbox", checked: showActions, onChange: (event) => setShowActions(event.target.checked) })
+          /* @__PURE__ */ import_react22.default.createElement("span", null, "Actions"),
+          /* @__PURE__ */ import_react22.default.createElement("input", { type: "checkbox", checked: showActions, onChange: (event) => setShowActions(event.target.checked) })
         ),
-        /* @__PURE__ */ import_react21.default.createElement(
+        /* @__PURE__ */ import_react22.default.createElement(
           "label",
           {
             style: {
@@ -34704,8 +34705,8 @@ function FeatureCardPreviewPage() {
               backgroundColor: disabledImage ? palette13.gray["2"] : palette13.base.white
             }
           },
-          /* @__PURE__ */ import_react21.default.createElement("span", null, "Image"),
-          /* @__PURE__ */ import_react21.default.createElement(
+          /* @__PURE__ */ import_react22.default.createElement("span", null, "Image"),
+          /* @__PURE__ */ import_react22.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -34716,7 +34717,7 @@ function FeatureCardPreviewPage() {
           )
         )
       ),
-      /* @__PURE__ */ import_react21.default.createElement(
+      /* @__PURE__ */ import_react22.default.createElement(
         "section",
         {
           style: {
@@ -34730,7 +34731,7 @@ function FeatureCardPreviewPage() {
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react21.default.createElement(
+        /* @__PURE__ */ import_react22.default.createElement(
           "h2",
           {
             style: {
@@ -34744,7 +34745,7 @@ function FeatureCardPreviewPage() {
           },
           "Active Selection"
         ),
-        /* @__PURE__ */ import_react21.default.createElement(
+        /* @__PURE__ */ import_react22.default.createElement(
           FeatureCard,
           {
             type,
@@ -34752,11 +34753,11 @@ function FeatureCardPreviewPage() {
             showBadge,
             showActions,
             imageSlot,
-            customSlot: type === "custom" ? /* @__PURE__ */ import_react21.default.createElement(PreviewCustomSlot, null) : void 0
+            customSlot: type === "custom" ? /* @__PURE__ */ import_react22.default.createElement(PreviewCustomSlot, null) : void 0
           }
         )
       ),
-      /* @__PURE__ */ import_react21.default.createElement(
+      /* @__PURE__ */ import_react22.default.createElement(
         "section",
         {
           style: {
@@ -34770,7 +34771,7 @@ function FeatureCardPreviewPage() {
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react21.default.createElement(
+        /* @__PURE__ */ import_react22.default.createElement(
           "h2",
           {
             style: {
@@ -34784,7 +34785,7 @@ function FeatureCardPreviewPage() {
           },
           "Variant Matrix"
         ),
-        /* @__PURE__ */ import_react21.default.createElement("div", { style: { display: "grid", gap: spacing.scale["24"] } }, TYPES6.map((typeItem) => /* @__PURE__ */ import_react21.default.createElement("div", { key: typeItem, style: { display: "grid", gap: spacing.scale["12"] } }, /* @__PURE__ */ import_react21.default.createElement(
+        /* @__PURE__ */ import_react22.default.createElement("div", { style: { display: "grid", gap: spacing.scale["24"] } }, TYPES6.map((typeItem) => /* @__PURE__ */ import_react22.default.createElement("div", { key: typeItem, style: { display: "grid", gap: spacing.scale["12"] } }, /* @__PURE__ */ import_react22.default.createElement(
           "span",
           {
             style: {
@@ -34798,7 +34799,7 @@ function FeatureCardPreviewPage() {
           },
           "Type ",
           toTitleCase(typeItem)
-        ), typeItem === "custom" ? /* @__PURE__ */ import_react21.default.createElement(FeatureCard, { type: "custom", customSlot: /* @__PURE__ */ import_react21.default.createElement(PreviewCustomSlot, null) }) : ALIGNMENTS.map((alignmentItem) => /* @__PURE__ */ import_react21.default.createElement(
+        ), typeItem === "custom" ? /* @__PURE__ */ import_react22.default.createElement(FeatureCard, { type: "custom", customSlot: /* @__PURE__ */ import_react22.default.createElement(PreviewCustomSlot, null) }) : ALIGNMENTS.map((alignmentItem) => /* @__PURE__ */ import_react22.default.createElement(
           FeatureCard,
           {
             key: `${typeItem}-${alignmentItem}`,
@@ -34814,10 +34815,10 @@ function FeatureCardPreviewPage() {
 }
 
 // components/Icons/Icons.preview.tsx
-var import_react23 = __toESM(require_react());
+var import_react24 = __toESM(require_react());
 
 // components/Icons/Icons.tsx
-var import_react22 = __toESM(require_react());
+var import_react23 = __toESM(require_react());
 
 // components/Icons/icon-catalog.ts
 var iconCatalog = {
@@ -39492,15 +39493,15 @@ function Icons({
   onFocus,
   onBlur
 }) {
-  const [hovered, setHovered] = (0, import_react22.useState)(false);
-  const [focused, setFocused] = (0, import_react22.useState)(false);
+  const [hovered, setHovered] = (0, import_react23.useState)(false);
+  const [focused, setFocused] = (0, import_react23.useState)(false);
   const resolvedState = resolveState3(state, disabled, hovered, focused);
   const resolvedColor = resolveColor(tone, resolvedState);
-  const iconFileName = (0, import_react22.useMemo)(() => resolveIconFileName(name, type), [name, type]);
+  const iconFileName = (0, import_react23.useMemo)(() => resolveIconFileName(name, type), [name, type]);
   const iconSize = SIZE_MAP[size];
-  const iconUrl = (0, import_react22.useMemo)(() => encodeURI(`/icons/${iconFileName}.svg`), [iconFileName]);
+  const iconUrl = (0, import_react23.useMemo)(() => encodeURI(`/icons/${iconFileName}.svg`), [iconFileName]);
   const interactiveMode = interactive || Boolean(onClick);
-  const glyph = /* @__PURE__ */ import_react22.default.createElement(
+  const glyph = /* @__PURE__ */ import_react23.default.createElement(
     "span",
     {
       "aria-hidden": decorative ? "true" : void 0,
@@ -39528,7 +39529,7 @@ function Icons({
     }
   );
   if (interactiveMode) {
-    return /* @__PURE__ */ import_react22.default.createElement(
+    return /* @__PURE__ */ import_react23.default.createElement(
       "button",
       {
         type: "button",
@@ -39579,7 +39580,7 @@ function Icons({
       glyph
     );
   }
-  return /* @__PURE__ */ import_react22.default.createElement(
+  return /* @__PURE__ */ import_react23.default.createElement(
     "span",
     {
       className,
@@ -39636,25 +39637,25 @@ function textStyle(token) {
   };
 }
 function IconsPreviewPage() {
-  const [name, setName] = (0, import_react23.useState)(DEFAULT_ICON_NAME);
-  const [search, setSearch] = (0, import_react23.useState)("");
-  const [type, setType] = (0, import_react23.useState)("line");
-  const [size, setSize] = (0, import_react23.useState)("24");
-  const [tone, setTone] = (0, import_react23.useState)("primary");
-  const [state, setState] = (0, import_react23.useState)("default");
-  const [interactive, setInteractive] = (0, import_react23.useState)(false);
-  const [disabled, setDisabled] = (0, import_react23.useState)(false);
-  const [decorative, setDecorative] = (0, import_react23.useState)(true);
-  const filteredNames = (0, import_react23.useMemo)(() => {
+  const [name, setName] = (0, import_react24.useState)(DEFAULT_ICON_NAME);
+  const [search, setSearch] = (0, import_react24.useState)("");
+  const [type, setType] = (0, import_react24.useState)("line");
+  const [size, setSize] = (0, import_react24.useState)("24");
+  const [tone, setTone] = (0, import_react24.useState)("primary");
+  const [state, setState] = (0, import_react24.useState)("default");
+  const [interactive, setInteractive] = (0, import_react24.useState)(false);
+  const [disabled, setDisabled] = (0, import_react24.useState)(false);
+  const [decorative, setDecorative] = (0, import_react24.useState)(true);
+  const filteredNames = (0, import_react24.useMemo)(() => {
     const keyword = search.trim().toLowerCase();
     if (!keyword) {
       return allIconNames;
     }
     return allIconNames.filter((item) => item.includes(keyword));
   }, [search]);
-  const pickerNames = (0, import_react23.useMemo)(() => filteredNames.slice(0, spacing.scale["320"]), [filteredNames]);
-  const gridNames = (0, import_react23.useMemo)(() => filteredNames.slice(0, spacing.scale["48"]), [filteredNames]);
-  return /* @__PURE__ */ import_react23.default.createElement(
+  const pickerNames = (0, import_react24.useMemo)(() => filteredNames.slice(0, spacing.scale["320"]), [filteredNames]);
+  const gridNames = (0, import_react24.useMemo)(() => filteredNames.slice(0, spacing.scale["48"]), [filteredNames]);
+  return /* @__PURE__ */ import_react24.default.createElement(
     "main",
     {
       style: {
@@ -39666,7 +39667,7 @@ function IconsPreviewPage() {
         gap: spacing.scale["20"]
       }
     },
-    /* @__PURE__ */ import_react23.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react23.default.createElement(
+    /* @__PURE__ */ import_react24.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react24.default.createElement(
       "h1",
       {
         style: {
@@ -39675,7 +39676,7 @@ function IconsPreviewPage() {
         }
       },
       "Icons Preview"
-    ), /* @__PURE__ */ import_react23.default.createElement(
+    ), /* @__PURE__ */ import_react24.default.createElement(
       "p",
       {
         style: {
@@ -39688,7 +39689,7 @@ function IconsPreviewPage() {
       iconCatalog.allNames.length,
       "\uC885\uC744 \uAE30\uC900\uC73C\uB85C \uB80C\uB354\uB9C1\uD569\uB2C8\uB2E4."
     )),
-    /* @__PURE__ */ import_react23.default.createElement(
+    /* @__PURE__ */ import_react24.default.createElement(
       "section",
       {
         style: {
@@ -39703,7 +39704,7 @@ function IconsPreviewPage() {
           gap: spacing.scale["12"]
         }
       },
-      /* @__PURE__ */ import_react23.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react23.default.createElement("span", { style: { ...textStyle(typography.scale.captionM.medium), color: textBase9.staticDarkSecondary } }, "Name Search"), /* @__PURE__ */ import_react23.default.createElement(
+      /* @__PURE__ */ import_react24.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react24.default.createElement("span", { style: { ...textStyle(typography.scale.captionM.medium), color: textBase9.staticDarkSecondary } }, "Name Search"), /* @__PURE__ */ import_react24.default.createElement(
         "input",
         {
           value: search,
@@ -39721,7 +39722,7 @@ function IconsPreviewPage() {
           }
         }
       )),
-      /* @__PURE__ */ import_react23.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react23.default.createElement("span", { style: { ...textStyle(typography.scale.captionM.medium), color: textBase9.staticDarkSecondary } }, `Name (${pickerNames.length})`), /* @__PURE__ */ import_react23.default.createElement(
+      /* @__PURE__ */ import_react24.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react24.default.createElement("span", { style: { ...textStyle(typography.scale.captionM.medium), color: textBase9.staticDarkSecondary } }, `Name (${pickerNames.length})`), /* @__PURE__ */ import_react24.default.createElement(
         "select",
         {
           value: name,
@@ -39737,9 +39738,9 @@ function IconsPreviewPage() {
             color: textBase9.staticDark
           }
         },
-        pickerNames.length > 0 ? pickerNames.map((item) => /* @__PURE__ */ import_react23.default.createElement("option", { key: item, value: item }, item)) : /* @__PURE__ */ import_react23.default.createElement("option", { value: name }, name)
+        pickerNames.length > 0 ? pickerNames.map((item) => /* @__PURE__ */ import_react24.default.createElement("option", { key: item, value: item }, item)) : /* @__PURE__ */ import_react24.default.createElement("option", { value: name }, name)
       )),
-      /* @__PURE__ */ import_react23.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react23.default.createElement("span", { style: { ...textStyle(typography.scale.captionM.medium), color: textBase9.staticDarkSecondary } }, "Type"), /* @__PURE__ */ import_react23.default.createElement(
+      /* @__PURE__ */ import_react24.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react24.default.createElement("span", { style: { ...textStyle(typography.scale.captionM.medium), color: textBase9.staticDarkSecondary } }, "Type"), /* @__PURE__ */ import_react24.default.createElement(
         "select",
         {
           value: type,
@@ -39755,9 +39756,9 @@ function IconsPreviewPage() {
             color: textBase9.staticDark
           }
         },
-        ICON_TYPE_OPTIONS.map((item) => /* @__PURE__ */ import_react23.default.createElement("option", { key: item, value: item }, item))
+        ICON_TYPE_OPTIONS.map((item) => /* @__PURE__ */ import_react24.default.createElement("option", { key: item, value: item }, item))
       )),
-      /* @__PURE__ */ import_react23.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react23.default.createElement("span", { style: { ...textStyle(typography.scale.captionM.medium), color: textBase9.staticDarkSecondary } }, "Size Token"), /* @__PURE__ */ import_react23.default.createElement(
+      /* @__PURE__ */ import_react24.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react24.default.createElement("span", { style: { ...textStyle(typography.scale.captionM.medium), color: textBase9.staticDarkSecondary } }, "Size Token"), /* @__PURE__ */ import_react24.default.createElement(
         "select",
         {
           value: size,
@@ -39773,9 +39774,9 @@ function IconsPreviewPage() {
             color: textBase9.staticDark
           }
         },
-        ICON_SIZE_OPTIONS.map((item) => /* @__PURE__ */ import_react23.default.createElement("option", { key: item, value: item }, item))
+        ICON_SIZE_OPTIONS.map((item) => /* @__PURE__ */ import_react24.default.createElement("option", { key: item, value: item }, item))
       )),
-      /* @__PURE__ */ import_react23.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react23.default.createElement("span", { style: { ...textStyle(typography.scale.captionM.medium), color: textBase9.staticDarkSecondary } }, "Tone"), /* @__PURE__ */ import_react23.default.createElement(
+      /* @__PURE__ */ import_react24.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react24.default.createElement("span", { style: { ...textStyle(typography.scale.captionM.medium), color: textBase9.staticDarkSecondary } }, "Tone"), /* @__PURE__ */ import_react24.default.createElement(
         "select",
         {
           value: tone,
@@ -39791,9 +39792,9 @@ function IconsPreviewPage() {
             color: textBase9.staticDark
           }
         },
-        ICON_TONE_OPTIONS.map((item) => /* @__PURE__ */ import_react23.default.createElement("option", { key: item, value: item }, item))
+        ICON_TONE_OPTIONS.map((item) => /* @__PURE__ */ import_react24.default.createElement("option", { key: item, value: item }, item))
       )),
-      /* @__PURE__ */ import_react23.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react23.default.createElement("span", { style: { ...textStyle(typography.scale.captionM.medium), color: textBase9.staticDarkSecondary } }, "State"), /* @__PURE__ */ import_react23.default.createElement(
+      /* @__PURE__ */ import_react24.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react24.default.createElement("span", { style: { ...textStyle(typography.scale.captionM.medium), color: textBase9.staticDarkSecondary } }, "State"), /* @__PURE__ */ import_react24.default.createElement(
         "select",
         {
           value: state,
@@ -39809,13 +39810,13 @@ function IconsPreviewPage() {
             color: textBase9.staticDark
           }
         },
-        ICON_VISUAL_STATE_OPTIONS.map((item) => /* @__PURE__ */ import_react23.default.createElement("option", { key: item, value: item }, item))
+        ICON_VISUAL_STATE_OPTIONS.map((item) => /* @__PURE__ */ import_react24.default.createElement("option", { key: item, value: item }, item))
       )),
       [
         ["interactive", interactive, setInteractive],
         ["disabled", disabled, setDisabled],
         ["decorative", decorative, setDecorative]
-      ].map(([label, value, setter]) => /* @__PURE__ */ import_react23.default.createElement(
+      ].map(([label, value, setter]) => /* @__PURE__ */ import_react24.default.createElement(
         "label",
         {
           key: label,
@@ -39833,11 +39834,11 @@ function IconsPreviewPage() {
             gap: spacing.scale["8"]
           }
         },
-        /* @__PURE__ */ import_react23.default.createElement("span", { style: { ...textStyle(typography.scale.captionL.regular) } }, label),
-        /* @__PURE__ */ import_react23.default.createElement("input", { type: "checkbox", checked: value, onChange: (event) => setter(event.target.checked) })
+        /* @__PURE__ */ import_react24.default.createElement("span", { style: { ...textStyle(typography.scale.captionL.regular) } }, label),
+        /* @__PURE__ */ import_react24.default.createElement("input", { type: "checkbox", checked: value, onChange: (event) => setter(event.target.checked) })
       ))
     ),
-    /* @__PURE__ */ import_react23.default.createElement(
+    /* @__PURE__ */ import_react24.default.createElement(
       "section",
       {
         style: {
@@ -39851,7 +39852,7 @@ function IconsPreviewPage() {
           gap: spacing.scale["16"]
         }
       },
-      /* @__PURE__ */ import_react23.default.createElement(
+      /* @__PURE__ */ import_react24.default.createElement(
         "h2",
         {
           style: {
@@ -39861,7 +39862,7 @@ function IconsPreviewPage() {
         },
         "Active Variant"
       ),
-      /* @__PURE__ */ import_react23.default.createElement(
+      /* @__PURE__ */ import_react24.default.createElement(
         "div",
         {
           style: {
@@ -39876,7 +39877,7 @@ function IconsPreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react23.default.createElement(
+        /* @__PURE__ */ import_react24.default.createElement(
           Icons,
           {
             name,
@@ -39890,7 +39891,7 @@ function IconsPreviewPage() {
             ariaLabel: `${name} ${type} icon`
           }
         ),
-        /* @__PURE__ */ import_react23.default.createElement(
+        /* @__PURE__ */ import_react24.default.createElement(
           "div",
           {
             style: {
@@ -39901,13 +39902,13 @@ function IconsPreviewPage() {
               ...textStyle(typography.scale.captionM.regular)
             }
           },
-          /* @__PURE__ */ import_react23.default.createElement("div", null, `icon file: ${name}-${type}.svg (fallback \uC790\uB3D9)`),
-          /* @__PURE__ */ import_react23.default.createElement("div", null, `state: ${state}`),
-          /* @__PURE__ */ import_react23.default.createElement("div", null, `size token: spacing.scale.${size}`)
+          /* @__PURE__ */ import_react24.default.createElement("div", null, `icon file: ${name}-${type}.svg (fallback \uC790\uB3D9)`),
+          /* @__PURE__ */ import_react24.default.createElement("div", null, `state: ${state}`),
+          /* @__PURE__ */ import_react24.default.createElement("div", null, `size token: spacing.scale.${size}`)
         )
       )
     ),
-    /* @__PURE__ */ import_react23.default.createElement(
+    /* @__PURE__ */ import_react24.default.createElement(
       "section",
       {
         style: {
@@ -39921,7 +39922,7 @@ function IconsPreviewPage() {
           gap: spacing.scale["12"]
         }
       },
-      /* @__PURE__ */ import_react23.default.createElement(
+      /* @__PURE__ */ import_react24.default.createElement(
         "h2",
         {
           style: {
@@ -39933,7 +39934,7 @@ function IconsPreviewPage() {
         filteredNames.length,
         ")"
       ),
-      /* @__PURE__ */ import_react23.default.createElement(
+      /* @__PURE__ */ import_react24.default.createElement(
         "div",
         {
           style: {
@@ -39942,7 +39943,7 @@ function IconsPreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        gridNames.map((iconName) => /* @__PURE__ */ import_react23.default.createElement(
+        gridNames.map((iconName) => /* @__PURE__ */ import_react24.default.createElement(
           "article",
           {
             key: iconName,
@@ -39960,8 +39961,8 @@ function IconsPreviewPage() {
               gap: spacing.scale["8"]
             }
           },
-          /* @__PURE__ */ import_react23.default.createElement("div", { style: { display: "inline-flex", alignItems: "center", gap: spacing.scale["12"] } }, /* @__PURE__ */ import_react23.default.createElement(Icons, { name: iconName, type: "line", size: "24", tone: "secondary" }), /* @__PURE__ */ import_react23.default.createElement(Icons, { name: iconName, type: "fill", size: "24", tone: "primary" })),
-          /* @__PURE__ */ import_react23.default.createElement(
+          /* @__PURE__ */ import_react24.default.createElement("div", { style: { display: "inline-flex", alignItems: "center", gap: spacing.scale["12"] } }, /* @__PURE__ */ import_react24.default.createElement(Icons, { name: iconName, type: "line", size: "24", tone: "secondary" }), /* @__PURE__ */ import_react24.default.createElement(Icons, { name: iconName, type: "fill", size: "24", tone: "primary" })),
+          /* @__PURE__ */ import_react24.default.createElement(
             "span",
             {
               style: {
@@ -39980,10 +39981,10 @@ function IconsPreviewPage() {
 }
 
 // components/Input/Input.preview.tsx
-var import_react25 = __toESM(require_react());
+var import_react26 = __toESM(require_react());
 
 // components/Input/Input.tsx
-var import_react24 = __toESM(require_react());
+var import_react25 = __toESM(require_react());
 var palette15 = colors.primitive.palette;
 var textBase10 = colors.semantic.theme.text.base;
 var textStatus = colors.semantic.theme.text.status;
@@ -40073,7 +40074,7 @@ function getFieldFocusShadow(target, state) {
   return target === "destructive" ? shadows.focusRing.lightDestructive.css : shadows.focusRing.light.css;
 }
 function FlagIcon({ disabled }) {
-  return /* @__PURE__ */ import_react24.default.createElement(
+  return /* @__PURE__ */ import_react25.default.createElement(
     "span",
     {
       "aria-hidden": "true",
@@ -40087,13 +40088,13 @@ function FlagIcon({ disabled }) {
         mixBlendMode: disabled ? "luminosity" : "normal"
       }
     },
-    /* @__PURE__ */ import_react24.default.createElement("img", { src: FLAG_BASE_SRC, alt: "", style: { position: "absolute", inset: 0, width: "100%", height: "100%", display: "block" } }),
-    /* @__PURE__ */ import_react24.default.createElement("span", { style: { position: "absolute", inset: spacing.scale["0"] } }, /* @__PURE__ */ import_react24.default.createElement("img", { src: FLAG_GROUP_SRC, alt: "", style: { width: "100%", height: "100%", display: "block" } })),
-    /* @__PURE__ */ import_react24.default.createElement("img", { src: FLAG_OVERLAY_SRC, alt: "", style: { position: "absolute", inset: 0, width: "100%", height: "100%", display: "block" } })
+    /* @__PURE__ */ import_react25.default.createElement("img", { src: FLAG_BASE_SRC, alt: "", style: { position: "absolute", inset: 0, width: "100%", height: "100%", display: "block" } }),
+    /* @__PURE__ */ import_react25.default.createElement("span", { style: { position: "absolute", inset: spacing.scale["0"] } }, /* @__PURE__ */ import_react25.default.createElement("img", { src: FLAG_GROUP_SRC, alt: "", style: { width: "100%", height: "100%", display: "block" } })),
+    /* @__PURE__ */ import_react25.default.createElement("img", { src: FLAG_OVERLAY_SRC, alt: "", style: { position: "absolute", inset: 0, width: "100%", height: "100%", display: "block" } })
   );
 }
 function IconImage({ src, size, disabled }) {
-  return /* @__PURE__ */ import_react24.default.createElement(
+  return /* @__PURE__ */ import_react25.default.createElement(
     "span",
     {
       "aria-hidden": "true",
@@ -40107,7 +40108,7 @@ function IconImage({ src, size, disabled }) {
         opacity: disabled ? 0.5 : 1
       }
     },
-    /* @__PURE__ */ import_react24.default.createElement("img", { src, alt: "", style: { width: "100%", height: "100%", display: "block" } })
+    /* @__PURE__ */ import_react25.default.createElement("img", { src, alt: "", style: { width: "100%", height: "100%", display: "block" } })
   );
 }
 function Input({
@@ -40147,9 +40148,9 @@ function Input({
   onMouseLeave,
   ...rest
 }) {
-  const [hovered, setHovered] = (0, import_react24.useState)(false);
-  const [focused, setFocused] = (0, import_react24.useState)(false);
-  const [uncontrolledValue, setUncontrolledValue] = (0, import_react24.useState)(defaultValue);
+  const [hovered, setHovered] = (0, import_react25.useState)(false);
+  const [focused, setFocused] = (0, import_react25.useState)(false);
+  const [uncontrolledValue, setUncontrolledValue] = (0, import_react25.useState)(defaultValue);
   const sizeStyle = SIZE_STYLES[size];
   const resolvedValue = value ?? uncontrolledValue;
   const resolvedState = resolveVisualState6(state, disabled, hovered, focused, resolvedValue);
@@ -40194,7 +40195,7 @@ function Input({
   const fullFieldRadius = {
     borderRadius: sizeStyle.fieldRadius
   };
-  return /* @__PURE__ */ import_react24.default.createElement(
+  return /* @__PURE__ */ import_react25.default.createElement(
     "div",
     {
       id,
@@ -40212,7 +40213,7 @@ function Input({
       onMouseLeave: handleMouseLeave,
       ...rest
     },
-    showLabel ? /* @__PURE__ */ import_react24.default.createElement(
+    showLabel ? /* @__PURE__ */ import_react25.default.createElement(
       "div",
       {
         style: {
@@ -40223,7 +40224,7 @@ function Input({
           padding: spacing.scale["0"]
         }
       },
-      /* @__PURE__ */ import_react24.default.createElement(
+      /* @__PURE__ */ import_react25.default.createElement(
         "div",
         {
           style: {
@@ -40235,7 +40236,7 @@ function Input({
             whiteSpace: "nowrap"
           }
         },
-        /* @__PURE__ */ import_react24.default.createElement(
+        /* @__PURE__ */ import_react25.default.createElement(
           "span",
           {
             style: {
@@ -40245,7 +40246,7 @@ function Input({
           },
           label
         ),
-        /* @__PURE__ */ import_react24.default.createElement(
+        /* @__PURE__ */ import_react25.default.createElement(
           "span",
           {
             style: {
@@ -40257,7 +40258,7 @@ function Input({
         )
       )
     ) : null,
-    /* @__PURE__ */ import_react24.default.createElement(
+    /* @__PURE__ */ import_react25.default.createElement(
       "div",
       {
         style: {
@@ -40268,7 +40269,7 @@ function Input({
           boxShadow: containerShadow
         }
       },
-      type === "external" ? /* @__PURE__ */ import_react24.default.createElement(
+      type === "external" ? /* @__PURE__ */ import_react25.default.createElement(
         "div",
         {
           style: {
@@ -40287,8 +40288,8 @@ function Input({
             ...leftFieldRadius
           }
         },
-        leadIcon ? /* @__PURE__ */ import_react24.default.createElement(import_react24.default.Fragment, null, leadIcon ?? /* @__PURE__ */ import_react24.default.createElement(IconImage, { src: EARTH_ICON_SRC, size: spacing.scale["20"], disabled: componentDisabled })) : null,
-        /* @__PURE__ */ import_react24.default.createElement(
+        leadIcon ? /* @__PURE__ */ import_react25.default.createElement(import_react25.default.Fragment, null, leadIcon ?? /* @__PURE__ */ import_react25.default.createElement(IconImage, { src: EARTH_ICON_SRC, size: spacing.scale["20"], disabled: componentDisabled })) : null,
+        /* @__PURE__ */ import_react25.default.createElement(
           "div",
           {
             style: {
@@ -40299,7 +40300,7 @@ function Input({
               paddingBlock: spacing.scale["0"]
             }
           },
-          /* @__PURE__ */ import_react24.default.createElement(
+          /* @__PURE__ */ import_react25.default.createElement(
             "span",
             {
               style: {
@@ -40312,7 +40313,7 @@ function Input({
           )
         )
       ) : null,
-      /* @__PURE__ */ import_react24.default.createElement(
+      /* @__PURE__ */ import_react25.default.createElement(
         "div",
         {
           style: {
@@ -40331,7 +40332,7 @@ function Input({
             ...type === "default" ? fullFieldRadius : type === "external" ? rightFieldRadius : leftFieldRadius
           }
         },
-        /* @__PURE__ */ import_react24.default.createElement(
+        /* @__PURE__ */ import_react25.default.createElement(
           "div",
           {
             style: {
@@ -40342,8 +40343,8 @@ function Input({
               minWidth: spacing.scale["0"]
             }
           },
-          type !== "external" && showFlag ? /* @__PURE__ */ import_react24.default.createElement(FlagIcon, { disabled: componentDisabled }) : null,
-          type !== "external" && showLeadDropdown ? /* @__PURE__ */ import_react24.default.createElement(
+          type !== "external" && showFlag ? /* @__PURE__ */ import_react25.default.createElement(FlagIcon, { disabled: componentDisabled }) : null,
+          type !== "external" && showLeadDropdown ? /* @__PURE__ */ import_react25.default.createElement(
             "div",
             {
               style: {
@@ -40355,7 +40356,7 @@ function Input({
                 paddingBlock: spacing.scale["0"]
               }
             },
-            /* @__PURE__ */ import_react24.default.createElement(
+            /* @__PURE__ */ import_react25.default.createElement(
               "span",
               {
                 style: {
@@ -40366,9 +40367,9 @@ function Input({
               },
               leadDropdownLabel
             ),
-            /* @__PURE__ */ import_react24.default.createElement(IconImage, { src: CHEVRON_ICON_SRC, size: spacing.scale["16"], disabled: componentDisabled })
+            /* @__PURE__ */ import_react25.default.createElement(IconImage, { src: CHEVRON_ICON_SRC, size: spacing.scale["16"], disabled: componentDisabled })
           ) : null,
-          /* @__PURE__ */ import_react24.default.createElement(
+          /* @__PURE__ */ import_react25.default.createElement(
             "div",
             {
               style: {
@@ -40379,8 +40380,8 @@ function Input({
                 minWidth: spacing.scale["0"]
               }
             },
-            type !== "external" && showLeadIcon ? /* @__PURE__ */ import_react24.default.createElement(import_react24.default.Fragment, null, leadIcon ?? /* @__PURE__ */ import_react24.default.createElement(IconImage, { src: EARTH_ICON_SRC, size: spacing.scale["20"], disabled: componentDisabled })) : null,
-            /* @__PURE__ */ import_react24.default.createElement(
+            type !== "external" && showLeadIcon ? /* @__PURE__ */ import_react25.default.createElement(import_react25.default.Fragment, null, leadIcon ?? /* @__PURE__ */ import_react25.default.createElement(IconImage, { src: EARTH_ICON_SRC, size: spacing.scale["20"], disabled: componentDisabled })) : null,
+            /* @__PURE__ */ import_react25.default.createElement(
               "div",
               {
                 style: {
@@ -40392,7 +40393,7 @@ function Input({
                   paddingBlock: spacing.scale["0"]
                 }
               },
-              /* @__PURE__ */ import_react24.default.createElement(
+              /* @__PURE__ */ import_react25.default.createElement(
                 "input",
                 {
                   "aria-label": inputAriaLabel,
@@ -40417,7 +40418,7 @@ function Input({
               )
             )
           ),
-          showBadge ? /* @__PURE__ */ import_react24.default.createElement(
+          showBadge ? /* @__PURE__ */ import_react25.default.createElement(
             "div",
             {
               style: {
@@ -40427,7 +40428,7 @@ function Input({
                 paddingBlock: spacing.scale["0"]
               }
             },
-            /* @__PURE__ */ import_react24.default.createElement(
+            /* @__PURE__ */ import_react25.default.createElement(
               "div",
               {
                 style: {
@@ -40440,7 +40441,7 @@ function Input({
                   paddingBlock: spacing.scale["0"]
                 }
               },
-              /* @__PURE__ */ import_react24.default.createElement(
+              /* @__PURE__ */ import_react25.default.createElement(
                 "div",
                 {
                   style: {
@@ -40451,7 +40452,7 @@ function Input({
                     paddingBlock: spacing.scale["0"]
                   }
                 },
-                /* @__PURE__ */ import_react24.default.createElement(
+                /* @__PURE__ */ import_react25.default.createElement(
                   "span",
                   {
                     style: {
@@ -40465,8 +40466,8 @@ function Input({
               )
             )
           ) : null,
-          showTailIcon ? /* @__PURE__ */ import_react24.default.createElement(import_react24.default.Fragment, null, tailIcon ?? /* @__PURE__ */ import_react24.default.createElement(IconImage, { src: INFO_ICON_SRC, size: spacing.scale["20"], disabled: componentDisabled })) : null,
-          showTailDropdown ? /* @__PURE__ */ import_react24.default.createElement(
+          showTailIcon ? /* @__PURE__ */ import_react25.default.createElement(import_react25.default.Fragment, null, tailIcon ?? /* @__PURE__ */ import_react25.default.createElement(IconImage, { src: INFO_ICON_SRC, size: spacing.scale["20"], disabled: componentDisabled })) : null,
+          showTailDropdown ? /* @__PURE__ */ import_react25.default.createElement(
             "div",
             {
               style: {
@@ -40478,7 +40479,7 @@ function Input({
                 paddingBlock: spacing.scale["0"]
               }
             },
-            /* @__PURE__ */ import_react24.default.createElement(
+            /* @__PURE__ */ import_react25.default.createElement(
               "span",
               {
                 style: {
@@ -40489,11 +40490,11 @@ function Input({
               },
               tailDropdownLabel
             ),
-            /* @__PURE__ */ import_react24.default.createElement(IconImage, { src: CHEVRON_ICON_SRC, size: spacing.scale["16"], disabled: componentDisabled })
+            /* @__PURE__ */ import_react25.default.createElement(IconImage, { src: CHEVRON_ICON_SRC, size: spacing.scale["16"], disabled: componentDisabled })
           ) : null
         )
       ),
-      type === "button" ? /* @__PURE__ */ import_react24.default.createElement(
+      type === "button" ? /* @__PURE__ */ import_react25.default.createElement(
         "button",
         {
           type: "button",
@@ -40517,7 +40518,7 @@ function Input({
             ...rightFieldRadius
           }
         },
-        /* @__PURE__ */ import_react24.default.createElement(
+        /* @__PURE__ */ import_react25.default.createElement(
           "span",
           {
             style: {
@@ -40530,7 +40531,7 @@ function Input({
         )
       ) : null
     ),
-    showHelper ? /* @__PURE__ */ import_react24.default.createElement(
+    showHelper ? /* @__PURE__ */ import_react25.default.createElement(
       "div",
       {
         style: {
@@ -40542,8 +40543,8 @@ function Input({
           paddingBlock: spacing.scale["2"]
         }
       },
-      /* @__PURE__ */ import_react24.default.createElement(IconImage, { src: INFO_ICON_SRC, size: spacing.scale["16"], disabled: componentDisabled }),
-      /* @__PURE__ */ import_react24.default.createElement(
+      /* @__PURE__ */ import_react25.default.createElement(IconImage, { src: INFO_ICON_SRC, size: spacing.scale["16"], disabled: componentDisabled }),
+      /* @__PURE__ */ import_react25.default.createElement(
         "span",
         {
           style: {
@@ -40569,18 +40570,18 @@ function toTitle11(value) {
   return value.charAt(0).toUpperCase() + value.slice(1);
 }
 function InputPreviewPage() {
-  const [type, setType] = (0, import_react25.useState)("default");
-  const [size, setSize] = (0, import_react25.useState)("md");
-  const [target, setTarget] = (0, import_react25.useState)("default");
-  const [state, setState] = (0, import_react25.useState)("auto");
-  const [value, setValue] = (0, import_react25.useState)("");
-  const [showFlag, setShowFlag] = (0, import_react25.useState)(true);
-  const [showLeadDropdown, setShowLeadDropdown] = (0, import_react25.useState)(true);
-  const [showLeadIcon, setShowLeadIcon] = (0, import_react25.useState)(true);
-  const [showBadge, setShowBadge] = (0, import_react25.useState)(true);
-  const [showTailIcon, setShowTailIcon] = (0, import_react25.useState)(true);
-  const [showTailDropdown, setShowTailDropdown] = (0, import_react25.useState)(true);
-  return /* @__PURE__ */ import_react25.default.createElement(
+  const [type, setType] = (0, import_react26.useState)("default");
+  const [size, setSize] = (0, import_react26.useState)("md");
+  const [target, setTarget] = (0, import_react26.useState)("default");
+  const [state, setState] = (0, import_react26.useState)("auto");
+  const [value, setValue] = (0, import_react26.useState)("");
+  const [showFlag, setShowFlag] = (0, import_react26.useState)(true);
+  const [showLeadDropdown, setShowLeadDropdown] = (0, import_react26.useState)(true);
+  const [showLeadIcon, setShowLeadIcon] = (0, import_react26.useState)(true);
+  const [showBadge, setShowBadge] = (0, import_react26.useState)(true);
+  const [showTailIcon, setShowTailIcon] = (0, import_react26.useState)(true);
+  const [showTailDropdown, setShowTailDropdown] = (0, import_react26.useState)(true);
+  return /* @__PURE__ */ import_react26.default.createElement(
     "main",
     {
       style: {
@@ -40591,7 +40592,7 @@ function InputPreviewPage() {
         fontFamily: typography.scale.bodyM.medium.fontFamily
       }
     },
-    /* @__PURE__ */ import_react25.default.createElement(
+    /* @__PURE__ */ import_react26.default.createElement(
       "section",
       {
         style: {
@@ -40601,7 +40602,7 @@ function InputPreviewPage() {
           gap: spacing.scale["24"]
         }
       },
-      /* @__PURE__ */ import_react25.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react25.default.createElement(
+      /* @__PURE__ */ import_react26.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react26.default.createElement(
         "h1",
         {
           style: {
@@ -40614,7 +40615,7 @@ function InputPreviewPage() {
           }
         },
         "Input Preview"
-      ), /* @__PURE__ */ import_react25.default.createElement(
+      ), /* @__PURE__ */ import_react26.default.createElement(
         "p",
         {
           style: {
@@ -40629,7 +40630,7 @@ function InputPreviewPage() {
         },
         "Figma \uCD95(Type, Size, Target, State)\uACFC \uBCF4\uC870 \uC694\uC18C(Flag/Dropdown/Icon/Badge) \uC870\uD569 \uAC80\uC99D"
       )),
-      /* @__PURE__ */ import_react25.default.createElement(
+      /* @__PURE__ */ import_react26.default.createElement(
         "section",
         {
           style: {
@@ -40644,7 +40645,7 @@ function InputPreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react25.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react25.default.createElement("span", null, "Type"), /* @__PURE__ */ import_react25.default.createElement(
+        /* @__PURE__ */ import_react26.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react26.default.createElement("span", null, "Type"), /* @__PURE__ */ import_react26.default.createElement(
           "select",
           {
             value: type,
@@ -40660,9 +40661,9 @@ function InputPreviewPage() {
               color: textBase11.staticDark
             }
           },
-          TYPES7.map((item) => /* @__PURE__ */ import_react25.default.createElement("option", { key: item, value: item }, toTitle11(item)))
+          TYPES7.map((item) => /* @__PURE__ */ import_react26.default.createElement("option", { key: item, value: item }, toTitle11(item)))
         )),
-        /* @__PURE__ */ import_react25.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react25.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react25.default.createElement(
+        /* @__PURE__ */ import_react26.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react26.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react26.default.createElement(
           "select",
           {
             value: size,
@@ -40678,9 +40679,9 @@ function InputPreviewPage() {
               color: textBase11.staticDark
             }
           },
-          SIZES9.map((item) => /* @__PURE__ */ import_react25.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
+          SIZES9.map((item) => /* @__PURE__ */ import_react26.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
         )),
-        /* @__PURE__ */ import_react25.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react25.default.createElement("span", null, "Target"), /* @__PURE__ */ import_react25.default.createElement(
+        /* @__PURE__ */ import_react26.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react26.default.createElement("span", null, "Target"), /* @__PURE__ */ import_react26.default.createElement(
           "select",
           {
             value: target,
@@ -40696,9 +40697,9 @@ function InputPreviewPage() {
               color: textBase11.staticDark
             }
           },
-          TARGETS.map((item) => /* @__PURE__ */ import_react25.default.createElement("option", { key: item, value: item }, toTitle11(item)))
+          TARGETS.map((item) => /* @__PURE__ */ import_react26.default.createElement("option", { key: item, value: item }, toTitle11(item)))
         )),
-        /* @__PURE__ */ import_react25.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react25.default.createElement("span", null, "State"), /* @__PURE__ */ import_react25.default.createElement(
+        /* @__PURE__ */ import_react26.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react26.default.createElement("span", null, "State"), /* @__PURE__ */ import_react26.default.createElement(
           "select",
           {
             value: state,
@@ -40714,9 +40715,9 @@ function InputPreviewPage() {
               color: textBase11.staticDark
             }
           },
-          STATES7.map((item) => /* @__PURE__ */ import_react25.default.createElement("option", { key: item, value: item }, toTitle11(item)))
+          STATES7.map((item) => /* @__PURE__ */ import_react26.default.createElement("option", { key: item, value: item }, toTitle11(item)))
         )),
-        /* @__PURE__ */ import_react25.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react25.default.createElement("span", null, "Value"), /* @__PURE__ */ import_react25.default.createElement(
+        /* @__PURE__ */ import_react26.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react26.default.createElement("span", null, "Value"), /* @__PURE__ */ import_react26.default.createElement(
           "input",
           {
             value,
@@ -40741,7 +40742,7 @@ function InputPreviewPage() {
           ["Badge", showBadge, setShowBadge],
           ["Tail Icon", showTailIcon, setShowTailIcon],
           ["Tail Dropdown", showTailDropdown, setShowTailDropdown]
-        ].map(([labelText, checked, setChecked]) => /* @__PURE__ */ import_react25.default.createElement(
+        ].map(([labelText, checked, setChecked]) => /* @__PURE__ */ import_react26.default.createElement(
           "label",
           {
             key: labelText,
@@ -40759,8 +40760,8 @@ function InputPreviewPage() {
               backgroundColor: palette16.base.white
             }
           },
-          /* @__PURE__ */ import_react25.default.createElement("span", null, labelText),
-          /* @__PURE__ */ import_react25.default.createElement(
+          /* @__PURE__ */ import_react26.default.createElement("span", null, labelText),
+          /* @__PURE__ */ import_react26.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -40770,7 +40771,7 @@ function InputPreviewPage() {
           )
         ))
       ),
-      /* @__PURE__ */ import_react25.default.createElement(
+      /* @__PURE__ */ import_react26.default.createElement(
         "section",
         {
           style: {
@@ -40784,7 +40785,7 @@ function InputPreviewPage() {
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react25.default.createElement(
+        /* @__PURE__ */ import_react26.default.createElement(
           "h2",
           {
             style: {
@@ -40798,7 +40799,7 @@ function InputPreviewPage() {
           },
           "Interactive"
         ),
-        /* @__PURE__ */ import_react25.default.createElement(
+        /* @__PURE__ */ import_react26.default.createElement(
           Input,
           {
             type,
@@ -40816,7 +40817,7 @@ function InputPreviewPage() {
           }
         )
       ),
-      /* @__PURE__ */ import_react25.default.createElement(
+      /* @__PURE__ */ import_react26.default.createElement(
         "section",
         {
           style: {
@@ -40830,7 +40831,7 @@ function InputPreviewPage() {
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react25.default.createElement(
+        /* @__PURE__ */ import_react26.default.createElement(
           "h2",
           {
             style: {
@@ -40844,7 +40845,7 @@ function InputPreviewPage() {
           },
           "Variant Matrix"
         ),
-        /* @__PURE__ */ import_react25.default.createElement("div", { style: { display: "grid", gap: spacing.scale["16"] } }, TARGETS.map((matrixTarget) => /* @__PURE__ */ import_react25.default.createElement("div", { key: matrixTarget, style: { display: "grid", gap: spacing.scale["12"] } }, /* @__PURE__ */ import_react25.default.createElement(
+        /* @__PURE__ */ import_react26.default.createElement("div", { style: { display: "grid", gap: spacing.scale["16"] } }, TARGETS.map((matrixTarget) => /* @__PURE__ */ import_react26.default.createElement("div", { key: matrixTarget, style: { display: "grid", gap: spacing.scale["12"] } }, /* @__PURE__ */ import_react26.default.createElement(
           "h3",
           {
             style: {
@@ -40859,7 +40860,7 @@ function InputPreviewPage() {
           },
           "Target: ",
           toTitle11(matrixTarget)
-        ), /* @__PURE__ */ import_react25.default.createElement("div", { style: { display: "grid", gap: spacing.scale["12"] } }, SIZES9.map((matrixSize) => /* @__PURE__ */ import_react25.default.createElement("div", { key: matrixSize, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react25.default.createElement(
+        ), /* @__PURE__ */ import_react26.default.createElement("div", { style: { display: "grid", gap: spacing.scale["12"] } }, SIZES9.map((matrixSize) => /* @__PURE__ */ import_react26.default.createElement("div", { key: matrixSize, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react26.default.createElement(
           "span",
           {
             style: {
@@ -40873,7 +40874,7 @@ function InputPreviewPage() {
           },
           "Size: ",
           matrixSize.toUpperCase()
-        ), /* @__PURE__ */ import_react25.default.createElement("div", { style: { display: "grid", gap: spacing.scale["12"] } }, TYPES7.map((matrixType) => /* @__PURE__ */ import_react25.default.createElement(
+        ), /* @__PURE__ */ import_react26.default.createElement("div", { style: { display: "grid", gap: spacing.scale["12"] } }, TYPES7.map((matrixType) => /* @__PURE__ */ import_react26.default.createElement(
           Input,
           {
             key: `${matrixTarget}-${matrixSize}-${matrixType}`,
@@ -40896,9 +40897,10 @@ function InputPreviewPage() {
 }
 
 // components/NavigationBar/NavigationBar.preview.tsx
-var import_react26 = __toESM(require_react());
+var import_react28 = __toESM(require_react());
 
 // components/NavigationBar/NavigationBar.tsx
+var import_react27 = __toESM(require_react());
 var LOGO_SRC = "/components/NavigationBar/assets/logo.png";
 var CHEVRON_DOWN_SRC = "/components/NavigationBar/assets/chevron-down.png";
 var PRO_ACCESS_ICON_SRC = "/components/NavigationBar/assets/pro-access.png";
@@ -40969,7 +40971,7 @@ function getBottomLinks(bottomLinks) {
   return TYPE08_DEFAULT_BOTTOM_LINKS;
 }
 function IconImage2({ src, size = ICON_SIZE }) {
-  return /* @__PURE__ */ React.createElement(
+  return /* @__PURE__ */ import_react27.default.createElement(
     "img",
     {
       src,
@@ -40986,7 +40988,7 @@ function IconImage2({ src, size = ICON_SIZE }) {
   );
 }
 function LogoMark() {
-  return /* @__PURE__ */ React.createElement(
+  return /* @__PURE__ */ import_react27.default.createElement(
     "span",
     {
       "aria-hidden": "true",
@@ -40999,7 +41001,7 @@ function LogoMark() {
         flexShrink: 0
       }
     },
-    /* @__PURE__ */ React.createElement(
+    /* @__PURE__ */ import_react27.default.createElement(
       "img",
       {
         src: LOGO_SRC,
@@ -41025,7 +41027,7 @@ function SearchField({
   const fieldBackground = disabled ? palette17.gray["1"] : palette17.base.white;
   const placeholderColor = disabled ? textBase12.staticDarkQuaternary : textBase12.staticDarkTertiary;
   const shortcutColor = disabled ? textBase12.staticDarkQuaternary : textBase12.staticDarkSecondary;
-  return /* @__PURE__ */ React.createElement(
+  return /* @__PURE__ */ import_react27.default.createElement(
     "div",
     {
       style: {
@@ -41035,7 +41037,7 @@ function SearchField({
         boxShadow: withFocusRing(shadows.elevation.xs.css, interactionState, disabled)
       }
     },
-    /* @__PURE__ */ React.createElement(
+    /* @__PURE__ */ import_react27.default.createElement(
       "div",
       {
         style: {
@@ -41053,7 +41055,7 @@ function SearchField({
           boxSizing: "border-box"
         }
       },
-      /* @__PURE__ */ React.createElement(
+      /* @__PURE__ */ import_react27.default.createElement(
         "span",
         {
           style: {
@@ -41065,7 +41067,7 @@ function SearchField({
         },
         placeholder
       ),
-      /* @__PURE__ */ React.createElement(
+      /* @__PURE__ */ import_react27.default.createElement(
         "span",
         {
           "aria-hidden": "true",
@@ -41103,9 +41105,9 @@ function NavigationMainItem({
   if (item.icon) {
     iconNode = item.icon;
   } else if (hasProIcon) {
-    iconNode = /* @__PURE__ */ React.createElement(IconImage2, { src: PRO_ACCESS_ICON_SRC });
+    iconNode = /* @__PURE__ */ import_react27.default.createElement(IconImage2, { src: PRO_ACCESS_ICON_SRC });
   }
-  return /* @__PURE__ */ React.createElement(
+  return /* @__PURE__ */ import_react27.default.createElement(
     "button",
     {
       type: "button",
@@ -41129,7 +41131,7 @@ function NavigationMainItem({
       }
     },
     iconNode,
-    /* @__PURE__ */ React.createElement(
+    /* @__PURE__ */ import_react27.default.createElement(
       "span",
       {
         style: {
@@ -41140,7 +41142,7 @@ function NavigationMainItem({
       },
       item.label
     ),
-    hasTrailingChevron ? /* @__PURE__ */ React.createElement(IconImage2, { src: CHEVRON_DOWN_SRC }) : null
+    hasTrailingChevron ? /* @__PURE__ */ import_react27.default.createElement(IconImage2, { src: CHEVRON_DOWN_SRC }) : null
   );
 }
 function NavigationBottomTabItem({
@@ -41155,7 +41157,7 @@ function NavigationBottomTabItem({
   const badgeBackground = disabled ? palette17.gray["2a"] : palette17.gray["1a"];
   const badgeTextColor = disabled ? textBase12.staticDarkQuaternary : active ? textBase12.staticDark : textBase12.staticDarkSecondary;
   const isInteractive = Boolean(onClick) && !disabled;
-  return /* @__PURE__ */ React.createElement(
+  return /* @__PURE__ */ import_react27.default.createElement(
     "button",
     {
       type: "button",
@@ -41181,7 +41183,7 @@ function NavigationBottomTabItem({
         boxShadow: interactionState === "focus" && !disabled ? shadows.focusRing.light.css : "none"
       }
     },
-    /* @__PURE__ */ React.createElement(
+    /* @__PURE__ */ import_react27.default.createElement(
       "span",
       {
         style: {
@@ -41193,7 +41195,7 @@ function NavigationBottomTabItem({
       },
       item.label
     ),
-    item.badgeText ? /* @__PURE__ */ React.createElement(
+    item.badgeText ? /* @__PURE__ */ import_react27.default.createElement(
       "span",
       {
         "aria-hidden": "true",
@@ -41221,7 +41223,7 @@ function BaseCenterLinks({
   onLinkClick,
   justify
 }) {
-  return /* @__PURE__ */ React.createElement(
+  return /* @__PURE__ */ import_react27.default.createElement(
     "div",
     {
       style: {
@@ -41233,7 +41235,7 @@ function BaseCenterLinks({
         minWidth: spacing.scale["0"]
       }
     },
-    links.map((item) => /* @__PURE__ */ React.createElement(
+    links.map((item) => /* @__PURE__ */ import_react27.default.createElement(
       NavigationMainItem,
       {
         key: item.id,
@@ -41276,7 +41278,7 @@ function NavigationBar({
   if (type === "07") {
     const ctaTextColor = componentDisabled ? textBase12.staticDarkQuaternary : textBase12.staticWhite;
     const ctaBackground = componentDisabled ? palette17.gray["3"] : palette17.gray["13"];
-    return /* @__PURE__ */ React.createElement(
+    return /* @__PURE__ */ import_react27.default.createElement(
       "header",
       {
         id,
@@ -41294,7 +41296,7 @@ function NavigationBar({
         },
         ...props
       },
-      /* @__PURE__ */ React.createElement(
+      /* @__PURE__ */ import_react27.default.createElement(
         "div",
         {
           style: {
@@ -41314,7 +41316,7 @@ function NavigationBar({
             boxSizing: "border-box"
           }
         },
-        /* @__PURE__ */ React.createElement(
+        /* @__PURE__ */ import_react27.default.createElement(
           "div",
           {
             style: {
@@ -41323,9 +41325,9 @@ function NavigationBar({
               alignItems: "center"
             }
           },
-          /* @__PURE__ */ React.createElement(LogoMark, null)
+          /* @__PURE__ */ import_react27.default.createElement(LogoMark, null)
         ),
-        /* @__PURE__ */ React.createElement(
+        /* @__PURE__ */ import_react27.default.createElement(
           BaseCenterLinks,
           {
             links: resolvedMainLinks,
@@ -41335,7 +41337,7 @@ function NavigationBar({
             justify: "center"
           }
         ),
-        /* @__PURE__ */ React.createElement(
+        /* @__PURE__ */ import_react27.default.createElement(
           "div",
           {
             style: {
@@ -41345,7 +41347,7 @@ function NavigationBar({
               justifyContent: "flex-end"
             }
           },
-          /* @__PURE__ */ React.createElement(
+          /* @__PURE__ */ import_react27.default.createElement(
             "button",
             {
               type: "button",
@@ -41367,7 +41369,7 @@ function NavigationBar({
                 cursor: componentDisabled ? "default" : "pointer"
               }
             },
-            /* @__PURE__ */ React.createElement(
+            /* @__PURE__ */ import_react27.default.createElement(
               "span",
               {
                 style: {
@@ -41389,7 +41391,7 @@ function NavigationBar({
   }
   if (type === "08") {
     const helpTextColor = componentDisabled ? textBase12.staticDarkQuaternary : textBase12.staticDarkSecondary;
-    return /* @__PURE__ */ React.createElement(
+    return /* @__PURE__ */ import_react27.default.createElement(
       "header",
       {
         id,
@@ -41405,7 +41407,7 @@ function NavigationBar({
         },
         ...props
       },
-      /* @__PURE__ */ React.createElement(
+      /* @__PURE__ */ import_react27.default.createElement(
         "div",
         {
           style: {
@@ -41421,8 +41423,8 @@ function NavigationBar({
             boxSizing: "border-box"
           }
         },
-        /* @__PURE__ */ React.createElement(LogoMark, null),
-        /* @__PURE__ */ React.createElement(
+        /* @__PURE__ */ import_react27.default.createElement(LogoMark, null),
+        /* @__PURE__ */ import_react27.default.createElement(
           "div",
           {
             style: {
@@ -41432,7 +41434,7 @@ function NavigationBar({
               minWidth: spacing.scale["0"]
             }
           },
-          /* @__PURE__ */ React.createElement(
+          /* @__PURE__ */ import_react27.default.createElement(
             SearchField,
             {
               placeholder: searchPlaceholder,
@@ -41442,7 +41444,7 @@ function NavigationBar({
             }
           )
         ),
-        /* @__PURE__ */ React.createElement(
+        /* @__PURE__ */ import_react27.default.createElement(
           "span",
           {
             style: {
@@ -41454,7 +41456,7 @@ function NavigationBar({
               display: "inline-flex"
             }
           },
-          /* @__PURE__ */ React.createElement(
+          /* @__PURE__ */ import_react27.default.createElement(
             "img",
             {
               src: avatarSrc ?? DEFAULT_AVATAR_SRC,
@@ -41472,7 +41474,7 @@ function NavigationBar({
           )
         )
       ),
-      /* @__PURE__ */ React.createElement(
+      /* @__PURE__ */ import_react27.default.createElement(
         "div",
         {
           style: {
@@ -41489,7 +41491,7 @@ function NavigationBar({
             boxSizing: "border-box"
           }
         },
-        /* @__PURE__ */ React.createElement(
+        /* @__PURE__ */ import_react27.default.createElement(
           "div",
           {
             style: {
@@ -41499,7 +41501,7 @@ function NavigationBar({
               minWidth: spacing.scale["0"]
             }
           },
-          /* @__PURE__ */ React.createElement(
+          /* @__PURE__ */ import_react27.default.createElement(
             "div",
             {
               style: {
@@ -41508,7 +41510,7 @@ function NavigationBar({
                 gap: spacing.scale["24"]
               }
             },
-            resolvedBottomLinks.map((item) => /* @__PURE__ */ React.createElement(
+            resolvedBottomLinks.map((item) => /* @__PURE__ */ import_react27.default.createElement(
               NavigationBottomTabItem,
               {
                 key: item.id,
@@ -41521,7 +41523,7 @@ function NavigationBar({
             ))
           )
         ),
-        /* @__PURE__ */ React.createElement(
+        /* @__PURE__ */ import_react27.default.createElement(
           "button",
           {
             type: "button",
@@ -41542,7 +41544,7 @@ function NavigationBar({
               cursor: componentDisabled ? "default" : "pointer"
             }
           },
-          /* @__PURE__ */ React.createElement(
+          /* @__PURE__ */ import_react27.default.createElement(
             "span",
             {
               style: {
@@ -41553,13 +41555,13 @@ function NavigationBar({
             },
             helpLabel
           ),
-          /* @__PURE__ */ React.createElement(IconImage2, { src: CHEVRON_DOWN_SRC })
+          /* @__PURE__ */ import_react27.default.createElement(IconImage2, { src: CHEVRON_DOWN_SRC })
         )
       )
     );
   }
   if (type === "05") {
-    return /* @__PURE__ */ React.createElement(
+    return /* @__PURE__ */ import_react27.default.createElement(
       "header",
       {
         id,
@@ -41584,7 +41586,7 @@ function NavigationBar({
         },
         ...props
       },
-      /* @__PURE__ */ React.createElement(
+      /* @__PURE__ */ import_react27.default.createElement(
         "div",
         {
           style: {
@@ -41594,9 +41596,9 @@ function NavigationBar({
             minWidth: spacing.scale["0"]
           }
         },
-        /* @__PURE__ */ React.createElement(LogoMark, null)
+        /* @__PURE__ */ import_react27.default.createElement(LogoMark, null)
       ),
-      /* @__PURE__ */ React.createElement(
+      /* @__PURE__ */ import_react27.default.createElement(
         BaseCenterLinks,
         {
           links: resolvedMainLinks,
@@ -41606,7 +41608,7 @@ function NavigationBar({
           justify: "center"
         }
       ),
-      /* @__PURE__ */ React.createElement(
+      /* @__PURE__ */ import_react27.default.createElement(
         "div",
         {
           style: {
@@ -41620,7 +41622,7 @@ function NavigationBar({
     );
   }
   if (type === "06") {
-    return /* @__PURE__ */ React.createElement(
+    return /* @__PURE__ */ import_react27.default.createElement(
       "header",
       {
         id,
@@ -41645,8 +41647,8 @@ function NavigationBar({
         },
         ...props
       },
-      /* @__PURE__ */ React.createElement(LogoMark, null),
-      /* @__PURE__ */ React.createElement(
+      /* @__PURE__ */ import_react27.default.createElement(LogoMark, null),
+      /* @__PURE__ */ import_react27.default.createElement(
         "div",
         {
           style: {
@@ -41657,7 +41659,7 @@ function NavigationBar({
             minWidth: spacing.scale["0"]
           }
         },
-        /* @__PURE__ */ React.createElement(
+        /* @__PURE__ */ import_react27.default.createElement(
           SearchField,
           {
             placeholder: searchPlaceholder,
@@ -41666,7 +41668,7 @@ function NavigationBar({
             disabled: componentDisabled
           }
         ),
-        resolvedMainLinks.map((item) => /* @__PURE__ */ React.createElement(
+        resolvedMainLinks.map((item) => /* @__PURE__ */ import_react27.default.createElement(
           NavigationMainItem,
           {
             key: item.id,
@@ -41679,7 +41681,7 @@ function NavigationBar({
       )
     );
   }
-  return /* @__PURE__ */ React.createElement(
+  return /* @__PURE__ */ import_react27.default.createElement(
     "header",
     {
       id,
@@ -41704,8 +41706,8 @@ function NavigationBar({
       },
       ...props
     },
-    /* @__PURE__ */ React.createElement(LogoMark, null),
-    /* @__PURE__ */ React.createElement(
+    /* @__PURE__ */ import_react27.default.createElement(LogoMark, null),
+    /* @__PURE__ */ import_react27.default.createElement(
       BaseCenterLinks,
       {
         links: resolvedMainLinks,
@@ -41744,15 +41746,15 @@ function toTitle12(value) {
   return value.replace(/^./, (first) => first.toUpperCase());
 }
 function NavigationBarPreviewPage() {
-  const [type, setType] = (0, import_react26.useState)("01");
-  const [interactionState, setInteractionState] = (0, import_react26.useState)("default");
-  const [width, setWidth] = (0, import_react26.useState)(spacing.scale["1440"]);
-  const [useCustomLinks, setUseCustomLinks] = (0, import_react26.useState)(false);
-  const [activeBottomLinkId, setActiveBottomLinkId] = (0, import_react26.useState)(DEFAULT_BOTTOM_LINKS[1].id);
-  const [lastAction, setLastAction] = (0, import_react26.useState)("None");
-  const resolvedMainLinks = (0, import_react26.useMemo)(() => useCustomLinks ? CUSTOM_MAIN_LINKS : void 0, [useCustomLinks]);
-  const resolvedBottomLinks = (0, import_react26.useMemo)(() => useCustomLinks ? CUSTOM_BOTTOM_LINKS : DEFAULT_BOTTOM_LINKS, [useCustomLinks]);
-  (0, import_react26.useEffect)(() => {
+  const [type, setType] = (0, import_react28.useState)("01");
+  const [interactionState, setInteractionState] = (0, import_react28.useState)("default");
+  const [width, setWidth] = (0, import_react28.useState)(spacing.scale["1440"]);
+  const [useCustomLinks, setUseCustomLinks] = (0, import_react28.useState)(false);
+  const [activeBottomLinkId, setActiveBottomLinkId] = (0, import_react28.useState)(DEFAULT_BOTTOM_LINKS[1].id);
+  const [lastAction, setLastAction] = (0, import_react28.useState)("None");
+  const resolvedMainLinks = (0, import_react28.useMemo)(() => useCustomLinks ? CUSTOM_MAIN_LINKS : void 0, [useCustomLinks]);
+  const resolvedBottomLinks = (0, import_react28.useMemo)(() => useCustomLinks ? CUSTOM_BOTTOM_LINKS : DEFAULT_BOTTOM_LINKS, [useCustomLinks]);
+  (0, import_react28.useEffect)(() => {
     if (resolvedBottomLinks.some((item) => item.id === activeBottomLinkId)) {
       return;
     }
@@ -41760,7 +41762,7 @@ function NavigationBarPreviewPage() {
       setActiveBottomLinkId(resolvedBottomLinks[spacing.scale["0"]].id);
     }
   }, [activeBottomLinkId, resolvedBottomLinks]);
-  return /* @__PURE__ */ import_react26.default.createElement(
+  return /* @__PURE__ */ import_react28.default.createElement(
     "main",
     {
       style: {
@@ -41771,7 +41773,7 @@ function NavigationBarPreviewPage() {
         fontFamily: typography.scale.bodyM.medium.fontFamily
       }
     },
-    /* @__PURE__ */ import_react26.default.createElement(
+    /* @__PURE__ */ import_react28.default.createElement(
       "section",
       {
         style: {
@@ -41781,7 +41783,7 @@ function NavigationBarPreviewPage() {
           gap: spacing.scale["24"]
         }
       },
-      /* @__PURE__ */ import_react26.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react26.default.createElement(
+      /* @__PURE__ */ import_react28.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react28.default.createElement(
         "h1",
         {
           style: {
@@ -41796,7 +41798,7 @@ function NavigationBarPreviewPage() {
           }
         },
         "Navigation Bar Preview"
-      ), /* @__PURE__ */ import_react26.default.createElement(
+      ), /* @__PURE__ */ import_react28.default.createElement(
         "p",
         {
           style: {
@@ -41813,7 +41815,7 @@ function NavigationBarPreviewPage() {
         },
         "Figma `Type=01~08` \uBCC0\uD615\uACFC \uC0C1\uD638\uC791\uC6A9 \uC0C1\uD0DC\uB97C \uD55C \uD654\uBA74\uC5D0\uC11C \uAC80\uC99D\uD569\uB2C8\uB2E4."
       )),
-      /* @__PURE__ */ import_react26.default.createElement(
+      /* @__PURE__ */ import_react28.default.createElement(
         "section",
         {
           style: {
@@ -41828,7 +41830,7 @@ function NavigationBarPreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react26.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react26.default.createElement("span", null, "Type"), /* @__PURE__ */ import_react26.default.createElement(
+        /* @__PURE__ */ import_react28.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react28.default.createElement("span", null, "Type"), /* @__PURE__ */ import_react28.default.createElement(
           "select",
           {
             value: type,
@@ -41844,9 +41846,9 @@ function NavigationBarPreviewPage() {
               color: colors.semantic.theme.text.base.staticDark
             }
           },
-          TYPES8.map((item) => /* @__PURE__ */ import_react26.default.createElement("option", { key: item, value: item }, "Type ", item))
+          TYPES8.map((item) => /* @__PURE__ */ import_react28.default.createElement("option", { key: item, value: item }, "Type ", item))
         )),
-        /* @__PURE__ */ import_react26.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react26.default.createElement("span", null, "Interaction State"), /* @__PURE__ */ import_react26.default.createElement(
+        /* @__PURE__ */ import_react28.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react28.default.createElement("span", null, "Interaction State"), /* @__PURE__ */ import_react28.default.createElement(
           "select",
           {
             value: interactionState,
@@ -41862,9 +41864,9 @@ function NavigationBarPreviewPage() {
               color: colors.semantic.theme.text.base.staticDark
             }
           },
-          INTERACTION_STATES.map((item) => /* @__PURE__ */ import_react26.default.createElement("option", { key: item, value: item }, toTitle12(item)))
+          INTERACTION_STATES.map((item) => /* @__PURE__ */ import_react28.default.createElement("option", { key: item, value: item }, toTitle12(item)))
         )),
-        /* @__PURE__ */ import_react26.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react26.default.createElement("span", null, "Width"), /* @__PURE__ */ import_react26.default.createElement(
+        /* @__PURE__ */ import_react28.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react28.default.createElement("span", null, "Width"), /* @__PURE__ */ import_react28.default.createElement(
           "select",
           {
             value: width,
@@ -41880,9 +41882,9 @@ function NavigationBarPreviewPage() {
               color: colors.semantic.theme.text.base.staticDark
             }
           },
-          WIDTH_OPTIONS.map((item) => /* @__PURE__ */ import_react26.default.createElement("option", { key: item, value: item }, item, "px"))
+          WIDTH_OPTIONS.map((item) => /* @__PURE__ */ import_react28.default.createElement("option", { key: item, value: item }, item, "px"))
         )),
-        /* @__PURE__ */ import_react26.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react26.default.createElement("span", null, "Type 08 Active Tab"), /* @__PURE__ */ import_react26.default.createElement(
+        /* @__PURE__ */ import_react28.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react28.default.createElement("span", null, "Type 08 Active Tab"), /* @__PURE__ */ import_react28.default.createElement(
           "select",
           {
             value: activeBottomLinkId,
@@ -41898,9 +41900,9 @@ function NavigationBarPreviewPage() {
               color: colors.semantic.theme.text.base.staticDark
             }
           },
-          resolvedBottomLinks.map((item) => /* @__PURE__ */ import_react26.default.createElement("option", { key: item.id, value: item.id }, item.label))
+          resolvedBottomLinks.map((item) => /* @__PURE__ */ import_react28.default.createElement("option", { key: item.id, value: item.id }, item.label))
         )),
-        /* @__PURE__ */ import_react26.default.createElement(
+        /* @__PURE__ */ import_react28.default.createElement(
           "label",
           {
             style: {
@@ -41917,11 +41919,11 @@ function NavigationBarPreviewPage() {
               backgroundColor: colors.primitive.palette.base.white
             }
           },
-          /* @__PURE__ */ import_react26.default.createElement("span", null, "Custom Links"),
-          /* @__PURE__ */ import_react26.default.createElement("input", { type: "checkbox", checked: useCustomLinks, onChange: (event) => setUseCustomLinks(event.target.checked) })
+          /* @__PURE__ */ import_react28.default.createElement("span", null, "Custom Links"),
+          /* @__PURE__ */ import_react28.default.createElement("input", { type: "checkbox", checked: useCustomLinks, onChange: (event) => setUseCustomLinks(event.target.checked) })
         )
       ),
-      /* @__PURE__ */ import_react26.default.createElement(
+      /* @__PURE__ */ import_react28.default.createElement(
         "section",
         {
           style: {
@@ -41935,7 +41937,7 @@ function NavigationBarPreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react26.default.createElement(
+        /* @__PURE__ */ import_react28.default.createElement(
           "h2",
           {
             style: {
@@ -41951,7 +41953,7 @@ function NavigationBarPreviewPage() {
           },
           "Selected Variant"
         ),
-        /* @__PURE__ */ import_react26.default.createElement("div", { style: { overflowX: "auto" } }, /* @__PURE__ */ import_react26.default.createElement(
+        /* @__PURE__ */ import_react28.default.createElement("div", { style: { overflowX: "auto" } }, /* @__PURE__ */ import_react28.default.createElement(
           NavigationBar,
           {
             type,
@@ -41970,7 +41972,7 @@ function NavigationBarPreviewPage() {
             onCtaClick: () => setLastAction("CTA: try-for-free")
           }
         )),
-        /* @__PURE__ */ import_react26.default.createElement(
+        /* @__PURE__ */ import_react28.default.createElement(
           "p",
           {
             style: {
@@ -41989,7 +41991,7 @@ function NavigationBarPreviewPage() {
           lastAction
         )
       ),
-      /* @__PURE__ */ import_react26.default.createElement(
+      /* @__PURE__ */ import_react28.default.createElement(
         "section",
         {
           style: {
@@ -42003,7 +42005,7 @@ function NavigationBarPreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react26.default.createElement(
+        /* @__PURE__ */ import_react28.default.createElement(
           "h2",
           {
             style: {
@@ -42019,7 +42021,7 @@ function NavigationBarPreviewPage() {
           },
           "All Types"
         ),
-        TYPES8.map((variant) => /* @__PURE__ */ import_react26.default.createElement("div", { key: variant, style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react26.default.createElement(
+        TYPES8.map((variant) => /* @__PURE__ */ import_react28.default.createElement("div", { key: variant, style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react28.default.createElement(
           "span",
           {
             style: {
@@ -42035,7 +42037,7 @@ function NavigationBarPreviewPage() {
           },
           "Type ",
           variant
-        ), /* @__PURE__ */ import_react26.default.createElement("div", { style: { overflowX: "auto" } }, /* @__PURE__ */ import_react26.default.createElement(
+        ), /* @__PURE__ */ import_react28.default.createElement("div", { style: { overflowX: "auto" } }, /* @__PURE__ */ import_react28.default.createElement(
           NavigationBar,
           {
             type: variant,
@@ -42060,9 +42062,10 @@ function NavigationBarPreviewPage() {
 }
 
 // components/Pagenation/Pagenation.preview.tsx
-var import_react27 = __toESM(require_react());
+var import_react30 = __toESM(require_react());
 
 // components/Pagenation/Pagenation.tsx
+var import_react29 = __toESM(require_react());
 var ARROW_LEFT_ICON_MD_SRC = "/components/Pagenation/assets/arrow-left-md.svg";
 var ARROW_RIGHT_ICON_MD_SRC = "/components/Pagenation/assets/arrow-right-md.svg";
 var ARROW_LEFT_ICON_SM_SRC = "/components/Pagenation/assets/arrow-left-sm.svg";
@@ -42143,7 +42146,7 @@ function withFocusRing2(baseShadow, interactionState, disabled) {
 function ArrowIcon2({ direction, size }) {
   const config = SIZE_CONFIG8[size];
   const iconSrc = direction === "left" ? size === "md" ? ARROW_LEFT_ICON_MD_SRC : ARROW_LEFT_ICON_SM_SRC : size === "md" ? ARROW_RIGHT_ICON_MD_SRC : ARROW_RIGHT_ICON_SM_SRC;
-  return /* @__PURE__ */ React.createElement(
+  return /* @__PURE__ */ import_react29.default.createElement(
     "img",
     {
       src: iconSrc,
@@ -42168,7 +42171,7 @@ function ArrowControlButton({
   ghost
 }) {
   const config = SIZE_CONFIG8[size];
-  return /* @__PURE__ */ React.createElement(
+  return /* @__PURE__ */ import_react29.default.createElement(
     "button",
     {
       type: "button",
@@ -42189,14 +42192,14 @@ function ArrowControlButton({
         boxShadow: withFocusRing2("none", interactionState, disabled)
       }
     },
-    /* @__PURE__ */ React.createElement(ArrowIcon2, { direction, size })
+    /* @__PURE__ */ import_react29.default.createElement(ArrowIcon2, { direction, size })
   );
 }
 function Dots({
   count,
   activeIndex
 }) {
-  return /* @__PURE__ */ React.createElement(
+  return /* @__PURE__ */ import_react29.default.createElement(
     "div",
     {
       style: {
@@ -42205,7 +42208,7 @@ function Dots({
         gap: spacing.scale["4"]
       }
     },
-    Array.from({ length: count }, (_, index) => /* @__PURE__ */ React.createElement(
+    Array.from({ length: count }, (_, index) => /* @__PURE__ */ import_react29.default.createElement(
       "span",
       {
         key: `dot-${index}`,
@@ -42232,7 +42235,7 @@ function NumberItemButton({
   const config = SIZE_CONFIG8[size];
   const itemDisabled = disabled || item.disabled;
   const isActive = Boolean(item.active) && !itemDisabled;
-  return /* @__PURE__ */ React.createElement(
+  return /* @__PURE__ */ import_react29.default.createElement(
     "button",
     {
       type: "button",
@@ -42255,7 +42258,7 @@ function NumberItemButton({
         boxShadow: withFocusRing2("none", interactionState, itemDisabled)
       }
     },
-    /* @__PURE__ */ React.createElement(
+    /* @__PURE__ */ import_react29.default.createElement(
       "span",
       {
         style: {
@@ -42278,7 +42281,7 @@ function ActionButton3({
   onClick
 }) {
   const config = SIZE_CONFIG8[size];
-  return /* @__PURE__ */ React.createElement(
+  return /* @__PURE__ */ import_react29.default.createElement(
     "button",
     {
       type: "button",
@@ -42301,7 +42304,7 @@ function ActionButton3({
         boxShadow: withFocusRing2(shadows.elevation.xs.css, interactionState, disabled)
       }
     },
-    /* @__PURE__ */ React.createElement(
+    /* @__PURE__ */ import_react29.default.createElement(
       "span",
       {
         style: {
@@ -42343,7 +42346,7 @@ function Pagenation({
   const disabled = interactionState === "disabled";
   const width = TYPE_CONTAINER_WIDTH[type][size];
   if (type === "arrows") {
-    return /* @__PURE__ */ React.createElement(
+    return /* @__PURE__ */ import_react29.default.createElement(
       "div",
       {
         role: "navigation",
@@ -42360,7 +42363,7 @@ function Pagenation({
         },
         ...props
       },
-      /* @__PURE__ */ React.createElement(
+      /* @__PURE__ */ import_react29.default.createElement(
         ArrowControlButton,
         {
           size,
@@ -42371,8 +42374,8 @@ function Pagenation({
           ghost: false
         }
       ),
-      showDots ? /* @__PURE__ */ React.createElement(Dots, { count: dotCount, activeIndex: activeDotIndex }) : null,
-      /* @__PURE__ */ React.createElement(
+      showDots ? /* @__PURE__ */ import_react29.default.createElement(Dots, { count: dotCount, activeIndex: activeDotIndex }) : null,
+      /* @__PURE__ */ import_react29.default.createElement(
         ArrowControlButton,
         {
           size,
@@ -42386,7 +42389,7 @@ function Pagenation({
     );
   }
   if (type === "buttons") {
-    return /* @__PURE__ */ React.createElement(
+    return /* @__PURE__ */ import_react29.default.createElement(
       "div",
       {
         role: "navigation",
@@ -42403,7 +42406,7 @@ function Pagenation({
         },
         ...props
       },
-      /* @__PURE__ */ React.createElement(
+      /* @__PURE__ */ import_react29.default.createElement(
         "div",
         {
           style: {
@@ -42414,7 +42417,7 @@ function Pagenation({
             minWidth: spacing.scale["0"]
           }
         },
-        /* @__PURE__ */ React.createElement(
+        /* @__PURE__ */ import_react29.default.createElement(
           ActionButton3,
           {
             size,
@@ -42426,8 +42429,8 @@ function Pagenation({
           }
         )
       ),
-      showDots ? /* @__PURE__ */ React.createElement(Dots, { count: dotCount, activeIndex: activeDotIndex }) : null,
-      /* @__PURE__ */ React.createElement(
+      showDots ? /* @__PURE__ */ import_react29.default.createElement(Dots, { count: dotCount, activeIndex: activeDotIndex }) : null,
+      /* @__PURE__ */ import_react29.default.createElement(
         "div",
         {
           style: {
@@ -42438,7 +42441,7 @@ function Pagenation({
             minWidth: spacing.scale["0"]
           }
         },
-        /* @__PURE__ */ React.createElement(
+        /* @__PURE__ */ import_react29.default.createElement(
           ActionButton3,
           {
             size,
@@ -42452,7 +42455,7 @@ function Pagenation({
       )
     );
   }
-  return /* @__PURE__ */ React.createElement(
+  return /* @__PURE__ */ import_react29.default.createElement(
     "div",
     {
       role: "navigation",
@@ -42470,7 +42473,7 @@ function Pagenation({
       },
       ...props
     },
-    /* @__PURE__ */ React.createElement(
+    /* @__PURE__ */ import_react29.default.createElement(
       ArrowControlButton,
       {
         size,
@@ -42481,7 +42484,7 @@ function Pagenation({
         ghost: true
       }
     ),
-    numberItems.map((item) => /* @__PURE__ */ React.createElement(
+    numberItems.map((item) => /* @__PURE__ */ import_react29.default.createElement(
       NumberItemButton,
       {
         key: item.id,
@@ -42492,7 +42495,7 @@ function Pagenation({
         onNumberClick
       }
     )),
-    /* @__PURE__ */ React.createElement(
+    /* @__PURE__ */ import_react29.default.createElement(
       ArrowControlButton,
       {
         size,
@@ -42527,16 +42530,16 @@ function buildNumberItems(activePage) {
   ];
 }
 function PagenationPreviewPage() {
-  const [type, setType] = (0, import_react27.useState)("numbers");
-  const [size, setSize] = (0, import_react27.useState)("md");
-  const [interactionState, setInteractionState] = (0, import_react27.useState)("default");
-  const [showDots, setShowDots] = (0, import_react27.useState)(true);
-  const [activeDotIndex, setActiveDotIndex] = (0, import_react27.useState)(spacing.scale["0"]);
-  const [activePage, setActivePage] = (0, import_react27.useState)("57");
-  const [lastAction, setLastAction] = (0, import_react27.useState)("None");
-  const numberItems = (0, import_react27.useMemo)(() => buildNumberItems(activePage), [activePage]);
+  const [type, setType] = (0, import_react30.useState)("numbers");
+  const [size, setSize] = (0, import_react30.useState)("md");
+  const [interactionState, setInteractionState] = (0, import_react30.useState)("default");
+  const [showDots, setShowDots] = (0, import_react30.useState)(true);
+  const [activeDotIndex, setActiveDotIndex] = (0, import_react30.useState)(spacing.scale["0"]);
+  const [activePage, setActivePage] = (0, import_react30.useState)("57");
+  const [lastAction, setLastAction] = (0, import_react30.useState)("None");
+  const numberItems = (0, import_react30.useMemo)(() => buildNumberItems(activePage), [activePage]);
   const shouldShowDotsToggle = type === "arrows" || type === "buttons";
-  return /* @__PURE__ */ import_react27.default.createElement(
+  return /* @__PURE__ */ import_react30.default.createElement(
     "main",
     {
       style: {
@@ -42547,7 +42550,7 @@ function PagenationPreviewPage() {
         fontFamily: typography.scale.bodyM.medium.fontFamily
       }
     },
-    /* @__PURE__ */ import_react27.default.createElement(
+    /* @__PURE__ */ import_react30.default.createElement(
       "section",
       {
         style: {
@@ -42557,7 +42560,7 @@ function PagenationPreviewPage() {
           gap: spacing.scale["24"]
         }
       },
-      /* @__PURE__ */ import_react27.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react27.default.createElement(
+      /* @__PURE__ */ import_react30.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react30.default.createElement(
         "h1",
         {
           style: {
@@ -42570,7 +42573,7 @@ function PagenationPreviewPage() {
           }
         },
         "Pagenation Preview"
-      ), /* @__PURE__ */ import_react27.default.createElement(
+      ), /* @__PURE__ */ import_react30.default.createElement(
         "p",
         {
           style: {
@@ -42585,7 +42588,7 @@ function PagenationPreviewPage() {
         },
         "Figma Variant(`Type`, `Size`)\uC640 Number Active/Interaction \uC0C1\uD0DC\uB97C \uC778\uD130\uB799\uD2F0\uBE0C\uD558\uAC8C \uAC80\uC99D\uD569\uB2C8\uB2E4."
       )),
-      /* @__PURE__ */ import_react27.default.createElement(
+      /* @__PURE__ */ import_react30.default.createElement(
         "section",
         {
           style: {
@@ -42600,7 +42603,7 @@ function PagenationPreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react27.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react27.default.createElement("span", null, "Type"), /* @__PURE__ */ import_react27.default.createElement(
+        /* @__PURE__ */ import_react30.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react30.default.createElement("span", null, "Type"), /* @__PURE__ */ import_react30.default.createElement(
           "select",
           {
             value: type,
@@ -42616,9 +42619,9 @@ function PagenationPreviewPage() {
               color: colors.semantic.theme.text.base.staticDark
             }
           },
-          TYPES9.map((item) => /* @__PURE__ */ import_react27.default.createElement("option", { key: item, value: item }, toTitle13(item)))
+          TYPES9.map((item) => /* @__PURE__ */ import_react30.default.createElement("option", { key: item, value: item }, toTitle13(item)))
         )),
-        /* @__PURE__ */ import_react27.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react27.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react27.default.createElement(
+        /* @__PURE__ */ import_react30.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react30.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react30.default.createElement(
           "select",
           {
             value: size,
@@ -42634,9 +42637,9 @@ function PagenationPreviewPage() {
               color: colors.semantic.theme.text.base.staticDark
             }
           },
-          SIZES10.map((item) => /* @__PURE__ */ import_react27.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
+          SIZES10.map((item) => /* @__PURE__ */ import_react30.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
         )),
-        /* @__PURE__ */ import_react27.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react27.default.createElement("span", null, "Interaction State"), /* @__PURE__ */ import_react27.default.createElement(
+        /* @__PURE__ */ import_react30.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react30.default.createElement("span", null, "Interaction State"), /* @__PURE__ */ import_react30.default.createElement(
           "select",
           {
             value: interactionState,
@@ -42652,9 +42655,9 @@ function PagenationPreviewPage() {
               color: colors.semantic.theme.text.base.staticDark
             }
           },
-          INTERACTION_STATES2.map((item) => /* @__PURE__ */ import_react27.default.createElement("option", { key: item, value: item }, toTitle13(item)))
+          INTERACTION_STATES2.map((item) => /* @__PURE__ */ import_react30.default.createElement("option", { key: item, value: item }, toTitle13(item)))
         )),
-        /* @__PURE__ */ import_react27.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react27.default.createElement("span", null, "Active Page (Numbers)"), /* @__PURE__ */ import_react27.default.createElement(
+        /* @__PURE__ */ import_react30.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react30.default.createElement("span", null, "Active Page (Numbers)"), /* @__PURE__ */ import_react30.default.createElement(
           "select",
           {
             value: activePage,
@@ -42671,9 +42674,9 @@ function PagenationPreviewPage() {
               color: colors.semantic.theme.text.base.staticDark
             }
           },
-          PAGE_OPTIONS.map((item) => /* @__PURE__ */ import_react27.default.createElement("option", { key: item, value: item }, item))
+          PAGE_OPTIONS.map((item) => /* @__PURE__ */ import_react30.default.createElement("option", { key: item, value: item }, item))
         )),
-        /* @__PURE__ */ import_react27.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react27.default.createElement("span", null, "Active Dot"), /* @__PURE__ */ import_react27.default.createElement(
+        /* @__PURE__ */ import_react30.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react30.default.createElement("span", null, "Active Dot"), /* @__PURE__ */ import_react30.default.createElement(
           "select",
           {
             value: activeDotIndex,
@@ -42690,9 +42693,9 @@ function PagenationPreviewPage() {
               color: colors.semantic.theme.text.base.staticDark
             }
           },
-          DOT_OPTIONS.map((item) => /* @__PURE__ */ import_react27.default.createElement("option", { key: item, value: item }, item + spacing.scale["1"]))
+          DOT_OPTIONS.map((item) => /* @__PURE__ */ import_react30.default.createElement("option", { key: item, value: item }, item + spacing.scale["1"]))
         )),
-        /* @__PURE__ */ import_react27.default.createElement(
+        /* @__PURE__ */ import_react30.default.createElement(
           "label",
           {
             style: {
@@ -42709,8 +42712,8 @@ function PagenationPreviewPage() {
               backgroundColor: shouldShowDotsToggle ? colors.primitive.palette.base.white : colors.primitive.palette.gray["2"]
             }
           },
-          /* @__PURE__ */ import_react27.default.createElement("span", null, "Show Dots"),
-          /* @__PURE__ */ import_react27.default.createElement(
+          /* @__PURE__ */ import_react30.default.createElement("span", null, "Show Dots"),
+          /* @__PURE__ */ import_react30.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -42721,7 +42724,7 @@ function PagenationPreviewPage() {
           )
         )
       ),
-      /* @__PURE__ */ import_react27.default.createElement(
+      /* @__PURE__ */ import_react30.default.createElement(
         "section",
         {
           style: {
@@ -42736,7 +42739,7 @@ function PagenationPreviewPage() {
             justifyItems: "center"
           }
         },
-        /* @__PURE__ */ import_react27.default.createElement(
+        /* @__PURE__ */ import_react30.default.createElement(
           "h2",
           {
             style: {
@@ -42751,7 +42754,7 @@ function PagenationPreviewPage() {
           },
           "Live Preview"
         ),
-        /* @__PURE__ */ import_react27.default.createElement(
+        /* @__PURE__ */ import_react30.default.createElement(
           Pagenation,
           {
             type,
@@ -42774,7 +42777,7 @@ function PagenationPreviewPage() {
             onRightButtonClick: () => setLastAction("Right Button")
           }
         ),
-        /* @__PURE__ */ import_react27.default.createElement(
+        /* @__PURE__ */ import_react30.default.createElement(
           "p",
           {
             style: {
@@ -42796,9 +42799,10 @@ function PagenationPreviewPage() {
 }
 
 // components/ProgressBar/ProgressBar.preview.tsx
-var import_react28 = __toESM(require_react());
+var import_react32 = __toESM(require_react());
 
 // components/ProgressBar/ProgressBar.tsx
+var import_react31 = __toESM(require_react());
 var TAIL_ICON_DEFAULT_SRC = "/components/ProgressBar/assets/tail-icon-default.svg";
 var HELPER_ICON_DEFAULT_SRC = "/components/ProgressBar/assets/helper-icon-default.svg";
 var HELPER_ICON_DESTRUCTIVE_SRC = "/components/ProgressBar/assets/helper-icon-destructive.svg";
@@ -42856,7 +42860,7 @@ function withFocusRing3(interactionState) {
   return shadows.focusRing.light.css;
 }
 function TailIcon({ disabled }) {
-  return /* @__PURE__ */ React.createElement(
+  return /* @__PURE__ */ import_react31.default.createElement(
     "img",
     {
       src: TAIL_ICON_DEFAULT_SRC,
@@ -42874,7 +42878,7 @@ function TailIcon({ disabled }) {
   );
 }
 function HelperIcon({ destructive, disabled }) {
-  return /* @__PURE__ */ React.createElement(
+  return /* @__PURE__ */ import_react31.default.createElement(
     "img",
     {
       src: destructive ? HELPER_ICON_DESTRUCTIVE_SRC : HELPER_ICON_DEFAULT_SRC,
@@ -42898,7 +42902,7 @@ function ShimmerOverlay({
   if (!enabled || disabled) {
     return null;
   }
-  return /* @__PURE__ */ React.createElement(
+  return /* @__PURE__ */ import_react31.default.createElement(
     "span",
     {
       "aria-hidden": "true",
@@ -42950,7 +42954,7 @@ function ProgressBar({
   const optionalColor = disabled ? textBase14.staticDarkQuaternary : textBase14.staticDarkTertiary;
   const primaryTextColor = disabled ? textBase14.staticDarkQuaternary : textBase14.staticDark;
   const progressText = valueText ?? `${Math.round(progress)}%`;
-  return /* @__PURE__ */ React.createElement(
+  return /* @__PURE__ */ import_react31.default.createElement(
     "div",
     {
       role: "progressbar",
@@ -42971,8 +42975,8 @@ function ProgressBar({
       },
       ...props
     },
-    /* @__PURE__ */ React.createElement("style", null, `@keyframes progress-bar-shimmer {0% {background-position: -${spacing.scale["40"]}px 0;} 100% {background-position: ${spacing.scale["40"]}px 0;}}`),
-    showLabel ? /* @__PURE__ */ React.createElement(
+    /* @__PURE__ */ import_react31.default.createElement("style", null, `@keyframes progress-bar-shimmer {0% {background-position: -${spacing.scale["40"]}px 0;} 100% {background-position: ${spacing.scale["40"]}px 0;}}`),
+    showLabel ? /* @__PURE__ */ import_react31.default.createElement(
       "div",
       {
         style: {
@@ -42985,7 +42989,7 @@ function ProgressBar({
           flexShrink: 0
         }
       },
-      /* @__PURE__ */ React.createElement(
+      /* @__PURE__ */ import_react31.default.createElement(
         "span",
         {
           style: {
@@ -42996,7 +43000,7 @@ function ProgressBar({
             paddingBlock: spacing.scale["2"]
           }
         },
-        /* @__PURE__ */ React.createElement(
+        /* @__PURE__ */ import_react31.default.createElement(
           "span",
           {
             style: {
@@ -43007,7 +43011,7 @@ function ProgressBar({
           },
           label
         ),
-        showOptionalLabel ? /* @__PURE__ */ React.createElement(
+        showOptionalLabel ? /* @__PURE__ */ import_react31.default.createElement(
           "span",
           {
             style: {
@@ -43019,7 +43023,7 @@ function ProgressBar({
           optionalLabel
         ) : null
       ),
-      direction === "vertical" && resolvedShowProgressState ? /* @__PURE__ */ React.createElement(
+      direction === "vertical" && resolvedShowProgressState ? /* @__PURE__ */ import_react31.default.createElement(
         "span",
         {
           style: {
@@ -43031,7 +43035,7 @@ function ProgressBar({
             paddingBlock: spacing.scale["2"]
           }
         },
-        /* @__PURE__ */ React.createElement(
+        /* @__PURE__ */ import_react31.default.createElement(
           "span",
           {
             style: {
@@ -43042,10 +43046,10 @@ function ProgressBar({
           },
           progressText
         ),
-        resolvedShowTailIcon ? /* @__PURE__ */ React.createElement(TailIcon, { disabled }) : null
+        resolvedShowTailIcon ? /* @__PURE__ */ import_react31.default.createElement(TailIcon, { disabled }) : null
       ) : null
     ) : null,
-    direction === "horizontal" ? /* @__PURE__ */ React.createElement(
+    direction === "horizontal" ? /* @__PURE__ */ import_react31.default.createElement(
       "div",
       {
         style: {
@@ -43057,7 +43061,7 @@ function ProgressBar({
           minWidth: showLabel ? void 0 : spacing.scale["0"]
         }
       },
-      /* @__PURE__ */ React.createElement(
+      /* @__PURE__ */ import_react31.default.createElement(
         "div",
         {
           style: {
@@ -43070,7 +43074,7 @@ function ProgressBar({
             minWidth: spacing.scale["0"]
           }
         },
-        /* @__PURE__ */ React.createElement(
+        /* @__PURE__ */ import_react31.default.createElement(
           "span",
           {
             style: {
@@ -43086,10 +43090,10 @@ function ProgressBar({
               overflow: "hidden"
             }
           },
-          /* @__PURE__ */ React.createElement(ShimmerOverlay, { enabled: shimmering, disabled })
+          /* @__PURE__ */ import_react31.default.createElement(ShimmerOverlay, { enabled: shimmering, disabled })
         )
       ),
-      resolvedShowProgressState ? /* @__PURE__ */ React.createElement(
+      resolvedShowProgressState ? /* @__PURE__ */ import_react31.default.createElement(
         "span",
         {
           style: {
@@ -43103,7 +43107,7 @@ function ProgressBar({
             flexShrink: 0
           }
         },
-        /* @__PURE__ */ React.createElement(
+        /* @__PURE__ */ import_react31.default.createElement(
           "span",
           {
             style: {
@@ -43114,9 +43118,9 @@ function ProgressBar({
           },
           progressText
         ),
-        resolvedShowTailIcon ? /* @__PURE__ */ React.createElement(TailIcon, { disabled }) : null
+        resolvedShowTailIcon ? /* @__PURE__ */ import_react31.default.createElement(TailIcon, { disabled }) : null
       ) : null
-    ) : /* @__PURE__ */ React.createElement(
+    ) : /* @__PURE__ */ import_react31.default.createElement(
       "div",
       {
         style: {
@@ -43128,7 +43132,7 @@ function ProgressBar({
           position: "relative"
         }
       },
-      /* @__PURE__ */ React.createElement(
+      /* @__PURE__ */ import_react31.default.createElement(
         "span",
         {
           style: {
@@ -43144,10 +43148,10 @@ function ProgressBar({
             overflow: "hidden"
           }
         },
-        /* @__PURE__ */ React.createElement(ShimmerOverlay, { enabled: shimmering, disabled })
+        /* @__PURE__ */ import_react31.default.createElement(ShimmerOverlay, { enabled: shimmering, disabled })
       )
     ),
-    resolvedShowHelper ? /* @__PURE__ */ React.createElement(
+    resolvedShowHelper ? /* @__PURE__ */ import_react31.default.createElement(
       "span",
       {
         style: {
@@ -43159,8 +43163,8 @@ function ProgressBar({
           paddingBlock: spacing.scale["2"]
         }
       },
-      /* @__PURE__ */ React.createElement(HelperIcon, { destructive: isDestructive, disabled }),
-      /* @__PURE__ */ React.createElement(
+      /* @__PURE__ */ import_react31.default.createElement(HelperIcon, { destructive: isDestructive, disabled }),
+      /* @__PURE__ */ import_react31.default.createElement(
         "span",
         {
           style: {
@@ -43188,25 +43192,25 @@ function toTitle14(value) {
   return value.replace(/^./, (char) => char.toUpperCase());
 }
 function ProgressBarPreviewPage() {
-  const [direction, setDirection] = (0, import_react28.useState)("vertical");
-  const [target, setTarget] = (0, import_react28.useState)("default");
-  const [size, setSize] = (0, import_react28.useState)("md");
-  const [color, setColor] = (0, import_react28.useState)("green");
-  const [interactionState, setInteractionState] = (0, import_react28.useState)("default");
-  const [progressValue, setProgressValue] = (0, import_react28.useState)(spacing.scale["50"]);
-  const [showLabel, setShowLabel] = (0, import_react28.useState)(true);
-  const [showOptionalLabel, setShowOptionalLabel] = (0, import_react28.useState)(true);
-  const [showProgressState, setShowProgressState] = (0, import_react28.useState)(true);
-  const [showTailIcon, setShowTailIcon] = (0, import_react28.useState)(true);
-  const [showHelper, setShowHelper] = (0, import_react28.useState)(true);
-  const [shimmering, setShimmering] = (0, import_react28.useState)(false);
-  const computedColor = (0, import_react28.useMemo)(() => {
+  const [direction, setDirection] = (0, import_react32.useState)("vertical");
+  const [target, setTarget] = (0, import_react32.useState)("default");
+  const [size, setSize] = (0, import_react32.useState)("md");
+  const [color, setColor] = (0, import_react32.useState)("green");
+  const [interactionState, setInteractionState] = (0, import_react32.useState)("default");
+  const [progressValue, setProgressValue] = (0, import_react32.useState)(spacing.scale["50"]);
+  const [showLabel, setShowLabel] = (0, import_react32.useState)(true);
+  const [showOptionalLabel, setShowOptionalLabel] = (0, import_react32.useState)(true);
+  const [showProgressState, setShowProgressState] = (0, import_react32.useState)(true);
+  const [showTailIcon, setShowTailIcon] = (0, import_react32.useState)(true);
+  const [showHelper, setShowHelper] = (0, import_react32.useState)(true);
+  const [shimmering, setShimmering] = (0, import_react32.useState)(false);
+  const computedColor = (0, import_react32.useMemo)(() => {
     if (target === "destructive") {
       return "red";
     }
     return color;
   }, [color, target]);
-  return /* @__PURE__ */ import_react28.default.createElement(
+  return /* @__PURE__ */ import_react32.default.createElement(
     "main",
     {
       style: {
@@ -43217,7 +43221,7 @@ function ProgressBarPreviewPage() {
         fontFamily: typography.scale.bodyM.medium.fontFamily
       }
     },
-    /* @__PURE__ */ import_react28.default.createElement(
+    /* @__PURE__ */ import_react32.default.createElement(
       "section",
       {
         style: {
@@ -43227,7 +43231,7 @@ function ProgressBarPreviewPage() {
           gap: spacing.scale["24"]
         }
       },
-      /* @__PURE__ */ import_react28.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react28.default.createElement(
+      /* @__PURE__ */ import_react32.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react32.default.createElement(
         "h1",
         {
           style: {
@@ -43240,7 +43244,7 @@ function ProgressBarPreviewPage() {
           }
         },
         "Progress Bar Preview"
-      ), /* @__PURE__ */ import_react28.default.createElement(
+      ), /* @__PURE__ */ import_react32.default.createElement(
         "p",
         {
           style: {
@@ -43255,7 +43259,7 @@ function ProgressBarPreviewPage() {
         },
         "Figma Variant(`Direction`, `Target`) \uAE30\uC900 \uD504\uB9AC\uBDF0\uC640 Line \uD655\uC7A5 \uCD95(`Size`, `Color`, `Shimmering`) \uAC80\uC99D \uD654\uBA74"
       )),
-      /* @__PURE__ */ import_react28.default.createElement(
+      /* @__PURE__ */ import_react32.default.createElement(
         "section",
         {
           style: {
@@ -43270,7 +43274,7 @@ function ProgressBarPreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react28.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react28.default.createElement("span", null, "Direction"), /* @__PURE__ */ import_react28.default.createElement(
+        /* @__PURE__ */ import_react32.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react32.default.createElement("span", null, "Direction"), /* @__PURE__ */ import_react32.default.createElement(
           "select",
           {
             value: direction,
@@ -43284,9 +43288,9 @@ function ProgressBarPreviewPage() {
               paddingInline: spacing.scale["12"]
             }
           },
-          DIRECTIONS2.map((item) => /* @__PURE__ */ import_react28.default.createElement("option", { key: item, value: item }, toTitle14(item)))
+          DIRECTIONS2.map((item) => /* @__PURE__ */ import_react32.default.createElement("option", { key: item, value: item }, toTitle14(item)))
         )),
-        /* @__PURE__ */ import_react28.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react28.default.createElement("span", null, "Target"), /* @__PURE__ */ import_react28.default.createElement(
+        /* @__PURE__ */ import_react32.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react32.default.createElement("span", null, "Target"), /* @__PURE__ */ import_react32.default.createElement(
           "select",
           {
             value: target,
@@ -43300,9 +43304,9 @@ function ProgressBarPreviewPage() {
               paddingInline: spacing.scale["12"]
             }
           },
-          TARGETS2.map((item) => /* @__PURE__ */ import_react28.default.createElement("option", { key: item, value: item }, toTitle14(item)))
+          TARGETS2.map((item) => /* @__PURE__ */ import_react32.default.createElement("option", { key: item, value: item }, toTitle14(item)))
         )),
-        /* @__PURE__ */ import_react28.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react28.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react28.default.createElement(
+        /* @__PURE__ */ import_react32.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react32.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react32.default.createElement(
           "select",
           {
             value: size,
@@ -43316,9 +43320,9 @@ function ProgressBarPreviewPage() {
               paddingInline: spacing.scale["12"]
             }
           },
-          SIZES11.map((item) => /* @__PURE__ */ import_react28.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
+          SIZES11.map((item) => /* @__PURE__ */ import_react32.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
         )),
-        /* @__PURE__ */ import_react28.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react28.default.createElement("span", null, "Color"), /* @__PURE__ */ import_react28.default.createElement(
+        /* @__PURE__ */ import_react32.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react32.default.createElement("span", null, "Color"), /* @__PURE__ */ import_react32.default.createElement(
           "select",
           {
             value: computedColor,
@@ -43334,9 +43338,9 @@ function ProgressBarPreviewPage() {
               backgroundColor: target === "destructive" ? colors.primitive.palette.gray["2"] : colors.primitive.palette.base.white
             }
           },
-          COLORS2.map((item) => /* @__PURE__ */ import_react28.default.createElement("option", { key: item, value: item }, toTitle14(item)))
+          COLORS2.map((item) => /* @__PURE__ */ import_react32.default.createElement("option", { key: item, value: item }, toTitle14(item)))
         )),
-        /* @__PURE__ */ import_react28.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react28.default.createElement("span", null, "Interaction State"), /* @__PURE__ */ import_react28.default.createElement(
+        /* @__PURE__ */ import_react32.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react32.default.createElement("span", null, "Interaction State"), /* @__PURE__ */ import_react32.default.createElement(
           "select",
           {
             value: interactionState,
@@ -43350,9 +43354,9 @@ function ProgressBarPreviewPage() {
               paddingInline: spacing.scale["12"]
             }
           },
-          INTERACTION_STATES3.map((item) => /* @__PURE__ */ import_react28.default.createElement("option", { key: item, value: item }, toTitle14(item)))
+          INTERACTION_STATES3.map((item) => /* @__PURE__ */ import_react32.default.createElement("option", { key: item, value: item }, toTitle14(item)))
         )),
-        /* @__PURE__ */ import_react28.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react28.default.createElement("span", null, "Progress: ", Math.round(progressValue), "%"), /* @__PURE__ */ import_react28.default.createElement(
+        /* @__PURE__ */ import_react32.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react32.default.createElement("span", null, "Progress: ", Math.round(progressValue), "%"), /* @__PURE__ */ import_react32.default.createElement(
           "input",
           {
             type: "range",
@@ -43370,7 +43374,7 @@ function ProgressBarPreviewPage() {
           ["Tail Icon", showTailIcon, setShowTailIcon],
           ["Helper", showHelper, setShowHelper],
           ["Shimmering", shimmering, setShimmering]
-        ].map(([labelText, checked, setChecked]) => /* @__PURE__ */ import_react28.default.createElement(
+        ].map(([labelText, checked, setChecked]) => /* @__PURE__ */ import_react32.default.createElement(
           "label",
           {
             key: labelText,
@@ -43388,11 +43392,11 @@ function ProgressBarPreviewPage() {
               backgroundColor: colors.primitive.palette.base.white
             }
           },
-          /* @__PURE__ */ import_react28.default.createElement("span", null, labelText),
-          /* @__PURE__ */ import_react28.default.createElement("input", { type: "checkbox", checked: Boolean(checked), onChange: (event) => setChecked(event.target.checked) })
+          /* @__PURE__ */ import_react32.default.createElement("span", null, labelText),
+          /* @__PURE__ */ import_react32.default.createElement("input", { type: "checkbox", checked: Boolean(checked), onChange: (event) => setChecked(event.target.checked) })
         ))
       ),
-      /* @__PURE__ */ import_react28.default.createElement(
+      /* @__PURE__ */ import_react32.default.createElement(
         "section",
         {
           style: {
@@ -43407,7 +43411,7 @@ function ProgressBarPreviewPage() {
             justifyItems: "start"
           }
         },
-        /* @__PURE__ */ import_react28.default.createElement(
+        /* @__PURE__ */ import_react32.default.createElement(
           "h2",
           {
             style: {
@@ -43421,7 +43425,7 @@ function ProgressBarPreviewPage() {
           },
           "Live Preview"
         ),
-        /* @__PURE__ */ import_react28.default.createElement(
+        /* @__PURE__ */ import_react32.default.createElement(
           ProgressBar,
           {
             direction,
@@ -43439,7 +43443,7 @@ function ProgressBarPreviewPage() {
           }
         )
       ),
-      /* @__PURE__ */ import_react28.default.createElement(
+      /* @__PURE__ */ import_react32.default.createElement(
         "section",
         {
           style: {
@@ -43453,7 +43457,7 @@ function ProgressBarPreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react28.default.createElement(
+        /* @__PURE__ */ import_react32.default.createElement(
           "h2",
           {
             style: {
@@ -43467,7 +43471,7 @@ function ProgressBarPreviewPage() {
           },
           "Figma Variant Matrix"
         ),
-        DIRECTIONS2.map((dir) => /* @__PURE__ */ import_react28.default.createElement("div", { key: dir, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react28.default.createElement(
+        DIRECTIONS2.map((dir) => /* @__PURE__ */ import_react32.default.createElement("div", { key: dir, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react32.default.createElement(
           "span",
           {
             style: {
@@ -43482,7 +43486,7 @@ function ProgressBarPreviewPage() {
             }
           },
           toTitle14(dir)
-        ), TARGETS2.map((tar) => /* @__PURE__ */ import_react28.default.createElement(
+        ), TARGETS2.map((tar) => /* @__PURE__ */ import_react32.default.createElement(
           ProgressBar,
           {
             key: `${dir}-${tar}`,
@@ -43503,9 +43507,10 @@ function ProgressBarPreviewPage() {
 }
 
 // components/ProgressCircle/ProgressCircle.preview.tsx
-var import_react29 = __toESM(require_react());
+var import_react34 = __toESM(require_react());
 
 // components/ProgressCircle/ProgressCircle.tsx
+var import_react33 = __toESM(require_react());
 var palette20 = colors.primitive.palette;
 var textBase15 = colors.semantic.theme.text.base;
 var PROGRESS_MIN3 = spacing.scale["0"];
@@ -43571,7 +43576,7 @@ function ProgressCircle({
   const fillColor = disabled ? palette20.gray["4"] : COLOR_TO_STROKE[color];
   const shouldShowLabel = typeof showLabel === "boolean" ? showLabel : config.showLabelByDefault;
   const progressText = label ?? `${Math.round(progress)}%`;
-  return /* @__PURE__ */ React.createElement(
+  return /* @__PURE__ */ import_react33.default.createElement(
     "div",
     {
       className,
@@ -43592,7 +43597,7 @@ function ProgressCircle({
       },
       ...props
     },
-    /* @__PURE__ */ React.createElement(
+    /* @__PURE__ */ import_react33.default.createElement(
       "svg",
       {
         width: config.circleSize,
@@ -43604,7 +43609,7 @@ function ProgressCircle({
         },
         "aria-hidden": "true"
       },
-      /* @__PURE__ */ React.createElement(
+      /* @__PURE__ */ import_react33.default.createElement(
         "circle",
         {
           cx: config.circleSize / spacing.scale["2"],
@@ -43615,7 +43620,7 @@ function ProgressCircle({
           strokeWidth: config.strokeWidth
         }
       ),
-      /* @__PURE__ */ React.createElement(
+      /* @__PURE__ */ import_react33.default.createElement(
         "circle",
         {
           cx: config.circleSize / spacing.scale["2"],
@@ -43635,7 +43640,7 @@ function ProgressCircle({
         }
       )
     ),
-    shouldShowLabel ? /* @__PURE__ */ React.createElement(
+    shouldShowLabel ? /* @__PURE__ */ import_react33.default.createElement(
       "span",
       {
         style: {
@@ -43670,12 +43675,12 @@ function toTitle15(value) {
   return value.replace(/^./, (char) => char.toUpperCase());
 }
 function ProgressCirclePreviewPage() {
-  const [size, setSize] = (0, import_react29.useState)("md");
-  const [color, setColor] = (0, import_react29.useState)("green");
-  const [interactionState, setInteractionState] = (0, import_react29.useState)("default");
-  const [progressValue, setProgressValue] = (0, import_react29.useState)(spacing.scale["50"]);
-  const [showLabel, setShowLabel] = (0, import_react29.useState)(true);
-  return /* @__PURE__ */ import_react29.default.createElement(
+  const [size, setSize] = (0, import_react34.useState)("md");
+  const [color, setColor] = (0, import_react34.useState)("green");
+  const [interactionState, setInteractionState] = (0, import_react34.useState)("default");
+  const [progressValue, setProgressValue] = (0, import_react34.useState)(spacing.scale["50"]);
+  const [showLabel, setShowLabel] = (0, import_react34.useState)(true);
+  return /* @__PURE__ */ import_react34.default.createElement(
     "main",
     {
       style: {
@@ -43686,7 +43691,7 @@ function ProgressCirclePreviewPage() {
         fontFamily: typography.scale.bodyM.medium.fontFamily
       }
     },
-    /* @__PURE__ */ import_react29.default.createElement(
+    /* @__PURE__ */ import_react34.default.createElement(
       "section",
       {
         style: {
@@ -43696,7 +43701,7 @@ function ProgressCirclePreviewPage() {
           gap: spacing.scale["24"]
         }
       },
-      /* @__PURE__ */ import_react29.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react29.default.createElement(
+      /* @__PURE__ */ import_react34.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react34.default.createElement(
         "h1",
         {
           style: {
@@ -43709,7 +43714,7 @@ function ProgressCirclePreviewPage() {
           }
         },
         "Progress Circle Preview"
-      ), /* @__PURE__ */ import_react29.default.createElement(
+      ), /* @__PURE__ */ import_react34.default.createElement(
         "p",
         {
           style: {
@@ -43724,7 +43729,7 @@ function ProgressCirclePreviewPage() {
         },
         "Figma Variant(`Size=xs|sm|md|lg`)\uC640 Circle \uB0B4\uBD80 \uCD95(`Color`, `Progress`) \uAC80\uC99D \uD654\uBA74"
       )),
-      /* @__PURE__ */ import_react29.default.createElement(
+      /* @__PURE__ */ import_react34.default.createElement(
         "section",
         {
           style: {
@@ -43739,7 +43744,7 @@ function ProgressCirclePreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react29.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react29.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react29.default.createElement(
+        /* @__PURE__ */ import_react34.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react34.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react34.default.createElement(
           "select",
           {
             value: size,
@@ -43753,9 +43758,9 @@ function ProgressCirclePreviewPage() {
               paddingInline: spacing.scale["12"]
             }
           },
-          SIZES12.map((item) => /* @__PURE__ */ import_react29.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
+          SIZES12.map((item) => /* @__PURE__ */ import_react34.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
         )),
-        /* @__PURE__ */ import_react29.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react29.default.createElement("span", null, "Color"), /* @__PURE__ */ import_react29.default.createElement(
+        /* @__PURE__ */ import_react34.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react34.default.createElement("span", null, "Color"), /* @__PURE__ */ import_react34.default.createElement(
           "select",
           {
             value: color,
@@ -43769,9 +43774,9 @@ function ProgressCirclePreviewPage() {
               paddingInline: spacing.scale["12"]
             }
           },
-          COLORS3.map((item) => /* @__PURE__ */ import_react29.default.createElement("option", { key: item, value: item }, toTitle15(item)))
+          COLORS3.map((item) => /* @__PURE__ */ import_react34.default.createElement("option", { key: item, value: item }, toTitle15(item)))
         )),
-        /* @__PURE__ */ import_react29.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react29.default.createElement("span", null, "Interaction State"), /* @__PURE__ */ import_react29.default.createElement(
+        /* @__PURE__ */ import_react34.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react34.default.createElement("span", null, "Interaction State"), /* @__PURE__ */ import_react34.default.createElement(
           "select",
           {
             value: interactionState,
@@ -43785,9 +43790,9 @@ function ProgressCirclePreviewPage() {
               paddingInline: spacing.scale["12"]
             }
           },
-          INTERACTION_STATES4.map((item) => /* @__PURE__ */ import_react29.default.createElement("option", { key: item, value: item }, toTitle15(item)))
+          INTERACTION_STATES4.map((item) => /* @__PURE__ */ import_react34.default.createElement("option", { key: item, value: item }, toTitle15(item)))
         )),
-        /* @__PURE__ */ import_react29.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react29.default.createElement("span", null, "Progress: ", Math.round(progressValue), "%"), /* @__PURE__ */ import_react29.default.createElement(
+        /* @__PURE__ */ import_react34.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react34.default.createElement("span", null, "Progress: ", Math.round(progressValue), "%"), /* @__PURE__ */ import_react34.default.createElement(
           "input",
           {
             type: "range",
@@ -43798,7 +43803,7 @@ function ProgressCirclePreviewPage() {
             onChange: (event) => setProgressValue(Number(event.target.value))
           }
         )),
-        /* @__PURE__ */ import_react29.default.createElement(
+        /* @__PURE__ */ import_react34.default.createElement(
           "label",
           {
             style: {
@@ -43815,11 +43820,11 @@ function ProgressCirclePreviewPage() {
               backgroundColor: colors.primitive.palette.base.white
             }
           },
-          /* @__PURE__ */ import_react29.default.createElement("span", null, "Show Label"),
-          /* @__PURE__ */ import_react29.default.createElement("input", { type: "checkbox", checked: showLabel, onChange: (event) => setShowLabel(event.target.checked) })
+          /* @__PURE__ */ import_react34.default.createElement("span", null, "Show Label"),
+          /* @__PURE__ */ import_react34.default.createElement("input", { type: "checkbox", checked: showLabel, onChange: (event) => setShowLabel(event.target.checked) })
         )
       ),
-      /* @__PURE__ */ import_react29.default.createElement(
+      /* @__PURE__ */ import_react34.default.createElement(
         "section",
         {
           style: {
@@ -43834,7 +43839,7 @@ function ProgressCirclePreviewPage() {
             justifyItems: "center"
           }
         },
-        /* @__PURE__ */ import_react29.default.createElement(
+        /* @__PURE__ */ import_react34.default.createElement(
           "h2",
           {
             style: {
@@ -43849,7 +43854,7 @@ function ProgressCirclePreviewPage() {
           },
           "Live Preview"
         ),
-        /* @__PURE__ */ import_react29.default.createElement(
+        /* @__PURE__ */ import_react34.default.createElement(
           ProgressCircle,
           {
             size,
@@ -43860,7 +43865,7 @@ function ProgressCirclePreviewPage() {
           }
         )
       ),
-      /* @__PURE__ */ import_react29.default.createElement(
+      /* @__PURE__ */ import_react34.default.createElement(
         "section",
         {
           style: {
@@ -43874,7 +43879,7 @@ function ProgressCirclePreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react29.default.createElement(
+        /* @__PURE__ */ import_react34.default.createElement(
           "h2",
           {
             style: {
@@ -43888,7 +43893,7 @@ function ProgressCirclePreviewPage() {
           },
           "Size Matrix"
         ),
-        /* @__PURE__ */ import_react29.default.createElement(
+        /* @__PURE__ */ import_react34.default.createElement(
           "div",
           {
             style: {
@@ -43899,7 +43904,7 @@ function ProgressCirclePreviewPage() {
               justifyItems: "center"
             }
           },
-          SIZES12.map((item) => /* @__PURE__ */ import_react29.default.createElement("div", { key: item, style: { display: "grid", gap: spacing.scale["8"], justifyItems: "center" } }, /* @__PURE__ */ import_react29.default.createElement(
+          SIZES12.map((item) => /* @__PURE__ */ import_react34.default.createElement("div", { key: item, style: { display: "grid", gap: spacing.scale["8"], justifyItems: "center" } }, /* @__PURE__ */ import_react34.default.createElement(
             "span",
             {
               style: {
@@ -43914,7 +43919,7 @@ function ProgressCirclePreviewPage() {
               }
             },
             item.toUpperCase()
-          ), /* @__PURE__ */ import_react29.default.createElement(
+          ), /* @__PURE__ */ import_react34.default.createElement(
             ProgressCircle,
             {
               size: item,
@@ -43931,10 +43936,10 @@ function ProgressCirclePreviewPage() {
 }
 
 // components/QuantityStepper/QuantityStepper.preview.tsx
-var import_react31 = __toESM(require_react());
+var import_react36 = __toESM(require_react());
 
 // components/QuantityStepper/QuantityStepper.tsx
-var import_react30 = __toESM(require_react());
+var import_react35 = __toESM(require_react());
 var SIZE_CONFIG10 = {
   lg: {
     actionSize: spacing.scale["40"],
@@ -44006,7 +44011,7 @@ function resolveContainerShadow(state) {
 function StepperIcon({ type, size, color }) {
   const addPath = "M9.16667 4.16667H10.8333V9.16667H15.8333V10.8333H10.8333V15.8333H9.16667V10.8333H4.16667V9.16667H9.16667V4.16667Z";
   const subtractPath = "M4.16667 9.16667H15.8333V10.8333H4.16667V9.16667Z";
-  return /* @__PURE__ */ import_react30.default.createElement(
+  return /* @__PURE__ */ import_react35.default.createElement(
     "svg",
     {
       "aria-hidden": "true",
@@ -44019,7 +44024,7 @@ function StepperIcon({ type, size, color }) {
         color
       }
     },
-    /* @__PURE__ */ import_react30.default.createElement("path", { d: type === "add" ? addPath : subtractPath, fill: "currentColor" })
+    /* @__PURE__ */ import_react35.default.createElement("path", { d: type === "add" ? addPath : subtractPath, fill: "currentColor" })
   );
 }
 function StepActionButton({
@@ -44030,7 +44035,7 @@ function StepActionButton({
   onClick,
   ariaLabel
 }) {
-  return /* @__PURE__ */ import_react30.default.createElement(
+  return /* @__PURE__ */ import_react35.default.createElement(
     "button",
     {
       type: "button",
@@ -44052,7 +44057,7 @@ function StepActionButton({
         cursor: disabled ? "default" : "pointer"
       }
     },
-    /* @__PURE__ */ import_react30.default.createElement(StepperIcon, { type, size: sizeConfig.iconSize, color: iconColor })
+    /* @__PURE__ */ import_react35.default.createElement(StepperIcon, { type, size: sizeConfig.iconSize, color: iconColor })
   );
 }
 function QuantityStepper({
@@ -44079,13 +44084,13 @@ function QuantityStepper({
   onKeyDown,
   ...props
 }) {
-  const rootRef = (0, import_react30.useRef)(null);
+  const rootRef = (0, import_react35.useRef)(null);
   const sizeConfig = SIZE_CONFIG10[size];
   const isControlled = typeof value === "number";
-  const [internalValue, setInternalValue] = (0, import_react30.useState)(defaultValue);
-  const [hovered, setHovered] = (0, import_react30.useState)(false);
-  const [focused, setFocused] = (0, import_react30.useState)(false);
-  const currentValue = (0, import_react30.useMemo)(
+  const [internalValue, setInternalValue] = (0, import_react35.useState)(defaultValue);
+  const [hovered, setHovered] = (0, import_react35.useState)(false);
+  const [focused, setFocused] = (0, import_react35.useState)(false);
+  const currentValue = (0, import_react35.useMemo)(
     () => clampValue(isControlled ? value : internalValue, min, max),
     [internalValue, isControlled, max, min, value]
   );
@@ -44120,7 +44125,7 @@ function QuantityStepper({
     }
     applyValue(currentValue + step, "increase");
   }
-  return /* @__PURE__ */ import_react30.default.createElement(
+  return /* @__PURE__ */ import_react35.default.createElement(
     "div",
     {
       ref: rootRef,
@@ -44186,7 +44191,7 @@ function QuantityStepper({
       },
       ...props
     },
-    /* @__PURE__ */ import_react30.default.createElement(
+    /* @__PURE__ */ import_react35.default.createElement(
       StepActionButton,
       {
         type: "subtract",
@@ -44197,7 +44202,7 @@ function QuantityStepper({
         ariaLabel: decreaseAriaLabel
       }
     ),
-    /* @__PURE__ */ import_react30.default.createElement(
+    /* @__PURE__ */ import_react35.default.createElement(
       "span",
       {
         style: {
@@ -44212,7 +44217,7 @@ function QuantityStepper({
       },
       currentValue
     ),
-    /* @__PURE__ */ import_react30.default.createElement(
+    /* @__PURE__ */ import_react35.default.createElement(
       StepActionButton,
       {
         type: "add",
@@ -44234,23 +44239,23 @@ function toTitle16(value) {
   return value.replace(/^./, (char) => char.toUpperCase());
 }
 function QuantityStepperPreviewPage() {
-  const [size, setSize] = (0, import_react31.useState)("lg");
-  const [shape, setShape] = (0, import_react31.useState)("rounded");
-  const [state, setState] = (0, import_react31.useState)("auto");
-  const [value, setValue] = (0, import_react31.useState)(spacing.scale["2"]);
-  const [min, setMin] = (0, import_react31.useState)(spacing.scale["0"]);
-  const [max, setMax] = (0, import_react31.useState)(spacing.scale["10"]);
-  const [step, setStep] = (0, import_react31.useState)(spacing.scale["1"]);
-  const [disabled, setDisabled] = (0, import_react31.useState)(false);
-  const [lastAction, setLastAction] = (0, import_react31.useState)("None");
-  const forcedState = (0, import_react31.useMemo)(() => {
+  const [size, setSize] = (0, import_react36.useState)("lg");
+  const [shape, setShape] = (0, import_react36.useState)("rounded");
+  const [state, setState] = (0, import_react36.useState)("auto");
+  const [value, setValue] = (0, import_react36.useState)(spacing.scale["2"]);
+  const [min, setMin] = (0, import_react36.useState)(spacing.scale["0"]);
+  const [max, setMax] = (0, import_react36.useState)(spacing.scale["10"]);
+  const [step, setStep] = (0, import_react36.useState)(spacing.scale["1"]);
+  const [disabled, setDisabled] = (0, import_react36.useState)(false);
+  const [lastAction, setLastAction] = (0, import_react36.useState)("None");
+  const forcedState = (0, import_react36.useMemo)(() => {
     if (state === "auto") {
       return disabled ? "disabled" : void 0;
     }
     return state;
   }, [disabled, state]);
-  const clampedValue = (0, import_react31.useMemo)(() => Math.max(min, Math.min(max, value)), [max, min, value]);
-  return /* @__PURE__ */ import_react31.default.createElement(
+  const clampedValue = (0, import_react36.useMemo)(() => Math.max(min, Math.min(max, value)), [max, min, value]);
+  return /* @__PURE__ */ import_react36.default.createElement(
     "main",
     {
       style: {
@@ -44261,7 +44266,7 @@ function QuantityStepperPreviewPage() {
         fontFamily: typography.scale.bodyM.medium.fontFamily
       }
     },
-    /* @__PURE__ */ import_react31.default.createElement(
+    /* @__PURE__ */ import_react36.default.createElement(
       "section",
       {
         style: {
@@ -44271,7 +44276,7 @@ function QuantityStepperPreviewPage() {
           gap: spacing.scale["24"]
         }
       },
-      /* @__PURE__ */ import_react31.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react31.default.createElement(
+      /* @__PURE__ */ import_react36.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react36.default.createElement(
         "h1",
         {
           style: {
@@ -44284,7 +44289,7 @@ function QuantityStepperPreviewPage() {
           }
         },
         "Quantity Stepper Preview"
-      ), /* @__PURE__ */ import_react31.default.createElement(
+      ), /* @__PURE__ */ import_react36.default.createElement(
         "p",
         {
           style: {
@@ -44299,7 +44304,7 @@ function QuantityStepperPreviewPage() {
         },
         "Figma Variant(`size`, `shape`, `state`)\uACFC \uAC12 \uC99D\uAC10 \uB3D9\uC791/\uC811\uADFC\uC131 \uC0C1\uD0DC\uB97C \uAC80\uC99D\uD569\uB2C8\uB2E4."
       )),
-      /* @__PURE__ */ import_react31.default.createElement(
+      /* @__PURE__ */ import_react36.default.createElement(
         "section",
         {
           style: {
@@ -44314,7 +44319,7 @@ function QuantityStepperPreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react31.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react31.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react31.default.createElement(
+        /* @__PURE__ */ import_react36.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react36.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react36.default.createElement(
           "select",
           {
             value: size,
@@ -44328,9 +44333,9 @@ function QuantityStepperPreviewPage() {
               paddingInline: spacing.scale["12"]
             }
           },
-          SIZES13.map((item) => /* @__PURE__ */ import_react31.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
+          SIZES13.map((item) => /* @__PURE__ */ import_react36.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
         )),
-        /* @__PURE__ */ import_react31.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react31.default.createElement("span", null, "Shape"), /* @__PURE__ */ import_react31.default.createElement(
+        /* @__PURE__ */ import_react36.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react36.default.createElement("span", null, "Shape"), /* @__PURE__ */ import_react36.default.createElement(
           "select",
           {
             value: shape,
@@ -44344,9 +44349,9 @@ function QuantityStepperPreviewPage() {
               paddingInline: spacing.scale["12"]
             }
           },
-          SHAPES4.map((item) => /* @__PURE__ */ import_react31.default.createElement("option", { key: item, value: item }, toTitle16(item)))
+          SHAPES4.map((item) => /* @__PURE__ */ import_react36.default.createElement("option", { key: item, value: item }, toTitle16(item)))
         )),
-        /* @__PURE__ */ import_react31.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react31.default.createElement("span", null, "State"), /* @__PURE__ */ import_react31.default.createElement(
+        /* @__PURE__ */ import_react36.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react36.default.createElement("span", null, "State"), /* @__PURE__ */ import_react36.default.createElement(
           "select",
           {
             value: state,
@@ -44360,9 +44365,9 @@ function QuantityStepperPreviewPage() {
               paddingInline: spacing.scale["12"]
             }
           },
-          STATES8.map((item) => /* @__PURE__ */ import_react31.default.createElement("option", { key: item, value: item }, toTitle16(item)))
+          STATES8.map((item) => /* @__PURE__ */ import_react36.default.createElement("option", { key: item, value: item }, toTitle16(item)))
         )),
-        /* @__PURE__ */ import_react31.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react31.default.createElement("span", null, "Value"), /* @__PURE__ */ import_react31.default.createElement(
+        /* @__PURE__ */ import_react36.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react36.default.createElement("span", null, "Value"), /* @__PURE__ */ import_react36.default.createElement(
           "input",
           {
             type: "number",
@@ -44378,7 +44383,7 @@ function QuantityStepperPreviewPage() {
             }
           }
         )),
-        /* @__PURE__ */ import_react31.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react31.default.createElement("span", null, "Min"), /* @__PURE__ */ import_react31.default.createElement(
+        /* @__PURE__ */ import_react36.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react36.default.createElement("span", null, "Min"), /* @__PURE__ */ import_react36.default.createElement(
           "input",
           {
             type: "number",
@@ -44394,7 +44399,7 @@ function QuantityStepperPreviewPage() {
             }
           }
         )),
-        /* @__PURE__ */ import_react31.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react31.default.createElement("span", null, "Max"), /* @__PURE__ */ import_react31.default.createElement(
+        /* @__PURE__ */ import_react36.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react36.default.createElement("span", null, "Max"), /* @__PURE__ */ import_react36.default.createElement(
           "input",
           {
             type: "number",
@@ -44410,7 +44415,7 @@ function QuantityStepperPreviewPage() {
             }
           }
         )),
-        /* @__PURE__ */ import_react31.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react31.default.createElement("span", null, "Step"), /* @__PURE__ */ import_react31.default.createElement(
+        /* @__PURE__ */ import_react36.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react36.default.createElement("span", null, "Step"), /* @__PURE__ */ import_react36.default.createElement(
           "input",
           {
             type: "number",
@@ -44427,7 +44432,7 @@ function QuantityStepperPreviewPage() {
             }
           }
         )),
-        /* @__PURE__ */ import_react31.default.createElement(
+        /* @__PURE__ */ import_react36.default.createElement(
           "label",
           {
             style: {
@@ -44443,11 +44448,11 @@ function QuantityStepperPreviewPage() {
               gap: spacing.scale["8"]
             }
           },
-          /* @__PURE__ */ import_react31.default.createElement("span", null, "Disabled"),
-          /* @__PURE__ */ import_react31.default.createElement("input", { type: "checkbox", checked: disabled, onChange: (event) => setDisabled(event.target.checked) })
+          /* @__PURE__ */ import_react36.default.createElement("span", null, "Disabled"),
+          /* @__PURE__ */ import_react36.default.createElement("input", { type: "checkbox", checked: disabled, onChange: (event) => setDisabled(event.target.checked) })
         )
       ),
-      /* @__PURE__ */ import_react31.default.createElement(
+      /* @__PURE__ */ import_react36.default.createElement(
         "section",
         {
           style: {
@@ -44462,7 +44467,7 @@ function QuantityStepperPreviewPage() {
             justifyItems: "start"
           }
         },
-        /* @__PURE__ */ import_react31.default.createElement(
+        /* @__PURE__ */ import_react36.default.createElement(
           "h2",
           {
             style: {
@@ -44476,7 +44481,7 @@ function QuantityStepperPreviewPage() {
           },
           "Live Preview"
         ),
-        /* @__PURE__ */ import_react31.default.createElement(
+        /* @__PURE__ */ import_react36.default.createElement(
           QuantityStepper,
           {
             size,
@@ -44495,7 +44500,7 @@ function QuantityStepperPreviewPage() {
             onIncrease: (next) => setLastAction(`Increase: ${next}`)
           }
         ),
-        /* @__PURE__ */ import_react31.default.createElement(
+        /* @__PURE__ */ import_react36.default.createElement(
           "p",
           {
             style: {
@@ -44512,7 +44517,7 @@ function QuantityStepperPreviewPage() {
           lastAction
         )
       ),
-      /* @__PURE__ */ import_react31.default.createElement(
+      /* @__PURE__ */ import_react36.default.createElement(
         "section",
         {
           style: {
@@ -44526,7 +44531,7 @@ function QuantityStepperPreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react31.default.createElement(
+        /* @__PURE__ */ import_react36.default.createElement(
           "h2",
           {
             style: {
@@ -44540,7 +44545,7 @@ function QuantityStepperPreviewPage() {
           },
           "Variant Matrix"
         ),
-        SIZES13.map((sizeItem) => /* @__PURE__ */ import_react31.default.createElement("div", { key: sizeItem, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react31.default.createElement(
+        SIZES13.map((sizeItem) => /* @__PURE__ */ import_react36.default.createElement("div", { key: sizeItem, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react36.default.createElement(
           "span",
           {
             style: {
@@ -44556,7 +44561,7 @@ function QuantityStepperPreviewPage() {
           },
           "Size ",
           sizeItem.toUpperCase()
-        ), /* @__PURE__ */ import_react31.default.createElement("div", { style: { display: "flex", alignItems: "center", gap: spacing.scale["12"], flexWrap: "wrap" } }, SHAPES4.map((shapeItem) => /* @__PURE__ */ import_react31.default.createElement(
+        ), /* @__PURE__ */ import_react36.default.createElement("div", { style: { display: "flex", alignItems: "center", gap: spacing.scale["12"], flexWrap: "wrap" } }, SHAPES4.map((shapeItem) => /* @__PURE__ */ import_react36.default.createElement(
           QuantityStepper,
           {
             key: `${sizeItem}-${shapeItem}`,
@@ -44577,10 +44582,10 @@ function QuantityStepperPreviewPage() {
 }
 
 // components/Radio/Radio.preview.tsx
-var import_react33 = __toESM(require_react());
+var import_react38 = __toESM(require_react());
 
 // components/Radio/Radio.tsx
-var import_react32 = __toESM(require_react());
+var import_react37 = __toESM(require_react());
 var palette22 = colors.primitive.palette;
 var SIZE_CONFIG11 = {
   sm: {
@@ -44621,8 +44626,8 @@ function Radio({
   onClick,
   ariaLabel
 }) {
-  const [hovered, setHovered] = (0, import_react32.useState)(false);
-  const [focused, setFocused] = (0, import_react32.useState)(false);
+  const [hovered, setHovered] = (0, import_react37.useState)(false);
+  const [focused, setFocused] = (0, import_react37.useState)(false);
   const config = SIZE_CONFIG11[size];
   const visualState = resolveVisualState7(state, disabled, hovered, focused);
   const isDisabled = visualState === "disabled";
@@ -44671,7 +44676,7 @@ function Radio({
     }
     onClick?.();
   };
-  return /* @__PURE__ */ import_react32.default.createElement(
+  return /* @__PURE__ */ import_react37.default.createElement(
     "button",
     {
       id,
@@ -44706,7 +44711,7 @@ function Radio({
         ...style
       }
     },
-    checked ? /* @__PURE__ */ import_react32.default.createElement(
+    checked ? /* @__PURE__ */ import_react37.default.createElement(
       "span",
       {
         "aria-hidden": "true",
@@ -44731,10 +44736,10 @@ function toTitle17(value) {
   return value.charAt(0).toUpperCase() + value.slice(1);
 }
 function RadioPreviewPage() {
-  const [size, setSize] = (0, import_react33.useState)("sm");
-  const [state, setState] = (0, import_react33.useState)("auto");
-  const [checked, setChecked] = (0, import_react33.useState)(false);
-  return /* @__PURE__ */ import_react33.default.createElement(
+  const [size, setSize] = (0, import_react38.useState)("sm");
+  const [state, setState] = (0, import_react38.useState)("auto");
+  const [checked, setChecked] = (0, import_react38.useState)(false);
+  return /* @__PURE__ */ import_react38.default.createElement(
     "main",
     {
       style: {
@@ -44745,7 +44750,7 @@ function RadioPreviewPage() {
         fontFamily: typography.scale.bodyM.medium.fontFamily
       }
     },
-    /* @__PURE__ */ import_react33.default.createElement(
+    /* @__PURE__ */ import_react38.default.createElement(
       "section",
       {
         style: {
@@ -44755,7 +44760,7 @@ function RadioPreviewPage() {
           gap: spacing.scale["24"]
         }
       },
-      /* @__PURE__ */ import_react33.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react33.default.createElement(
+      /* @__PURE__ */ import_react38.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react38.default.createElement(
         "h1",
         {
           style: {
@@ -44768,7 +44773,7 @@ function RadioPreviewPage() {
           }
         },
         "Radio Preview"
-      ), /* @__PURE__ */ import_react33.default.createElement(
+      ), /* @__PURE__ */ import_react38.default.createElement(
         "p",
         {
           style: {
@@ -44783,7 +44788,7 @@ function RadioPreviewPage() {
         },
         "Figma variant(Size/Active/State) \uB300\uC751 \uC778\uD130\uB799\uC158 \uAC80\uC99D"
       )),
-      /* @__PURE__ */ import_react33.default.createElement(
+      /* @__PURE__ */ import_react38.default.createElement(
         "section",
         {
           style: {
@@ -44798,7 +44803,7 @@ function RadioPreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react33.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react33.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react33.default.createElement(
+        /* @__PURE__ */ import_react38.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react38.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react38.default.createElement(
           "select",
           {
             value: size,
@@ -44814,9 +44819,9 @@ function RadioPreviewPage() {
               color: textBase17.staticDark
             }
           },
-          SIZES14.map((item) => /* @__PURE__ */ import_react33.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
+          SIZES14.map((item) => /* @__PURE__ */ import_react38.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
         )),
-        /* @__PURE__ */ import_react33.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react33.default.createElement("span", null, "State"), /* @__PURE__ */ import_react33.default.createElement(
+        /* @__PURE__ */ import_react38.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react38.default.createElement("span", null, "State"), /* @__PURE__ */ import_react38.default.createElement(
           "select",
           {
             value: state,
@@ -44832,9 +44837,9 @@ function RadioPreviewPage() {
               color: textBase17.staticDark
             }
           },
-          STATES9.map((item) => /* @__PURE__ */ import_react33.default.createElement("option", { key: item, value: item }, toTitle17(item)))
+          STATES9.map((item) => /* @__PURE__ */ import_react38.default.createElement("option", { key: item, value: item }, toTitle17(item)))
         )),
-        /* @__PURE__ */ import_react33.default.createElement(
+        /* @__PURE__ */ import_react38.default.createElement(
           "label",
           {
             style: {
@@ -44851,8 +44856,8 @@ function RadioPreviewPage() {
               backgroundColor: palette23.base.white
             }
           },
-          /* @__PURE__ */ import_react33.default.createElement("span", null, "Active"),
-          /* @__PURE__ */ import_react33.default.createElement(
+          /* @__PURE__ */ import_react38.default.createElement("span", null, "Active"),
+          /* @__PURE__ */ import_react38.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -44862,7 +44867,7 @@ function RadioPreviewPage() {
           )
         )
       ),
-      /* @__PURE__ */ import_react33.default.createElement(
+      /* @__PURE__ */ import_react38.default.createElement(
         "section",
         {
           style: {
@@ -44876,7 +44881,7 @@ function RadioPreviewPage() {
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react33.default.createElement(
+        /* @__PURE__ */ import_react38.default.createElement(
           "h2",
           {
             style: {
@@ -44890,7 +44895,7 @@ function RadioPreviewPage() {
           },
           "Active Selection"
         ),
-        /* @__PURE__ */ import_react33.default.createElement(
+        /* @__PURE__ */ import_react38.default.createElement(
           Radio,
           {
             size,
@@ -44901,7 +44906,7 @@ function RadioPreviewPage() {
           }
         )
       ),
-      /* @__PURE__ */ import_react33.default.createElement(
+      /* @__PURE__ */ import_react38.default.createElement(
         "section",
         {
           style: {
@@ -44915,7 +44920,7 @@ function RadioPreviewPage() {
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react33.default.createElement(
+        /* @__PURE__ */ import_react38.default.createElement(
           "h2",
           {
             style: {
@@ -44929,7 +44934,7 @@ function RadioPreviewPage() {
           },
           "Variant Matrix"
         ),
-        /* @__PURE__ */ import_react33.default.createElement(
+        /* @__PURE__ */ import_react38.default.createElement(
           "div",
           {
             style: {
@@ -44937,7 +44942,7 @@ function RadioPreviewPage() {
               gap: spacing.scale["16"]
             }
           },
-          SIZES14.map((sizeItem) => /* @__PURE__ */ import_react33.default.createElement("div", { key: sizeItem, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react33.default.createElement(
+          SIZES14.map((sizeItem) => /* @__PURE__ */ import_react38.default.createElement("div", { key: sizeItem, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react38.default.createElement(
             "h3",
             {
               style: {
@@ -44951,7 +44956,7 @@ function RadioPreviewPage() {
             },
             "Size ",
             sizeItem.toUpperCase()
-          ), /* @__PURE__ */ import_react33.default.createElement(
+          ), /* @__PURE__ */ import_react38.default.createElement(
             "div",
             {
               style: {
@@ -44960,7 +44965,7 @@ function RadioPreviewPage() {
                 gap: spacing.scale["12"]
               }
             },
-            ["default", "hover", "focus", "disabled"].map((stateItem) => /* @__PURE__ */ import_react33.default.createElement(
+            ["default", "hover", "focus", "disabled"].map((stateItem) => /* @__PURE__ */ import_react38.default.createElement(
               "div",
               {
                 key: `${sizeItem}-inactive-${stateItem}`,
@@ -44976,7 +44981,7 @@ function RadioPreviewPage() {
                   justifyItems: "start"
                 }
               },
-              /* @__PURE__ */ import_react33.default.createElement(
+              /* @__PURE__ */ import_react38.default.createElement(
                 "span",
                 {
                   style: {
@@ -44991,9 +44996,9 @@ function RadioPreviewPage() {
                 "Inactive / ",
                 toTitle17(stateItem)
               ),
-              /* @__PURE__ */ import_react33.default.createElement(Radio, { size: sizeItem, checked: false, state: stateItem, ariaLabel: "Matrix radio inactive" })
+              /* @__PURE__ */ import_react38.default.createElement(Radio, { size: sizeItem, checked: false, state: stateItem, ariaLabel: "Matrix radio inactive" })
             )),
-            ["default", "hover", "focus", "disabled"].map((stateItem) => /* @__PURE__ */ import_react33.default.createElement(
+            ["default", "hover", "focus", "disabled"].map((stateItem) => /* @__PURE__ */ import_react38.default.createElement(
               "div",
               {
                 key: `${sizeItem}-active-${stateItem}`,
@@ -45009,7 +45014,7 @@ function RadioPreviewPage() {
                   justifyItems: "start"
                 }
               },
-              /* @__PURE__ */ import_react33.default.createElement(
+              /* @__PURE__ */ import_react38.default.createElement(
                 "span",
                 {
                   style: {
@@ -45024,7 +45029,7 @@ function RadioPreviewPage() {
                 "Active / ",
                 toTitle17(stateItem)
               ),
-              /* @__PURE__ */ import_react33.default.createElement(Radio, { size: sizeItem, checked: true, state: stateItem, ariaLabel: "Matrix radio active" })
+              /* @__PURE__ */ import_react38.default.createElement(Radio, { size: sizeItem, checked: true, state: stateItem, ariaLabel: "Matrix radio active" })
             ))
           )))
         )
@@ -45034,10 +45039,10 @@ function RadioPreviewPage() {
 }
 
 // components/RadioLabel/RadioLabel.preview.tsx
-var import_react35 = __toESM(require_react());
+var import_react40 = __toESM(require_react());
 
 // components/RadioLabel/RadioLabel.tsx
-var import_react34 = __toESM(require_react());
+var import_react39 = __toESM(require_react());
 var textBase18 = colors.semantic.theme.text.base;
 var SIZE_CONFIG12 = {
   sm: {
@@ -45088,8 +45093,8 @@ function RadioLabel({
   disabled = false,
   onCheckedChange
 }) {
-  const [hovered, setHovered] = (0, import_react34.useState)(false);
-  const [focused, setFocused] = (0, import_react34.useState)(false);
+  const [hovered, setHovered] = (0, import_react39.useState)(false);
+  const [focused, setFocused] = (0, import_react39.useState)(false);
   const config = SIZE_CONFIG12[size];
   const visualState = resolveVisualState8(state, disabled, hovered, focused);
   const isDisabled = visualState === "disabled";
@@ -45101,7 +45106,7 @@ function RadioLabel({
       onCheckedChange?.(true);
     }
   };
-  return /* @__PURE__ */ import_react34.default.createElement(
+  return /* @__PURE__ */ import_react39.default.createElement(
     "div",
     {
       id,
@@ -45133,7 +45138,7 @@ function RadioLabel({
         ...style
       }
     },
-    /* @__PURE__ */ import_react34.default.createElement(
+    /* @__PURE__ */ import_react39.default.createElement(
       "span",
       {
         style: {
@@ -45145,7 +45150,7 @@ function RadioLabel({
           paddingBottom: spacing.scale["0"]
         }
       },
-      /* @__PURE__ */ import_react34.default.createElement(
+      /* @__PURE__ */ import_react39.default.createElement(
         Radio,
         {
           size,
@@ -45159,7 +45164,7 @@ function RadioLabel({
         }
       )
     ),
-    /* @__PURE__ */ import_react34.default.createElement(
+    /* @__PURE__ */ import_react39.default.createElement(
       "span",
       {
         style: {
@@ -45171,7 +45176,7 @@ function RadioLabel({
           whiteSpace: "nowrap"
         }
       },
-      /* @__PURE__ */ import_react34.default.createElement(
+      /* @__PURE__ */ import_react39.default.createElement(
         "span",
         {
           style: {
@@ -45181,7 +45186,7 @@ function RadioLabel({
         },
         label
       ),
-      showCaption ? /* @__PURE__ */ import_react34.default.createElement(
+      showCaption ? /* @__PURE__ */ import_react39.default.createElement(
         "span",
         {
           style: {
@@ -45204,11 +45209,11 @@ function toTitle18(value) {
   return value.charAt(0).toUpperCase() + value.slice(1);
 }
 function RadioLabelPreviewPage() {
-  const [size, setSize] = (0, import_react35.useState)("sm");
-  const [state, setState] = (0, import_react35.useState)("auto");
-  const [checked, setChecked] = (0, import_react35.useState)(false);
-  const [showCaption, setShowCaption] = (0, import_react35.useState)(true);
-  return /* @__PURE__ */ import_react35.default.createElement(
+  const [size, setSize] = (0, import_react40.useState)("sm");
+  const [state, setState] = (0, import_react40.useState)("auto");
+  const [checked, setChecked] = (0, import_react40.useState)(false);
+  const [showCaption, setShowCaption] = (0, import_react40.useState)(true);
+  return /* @__PURE__ */ import_react40.default.createElement(
     "main",
     {
       style: {
@@ -45219,7 +45224,7 @@ function RadioLabelPreviewPage() {
         fontFamily: typography.scale.bodyM.medium.fontFamily
       }
     },
-    /* @__PURE__ */ import_react35.default.createElement(
+    /* @__PURE__ */ import_react40.default.createElement(
       "section",
       {
         style: {
@@ -45229,7 +45234,7 @@ function RadioLabelPreviewPage() {
           gap: spacing.scale["24"]
         }
       },
-      /* @__PURE__ */ import_react35.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react35.default.createElement(
+      /* @__PURE__ */ import_react40.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react40.default.createElement(
         "h1",
         {
           style: {
@@ -45242,7 +45247,7 @@ function RadioLabelPreviewPage() {
           }
         },
         "Radio Label Preview"
-      ), /* @__PURE__ */ import_react35.default.createElement(
+      ), /* @__PURE__ */ import_react40.default.createElement(
         "p",
         {
           style: {
@@ -45257,7 +45262,7 @@ function RadioLabelPreviewPage() {
         },
         "Figma variant(Size/Active/State) + Caption \uD1A0\uAE00 \uAC80\uC99D"
       )),
-      /* @__PURE__ */ import_react35.default.createElement(
+      /* @__PURE__ */ import_react40.default.createElement(
         "section",
         {
           style: {
@@ -45272,7 +45277,7 @@ function RadioLabelPreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react35.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react35.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react35.default.createElement(
+        /* @__PURE__ */ import_react40.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react40.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react40.default.createElement(
           "select",
           {
             value: size,
@@ -45288,9 +45293,9 @@ function RadioLabelPreviewPage() {
               color: textBase19.staticDark
             }
           },
-          SIZES15.map((item) => /* @__PURE__ */ import_react35.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
+          SIZES15.map((item) => /* @__PURE__ */ import_react40.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
         )),
-        /* @__PURE__ */ import_react35.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react35.default.createElement("span", null, "State"), /* @__PURE__ */ import_react35.default.createElement(
+        /* @__PURE__ */ import_react40.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react40.default.createElement("span", null, "State"), /* @__PURE__ */ import_react40.default.createElement(
           "select",
           {
             value: state,
@@ -45306,9 +45311,9 @@ function RadioLabelPreviewPage() {
               color: textBase19.staticDark
             }
           },
-          STATES10.map((item) => /* @__PURE__ */ import_react35.default.createElement("option", { key: item, value: item }, toTitle18(item)))
+          STATES10.map((item) => /* @__PURE__ */ import_react40.default.createElement("option", { key: item, value: item }, toTitle18(item)))
         )),
-        /* @__PURE__ */ import_react35.default.createElement(
+        /* @__PURE__ */ import_react40.default.createElement(
           "label",
           {
             style: {
@@ -45325,8 +45330,8 @@ function RadioLabelPreviewPage() {
               backgroundColor: palette24.base.white
             }
           },
-          /* @__PURE__ */ import_react35.default.createElement("span", null, "Active"),
-          /* @__PURE__ */ import_react35.default.createElement(
+          /* @__PURE__ */ import_react40.default.createElement("span", null, "Active"),
+          /* @__PURE__ */ import_react40.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -45335,7 +45340,7 @@ function RadioLabelPreviewPage() {
             }
           )
         ),
-        /* @__PURE__ */ import_react35.default.createElement(
+        /* @__PURE__ */ import_react40.default.createElement(
           "label",
           {
             style: {
@@ -45352,8 +45357,8 @@ function RadioLabelPreviewPage() {
               backgroundColor: palette24.base.white
             }
           },
-          /* @__PURE__ */ import_react35.default.createElement("span", null, "Caption"),
-          /* @__PURE__ */ import_react35.default.createElement(
+          /* @__PURE__ */ import_react40.default.createElement("span", null, "Caption"),
+          /* @__PURE__ */ import_react40.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -45363,7 +45368,7 @@ function RadioLabelPreviewPage() {
           )
         )
       ),
-      /* @__PURE__ */ import_react35.default.createElement(
+      /* @__PURE__ */ import_react40.default.createElement(
         "section",
         {
           style: {
@@ -45377,7 +45382,7 @@ function RadioLabelPreviewPage() {
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react35.default.createElement(
+        /* @__PURE__ */ import_react40.default.createElement(
           "h2",
           {
             style: {
@@ -45391,7 +45396,7 @@ function RadioLabelPreviewPage() {
           },
           "Active Selection"
         ),
-        /* @__PURE__ */ import_react35.default.createElement(
+        /* @__PURE__ */ import_react40.default.createElement(
           RadioLabel,
           {
             size,
@@ -45404,7 +45409,7 @@ function RadioLabelPreviewPage() {
           }
         )
       ),
-      /* @__PURE__ */ import_react35.default.createElement(
+      /* @__PURE__ */ import_react40.default.createElement(
         "section",
         {
           style: {
@@ -45418,7 +45423,7 @@ function RadioLabelPreviewPage() {
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react35.default.createElement(
+        /* @__PURE__ */ import_react40.default.createElement(
           "h2",
           {
             style: {
@@ -45432,7 +45437,7 @@ function RadioLabelPreviewPage() {
           },
           "Variant Matrix"
         ),
-        /* @__PURE__ */ import_react35.default.createElement("div", { style: { display: "grid", gap: spacing.scale["16"] } }, SIZES15.map((sizeItem) => /* @__PURE__ */ import_react35.default.createElement("div", { key: sizeItem, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react35.default.createElement(
+        /* @__PURE__ */ import_react40.default.createElement("div", { style: { display: "grid", gap: spacing.scale["16"] } }, SIZES15.map((sizeItem) => /* @__PURE__ */ import_react40.default.createElement("div", { key: sizeItem, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react40.default.createElement(
           "h3",
           {
             style: {
@@ -45446,7 +45451,7 @@ function RadioLabelPreviewPage() {
           },
           "Size ",
           sizeItem.toUpperCase()
-        ), /* @__PURE__ */ import_react35.default.createElement(
+        ), /* @__PURE__ */ import_react40.default.createElement(
           "div",
           {
             style: {
@@ -45455,7 +45460,7 @@ function RadioLabelPreviewPage() {
               gap: spacing.scale["12"]
             }
           },
-          ["default", "hover", "focus", "disabled"].map((stateItem) => /* @__PURE__ */ import_react35.default.createElement(
+          ["default", "hover", "focus", "disabled"].map((stateItem) => /* @__PURE__ */ import_react40.default.createElement(
             "div",
             {
               key: `${sizeItem}-inactive-${stateItem}`,
@@ -45470,7 +45475,7 @@ function RadioLabelPreviewPage() {
                 backgroundColor: palette24.base.white
               }
             },
-            /* @__PURE__ */ import_react35.default.createElement(
+            /* @__PURE__ */ import_react40.default.createElement(
               "span",
               {
                 style: {
@@ -45485,7 +45490,7 @@ function RadioLabelPreviewPage() {
               "Inactive / ",
               toTitle18(stateItem)
             ),
-            /* @__PURE__ */ import_react35.default.createElement(
+            /* @__PURE__ */ import_react40.default.createElement(
               RadioLabel,
               {
                 size: sizeItem,
@@ -45496,7 +45501,7 @@ function RadioLabelPreviewPage() {
               }
             )
           )),
-          ["default", "hover", "focus", "disabled"].map((stateItem) => /* @__PURE__ */ import_react35.default.createElement(
+          ["default", "hover", "focus", "disabled"].map((stateItem) => /* @__PURE__ */ import_react40.default.createElement(
             "div",
             {
               key: `${sizeItem}-active-${stateItem}`,
@@ -45511,7 +45516,7 @@ function RadioLabelPreviewPage() {
                 backgroundColor: palette24.base.white
               }
             },
-            /* @__PURE__ */ import_react35.default.createElement(
+            /* @__PURE__ */ import_react40.default.createElement(
               "span",
               {
                 style: {
@@ -45526,7 +45531,7 @@ function RadioLabelPreviewPage() {
               "Active / ",
               toTitle18(stateItem)
             ),
-            /* @__PURE__ */ import_react35.default.createElement(
+            /* @__PURE__ */ import_react40.default.createElement(
               RadioLabel,
               {
                 size: sizeItem,
@@ -45544,10 +45549,10 @@ function RadioLabelPreviewPage() {
 }
 
 // components/SearchInput/SearchInput.preview.tsx
-var import_react37 = __toESM(require_react());
+var import_react42 = __toESM(require_react());
 
 // components/SearchInput/SearchInput.tsx
-var import_react36 = __toESM(require_react());
+var import_react41 = __toESM(require_react());
 var palette25 = colors.primitive.palette;
 var textBase20 = colors.semantic.theme.text.base;
 var SEARCH_ICON_SRC = "/components/SearchInput/assets/search-line.png";
@@ -45574,7 +45579,7 @@ function resolveState4(forcedState, disabled, value) {
   return "default";
 }
 function IconImage3({ src, size, disabled }) {
-  return /* @__PURE__ */ import_react36.default.createElement(
+  return /* @__PURE__ */ import_react41.default.createElement(
     "span",
     {
       "aria-hidden": "true",
@@ -45588,7 +45593,7 @@ function IconImage3({ src, size, disabled }) {
         opacity: disabled ? 0.5 : 1
       }
     },
-    /* @__PURE__ */ import_react36.default.createElement("img", { src, alt: "", style: { width: "100%", height: "100%", display: "block" } })
+    /* @__PURE__ */ import_react41.default.createElement("img", { src, alt: "", style: { width: "100%", height: "100%", display: "block" } })
   );
 }
 function SearchInput({
@@ -45609,7 +45614,7 @@ function SearchInput({
   onValueChange,
   ...rest
 }) {
-  const [uncontrolledValue, setUncontrolledValue] = (0, import_react36.useState)(defaultValue);
+  const [uncontrolledValue, setUncontrolledValue] = (0, import_react41.useState)(defaultValue);
   const resolvedValue = value ?? uncontrolledValue;
   const resolvedState = resolveState4(state, disabled, resolvedValue);
   const componentDisabled = resolvedState === "disabled";
@@ -45621,7 +45626,7 @@ function SearchInput({
     }
     onValueChange?.(event.target.value);
   };
-  return /* @__PURE__ */ import_react36.default.createElement(
+  return /* @__PURE__ */ import_react41.default.createElement(
     "div",
     {
       id,
@@ -45638,7 +45643,7 @@ function SearchInput({
       },
       ...rest
     },
-    /* @__PURE__ */ import_react36.default.createElement(
+    /* @__PURE__ */ import_react41.default.createElement(
       "div",
       {
         style: {
@@ -45649,7 +45654,7 @@ function SearchInput({
           minWidth: spacing.scale["0"]
         }
       },
-      /* @__PURE__ */ import_react36.default.createElement(
+      /* @__PURE__ */ import_react41.default.createElement(
         "div",
         {
           style: {
@@ -45660,8 +45665,8 @@ function SearchInput({
             minWidth: spacing.scale["0"]
           }
         },
-        showLeadIcon ? /* @__PURE__ */ import_react36.default.createElement(import_react36.default.Fragment, null, leadIcon ?? /* @__PURE__ */ import_react36.default.createElement(IconImage3, { src: SEARCH_ICON_SRC, size: spacing.scale["16"], disabled: componentDisabled })) : null,
-        /* @__PURE__ */ import_react36.default.createElement(
+        showLeadIcon ? /* @__PURE__ */ import_react41.default.createElement(import_react41.default.Fragment, null, leadIcon ?? /* @__PURE__ */ import_react41.default.createElement(IconImage3, { src: SEARCH_ICON_SRC, size: spacing.scale["16"], disabled: componentDisabled })) : null,
+        /* @__PURE__ */ import_react41.default.createElement(
           "div",
           {
             style: {
@@ -45673,7 +45678,7 @@ function SearchInput({
               paddingBlock: spacing.scale["0"]
             }
           },
-          /* @__PURE__ */ import_react36.default.createElement(
+          /* @__PURE__ */ import_react41.default.createElement(
             "input",
             {
               "aria-label": inputAriaLabel,
@@ -45695,7 +45700,7 @@ function SearchInput({
           )
         )
       ),
-      /* @__PURE__ */ import_react36.default.createElement(
+      /* @__PURE__ */ import_react41.default.createElement(
         "div",
         {
           style: {
@@ -45704,7 +45709,7 @@ function SearchInput({
             paddingInline: spacing.scale["4"]
           }
         },
-        /* @__PURE__ */ import_react36.default.createElement(
+        /* @__PURE__ */ import_react41.default.createElement(
           "div",
           {
             style: {
@@ -45717,7 +45722,7 @@ function SearchInput({
               paddingBlock: spacing.scale["2"]
             }
           },
-          /* @__PURE__ */ import_react36.default.createElement(
+          /* @__PURE__ */ import_react41.default.createElement(
             "div",
             {
               style: {
@@ -45728,7 +45733,7 @@ function SearchInput({
                 paddingBlock: spacing.scale["0"]
               }
             },
-            /* @__PURE__ */ import_react36.default.createElement(
+            /* @__PURE__ */ import_react41.default.createElement(
               "span",
               {
                 style: {
@@ -45742,7 +45747,7 @@ function SearchInput({
           )
         )
       ),
-      showTailIcon ? /* @__PURE__ */ import_react36.default.createElement(import_react36.default.Fragment, null, tailIcon ?? /* @__PURE__ */ import_react36.default.createElement(IconImage3, { src: INFO_ICON_SRC2, size: spacing.scale["20"], disabled: componentDisabled })) : null
+      showTailIcon ? /* @__PURE__ */ import_react41.default.createElement(import_react41.default.Fragment, null, tailIcon ?? /* @__PURE__ */ import_react41.default.createElement(IconImage3, { src: INFO_ICON_SRC2, size: spacing.scale["20"], disabled: componentDisabled })) : null
     )
   );
 }
@@ -45755,11 +45760,11 @@ function toTitle19(value) {
   return value.charAt(0).toUpperCase() + value.slice(1);
 }
 function SearchInputPreviewPage() {
-  const [state, setState] = (0, import_react37.useState)("auto");
-  const [value, setValue] = (0, import_react37.useState)("");
-  const [showLeadIcon, setShowLeadIcon] = (0, import_react37.useState)(true);
-  const [showTailIcon, setShowTailIcon] = (0, import_react37.useState)(true);
-  return /* @__PURE__ */ import_react37.default.createElement(
+  const [state, setState] = (0, import_react42.useState)("auto");
+  const [value, setValue] = (0, import_react42.useState)("");
+  const [showLeadIcon, setShowLeadIcon] = (0, import_react42.useState)(true);
+  const [showTailIcon, setShowTailIcon] = (0, import_react42.useState)(true);
+  return /* @__PURE__ */ import_react42.default.createElement(
     "main",
     {
       style: {
@@ -45770,7 +45775,7 @@ function SearchInputPreviewPage() {
         fontFamily: typography.scale.bodyM.medium.fontFamily
       }
     },
-    /* @__PURE__ */ import_react37.default.createElement(
+    /* @__PURE__ */ import_react42.default.createElement(
       "section",
       {
         style: {
@@ -45780,7 +45785,7 @@ function SearchInputPreviewPage() {
           gap: spacing.scale["24"]
         }
       },
-      /* @__PURE__ */ import_react37.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react37.default.createElement(
+      /* @__PURE__ */ import_react42.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react42.default.createElement(
         "h1",
         {
           style: {
@@ -45793,7 +45798,7 @@ function SearchInputPreviewPage() {
           }
         },
         "Search Input Preview"
-      ), /* @__PURE__ */ import_react37.default.createElement(
+      ), /* @__PURE__ */ import_react42.default.createElement(
         "p",
         {
           style: {
@@ -45808,7 +45813,7 @@ function SearchInputPreviewPage() {
         },
         "Figma \uCD95(State=Default/Filled/Disabled)\uC640 \uC785\uB825 \uAC12 \uC0C1\uD0DC\uB97C \uAC80\uC99D"
       )),
-      /* @__PURE__ */ import_react37.default.createElement(
+      /* @__PURE__ */ import_react42.default.createElement(
         "section",
         {
           style: {
@@ -45823,7 +45828,7 @@ function SearchInputPreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react37.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react37.default.createElement("span", null, "State"), /* @__PURE__ */ import_react37.default.createElement(
+        /* @__PURE__ */ import_react42.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react42.default.createElement("span", null, "State"), /* @__PURE__ */ import_react42.default.createElement(
           "select",
           {
             value: state,
@@ -45839,9 +45844,9 @@ function SearchInputPreviewPage() {
               color: textBase21.staticDark
             }
           },
-          STATES11.map((item) => /* @__PURE__ */ import_react37.default.createElement("option", { key: item, value: item }, toTitle19(item)))
+          STATES11.map((item) => /* @__PURE__ */ import_react42.default.createElement("option", { key: item, value: item }, toTitle19(item)))
         )),
-        /* @__PURE__ */ import_react37.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react37.default.createElement("span", null, "Value"), /* @__PURE__ */ import_react37.default.createElement(
+        /* @__PURE__ */ import_react42.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react42.default.createElement("span", null, "Value"), /* @__PURE__ */ import_react42.default.createElement(
           "input",
           {
             value,
@@ -45859,7 +45864,7 @@ function SearchInputPreviewPage() {
             }
           }
         )),
-        /* @__PURE__ */ import_react37.default.createElement(
+        /* @__PURE__ */ import_react42.default.createElement(
           "label",
           {
             style: {
@@ -45876,10 +45881,10 @@ function SearchInputPreviewPage() {
               backgroundColor: palette26.base.white
             }
           },
-          /* @__PURE__ */ import_react37.default.createElement("span", null, "Lead Icon"),
-          /* @__PURE__ */ import_react37.default.createElement("input", { type: "checkbox", checked: showLeadIcon, onChange: (event) => setShowLeadIcon(event.target.checked) })
+          /* @__PURE__ */ import_react42.default.createElement("span", null, "Lead Icon"),
+          /* @__PURE__ */ import_react42.default.createElement("input", { type: "checkbox", checked: showLeadIcon, onChange: (event) => setShowLeadIcon(event.target.checked) })
         ),
-        /* @__PURE__ */ import_react37.default.createElement(
+        /* @__PURE__ */ import_react42.default.createElement(
           "label",
           {
             style: {
@@ -45896,11 +45901,11 @@ function SearchInputPreviewPage() {
               backgroundColor: palette26.base.white
             }
           },
-          /* @__PURE__ */ import_react37.default.createElement("span", null, "Tail Icon"),
-          /* @__PURE__ */ import_react37.default.createElement("input", { type: "checkbox", checked: showTailIcon, onChange: (event) => setShowTailIcon(event.target.checked) })
+          /* @__PURE__ */ import_react42.default.createElement("span", null, "Tail Icon"),
+          /* @__PURE__ */ import_react42.default.createElement("input", { type: "checkbox", checked: showTailIcon, onChange: (event) => setShowTailIcon(event.target.checked) })
         )
       ),
-      /* @__PURE__ */ import_react37.default.createElement(
+      /* @__PURE__ */ import_react42.default.createElement(
         "section",
         {
           style: {
@@ -45914,7 +45919,7 @@ function SearchInputPreviewPage() {
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react37.default.createElement(
+        /* @__PURE__ */ import_react42.default.createElement(
           "h2",
           {
             style: {
@@ -45928,7 +45933,7 @@ function SearchInputPreviewPage() {
           },
           "Interactive"
         ),
-        /* @__PURE__ */ import_react37.default.createElement(
+        /* @__PURE__ */ import_react42.default.createElement(
           SearchInput,
           {
             state: state === "auto" ? void 0 : state,
@@ -45938,7 +45943,7 @@ function SearchInputPreviewPage() {
             showTailIcon
           }
         ),
-        /* @__PURE__ */ import_react37.default.createElement("div", { style: { display: "grid", gap: spacing.scale["8"] } }, ["default", "filled", "disabled"].map((item) => /* @__PURE__ */ import_react37.default.createElement(
+        /* @__PURE__ */ import_react42.default.createElement("div", { style: { display: "grid", gap: spacing.scale["8"] } }, ["default", "filled", "disabled"].map((item) => /* @__PURE__ */ import_react42.default.createElement(
           SearchInput,
           {
             key: item,
@@ -45954,10 +45959,10 @@ function SearchInputPreviewPage() {
 }
 
 // components/SelectInput/SelectInput.preview.tsx
-var import_react39 = __toESM(require_react());
+var import_react44 = __toESM(require_react());
 
 // components/SelectInput/SelectInput.tsx
-var import_react38 = __toESM(require_react());
+var import_react43 = __toESM(require_react());
 var palette27 = colors.primitive.palette;
 var textBase22 = colors.semantic.theme.text.base;
 var textStatus3 = colors.semantic.theme.text.status;
@@ -46081,7 +46086,7 @@ function getChipTextColor(optionId) {
   }
 }
 function UserIcon({ color }) {
-  return /* @__PURE__ */ import_react38.default.createElement(
+  return /* @__PURE__ */ import_react43.default.createElement(
     "span",
     {
       "aria-hidden": "true",
@@ -46095,7 +46100,7 @@ function UserIcon({ color }) {
         flexShrink: 0
       }
     },
-    /* @__PURE__ */ import_react38.default.createElement("svg", { width: "20", height: "20", viewBox: "0 0 20 20", fill: "none" }, /* @__PURE__ */ import_react38.default.createElement("circle", { cx: "10", cy: "6.5", r: "2.75", stroke: "currentColor", strokeWidth: border.width["1"] }), /* @__PURE__ */ import_react38.default.createElement(
+    /* @__PURE__ */ import_react43.default.createElement("svg", { width: "20", height: "20", viewBox: "0 0 20 20", fill: "none" }, /* @__PURE__ */ import_react43.default.createElement("circle", { cx: "10", cy: "6.5", r: "2.75", stroke: "currentColor", strokeWidth: border.width["1"] }), /* @__PURE__ */ import_react43.default.createElement(
       "path",
       {
         d: "M3.75 15.875C4.347 13.055 6.86 11 10 11C13.14 11 15.653 13.055 16.25 15.875",
@@ -46108,7 +46113,7 @@ function UserIcon({ color }) {
 }
 function InfoIcon({ color, size = "md" }) {
   const iconSize = size === "sm" ? spacing.scale["16"] : spacing.scale["20"];
-  return /* @__PURE__ */ import_react38.default.createElement(
+  return /* @__PURE__ */ import_react43.default.createElement(
     "span",
     {
       "aria-hidden": "true",
@@ -46122,11 +46127,11 @@ function InfoIcon({ color, size = "md" }) {
         flexShrink: 0
       }
     },
-    /* @__PURE__ */ import_react38.default.createElement("svg", { width: iconSize, height: iconSize, viewBox: "0 0 20 20", fill: "none" }, /* @__PURE__ */ import_react38.default.createElement("circle", { cx: "10", cy: "10", r: "6.75", stroke: "currentColor", strokeWidth: border.width["1"] }), /* @__PURE__ */ import_react38.default.createElement("path", { d: "M10 9.25V13", stroke: "currentColor", strokeWidth: border.width["1"], strokeLinecap: "round" }), /* @__PURE__ */ import_react38.default.createElement("circle", { cx: "10", cy: "6.75", r: "0.875", fill: "currentColor" }))
+    /* @__PURE__ */ import_react43.default.createElement("svg", { width: iconSize, height: iconSize, viewBox: "0 0 20 20", fill: "none" }, /* @__PURE__ */ import_react43.default.createElement("circle", { cx: "10", cy: "10", r: "6.75", stroke: "currentColor", strokeWidth: border.width["1"] }), /* @__PURE__ */ import_react43.default.createElement("path", { d: "M10 9.25V13", stroke: "currentColor", strokeWidth: border.width["1"], strokeLinecap: "round" }), /* @__PURE__ */ import_react43.default.createElement("circle", { cx: "10", cy: "6.75", r: "0.875", fill: "currentColor" }))
   );
 }
 function CheckIcon({ color }) {
-  return /* @__PURE__ */ import_react38.default.createElement(
+  return /* @__PURE__ */ import_react43.default.createElement(
     "span",
     {
       "aria-hidden": "true",
@@ -46140,7 +46145,7 @@ function CheckIcon({ color }) {
         flexShrink: 0
       }
     },
-    /* @__PURE__ */ import_react38.default.createElement("svg", { width: "20", height: "20", viewBox: "0 0 20 20", fill: "none" }, /* @__PURE__ */ import_react38.default.createElement(
+    /* @__PURE__ */ import_react43.default.createElement("svg", { width: "20", height: "20", viewBox: "0 0 20 20", fill: "none" }, /* @__PURE__ */ import_react43.default.createElement(
       "path",
       {
         d: "M5.5 10.5L8.5 13.5L14.5 7.5",
@@ -46158,7 +46163,7 @@ function Avatar({
   src,
   dimmed = false
 }) {
-  return /* @__PURE__ */ import_react38.default.createElement(
+  return /* @__PURE__ */ import_react43.default.createElement(
     "span",
     {
       "aria-hidden": "true",
@@ -46176,7 +46181,7 @@ function Avatar({
         overflow: "hidden"
       }
     },
-    src ? /* @__PURE__ */ import_react38.default.createElement(
+    src ? /* @__PURE__ */ import_react43.default.createElement(
       "img",
       {
         alt: "",
@@ -46188,11 +46193,11 @@ function Avatar({
           objectFit: "cover"
         }
       }
-    ) : /* @__PURE__ */ import_react38.default.createElement("span", { style: toTypographyStyle11(typography.scale.captionS.medium) }, label.slice(0, 2))
+    ) : /* @__PURE__ */ import_react43.default.createElement("span", { style: toTypographyStyle11(typography.scale.captionS.medium) }, label.slice(0, 2))
   );
 }
 function ShortcutBadge({ label, disabled }) {
-  return /* @__PURE__ */ import_react38.default.createElement(
+  return /* @__PURE__ */ import_react43.default.createElement(
     "div",
     {
       style: {
@@ -46202,7 +46207,7 @@ function ShortcutBadge({ label, disabled }) {
         paddingBlock: spacing.scale["0"]
       }
     },
-    /* @__PURE__ */ import_react38.default.createElement(
+    /* @__PURE__ */ import_react43.default.createElement(
       "div",
       {
         style: {
@@ -46215,7 +46220,7 @@ function ShortcutBadge({ label, disabled }) {
           paddingBlock: spacing.scale["0"]
         }
       },
-      /* @__PURE__ */ import_react38.default.createElement(
+      /* @__PURE__ */ import_react43.default.createElement(
         "div",
         {
           style: {
@@ -46226,7 +46231,7 @@ function ShortcutBadge({ label, disabled }) {
             paddingBlock: spacing.scale["0"]
           }
         },
-        /* @__PURE__ */ import_react38.default.createElement(
+        /* @__PURE__ */ import_react43.default.createElement(
           "span",
           {
             style: {
@@ -46277,15 +46282,15 @@ function SelectInput({
   onMouseLeave,
   ...rest
 }) {
-  const [hovered, setHovered] = (0, import_react38.useState)(false);
-  const [focused, setFocused] = (0, import_react38.useState)(false);
-  const [uncontrolledOpen, setUncontrolledOpen] = (0, import_react38.useState)(defaultOpen);
-  const [uncontrolledSelectedId, setUncontrolledSelectedId] = (0, import_react38.useState)(defaultSelectedId);
-  const [uncontrolledSelectedIds, setUncontrolledSelectedIds] = (0, import_react38.useState)(defaultSelectedIds);
-  const [hoveredOptionId, setHoveredOptionId] = (0, import_react38.useState)(null);
-  const menuId = (0, import_react38.useId)();
-  const rootRef = (0, import_react38.useRef)(null);
-  const normalizedItems = (0, import_react38.useMemo)(() => {
+  const [hovered, setHovered] = (0, import_react43.useState)(false);
+  const [focused, setFocused] = (0, import_react43.useState)(false);
+  const [uncontrolledOpen, setUncontrolledOpen] = (0, import_react43.useState)(defaultOpen);
+  const [uncontrolledSelectedId, setUncontrolledSelectedId] = (0, import_react43.useState)(defaultSelectedId);
+  const [uncontrolledSelectedIds, setUncontrolledSelectedIds] = (0, import_react43.useState)(defaultSelectedIds);
+  const [hoveredOptionId, setHoveredOptionId] = (0, import_react43.useState)(null);
+  const menuId = (0, import_react43.useId)();
+  const rootRef = (0, import_react43.useRef)(null);
+  const normalizedItems = (0, import_react43.useMemo)(() => {
     if (!items || items.length === 0) {
       return DEFAULT_ITEMS2;
     }
@@ -46365,7 +46370,7 @@ function SelectInput({
   const renderTextContent = () => {
     if (type === "multi-select") {
       if (!hasValue) {
-        return /* @__PURE__ */ import_react38.default.createElement(
+        return /* @__PURE__ */ import_react43.default.createElement(
           "div",
           {
             style: {
@@ -46377,7 +46382,7 @@ function SelectInput({
               paddingBlock: spacing.scale["0"]
             }
           },
-          /* @__PURE__ */ import_react38.default.createElement(
+          /* @__PURE__ */ import_react43.default.createElement(
             "span",
             {
               style: {
@@ -46390,7 +46395,7 @@ function SelectInput({
           )
         );
       }
-      return /* @__PURE__ */ import_react38.default.createElement(
+      return /* @__PURE__ */ import_react43.default.createElement(
         "div",
         {
           style: {
@@ -46403,7 +46408,7 @@ function SelectInput({
             paddingBlock: spacing.scale["0"]
           }
         },
-        displayedChips.map((item) => /* @__PURE__ */ import_react38.default.createElement(
+        displayedChips.map((item) => /* @__PURE__ */ import_react43.default.createElement(
           "div",
           {
             key: item.id,
@@ -46422,7 +46427,7 @@ function SelectInput({
               flexShrink: 0
             }
           },
-          /* @__PURE__ */ import_react38.default.createElement(
+          /* @__PURE__ */ import_react43.default.createElement(
             "span",
             {
               style: {
@@ -46434,7 +46439,7 @@ function SelectInput({
             item.label.split(" ")[0]
           )
         )),
-        remainingChipCount > 0 ? /* @__PURE__ */ import_react38.default.createElement(
+        remainingChipCount > 0 ? /* @__PURE__ */ import_react43.default.createElement(
           "span",
           {
             style: {
@@ -46450,7 +46455,7 @@ function SelectInput({
       );
     }
     if (!selectedItem) {
-      return /* @__PURE__ */ import_react38.default.createElement(
+      return /* @__PURE__ */ import_react43.default.createElement(
         "div",
         {
           style: {
@@ -46462,7 +46467,7 @@ function SelectInput({
             paddingBlock: spacing.scale["0"]
           }
         },
-        /* @__PURE__ */ import_react38.default.createElement(
+        /* @__PURE__ */ import_react43.default.createElement(
           "span",
           {
             style: {
@@ -46475,7 +46480,7 @@ function SelectInput({
         )
       );
     }
-    return /* @__PURE__ */ import_react38.default.createElement(
+    return /* @__PURE__ */ import_react43.default.createElement(
       "div",
       {
         style: {
@@ -46488,7 +46493,7 @@ function SelectInput({
           paddingBlock: spacing.scale["0"]
         }
       },
-      /* @__PURE__ */ import_react38.default.createElement(
+      /* @__PURE__ */ import_react43.default.createElement(
         "span",
         {
           style: {
@@ -46499,7 +46504,7 @@ function SelectInput({
         },
         selectedItem.label
       ),
-      selectedItem.supportText ? /* @__PURE__ */ import_react38.default.createElement(
+      selectedItem.supportText ? /* @__PURE__ */ import_react43.default.createElement(
         "span",
         {
           style: {
@@ -46513,7 +46518,7 @@ function SelectInput({
     );
   };
   const triggerIconColor = componentDisabled ? textBase22.staticDarkQuaternary : hasValue ? fieldContentColor : placeholderColor;
-  return /* @__PURE__ */ import_react38.default.createElement(
+  return /* @__PURE__ */ import_react43.default.createElement(
     "div",
     {
       id,
@@ -46542,7 +46547,7 @@ function SelectInput({
       },
       ...rest
     },
-    showLabel ? /* @__PURE__ */ import_react38.default.createElement(
+    showLabel ? /* @__PURE__ */ import_react43.default.createElement(
       "div",
       {
         style: {
@@ -46553,7 +46558,7 @@ function SelectInput({
           padding: spacing.scale["0"]
         }
       },
-      /* @__PURE__ */ import_react38.default.createElement(
+      /* @__PURE__ */ import_react43.default.createElement(
         "div",
         {
           style: {
@@ -46565,11 +46570,11 @@ function SelectInput({
             whiteSpace: "nowrap"
           }
         },
-        /* @__PURE__ */ import_react38.default.createElement("span", { style: { color: textBase22.staticDark, ...mediumTypography } }, label),
-        /* @__PURE__ */ import_react38.default.createElement("span", { style: { color: textBase22.staticDarkTertiary, ...mediumTypography } }, optionalLabel)
+        /* @__PURE__ */ import_react43.default.createElement("span", { style: { color: textBase22.staticDark, ...mediumTypography } }, label),
+        /* @__PURE__ */ import_react43.default.createElement("span", { style: { color: textBase22.staticDarkTertiary, ...mediumTypography } }, optionalLabel)
       )
     ) : null,
-    /* @__PURE__ */ import_react38.default.createElement(
+    /* @__PURE__ */ import_react43.default.createElement(
       "div",
       {
         style: {
@@ -46580,7 +46585,7 @@ function SelectInput({
           boxShadow: controlShadow
         }
       },
-      isOpen ? /* @__PURE__ */ import_react38.default.createElement(
+      isOpen ? /* @__PURE__ */ import_react43.default.createElement(
         "div",
         {
           id: menuId,
@@ -46609,7 +46614,7 @@ function SelectInput({
         normalizedItems.map((item) => {
           const selected = type === "multi-select" ? selectedIds.includes(item.id) : item.id === selectedId;
           const activeBackground = selected || hoveredOptionId === item.id ? palette27.gray["1a"] : palette27.base.transparent;
-          return /* @__PURE__ */ import_react38.default.createElement(
+          return /* @__PURE__ */ import_react43.default.createElement(
             "div",
             {
               key: item.id,
@@ -46622,7 +46627,7 @@ function SelectInput({
                 paddingBlock: spacing.scale["2"]
               }
             },
-            /* @__PURE__ */ import_react38.default.createElement(
+            /* @__PURE__ */ import_react43.default.createElement(
               "button",
               {
                 type: "button",
@@ -46648,9 +46653,9 @@ function SelectInput({
                 },
                 disabled: componentDisabled
               },
-              type === "multi-select" ? /* @__PURE__ */ import_react38.default.createElement("span", { style: { display: "inline-flex", padding: spacing.scale["2"], flexShrink: 0 } }, /* @__PURE__ */ import_react38.default.createElement(Checkbox, { size: "sm", checked: selected, ariaLabel: `${item.label} checkbox` })) : null,
-              /* @__PURE__ */ import_react38.default.createElement(Avatar, { optionId: item.id, label: item.avatarLabel ?? item.label, src: item.avatarSrc }),
-              /* @__PURE__ */ import_react38.default.createElement(
+              type === "multi-select" ? /* @__PURE__ */ import_react43.default.createElement("span", { style: { display: "inline-flex", padding: spacing.scale["2"], flexShrink: 0 } }, /* @__PURE__ */ import_react43.default.createElement(Checkbox, { size: "sm", checked: selected, ariaLabel: `${item.label} checkbox` })) : null,
+              /* @__PURE__ */ import_react43.default.createElement(Avatar, { optionId: item.id, label: item.avatarLabel ?? item.label, src: item.avatarSrc }),
+              /* @__PURE__ */ import_react43.default.createElement(
                 "span",
                 {
                   style: {
@@ -46663,9 +46668,9 @@ function SelectInput({
                     paddingBlock: spacing.scale["0"]
                   }
                 },
-                /* @__PURE__ */ import_react38.default.createElement("span", { style: { ...fieldTypography, color: textBase22.staticDark, whiteSpace: "nowrap" } }, item.label),
-                item.supportText ? /* @__PURE__ */ import_react38.default.createElement("span", { style: { ...captionMTypography, color: textBase22.staticDarkTertiary, whiteSpace: "nowrap" } }, item.supportText) : null,
-                type === "multi-select" && item.badgeLabel ? /* @__PURE__ */ import_react38.default.createElement(
+                /* @__PURE__ */ import_react43.default.createElement("span", { style: { ...fieldTypography, color: textBase22.staticDark, whiteSpace: "nowrap" } }, item.label),
+                item.supportText ? /* @__PURE__ */ import_react43.default.createElement("span", { style: { ...captionMTypography, color: textBase22.staticDarkTertiary, whiteSpace: "nowrap" } }, item.supportText) : null,
+                type === "multi-select" && item.badgeLabel ? /* @__PURE__ */ import_react43.default.createElement(
                   "span",
                   {
                     style: {
@@ -46681,14 +46686,14 @@ function SelectInput({
                       paddingBlock: spacing.scale["0"]
                     }
                   },
-                  /* @__PURE__ */ import_react38.default.createElement("span", { style: { ...captionMMediumTypography, color: palette27.red["11"], whiteSpace: "nowrap" } }, item.badgeLabel)
+                  /* @__PURE__ */ import_react43.default.createElement("span", { style: { ...captionMMediumTypography, color: palette27.red["11"], whiteSpace: "nowrap" } }, item.badgeLabel)
                 ) : null
               ),
-              type !== "multi-select" && selected ? /* @__PURE__ */ import_react38.default.createElement(CheckIcon, { color: textBase22.staticDarkSecondary }) : null
+              type !== "multi-select" && selected ? /* @__PURE__ */ import_react43.default.createElement(CheckIcon, { color: textBase22.staticDarkSecondary }) : null
             )
           );
         }),
-        normalizedItems.length > 5 ? /* @__PURE__ */ import_react38.default.createElement(
+        normalizedItems.length > 5 ? /* @__PURE__ */ import_react43.default.createElement(
           "div",
           {
             "aria-hidden": "true",
@@ -46702,7 +46707,7 @@ function SelectInput({
               pointerEvents: "none"
             }
           },
-          /* @__PURE__ */ import_react38.default.createElement(
+          /* @__PURE__ */ import_react43.default.createElement(
             "div",
             {
               style: {
@@ -46717,7 +46722,7 @@ function SelectInput({
           )
         ) : null
       ) : null,
-      /* @__PURE__ */ import_react38.default.createElement(
+      /* @__PURE__ */ import_react43.default.createElement(
         "button",
         {
           type: "button",
@@ -46751,7 +46756,7 @@ function SelectInput({
             cursor: componentDisabled ? "not-allowed" : "pointer"
           }
         },
-        /* @__PURE__ */ import_react38.default.createElement(
+        /* @__PURE__ */ import_react43.default.createElement(
           "div",
           {
             style: {
@@ -46762,7 +46767,7 @@ function SelectInput({
               minWidth: spacing.scale["0"]
             }
           },
-          type === "avatar" ? /* @__PURE__ */ import_react38.default.createElement(
+          type === "avatar" ? /* @__PURE__ */ import_react43.default.createElement(
             Avatar,
             {
               optionId: selectedItem?.id ?? "option-1",
@@ -46770,14 +46775,14 @@ function SelectInput({
               src: selectedItem?.avatarSrc,
               dimmed: componentDisabled
             }
-          ) : showLeadIcon ? leadIcon ? /* @__PURE__ */ import_react38.default.createElement(import_react38.default.Fragment, null, leadIcon) : /* @__PURE__ */ import_react38.default.createElement(UserIcon, { color: triggerIconColor }) : null,
+          ) : showLeadIcon ? leadIcon ? /* @__PURE__ */ import_react43.default.createElement(import_react43.default.Fragment, null, leadIcon) : /* @__PURE__ */ import_react43.default.createElement(UserIcon, { color: triggerIconColor }) : null,
           renderTextContent(),
-          showShortcutBadge ? /* @__PURE__ */ import_react38.default.createElement(ShortcutBadge, { label: shortcutLabel, disabled: componentDisabled }) : null,
-          showTailIcon ? tailIcon ? /* @__PURE__ */ import_react38.default.createElement(import_react38.default.Fragment, null, tailIcon) : /* @__PURE__ */ import_react38.default.createElement(InfoIcon, { color: triggerIconColor }) : null
+          showShortcutBadge ? /* @__PURE__ */ import_react43.default.createElement(ShortcutBadge, { label: shortcutLabel, disabled: componentDisabled }) : null,
+          showTailIcon ? tailIcon ? /* @__PURE__ */ import_react43.default.createElement(import_react43.default.Fragment, null, tailIcon) : /* @__PURE__ */ import_react43.default.createElement(InfoIcon, { color: triggerIconColor }) : null
         )
       )
     ),
-    showHelper ? /* @__PURE__ */ import_react38.default.createElement(
+    showHelper ? /* @__PURE__ */ import_react43.default.createElement(
       "div",
       {
         style: {
@@ -46789,8 +46794,8 @@ function SelectInput({
           paddingBlock: spacing.scale["2"]
         }
       },
-      /* @__PURE__ */ import_react38.default.createElement(InfoIcon, { color: helperColor, size: "sm" }),
-      /* @__PURE__ */ import_react38.default.createElement("span", { style: { color: helperColor, ...fieldTypography, whiteSpace: "nowrap" } }, helperText)
+      /* @__PURE__ */ import_react43.default.createElement(InfoIcon, { color: helperColor, size: "sm" }),
+      /* @__PURE__ */ import_react43.default.createElement("span", { style: { color: helperColor, ...fieldTypography, whiteSpace: "nowrap" } }, helperText)
     ) : null
   );
 }
@@ -46812,18 +46817,18 @@ function toTitle20(value) {
   return value.split("-").map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join(" ");
 }
 function SelectInputPreviewPage() {
-  const [type, setType] = (0, import_react39.useState)("default");
-  const [size, setSize] = (0, import_react39.useState)("md");
-  const [target, setTarget] = (0, import_react39.useState)("default");
-  const [state, setState] = (0, import_react39.useState)("auto");
-  const [showLabel, setShowLabel] = (0, import_react39.useState)(true);
-  const [showHelper, setShowHelper] = (0, import_react39.useState)(true);
-  const [showShortcutBadge, setShowShortcutBadge] = (0, import_react39.useState)(true);
-  const [showLeadIcon, setShowLeadIcon] = (0, import_react39.useState)(true);
-  const [showTailIcon, setShowTailIcon] = (0, import_react39.useState)(true);
-  const [selectedId, setSelectedId] = (0, import_react39.useState)();
-  const [selectedIds, setSelectedIds] = (0, import_react39.useState)([]);
-  const effectiveSingleSelectedId = (0, import_react39.useMemo)(() => {
+  const [type, setType] = (0, import_react44.useState)("default");
+  const [size, setSize] = (0, import_react44.useState)("md");
+  const [target, setTarget] = (0, import_react44.useState)("default");
+  const [state, setState] = (0, import_react44.useState)("auto");
+  const [showLabel, setShowLabel] = (0, import_react44.useState)(true);
+  const [showHelper, setShowHelper] = (0, import_react44.useState)(true);
+  const [showShortcutBadge, setShowShortcutBadge] = (0, import_react44.useState)(true);
+  const [showLeadIcon, setShowLeadIcon] = (0, import_react44.useState)(true);
+  const [showTailIcon, setShowTailIcon] = (0, import_react44.useState)(true);
+  const [selectedId, setSelectedId] = (0, import_react44.useState)();
+  const [selectedIds, setSelectedIds] = (0, import_react44.useState)([]);
+  const effectiveSingleSelectedId = (0, import_react44.useMemo)(() => {
     if (type === "multi-select") {
       return void 0;
     }
@@ -46835,7 +46840,7 @@ function SelectInputPreviewPage() {
     }
     return void 0;
   }, [selectedId, state, type]);
-  const effectiveMultiSelectedIds = (0, import_react39.useMemo)(() => {
+  const effectiveMultiSelectedIds = (0, import_react44.useMemo)(() => {
     if (type !== "multi-select") {
       return [];
     }
@@ -46847,7 +46852,7 @@ function SelectInputPreviewPage() {
     }
     return [];
   }, [selectedIds, state, type]);
-  return /* @__PURE__ */ import_react39.default.createElement(
+  return /* @__PURE__ */ import_react44.default.createElement(
     "main",
     {
       style: {
@@ -46858,7 +46863,7 @@ function SelectInputPreviewPage() {
         fontFamily: typography.scale.bodyM.medium.fontFamily
       }
     },
-    /* @__PURE__ */ import_react39.default.createElement(
+    /* @__PURE__ */ import_react44.default.createElement(
       "section",
       {
         style: {
@@ -46868,7 +46873,7 @@ function SelectInputPreviewPage() {
           gap: spacing.scale["24"]
         }
       },
-      /* @__PURE__ */ import_react39.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react39.default.createElement(
+      /* @__PURE__ */ import_react44.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react44.default.createElement(
         "h1",
         {
           style: {
@@ -46881,7 +46886,7 @@ function SelectInputPreviewPage() {
           }
         },
         "Select Input Preview"
-      ), /* @__PURE__ */ import_react39.default.createElement(
+      ), /* @__PURE__ */ import_react44.default.createElement(
         "p",
         {
           style: {
@@ -46896,7 +46901,7 @@ function SelectInputPreviewPage() {
         },
         "Figma Variant \uCD95(Size, Target, Type, State)\uACFC interaction \uC0C1\uD0DC\uB97C \uAC80\uC99D\uD569\uB2C8\uB2E4."
       )),
-      /* @__PURE__ */ import_react39.default.createElement(
+      /* @__PURE__ */ import_react44.default.createElement(
         "section",
         {
           style: {
@@ -46911,7 +46916,7 @@ function SelectInputPreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react39.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react39.default.createElement("span", null, "Type"), /* @__PURE__ */ import_react39.default.createElement(
+        /* @__PURE__ */ import_react44.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react44.default.createElement("span", null, "Type"), /* @__PURE__ */ import_react44.default.createElement(
           "select",
           {
             value: type,
@@ -46927,9 +46932,9 @@ function SelectInputPreviewPage() {
               color: textBase23.staticDark
             }
           },
-          TYPES10.map((item) => /* @__PURE__ */ import_react39.default.createElement("option", { key: item, value: item }, toTitle20(item)))
+          TYPES10.map((item) => /* @__PURE__ */ import_react44.default.createElement("option", { key: item, value: item }, toTitle20(item)))
         )),
-        /* @__PURE__ */ import_react39.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react39.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react39.default.createElement(
+        /* @__PURE__ */ import_react44.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react44.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react44.default.createElement(
           "select",
           {
             value: size,
@@ -46945,9 +46950,9 @@ function SelectInputPreviewPage() {
               color: textBase23.staticDark
             }
           },
-          SIZES16.map((item) => /* @__PURE__ */ import_react39.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
+          SIZES16.map((item) => /* @__PURE__ */ import_react44.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
         )),
-        /* @__PURE__ */ import_react39.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react39.default.createElement("span", null, "Target"), /* @__PURE__ */ import_react39.default.createElement(
+        /* @__PURE__ */ import_react44.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react44.default.createElement("span", null, "Target"), /* @__PURE__ */ import_react44.default.createElement(
           "select",
           {
             value: target,
@@ -46963,9 +46968,9 @@ function SelectInputPreviewPage() {
               color: textBase23.staticDark
             }
           },
-          TARGETS3.map((item) => /* @__PURE__ */ import_react39.default.createElement("option", { key: item, value: item }, toTitle20(item)))
+          TARGETS3.map((item) => /* @__PURE__ */ import_react44.default.createElement("option", { key: item, value: item }, toTitle20(item)))
         )),
-        /* @__PURE__ */ import_react39.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react39.default.createElement("span", null, "State"), /* @__PURE__ */ import_react39.default.createElement(
+        /* @__PURE__ */ import_react44.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react44.default.createElement("span", null, "State"), /* @__PURE__ */ import_react44.default.createElement(
           "select",
           {
             value: state,
@@ -46981,7 +46986,7 @@ function SelectInputPreviewPage() {
               color: textBase23.staticDark
             }
           },
-          STATES12.map((item) => /* @__PURE__ */ import_react39.default.createElement("option", { key: item, value: item }, toTitle20(item)))
+          STATES12.map((item) => /* @__PURE__ */ import_react44.default.createElement("option", { key: item, value: item }, toTitle20(item)))
         )),
         [
           ["Label", showLabel, setShowLabel],
@@ -46989,7 +46994,7 @@ function SelectInputPreviewPage() {
           ["Shortcut Badge", showShortcutBadge, setShowShortcutBadge],
           ["Lead Icon", showLeadIcon, setShowLeadIcon],
           ["Tail Icon", showTailIcon, setShowTailIcon]
-        ].map(([labelText, checked, setChecked]) => /* @__PURE__ */ import_react39.default.createElement(
+        ].map(([labelText, checked, setChecked]) => /* @__PURE__ */ import_react44.default.createElement(
           "label",
           {
             key: labelText,
@@ -47007,8 +47012,8 @@ function SelectInputPreviewPage() {
               backgroundColor: palette28.base.white
             }
           },
-          /* @__PURE__ */ import_react39.default.createElement("span", null, labelText),
-          /* @__PURE__ */ import_react39.default.createElement(
+          /* @__PURE__ */ import_react44.default.createElement("span", null, labelText),
+          /* @__PURE__ */ import_react44.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -47018,7 +47023,7 @@ function SelectInputPreviewPage() {
           )
         ))
       ),
-      /* @__PURE__ */ import_react39.default.createElement(
+      /* @__PURE__ */ import_react44.default.createElement(
         "section",
         {
           style: {
@@ -47032,7 +47037,7 @@ function SelectInputPreviewPage() {
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react39.default.createElement(
+        /* @__PURE__ */ import_react44.default.createElement(
           "h2",
           {
             style: {
@@ -47046,7 +47051,7 @@ function SelectInputPreviewPage() {
           },
           "Interactive"
         ),
-        /* @__PURE__ */ import_react39.default.createElement(
+        /* @__PURE__ */ import_react44.default.createElement(
           SelectInput,
           {
             type,
@@ -47065,7 +47070,7 @@ function SelectInputPreviewPage() {
           }
         )
       ),
-      /* @__PURE__ */ import_react39.default.createElement(
+      /* @__PURE__ */ import_react44.default.createElement(
         "section",
         {
           style: {
@@ -47079,7 +47084,7 @@ function SelectInputPreviewPage() {
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react39.default.createElement(
+        /* @__PURE__ */ import_react44.default.createElement(
           "h2",
           {
             style: {
@@ -47093,7 +47098,7 @@ function SelectInputPreviewPage() {
           },
           "Variant Matrix"
         ),
-        /* @__PURE__ */ import_react39.default.createElement("div", { style: { display: "grid", gap: spacing.scale["16"] } }, TARGETS3.map((matrixTarget) => /* @__PURE__ */ import_react39.default.createElement("div", { key: matrixTarget, style: { display: "grid", gap: spacing.scale["12"] } }, /* @__PURE__ */ import_react39.default.createElement(
+        /* @__PURE__ */ import_react44.default.createElement("div", { style: { display: "grid", gap: spacing.scale["16"] } }, TARGETS3.map((matrixTarget) => /* @__PURE__ */ import_react44.default.createElement("div", { key: matrixTarget, style: { display: "grid", gap: spacing.scale["12"] } }, /* @__PURE__ */ import_react44.default.createElement(
           "h3",
           {
             style: {
@@ -47108,7 +47113,7 @@ function SelectInputPreviewPage() {
           },
           "Target: ",
           toTitle20(matrixTarget)
-        ), SIZES16.map((matrixSize) => /* @__PURE__ */ import_react39.default.createElement("div", { key: `${matrixTarget}-${matrixSize}`, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react39.default.createElement(
+        ), SIZES16.map((matrixSize) => /* @__PURE__ */ import_react44.default.createElement("div", { key: `${matrixTarget}-${matrixSize}`, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react44.default.createElement(
           "span",
           {
             style: {
@@ -47122,7 +47127,7 @@ function SelectInputPreviewPage() {
           },
           "Size: ",
           matrixSize.toUpperCase()
-        ), /* @__PURE__ */ import_react39.default.createElement("div", { style: { display: "grid", gap: spacing.scale["12"] } }, TYPES10.map((matrixType) => /* @__PURE__ */ import_react39.default.createElement("div", { key: `${matrixTarget}-${matrixSize}-${matrixType}`, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react39.default.createElement(
+        ), /* @__PURE__ */ import_react44.default.createElement("div", { style: { display: "grid", gap: spacing.scale["12"] } }, TYPES10.map((matrixType) => /* @__PURE__ */ import_react44.default.createElement("div", { key: `${matrixTarget}-${matrixSize}-${matrixType}`, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react44.default.createElement(
           "span",
           {
             style: {
@@ -47138,7 +47143,7 @@ function SelectInputPreviewPage() {
           } : {
             selectedId: matrixState === "filled" || matrixState === "focus" ? PRESET_SELECTED_ID : void 0
           };
-          return /* @__PURE__ */ import_react39.default.createElement(
+          return /* @__PURE__ */ import_react44.default.createElement(
             SelectInput,
             {
               key: `${matrixTarget}-${matrixSize}-${matrixType}-${matrixState}`,
@@ -47165,10 +47170,10 @@ function toTypographyStyle12(token) {
 }
 
 // components/TabMenu/TabMenu.preview.tsx
-var import_react41 = __toESM(require_react());
+var import_react46 = __toESM(require_react());
 
 // components/TabMenu/TabMenu.tsx
-var import_react40 = __toESM(require_react());
+var import_react45 = __toESM(require_react());
 var SIZE_CONFIG13 = {
   lg: {
     fillPaddingX: spacing.scale["16"],
@@ -47316,14 +47321,14 @@ function TabMenu({
   ...rest
 }) {
   const config = SIZE_CONFIG13[size];
-  const resolvedItems = (0, import_react40.useMemo)(() => items ?? getDefaultItems(type), [items, type]);
-  const fallbackSelectedId = (0, import_react40.useMemo)(
+  const resolvedItems = (0, import_react45.useMemo)(() => items ?? getDefaultItems(type), [items, type]);
+  const fallbackSelectedId = (0, import_react45.useMemo)(
     () => findInitialSelectedId(resolvedItems, defaultSelectedId),
     [resolvedItems, defaultSelectedId]
   );
   const isControlled = selectedId !== void 0;
-  const [internalSelectedId, setInternalSelectedId] = (0, import_react40.useState)(fallbackSelectedId);
-  (0, import_react40.useEffect)(() => {
+  const [internalSelectedId, setInternalSelectedId] = (0, import_react45.useState)(fallbackSelectedId);
+  (0, import_react45.useEffect)(() => {
     if (isControlled) {
       return;
     }
@@ -47333,7 +47338,7 @@ function TabMenu({
     });
   }, [fallbackSelectedId, isControlled, resolvedItems]);
   const currentSelectedId = isControlled ? selectedId : internalSelectedId;
-  const itemRefs = (0, import_react40.useRef)([]);
+  const itemRefs = (0, import_react45.useRef)([]);
   const rootStyle = type === "segmented" ? {
     display: "inline-flex",
     alignItems: "center",
@@ -47382,7 +47387,7 @@ function TabMenu({
     handleSelection(target.item, "default");
     itemRefs.current[target.index]?.focus();
   };
-  return /* @__PURE__ */ import_react40.default.createElement(
+  return /* @__PURE__ */ import_react45.default.createElement(
     "div",
     {
       ...rest,
@@ -47460,7 +47465,7 @@ function TabMenu({
         paddingInline: config.labelWrapPaddingX,
         paddingBlock: spacing.scale["0"]
       };
-      return /* @__PURE__ */ import_react40.default.createElement(
+      return /* @__PURE__ */ import_react45.default.createElement(
         "button",
         {
           key: item.id,
@@ -47500,7 +47505,7 @@ function TabMenu({
             cursor: isItemDisabled ? "default" : "pointer"
           }
         },
-        /* @__PURE__ */ import_react40.default.createElement("span", { style: textWrapStyle }, /* @__PURE__ */ import_react40.default.createElement(
+        /* @__PURE__ */ import_react45.default.createElement("span", { style: textWrapStyle }, /* @__PURE__ */ import_react45.default.createElement(
           "span",
           {
             style: {
@@ -47512,7 +47517,7 @@ function TabMenu({
           },
           item.label
         )),
-        showBadge && /* @__PURE__ */ import_react40.default.createElement(
+        showBadge && /* @__PURE__ */ import_react45.default.createElement(
           "span",
           {
             style: type === "line" ? {
@@ -47529,7 +47534,7 @@ function TabMenu({
               paddingBlock: spacing.scale["0"]
             }
           },
-          /* @__PURE__ */ import_react40.default.createElement(
+          /* @__PURE__ */ import_react45.default.createElement(
             "span",
             {
               style: {
@@ -47542,7 +47547,7 @@ function TabMenu({
                 backgroundColor: backgroundButton.tertiary
               }
             },
-            /* @__PURE__ */ import_react40.default.createElement(
+            /* @__PURE__ */ import_react45.default.createElement(
               "span",
               {
                 style: {
@@ -47591,24 +47596,24 @@ function getDefaultSelectedId(items) {
   return items[1]?.id ?? items[0]?.id ?? "";
 }
 function TabMenuPreviewPage() {
-  const [type, setType] = (0, import_react41.useState)("fill");
-  const [size, setSize] = (0, import_react41.useState)("md");
-  const [state, setState] = (0, import_react41.useState)("default");
-  const [disabled, setDisabled] = (0, import_react41.useState)(false);
-  const [showBadge, setShowBadge] = (0, import_react41.useState)(true);
-  const items = (0, import_react41.useMemo)(() => {
+  const [type, setType] = (0, import_react46.useState)("fill");
+  const [size, setSize] = (0, import_react46.useState)("md");
+  const [state, setState] = (0, import_react46.useState)("default");
+  const [disabled, setDisabled] = (0, import_react46.useState)(false);
+  const [showBadge, setShowBadge] = (0, import_react46.useState)(true);
+  const items = (0, import_react46.useMemo)(() => {
     const base = type === "segmented" ? SEGMENTED_ITEMS : LINEAR_ITEMS;
     return withBadgeToggle(base, showBadge);
   }, [type, showBadge]);
-  const [selectedId, setSelectedId] = (0, import_react41.useState)(getDefaultSelectedId(items));
-  (0, import_react41.useEffect)(() => {
+  const [selectedId, setSelectedId] = (0, import_react46.useState)(getDefaultSelectedId(items));
+  (0, import_react46.useEffect)(() => {
     const exists = items.some((item) => item.id === selectedId);
     if (!exists) {
       setSelectedId(getDefaultSelectedId(items));
     }
   }, [items, selectedId]);
   const tokenNotice = state === "default" ? "Figma Tab Menu\uB294 hover/focus/disabled \uC804\uC6A9 \uC2DC\uAC01 variant\uAC00 \uC5C6\uC5B4 default\uC640 \uB3D9\uC77C\uD55C \uC2DC\uAC01\uAC12\uC744 \uC0AC\uC6A9\uD569\uB2C8\uB2E4." : `${toTitle21(state)} \uAC15\uC81C \uC0C1\uD0DC\uB294 \uC811\uADFC\uC131/\uD589\uB3D9 \uAC80\uC99D\uC6A9\uC774\uBA70, \uC2DC\uAC01\uAC12\uC740 Figma \uAE30\uBCF8 variant\uB97C \uC720\uC9C0\uD569\uB2C8\uB2E4.`;
-  return /* @__PURE__ */ import_react41.default.createElement(
+  return /* @__PURE__ */ import_react46.default.createElement(
     "main",
     {
       style: {
@@ -47619,7 +47624,7 @@ function TabMenuPreviewPage() {
         fontFamily: typography.scale.bodyM.medium.fontFamily
       }
     },
-    /* @__PURE__ */ import_react41.default.createElement(
+    /* @__PURE__ */ import_react46.default.createElement(
       "section",
       {
         style: {
@@ -47629,7 +47634,7 @@ function TabMenuPreviewPage() {
           gap: spacing.scale["24"]
         }
       },
-      /* @__PURE__ */ import_react41.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react41.default.createElement(
+      /* @__PURE__ */ import_react46.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react46.default.createElement(
         "h1",
         {
           style: {
@@ -47642,7 +47647,7 @@ function TabMenuPreviewPage() {
           }
         },
         "Tab Menu Preview"
-      ), /* @__PURE__ */ import_react41.default.createElement(
+      ), /* @__PURE__ */ import_react46.default.createElement(
         "p",
         {
           style: {
@@ -47656,7 +47661,7 @@ function TabMenuPreviewPage() {
         },
         "Figma MCP \uB178\uB4DC `953:18063` \uAE30\uBC18 Type/Size/\uC0C1\uD0DC \uD504\uB9AC\uBDF0"
       )),
-      /* @__PURE__ */ import_react41.default.createElement(
+      /* @__PURE__ */ import_react46.default.createElement(
         "div",
         {
           style: {
@@ -47665,7 +47670,7 @@ function TabMenuPreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react41.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react41.default.createElement("span", { style: { color: colors.semantic.theme.text.base.secondary } }, "Type"), /* @__PURE__ */ import_react41.default.createElement(
+        /* @__PURE__ */ import_react46.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react46.default.createElement("span", { style: { color: colors.semantic.theme.text.base.secondary } }, "Type"), /* @__PURE__ */ import_react46.default.createElement(
           "select",
           {
             value: type,
@@ -47681,9 +47686,9 @@ function TabMenuPreviewPage() {
               borderRadius: spacing.scale["8"]
             }
           },
-          TYPES11.map((item) => /* @__PURE__ */ import_react41.default.createElement("option", { key: item, value: item }, toTitle21(item)))
+          TYPES11.map((item) => /* @__PURE__ */ import_react46.default.createElement("option", { key: item, value: item }, toTitle21(item)))
         )),
-        /* @__PURE__ */ import_react41.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react41.default.createElement("span", { style: { color: colors.semantic.theme.text.base.secondary } }, "Size"), /* @__PURE__ */ import_react41.default.createElement(
+        /* @__PURE__ */ import_react46.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react46.default.createElement("span", { style: { color: colors.semantic.theme.text.base.secondary } }, "Size"), /* @__PURE__ */ import_react46.default.createElement(
           "select",
           {
             value: size,
@@ -47699,9 +47704,9 @@ function TabMenuPreviewPage() {
               borderRadius: spacing.scale["8"]
             }
           },
-          SIZES17.map((item) => /* @__PURE__ */ import_react41.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
+          SIZES17.map((item) => /* @__PURE__ */ import_react46.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
         )),
-        /* @__PURE__ */ import_react41.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react41.default.createElement("span", { style: { color: colors.semantic.theme.text.base.secondary } }, "State"), /* @__PURE__ */ import_react41.default.createElement(
+        /* @__PURE__ */ import_react46.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react46.default.createElement("span", { style: { color: colors.semantic.theme.text.base.secondary } }, "State"), /* @__PURE__ */ import_react46.default.createElement(
           "select",
           {
             value: state,
@@ -47717,9 +47722,9 @@ function TabMenuPreviewPage() {
               borderRadius: spacing.scale["8"]
             }
           },
-          STATES13.map((item) => /* @__PURE__ */ import_react41.default.createElement("option", { key: item, value: item }, toTitle21(item)))
+          STATES13.map((item) => /* @__PURE__ */ import_react46.default.createElement("option", { key: item, value: item }, toTitle21(item)))
         )),
-        /* @__PURE__ */ import_react41.default.createElement(
+        /* @__PURE__ */ import_react46.default.createElement(
           "label",
           {
             style: {
@@ -47736,10 +47741,10 @@ function TabMenuPreviewPage() {
               backgroundColor: colors.semantic.theme.background.input.normal
             }
           },
-          /* @__PURE__ */ import_react41.default.createElement("span", null, "Disabled"),
-          /* @__PURE__ */ import_react41.default.createElement("input", { type: "checkbox", checked: disabled, onChange: (event) => setDisabled(event.target.checked) })
+          /* @__PURE__ */ import_react46.default.createElement("span", null, "Disabled"),
+          /* @__PURE__ */ import_react46.default.createElement("input", { type: "checkbox", checked: disabled, onChange: (event) => setDisabled(event.target.checked) })
         ),
-        /* @__PURE__ */ import_react41.default.createElement(
+        /* @__PURE__ */ import_react46.default.createElement(
           "label",
           {
             style: {
@@ -47756,10 +47761,10 @@ function TabMenuPreviewPage() {
               backgroundColor: colors.semantic.theme.background.input.normal
             }
           },
-          /* @__PURE__ */ import_react41.default.createElement("span", null, "Badge"),
-          /* @__PURE__ */ import_react41.default.createElement("input", { type: "checkbox", checked: showBadge, onChange: (event) => setShowBadge(event.target.checked) })
+          /* @__PURE__ */ import_react46.default.createElement("span", null, "Badge"),
+          /* @__PURE__ */ import_react46.default.createElement("input", { type: "checkbox", checked: showBadge, onChange: (event) => setShowBadge(event.target.checked) })
         ),
-        /* @__PURE__ */ import_react41.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react41.default.createElement("span", { style: { color: colors.semantic.theme.text.base.secondary } }, "Selected"), /* @__PURE__ */ import_react41.default.createElement(
+        /* @__PURE__ */ import_react46.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react46.default.createElement("span", { style: { color: colors.semantic.theme.text.base.secondary } }, "Selected"), /* @__PURE__ */ import_react46.default.createElement(
           "select",
           {
             value: selectedId,
@@ -47775,10 +47780,10 @@ function TabMenuPreviewPage() {
               borderRadius: spacing.scale["8"]
             }
           },
-          items.map((item) => /* @__PURE__ */ import_react41.default.createElement("option", { key: item.id, value: item.id }, item.id))
+          items.map((item) => /* @__PURE__ */ import_react46.default.createElement("option", { key: item.id, value: item.id }, item.id))
         ))
       ),
-      /* @__PURE__ */ import_react41.default.createElement(
+      /* @__PURE__ */ import_react46.default.createElement(
         "section",
         {
           style: {
@@ -47792,7 +47797,7 @@ function TabMenuPreviewPage() {
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react41.default.createElement(
+        /* @__PURE__ */ import_react46.default.createElement(
           "div",
           {
             style: {
@@ -47807,7 +47812,7 @@ function TabMenuPreviewPage() {
               justifyContent: "flex-start"
             }
           },
-          /* @__PURE__ */ import_react41.default.createElement(
+          /* @__PURE__ */ import_react46.default.createElement(
             TabMenu,
             {
               type,
@@ -47820,7 +47825,7 @@ function TabMenuPreviewPage() {
             }
           )
         ),
-        /* @__PURE__ */ import_react41.default.createElement(
+        /* @__PURE__ */ import_react46.default.createElement(
           "p",
           {
             style: {
@@ -47840,10 +47845,10 @@ function TabMenuPreviewPage() {
 }
 
 // components/Toggle/Toggle.preview.tsx
-var import_react43 = __toESM(require_react());
+var import_react48 = __toESM(require_react());
 
 // components/Toggle/Toggle.tsx
-var import_react42 = __toESM(require_react());
+var import_react47 = __toESM(require_react());
 var SIZE_CONFIG14 = {
   sm: {
     trackWidth: spacing.scale["28"],
@@ -47919,10 +47924,10 @@ function Toggle({
   ...rest
 }) {
   const isControlled = checked !== void 0;
-  const [internalChecked, setInternalChecked] = (0, import_react42.useState)(defaultChecked);
-  const [hovered, setHovered] = (0, import_react42.useState)(false);
-  const [focused, setFocused] = (0, import_react42.useState)(false);
-  (0, import_react42.useEffect)(() => {
+  const [internalChecked, setInternalChecked] = (0, import_react47.useState)(defaultChecked);
+  const [hovered, setHovered] = (0, import_react47.useState)(false);
+  const [focused, setFocused] = (0, import_react47.useState)(false);
+  (0, import_react47.useEffect)(() => {
     if (isControlled) {
       return;
     }
@@ -47932,7 +47937,7 @@ function Toggle({
   const visualState = resolveVisualState10(state, disabled, hovered, focused);
   const isDisabled = visualState === "disabled";
   const config = SIZE_CONFIG14[size];
-  const knobPadding = (0, import_react42.useMemo)(() => {
+  const knobPadding = (0, import_react47.useMemo)(() => {
     return resolvedChecked ? {
       paddingLeft: config.activeInset,
       paddingRight: config.insetPadding
@@ -47953,7 +47958,7 @@ function Toggle({
     onCheckedChange?.(nextChecked);
     onClick?.(event);
   };
-  return /* @__PURE__ */ import_react42.default.createElement(
+  return /* @__PURE__ */ import_react47.default.createElement(
     "button",
     {
       ...rest,
@@ -47999,7 +48004,7 @@ function Toggle({
         ...style
       }
     },
-    /* @__PURE__ */ import_react42.default.createElement(
+    /* @__PURE__ */ import_react47.default.createElement(
       "span",
       {
         "aria-hidden": "true",
@@ -48027,11 +48032,11 @@ function toTitle22(value) {
   return value.charAt(0).toUpperCase() + value.slice(1);
 }
 function TogglePreviewPage() {
-  const [size, setSize] = (0, import_react43.useState)("md");
-  const [state, setState] = (0, import_react43.useState)("auto");
-  const [checked, setChecked] = (0, import_react43.useState)(false);
-  const [disabled, setDisabled] = (0, import_react43.useState)(false);
-  const forcedState = (0, import_react43.useMemo)(() => {
+  const [size, setSize] = (0, import_react48.useState)("md");
+  const [state, setState] = (0, import_react48.useState)("auto");
+  const [checked, setChecked] = (0, import_react48.useState)(false);
+  const [disabled, setDisabled] = (0, import_react48.useState)(false);
+  const forcedState = (0, import_react48.useMemo)(() => {
     if (disabled) {
       return "disabled";
     }
@@ -48040,7 +48045,7 @@ function TogglePreviewPage() {
     }
     return state;
   }, [disabled, state]);
-  return /* @__PURE__ */ import_react43.default.createElement(
+  return /* @__PURE__ */ import_react48.default.createElement(
     "main",
     {
       style: {
@@ -48051,7 +48056,7 @@ function TogglePreviewPage() {
         fontFamily: typography.scale.bodyM.medium.fontFamily
       }
     },
-    /* @__PURE__ */ import_react43.default.createElement(
+    /* @__PURE__ */ import_react48.default.createElement(
       "section",
       {
         style: {
@@ -48061,7 +48066,7 @@ function TogglePreviewPage() {
           gap: spacing.scale["24"]
         }
       },
-      /* @__PURE__ */ import_react43.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react43.default.createElement(
+      /* @__PURE__ */ import_react48.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react48.default.createElement(
         "h1",
         {
           style: {
@@ -48074,7 +48079,7 @@ function TogglePreviewPage() {
           }
         },
         "Toggle Preview"
-      ), /* @__PURE__ */ import_react43.default.createElement(
+      ), /* @__PURE__ */ import_react48.default.createElement(
         "p",
         {
           style: {
@@ -48089,7 +48094,7 @@ function TogglePreviewPage() {
         },
         "Figma variant(`Size`, `Active`, `State`) \uAE30\uBC18 Toggle \uC778\uD130\uB799\uC158 \uAC80\uC99D"
       )),
-      /* @__PURE__ */ import_react43.default.createElement(
+      /* @__PURE__ */ import_react48.default.createElement(
         "section",
         {
           style: {
@@ -48104,7 +48109,7 @@ function TogglePreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react43.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react43.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react43.default.createElement(
+        /* @__PURE__ */ import_react48.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react48.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react48.default.createElement(
           "select",
           {
             value: size,
@@ -48120,9 +48125,9 @@ function TogglePreviewPage() {
               color: textBase25.staticDark
             }
           },
-          SIZES18.map((item) => /* @__PURE__ */ import_react43.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
+          SIZES18.map((item) => /* @__PURE__ */ import_react48.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
         )),
-        /* @__PURE__ */ import_react43.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react43.default.createElement("span", null, "State"), /* @__PURE__ */ import_react43.default.createElement(
+        /* @__PURE__ */ import_react48.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react48.default.createElement("span", null, "State"), /* @__PURE__ */ import_react48.default.createElement(
           "select",
           {
             value: state,
@@ -48138,9 +48143,9 @@ function TogglePreviewPage() {
               color: textBase25.staticDark
             }
           },
-          STATES14.map((item) => /* @__PURE__ */ import_react43.default.createElement("option", { key: item, value: item }, toTitle22(item)))
+          STATES14.map((item) => /* @__PURE__ */ import_react48.default.createElement("option", { key: item, value: item }, toTitle22(item)))
         )),
-        /* @__PURE__ */ import_react43.default.createElement(
+        /* @__PURE__ */ import_react48.default.createElement(
           "label",
           {
             style: {
@@ -48157,10 +48162,10 @@ function TogglePreviewPage() {
               backgroundColor: palette29.base.white
             }
           },
-          /* @__PURE__ */ import_react43.default.createElement("span", null, "Active"),
-          /* @__PURE__ */ import_react43.default.createElement("input", { type: "checkbox", checked, onChange: (event) => setChecked(event.target.checked) })
+          /* @__PURE__ */ import_react48.default.createElement("span", null, "Active"),
+          /* @__PURE__ */ import_react48.default.createElement("input", { type: "checkbox", checked, onChange: (event) => setChecked(event.target.checked) })
         ),
-        /* @__PURE__ */ import_react43.default.createElement(
+        /* @__PURE__ */ import_react48.default.createElement(
           "label",
           {
             style: {
@@ -48177,11 +48182,11 @@ function TogglePreviewPage() {
               backgroundColor: palette29.base.white
             }
           },
-          /* @__PURE__ */ import_react43.default.createElement("span", null, "Disabled"),
-          /* @__PURE__ */ import_react43.default.createElement("input", { type: "checkbox", checked: disabled, onChange: (event) => setDisabled(event.target.checked) })
+          /* @__PURE__ */ import_react48.default.createElement("span", null, "Disabled"),
+          /* @__PURE__ */ import_react48.default.createElement("input", { type: "checkbox", checked: disabled, onChange: (event) => setDisabled(event.target.checked) })
         )
       ),
-      /* @__PURE__ */ import_react43.default.createElement(
+      /* @__PURE__ */ import_react48.default.createElement(
         "section",
         {
           style: {
@@ -48195,7 +48200,7 @@ function TogglePreviewPage() {
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react43.default.createElement(
+        /* @__PURE__ */ import_react48.default.createElement(
           "h2",
           {
             style: {
@@ -48209,9 +48214,9 @@ function TogglePreviewPage() {
           },
           "Active Selection"
         ),
-        /* @__PURE__ */ import_react43.default.createElement(Toggle, { size, checked, disabled, state: forcedState, onCheckedChange: setChecked, "aria-label": "Preview toggle" })
+        /* @__PURE__ */ import_react48.default.createElement(Toggle, { size, checked, disabled, state: forcedState, onCheckedChange: setChecked, "aria-label": "Preview toggle" })
       ),
-      /* @__PURE__ */ import_react43.default.createElement(
+      /* @__PURE__ */ import_react48.default.createElement(
         "section",
         {
           style: {
@@ -48225,7 +48230,7 @@ function TogglePreviewPage() {
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react43.default.createElement(
+        /* @__PURE__ */ import_react48.default.createElement(
           "h2",
           {
             style: {
@@ -48239,7 +48244,7 @@ function TogglePreviewPage() {
           },
           "Variant Matrix"
         ),
-        /* @__PURE__ */ import_react43.default.createElement("div", { style: { display: "grid", gap: spacing.scale["16"] } }, SIZES18.map((sizeItem) => /* @__PURE__ */ import_react43.default.createElement("div", { key: sizeItem, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react43.default.createElement(
+        /* @__PURE__ */ import_react48.default.createElement("div", { style: { display: "grid", gap: spacing.scale["16"] } }, SIZES18.map((sizeItem) => /* @__PURE__ */ import_react48.default.createElement("div", { key: sizeItem, style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react48.default.createElement(
           "span",
           {
             style: {
@@ -48253,7 +48258,7 @@ function TogglePreviewPage() {
           },
           "Size ",
           sizeItem.toUpperCase()
-        ), ["default", "hover", "focus", "disabled"].map((stateItem) => /* @__PURE__ */ import_react43.default.createElement(
+        ), ["default", "hover", "focus", "disabled"].map((stateItem) => /* @__PURE__ */ import_react48.default.createElement(
           "div",
           {
             key: `${sizeItem}-${stateItem}`,
@@ -48264,7 +48269,7 @@ function TogglePreviewPage() {
               gap: spacing.scale["12"]
             }
           },
-          /* @__PURE__ */ import_react43.default.createElement(
+          /* @__PURE__ */ import_react48.default.createElement(
             "span",
             {
               style: {
@@ -48278,7 +48283,7 @@ function TogglePreviewPage() {
             },
             toTitle22(stateItem)
           ),
-          ACTIVE_OPTIONS.map((activeItem) => /* @__PURE__ */ import_react43.default.createElement(
+          ACTIVE_OPTIONS.map((activeItem) => /* @__PURE__ */ import_react48.default.createElement(
             "div",
             {
               key: `${sizeItem}-${stateItem}-${activeItem ? "on" : "off"}`,
@@ -48288,8 +48293,8 @@ function TogglePreviewPage() {
                 gap: spacing.scale["8"]
               }
             },
-            /* @__PURE__ */ import_react43.default.createElement(Toggle, { size: sizeItem, checked: activeItem, state: stateItem, "aria-label": `${sizeItem}-${stateItem}-${activeItem ? "on" : "off"}` }),
-            /* @__PURE__ */ import_react43.default.createElement(
+            /* @__PURE__ */ import_react48.default.createElement(Toggle, { size: sizeItem, checked: activeItem, state: stateItem, "aria-label": `${sizeItem}-${stateItem}-${activeItem ? "on" : "off"}` }),
+            /* @__PURE__ */ import_react48.default.createElement(
               "span",
               {
                 style: {
@@ -48311,10 +48316,10 @@ function TogglePreviewPage() {
 }
 
 // components/Tooltip/Tooltip.preview.tsx
-var import_react45 = __toESM(require_react());
+var import_react50 = __toESM(require_react());
 
 // components/Tooltip/Tooltip.tsx
-var import_react44 = __toESM(require_react());
+var import_react49 = __toESM(require_react());
 var SIZE_CONFIG15 = {
   sm: {
     paddingX: spacing.scale["8"],
@@ -48393,13 +48398,13 @@ function TooltipArrow({
   borderColor
 }) {
   if (direction === "up") {
-    return /* @__PURE__ */ import_react44.default.createElement("svg", { width: ARROW_WIDTH, height: ARROW_HEIGHT, viewBox: `0 0 ${ARROW_WIDTH} ${ARROW_HEIGHT}`, "aria-hidden": "true", style: { display: "block" } }, /* @__PURE__ */ import_react44.default.createElement("path", { d: `M 0 ${ARROW_HEIGHT} L ${ARROW_WIDTH / 2} 0 L ${ARROW_WIDTH} ${ARROW_HEIGHT} Z`, fill: backgroundColor, stroke: borderColor, strokeWidth: border.width["1"] }));
+    return /* @__PURE__ */ import_react49.default.createElement("svg", { width: ARROW_WIDTH, height: ARROW_HEIGHT, viewBox: `0 0 ${ARROW_WIDTH} ${ARROW_HEIGHT}`, "aria-hidden": "true", style: { display: "block" } }, /* @__PURE__ */ import_react49.default.createElement("path", { d: `M 0 ${ARROW_HEIGHT} L ${ARROW_WIDTH / 2} 0 L ${ARROW_WIDTH} ${ARROW_HEIGHT} Z`, fill: backgroundColor, stroke: borderColor, strokeWidth: border.width["1"] }));
   }
   if (direction === "down") {
-    return /* @__PURE__ */ import_react44.default.createElement("svg", { width: ARROW_WIDTH, height: ARROW_HEIGHT, viewBox: `0 0 ${ARROW_WIDTH} ${ARROW_HEIGHT}`, "aria-hidden": "true", style: { display: "block" } }, /* @__PURE__ */ import_react44.default.createElement("path", { d: `M 0 0 L ${ARROW_WIDTH / 2} ${ARROW_HEIGHT} L ${ARROW_WIDTH} 0 Z`, fill: backgroundColor, stroke: borderColor, strokeWidth: border.width["1"] }));
+    return /* @__PURE__ */ import_react49.default.createElement("svg", { width: ARROW_WIDTH, height: ARROW_HEIGHT, viewBox: `0 0 ${ARROW_WIDTH} ${ARROW_HEIGHT}`, "aria-hidden": "true", style: { display: "block" } }, /* @__PURE__ */ import_react49.default.createElement("path", { d: `M 0 0 L ${ARROW_WIDTH / 2} ${ARROW_HEIGHT} L ${ARROW_WIDTH} 0 Z`, fill: backgroundColor, stroke: borderColor, strokeWidth: border.width["1"] }));
   }
   if (direction === "left") {
-    return /* @__PURE__ */ import_react44.default.createElement(
+    return /* @__PURE__ */ import_react49.default.createElement(
       "svg",
       {
         width: ARROW_SIDE_WIDTH,
@@ -48408,10 +48413,10 @@ function TooltipArrow({
         "aria-hidden": "true",
         style: { display: "block" }
       },
-      /* @__PURE__ */ import_react44.default.createElement("path", { d: `M ${ARROW_SIDE_WIDTH} 0 L 0 ${ARROW_SIDE_HEIGHT / 2} L ${ARROW_SIDE_WIDTH} ${ARROW_SIDE_HEIGHT} Z`, fill: backgroundColor, stroke: borderColor, strokeWidth: border.width["1"] })
+      /* @__PURE__ */ import_react49.default.createElement("path", { d: `M ${ARROW_SIDE_WIDTH} 0 L 0 ${ARROW_SIDE_HEIGHT / 2} L ${ARROW_SIDE_WIDTH} ${ARROW_SIDE_HEIGHT} Z`, fill: backgroundColor, stroke: borderColor, strokeWidth: border.width["1"] })
     );
   }
-  return /* @__PURE__ */ import_react44.default.createElement(
+  return /* @__PURE__ */ import_react49.default.createElement(
     "svg",
     {
       width: ARROW_SIDE_WIDTH,
@@ -48420,7 +48425,7 @@ function TooltipArrow({
       "aria-hidden": "true",
       style: { display: "block" }
     },
-    /* @__PURE__ */ import_react44.default.createElement("path", { d: `M 0 0 L ${ARROW_SIDE_WIDTH} ${ARROW_SIDE_HEIGHT / 2} L 0 ${ARROW_SIDE_HEIGHT} Z`, fill: backgroundColor, stroke: borderColor, strokeWidth: border.width["1"] })
+    /* @__PURE__ */ import_react49.default.createElement("path", { d: `M 0 0 L ${ARROW_SIDE_WIDTH} ${ARROW_SIDE_HEIGHT / 2} L 0 ${ARROW_SIDE_HEIGHT} Z`, fill: backgroundColor, stroke: borderColor, strokeWidth: border.width["1"] })
   );
 }
 function TooltipBox({
@@ -48431,7 +48436,7 @@ function TooltipBox({
 }) {
   const config = SIZE_CONFIG15[size];
   if (size === "lg") {
-    return /* @__PURE__ */ import_react44.default.createElement(
+    return /* @__PURE__ */ import_react49.default.createElement(
       "div",
       {
         style: {
@@ -48449,7 +48454,7 @@ function TooltipBox({
           boxSizing: "border-box"
         }
       },
-      /* @__PURE__ */ import_react44.default.createElement(
+      /* @__PURE__ */ import_react49.default.createElement(
         "div",
         {
           style: {
@@ -48457,7 +48462,7 @@ function TooltipBox({
             gap: spacing.scale["4"]
           }
         },
-        /* @__PURE__ */ import_react44.default.createElement(
+        /* @__PURE__ */ import_react49.default.createElement(
           "p",
           {
             style: {
@@ -48470,7 +48475,7 @@ function TooltipBox({
           },
           headline
         ),
-        /* @__PURE__ */ import_react44.default.createElement(
+        /* @__PURE__ */ import_react49.default.createElement(
           "p",
           {
             style: {
@@ -48486,7 +48491,7 @@ function TooltipBox({
       )
     );
   }
-  return /* @__PURE__ */ import_react44.default.createElement(
+  return /* @__PURE__ */ import_react49.default.createElement(
     "div",
     {
       style: {
@@ -48504,7 +48509,7 @@ function TooltipBox({
         boxSizing: "border-box"
       }
     },
-    /* @__PURE__ */ import_react44.default.createElement(
+    /* @__PURE__ */ import_react49.default.createElement(
       "p",
       {
         style: {
@@ -48521,7 +48526,7 @@ function TooltipBox({
 function ArrowWrapper({ placement }) {
   const align = resolveArrowAlign(placement);
   if (placement === "leftSide" || placement === "rightSide") {
-    return /* @__PURE__ */ import_react44.default.createElement(
+    return /* @__PURE__ */ import_react49.default.createElement(
       "div",
       {
         style: {
@@ -48533,11 +48538,11 @@ function ArrowWrapper({ placement }) {
           overflow: "hidden"
         }
       },
-      /* @__PURE__ */ import_react44.default.createElement(TooltipArrow, { direction: placement === "leftSide" ? "left" : "right", backgroundColor: boxBackground, borderColor: boxBorderColor })
+      /* @__PURE__ */ import_react49.default.createElement(TooltipArrow, { direction: placement === "leftSide" ? "left" : "right", backgroundColor: boxBackground, borderColor: boxBorderColor })
     );
   }
   const isTop = placement === "topLeft" || placement === "topCenter" || placement === "topRight";
-  return /* @__PURE__ */ import_react44.default.createElement(
+  return /* @__PURE__ */ import_react49.default.createElement(
     "div",
     {
       style: {
@@ -48552,7 +48557,7 @@ function ArrowWrapper({ placement }) {
         boxSizing: "border-box"
       }
     },
-    /* @__PURE__ */ import_react44.default.createElement(TooltipArrow, { direction: isTop ? "up" : "down", backgroundColor: boxBackground, borderColor: boxBorderColor })
+    /* @__PURE__ */ import_react49.default.createElement(TooltipArrow, { direction: isTop ? "up" : "down", backgroundColor: boxBackground, borderColor: boxBorderColor })
   );
 }
 function Tooltip({
@@ -48568,9 +48573,9 @@ function Tooltip({
   const resolvedPlacement = normalizePlacement(size, placement);
   const isSidePlacement = resolvedPlacement === "leftSide" || resolvedPlacement === "rightSide";
   const isTopPlacement = resolvedPlacement === "topLeft" || resolvedPlacement === "topCenter" || resolvedPlacement === "topRight";
-  const box = /* @__PURE__ */ import_react44.default.createElement(TooltipBox, { size, text, headline, description });
-  const arrow = /* @__PURE__ */ import_react44.default.createElement(ArrowWrapper, { placement: resolvedPlacement });
-  return /* @__PURE__ */ import_react44.default.createElement(
+  const box = /* @__PURE__ */ import_react49.default.createElement(TooltipBox, { size, text, headline, description });
+  const arrow = /* @__PURE__ */ import_react49.default.createElement(ArrowWrapper, { placement: resolvedPlacement });
+  return /* @__PURE__ */ import_react49.default.createElement(
     "div",
     {
       ...rest,
@@ -48585,7 +48590,7 @@ function Tooltip({
         ...style
       }
     },
-    isSidePlacement ? resolvedPlacement === "leftSide" ? /* @__PURE__ */ import_react44.default.createElement(import_react44.default.Fragment, null, arrow, box) : /* @__PURE__ */ import_react44.default.createElement(import_react44.default.Fragment, null, box, arrow) : isTopPlacement ? /* @__PURE__ */ import_react44.default.createElement(import_react44.default.Fragment, null, arrow, box) : /* @__PURE__ */ import_react44.default.createElement(import_react44.default.Fragment, null, box, arrow)
+    isSidePlacement ? resolvedPlacement === "leftSide" ? /* @__PURE__ */ import_react49.default.createElement(import_react49.default.Fragment, null, arrow, box) : /* @__PURE__ */ import_react49.default.createElement(import_react49.default.Fragment, null, box, arrow) : isTopPlacement ? /* @__PURE__ */ import_react49.default.createElement(import_react49.default.Fragment, null, arrow, box) : /* @__PURE__ */ import_react49.default.createElement(import_react49.default.Fragment, null, box, arrow)
   );
 }
 function TooltipTrigger({
@@ -48602,9 +48607,9 @@ function TooltipTrigger({
   ...rest
 }) {
   const isControlled = active !== void 0;
-  const [internalActive, setInternalActive] = (0, import_react44.useState)(defaultActive);
+  const [internalActive, setInternalActive] = (0, import_react49.useState)(defaultActive);
   const resolvedActive = isControlled ? Boolean(active) : internalActive;
-  const tooltipId = (0, import_react44.useId)();
+  const tooltipId = (0, import_react49.useId)();
   const visibleTooltip = showTooltipOnActive && resolvedActive;
   const resolvedTooltipProps = {
     size: "sm",
@@ -48625,7 +48630,7 @@ function TooltipTrigger({
     onClick?.(event);
   };
   const iconBackgroundColor = resolvedActive ? iconBase2.staticDark : iconBase2.staticDarkQuaternary;
-  return /* @__PURE__ */ import_react44.default.createElement(
+  return /* @__PURE__ */ import_react49.default.createElement(
     "button",
     {
       ...rest,
@@ -48652,7 +48657,7 @@ function TooltipTrigger({
         ...style
       }
     },
-    /* @__PURE__ */ import_react44.default.createElement(
+    /* @__PURE__ */ import_react49.default.createElement(
       "span",
       {
         "aria-hidden": "true",
@@ -48673,7 +48678,7 @@ function TooltipTrigger({
       },
       "i"
     ),
-    visibleTooltip ? /* @__PURE__ */ import_react44.default.createElement(
+    visibleTooltip ? /* @__PURE__ */ import_react49.default.createElement(
       Tooltip,
       {
         ...resolvedTooltipProps,
@@ -48715,13 +48720,13 @@ function getSupportedPlacements(size) {
   return PLACEMENTS;
 }
 function TooltipPreviewPage() {
-  const [size, setSize] = (0, import_react45.useState)("sm");
-  const [placement, setPlacement] = (0, import_react45.useState)("bottomCenter");
-  const [triggerActive, setTriggerActive] = (0, import_react45.useState)(false);
-  const [triggerDisabled, setTriggerDisabled] = (0, import_react45.useState)(false);
-  const supportedPlacements = (0, import_react45.useMemo)(() => getSupportedPlacements(size), [size]);
+  const [size, setSize] = (0, import_react50.useState)("sm");
+  const [placement, setPlacement] = (0, import_react50.useState)("bottomCenter");
+  const [triggerActive, setTriggerActive] = (0, import_react50.useState)(false);
+  const [triggerDisabled, setTriggerDisabled] = (0, import_react50.useState)(false);
+  const supportedPlacements = (0, import_react50.useMemo)(() => getSupportedPlacements(size), [size]);
   const resolvedPlacement = supportedPlacements.includes(placement) ? placement : supportedPlacements[0];
-  return /* @__PURE__ */ import_react45.default.createElement(
+  return /* @__PURE__ */ import_react50.default.createElement(
     "main",
     {
       style: {
@@ -48732,7 +48737,7 @@ function TooltipPreviewPage() {
         fontFamily: typography.scale.bodyM.medium.fontFamily
       }
     },
-    /* @__PURE__ */ import_react45.default.createElement(
+    /* @__PURE__ */ import_react50.default.createElement(
       "section",
       {
         style: {
@@ -48742,7 +48747,7 @@ function TooltipPreviewPage() {
           gap: spacing.scale["24"]
         }
       },
-      /* @__PURE__ */ import_react45.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react45.default.createElement(
+      /* @__PURE__ */ import_react50.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react50.default.createElement(
         "h1",
         {
           style: {
@@ -48755,7 +48760,7 @@ function TooltipPreviewPage() {
           }
         },
         "Tooltip Preview"
-      ), /* @__PURE__ */ import_react45.default.createElement(
+      ), /* @__PURE__ */ import_react50.default.createElement(
         "p",
         {
           style: {
@@ -48770,7 +48775,7 @@ function TooltipPreviewPage() {
         },
         "Figma MCP \uB178\uB4DC `1428:49982`(Tooltip), `575:31201`(Tooltip Trigger) variant \uAC80\uC99D"
       )),
-      /* @__PURE__ */ import_react45.default.createElement(
+      /* @__PURE__ */ import_react50.default.createElement(
         "section",
         {
           style: {
@@ -48785,7 +48790,7 @@ function TooltipPreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react45.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react45.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react45.default.createElement(
+        /* @__PURE__ */ import_react50.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react50.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react50.default.createElement(
           "select",
           {
             value: size,
@@ -48801,9 +48806,9 @@ function TooltipPreviewPage() {
               color: textBase27.staticDark
             }
           },
-          SIZES19.map((item) => /* @__PURE__ */ import_react45.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
+          SIZES19.map((item) => /* @__PURE__ */ import_react50.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
         )),
-        /* @__PURE__ */ import_react45.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react45.default.createElement("span", null, "Placement"), /* @__PURE__ */ import_react45.default.createElement(
+        /* @__PURE__ */ import_react50.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react50.default.createElement("span", null, "Placement"), /* @__PURE__ */ import_react50.default.createElement(
           "select",
           {
             value: resolvedPlacement,
@@ -48819,9 +48824,9 @@ function TooltipPreviewPage() {
               color: textBase27.staticDark
             }
           },
-          supportedPlacements.map((item) => /* @__PURE__ */ import_react45.default.createElement("option", { key: item, value: item }, toTitle23(item)))
+          supportedPlacements.map((item) => /* @__PURE__ */ import_react50.default.createElement("option", { key: item, value: item }, toTitle23(item)))
         )),
-        /* @__PURE__ */ import_react45.default.createElement(
+        /* @__PURE__ */ import_react50.default.createElement(
           "label",
           {
             style: {
@@ -48838,10 +48843,10 @@ function TooltipPreviewPage() {
               backgroundColor: palette30.base.white
             }
           },
-          /* @__PURE__ */ import_react45.default.createElement("span", null, "Trigger Active"),
-          /* @__PURE__ */ import_react45.default.createElement("input", { type: "checkbox", checked: triggerActive, onChange: (event) => setTriggerActive(event.target.checked) })
+          /* @__PURE__ */ import_react50.default.createElement("span", null, "Trigger Active"),
+          /* @__PURE__ */ import_react50.default.createElement("input", { type: "checkbox", checked: triggerActive, onChange: (event) => setTriggerActive(event.target.checked) })
         ),
-        /* @__PURE__ */ import_react45.default.createElement(
+        /* @__PURE__ */ import_react50.default.createElement(
           "label",
           {
             style: {
@@ -48858,11 +48863,11 @@ function TooltipPreviewPage() {
               backgroundColor: palette30.base.white
             }
           },
-          /* @__PURE__ */ import_react45.default.createElement("span", null, "Trigger Disabled"),
-          /* @__PURE__ */ import_react45.default.createElement("input", { type: "checkbox", checked: triggerDisabled, onChange: (event) => setTriggerDisabled(event.target.checked) })
+          /* @__PURE__ */ import_react50.default.createElement("span", null, "Trigger Disabled"),
+          /* @__PURE__ */ import_react50.default.createElement("input", { type: "checkbox", checked: triggerDisabled, onChange: (event) => setTriggerDisabled(event.target.checked) })
         )
       ),
-      /* @__PURE__ */ import_react45.default.createElement(
+      /* @__PURE__ */ import_react50.default.createElement(
         "section",
         {
           style: {
@@ -48876,7 +48881,7 @@ function TooltipPreviewPage() {
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react45.default.createElement(
+        /* @__PURE__ */ import_react50.default.createElement(
           "h2",
           {
             style: {
@@ -48890,7 +48895,7 @@ function TooltipPreviewPage() {
           },
           "Active Selection"
         ),
-        /* @__PURE__ */ import_react45.default.createElement(
+        /* @__PURE__ */ import_react50.default.createElement(
           "div",
           {
             style: {
@@ -48905,9 +48910,9 @@ function TooltipPreviewPage() {
               backgroundColor: palette30.base.white
             }
           },
-          /* @__PURE__ */ import_react45.default.createElement(Tooltip, { size, placement: resolvedPlacement })
+          /* @__PURE__ */ import_react50.default.createElement(Tooltip, { size, placement: resolvedPlacement })
         ),
-        /* @__PURE__ */ import_react45.default.createElement(
+        /* @__PURE__ */ import_react50.default.createElement(
           "div",
           {
             style: {
@@ -48922,10 +48927,10 @@ function TooltipPreviewPage() {
               backgroundColor: palette30.base.white
             }
           },
-          /* @__PURE__ */ import_react45.default.createElement(TooltipTrigger, { active: triggerActive, disabled: triggerDisabled, onActiveChange: setTriggerActive })
+          /* @__PURE__ */ import_react50.default.createElement(TooltipTrigger, { active: triggerActive, disabled: triggerDisabled, onActiveChange: setTriggerActive })
         )
       ),
-      /* @__PURE__ */ import_react45.default.createElement(
+      /* @__PURE__ */ import_react50.default.createElement(
         "section",
         {
           style: {
@@ -48939,7 +48944,7 @@ function TooltipPreviewPage() {
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react45.default.createElement(
+        /* @__PURE__ */ import_react50.default.createElement(
           "h2",
           {
             style: {
@@ -48953,9 +48958,9 @@ function TooltipPreviewPage() {
           },
           "Tooltip Variant Matrix"
         ),
-        /* @__PURE__ */ import_react45.default.createElement("div", { style: { display: "grid", gap: spacing.scale["20"] } }, SIZES19.map((sizeItem) => {
+        /* @__PURE__ */ import_react50.default.createElement("div", { style: { display: "grid", gap: spacing.scale["20"] } }, SIZES19.map((sizeItem) => {
           const placements = getSupportedPlacements(sizeItem);
-          return /* @__PURE__ */ import_react45.default.createElement("div", { key: sizeItem, style: { display: "grid", gap: spacing.scale["12"] } }, /* @__PURE__ */ import_react45.default.createElement(
+          return /* @__PURE__ */ import_react50.default.createElement("div", { key: sizeItem, style: { display: "grid", gap: spacing.scale["12"] } }, /* @__PURE__ */ import_react50.default.createElement(
             "span",
             {
               style: {
@@ -48969,7 +48974,7 @@ function TooltipPreviewPage() {
             },
             "Size ",
             sizeItem.toUpperCase()
-          ), /* @__PURE__ */ import_react45.default.createElement(
+          ), /* @__PURE__ */ import_react50.default.createElement(
             "div",
             {
               style: {
@@ -48978,7 +48983,7 @@ function TooltipPreviewPage() {
                 gap: spacing.scale["12"]
               }
             },
-            placements.map((placementItem) => /* @__PURE__ */ import_react45.default.createElement(
+            placements.map((placementItem) => /* @__PURE__ */ import_react50.default.createElement(
               "div",
               {
                 key: `${sizeItem}-${placementItem}`,
@@ -48993,7 +48998,7 @@ function TooltipPreviewPage() {
                   gap: spacing.scale["8"]
                 }
               },
-              /* @__PURE__ */ import_react45.default.createElement(
+              /* @__PURE__ */ import_react50.default.createElement(
                 "span",
                 {
                   style: {
@@ -49007,12 +49012,12 @@ function TooltipPreviewPage() {
                 },
                 toTitle23(placementItem)
               ),
-              /* @__PURE__ */ import_react45.default.createElement("div", { style: { minHeight: spacing.scale["80"], display: "grid", placeItems: "center" } }, /* @__PURE__ */ import_react45.default.createElement(Tooltip, { size: sizeItem, placement: placementItem }))
+              /* @__PURE__ */ import_react50.default.createElement("div", { style: { minHeight: spacing.scale["80"], display: "grid", placeItems: "center" } }, /* @__PURE__ */ import_react50.default.createElement(Tooltip, { size: sizeItem, placement: placementItem }))
             ))
           ));
         }))
       ),
-      /* @__PURE__ */ import_react45.default.createElement(
+      /* @__PURE__ */ import_react50.default.createElement(
         "section",
         {
           style: {
@@ -49026,7 +49031,7 @@ function TooltipPreviewPage() {
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react45.default.createElement(
+        /* @__PURE__ */ import_react50.default.createElement(
           "h2",
           {
             style: {
@@ -49040,7 +49045,7 @@ function TooltipPreviewPage() {
           },
           "Trigger Variant Matrix"
         ),
-        /* @__PURE__ */ import_react45.default.createElement("div", { style: { display: "grid", gridTemplateColumns: `repeat(2, minmax(${spacing.scale["224"]}px, 1fr))`, gap: spacing.scale["12"] } }, [false, true].map((activeItem) => /* @__PURE__ */ import_react45.default.createElement(
+        /* @__PURE__ */ import_react50.default.createElement("div", { style: { display: "grid", gridTemplateColumns: `repeat(2, minmax(${spacing.scale["224"]}px, 1fr))`, gap: spacing.scale["12"] } }, [false, true].map((activeItem) => /* @__PURE__ */ import_react50.default.createElement(
           "div",
           {
             key: activeItem ? "trigger-on" : "trigger-off",
@@ -49055,7 +49060,7 @@ function TooltipPreviewPage() {
               gap: spacing.scale["8"]
             }
           },
-          /* @__PURE__ */ import_react45.default.createElement(
+          /* @__PURE__ */ import_react50.default.createElement(
             "span",
             {
               style: {
@@ -49070,7 +49075,7 @@ function TooltipPreviewPage() {
             "Active=",
             String(activeItem)
           ),
-          /* @__PURE__ */ import_react45.default.createElement("div", { style: { minHeight: spacing.scale["80"], display: "grid", placeItems: "center" } }, /* @__PURE__ */ import_react45.default.createElement(TooltipTrigger, { active: activeItem }))
+          /* @__PURE__ */ import_react50.default.createElement("div", { style: { minHeight: spacing.scale["80"], display: "grid", placeItems: "center" } }, /* @__PURE__ */ import_react50.default.createElement(TooltipTrigger, { active: activeItem }))
         )))
       )
     )
@@ -49078,10 +49083,10 @@ function TooltipPreviewPage() {
 }
 
 // components/TableCell/TableCell.preview.tsx
-var import_react47 = __toESM(require_react());
+var import_react52 = __toESM(require_react());
 
 // components/TableCell/TableCell.tsx
-var import_react46 = __toESM(require_react());
+var import_react51 = __toESM(require_react());
 var palette31 = colors.primitive.palette;
 var textBase28 = colors.semantic.theme.text.base;
 var DEFAULT_LEAD_TITLE = "Title";
@@ -49315,10 +49320,10 @@ function resolveDirectionTextAlignment(direction) {
 function VerticalDotsIcon({ size, color }) {
   const dotRadius = size / 8;
   const centerX = size / 2;
-  return /* @__PURE__ */ import_react46.default.createElement("svg", { "aria-hidden": "true", viewBox: "0 0 20 20", style: { width: size, height: size, display: "block" } }, /* @__PURE__ */ import_react46.default.createElement("circle", { cx: centerX, cy: size * 0.25, r: dotRadius, fill: color }), /* @__PURE__ */ import_react46.default.createElement("circle", { cx: centerX, cy: size * 0.5, r: dotRadius, fill: color }), /* @__PURE__ */ import_react46.default.createElement("circle", { cx: centerX, cy: size * 0.75, r: dotRadius, fill: color }));
+  return /* @__PURE__ */ import_react51.default.createElement("svg", { "aria-hidden": "true", viewBox: "0 0 20 20", style: { width: size, height: size, display: "block" } }, /* @__PURE__ */ import_react51.default.createElement("circle", { cx: centerX, cy: size * 0.25, r: dotRadius, fill: color }), /* @__PURE__ */ import_react51.default.createElement("circle", { cx: centerX, cy: size * 0.5, r: dotRadius, fill: color }), /* @__PURE__ */ import_react51.default.createElement("circle", { cx: centerX, cy: size * 0.75, r: dotRadius, fill: color }));
 }
 function RefreshIcon({ size, color }) {
-  return /* @__PURE__ */ import_react46.default.createElement("svg", { "aria-hidden": "true", viewBox: "0 0 20 20", style: { width: size, height: size, display: "block" } }, /* @__PURE__ */ import_react46.default.createElement(
+  return /* @__PURE__ */ import_react51.default.createElement("svg", { "aria-hidden": "true", viewBox: "0 0 20 20", style: { width: size, height: size, display: "block" } }, /* @__PURE__ */ import_react51.default.createElement(
     "path",
     {
       d: "M10 3.25C6.272 3.25 3.25 6.272 3.25 10C3.25 13.728 6.272 16.75 10 16.75C12.393 16.75 14.495 15.505 15.694 13.625",
@@ -49327,7 +49332,7 @@ function RefreshIcon({ size, color }) {
       strokeWidth: border.width["2"],
       strokeLinecap: "round"
     }
-  ), /* @__PURE__ */ import_react46.default.createElement(
+  ), /* @__PURE__ */ import_react51.default.createElement(
     "path",
     {
       d: "M15.75 7.75V3.75H11.75",
@@ -49340,7 +49345,7 @@ function RefreshIcon({ size, color }) {
   ));
 }
 function TrashIcon({ size, color }) {
-  return /* @__PURE__ */ import_react46.default.createElement("svg", { "aria-hidden": "true", viewBox: "0 0 20 20", style: { width: size, height: size, display: "block" } }, /* @__PURE__ */ import_react46.default.createElement(
+  return /* @__PURE__ */ import_react51.default.createElement("svg", { "aria-hidden": "true", viewBox: "0 0 20 20", style: { width: size, height: size, display: "block" } }, /* @__PURE__ */ import_react51.default.createElement(
     "path",
     {
       d: "M4.75 5.75H15.25",
@@ -49349,7 +49354,7 @@ function TrashIcon({ size, color }) {
       strokeWidth: border.width["2"],
       strokeLinecap: "round"
     }
-  ), /* @__PURE__ */ import_react46.default.createElement(
+  ), /* @__PURE__ */ import_react51.default.createElement(
     "path",
     {
       d: "M7.5 5.75V4.75C7.5 4.198 7.948 3.75 8.5 3.75H11.5C12.052 3.75 12.5 4.198 12.5 4.75V5.75",
@@ -49358,7 +49363,7 @@ function TrashIcon({ size, color }) {
       strokeWidth: border.width["2"],
       strokeLinecap: "round"
     }
-  ), /* @__PURE__ */ import_react46.default.createElement(
+  ), /* @__PURE__ */ import_react51.default.createElement(
     "path",
     {
       d: "M6.5 7.75V14.25C6.5 14.802 6.948 15.25 7.5 15.25H12.5C13.052 15.25 13.5 14.802 13.5 14.25V7.75",
@@ -49370,7 +49375,7 @@ function TrashIcon({ size, color }) {
   ));
 }
 function SpinnerIcon({ size }) {
-  return /* @__PURE__ */ import_react46.default.createElement("svg", { "aria-hidden": "true", viewBox: "0 0 20 20", style: { width: size, height: size, display: "block" } }, /* @__PURE__ */ import_react46.default.createElement("circle", { cx: "10", cy: "10", r: "6.5", fill: "none", stroke: palette31.gray["3"], strokeWidth: border.width["2"] }), /* @__PURE__ */ import_react46.default.createElement(
+  return /* @__PURE__ */ import_react51.default.createElement("svg", { "aria-hidden": "true", viewBox: "0 0 20 20", style: { width: size, height: size, display: "block" } }, /* @__PURE__ */ import_react51.default.createElement("circle", { cx: "10", cy: "10", r: "6.5", fill: "none", stroke: palette31.gray["3"], strokeWidth: border.width["2"] }), /* @__PURE__ */ import_react51.default.createElement(
     "path",
     {
       d: "M10 3.5C12.45 3.5 14.582 4.854 15.683 6.852",
@@ -49383,7 +49388,7 @@ function SpinnerIcon({ size }) {
 }
 function CircleCheckboxIcon({ size, checked }) {
   const strokeColor = checked ? palette31.green["8"] : palette31.gray["8"];
-  return /* @__PURE__ */ import_react46.default.createElement("svg", { "aria-hidden": "true", viewBox: "0 0 20 20", style: { width: size, height: size, display: "block" } }, /* @__PURE__ */ import_react46.default.createElement("circle", { cx: "10", cy: "10", r: "7", fill: "none", stroke: strokeColor, strokeWidth: border.width["2"] }), /* @__PURE__ */ import_react46.default.createElement(
+  return /* @__PURE__ */ import_react51.default.createElement("svg", { "aria-hidden": "true", viewBox: "0 0 20 20", style: { width: size, height: size, display: "block" } }, /* @__PURE__ */ import_react51.default.createElement("circle", { cx: "10", cy: "10", r: "7", fill: "none", stroke: strokeColor, strokeWidth: border.width["2"] }), /* @__PURE__ */ import_react51.default.createElement(
     "path",
     {
       d: "M6.5 10.5L9 13L13.5 8.5",
@@ -49403,7 +49408,7 @@ function IconButton({
   icon,
   gap
 }) {
-  return /* @__PURE__ */ import_react46.default.createElement(
+  return /* @__PURE__ */ import_react51.default.createElement(
     "button",
     {
       type: "button",
@@ -49433,7 +49438,7 @@ function AvatarItem({
   imageSrc
 }) {
   const toneStyle = getAvatarToneStyle(tone);
-  return /* @__PURE__ */ import_react46.default.createElement(
+  return /* @__PURE__ */ import_react51.default.createElement(
     "span",
     {
       "aria-hidden": "true",
@@ -49450,7 +49455,7 @@ function AvatarItem({
         flexShrink: 0
       }
     },
-    imageSrc ? /* @__PURE__ */ import_react46.default.createElement(
+    imageSrc ? /* @__PURE__ */ import_react51.default.createElement(
       "img",
       {
         src: imageSrc,
@@ -49462,7 +49467,7 @@ function AvatarItem({
           display: "block"
         }
       }
-    ) : /* @__PURE__ */ import_react46.default.createElement(
+    ) : /* @__PURE__ */ import_react51.default.createElement(
       "span",
       {
         style: {
@@ -49480,7 +49485,7 @@ function renderChart(points) {
   const step = 100 / (clamped.length - 1);
   const linePoints = clamped.map((point, index) => `${(index * step).toFixed(2)},${(100 - point).toFixed(2)}`).join(" ");
   const areaPoints = `0,100 ${linePoints} 100,100`;
-  return /* @__PURE__ */ import_react46.default.createElement("svg", { "aria-hidden": "true", viewBox: "0 0 100 100", preserveAspectRatio: "none", style: { width: "100%", height: "100%", display: "block" } }, /* @__PURE__ */ import_react46.default.createElement("polygon", { points: areaPoints, fill: palette31.blue["2"] }), /* @__PURE__ */ import_react46.default.createElement(
+  return /* @__PURE__ */ import_react51.default.createElement("svg", { "aria-hidden": "true", viewBox: "0 0 100 100", preserveAspectRatio: "none", style: { width: "100%", height: "100%", display: "block" } }, /* @__PURE__ */ import_react51.default.createElement("polygon", { points: areaPoints, fill: palette31.blue["2"] }), /* @__PURE__ */ import_react51.default.createElement(
     "polyline",
     {
       points: linePoints,
@@ -49500,7 +49505,7 @@ function renderTextBlock({
   stretched
 }) {
   const directionStyle = resolveDirectionTextAlignment(direction);
-  return /* @__PURE__ */ import_react46.default.createElement(
+  return /* @__PURE__ */ import_react51.default.createElement(
     "div",
     {
       style: {
@@ -49515,7 +49520,7 @@ function renderTextBlock({
         textAlign: directionStyle.textAlign
       }
     },
-    /* @__PURE__ */ import_react46.default.createElement(
+    /* @__PURE__ */ import_react51.default.createElement(
       "span",
       {
         style: {
@@ -49526,7 +49531,7 @@ function renderTextBlock({
       },
       title
     ),
-    showCaption ? /* @__PURE__ */ import_react46.default.createElement(
+    showCaption ? /* @__PURE__ */ import_react51.default.createElement(
       "span",
       {
         style: {
@@ -49593,7 +49598,7 @@ function TableCell({
     if (type === "leadPrimary") {
       const leadTextTypography = typography.scale.captionL.medium;
       const leadCaptionTypography = typography.scale.captionM.regular;
-      return /* @__PURE__ */ import_react46.default.createElement(import_react46.default.Fragment, null, showLeadIcon ? /* @__PURE__ */ import_react46.default.createElement(
+      return /* @__PURE__ */ import_react51.default.createElement(import_react51.default.Fragment, null, showLeadIcon ? /* @__PURE__ */ import_react51.default.createElement(
         "span",
         {
           "aria-hidden": "true",
@@ -49610,8 +49615,8 @@ function TableCell({
             flexShrink: spacing.scale["0"]
           }
         },
-        leadIcon ?? /* @__PURE__ */ import_react46.default.createElement(VerticalDotsIcon, { size: config.leadIconSize, color: textBase28.staticDarkSecondary })
-      ) : null, /* @__PURE__ */ import_react46.default.createElement(
+        leadIcon ?? /* @__PURE__ */ import_react51.default.createElement(VerticalDotsIcon, { size: config.leadIconSize, color: textBase28.staticDarkSecondary })
+      ) : null, /* @__PURE__ */ import_react51.default.createElement(
         "div",
         {
           style: {
@@ -49623,8 +49628,8 @@ function TableCell({
             flex: direction === "left" ? "1 0 0" : void 0
           }
         },
-        showAvatar ? /* @__PURE__ */ import_react46.default.createElement(AvatarItem, { size: config.leadAvatarSize, label: avatarLabel, imageSrc: avatarSrc, tone: "gray" }) : null,
-        /* @__PURE__ */ import_react46.default.createElement(
+        showAvatar ? /* @__PURE__ */ import_react51.default.createElement(AvatarItem, { size: config.leadAvatarSize, label: avatarLabel, imageSrc: avatarSrc, tone: "gray" }) : null,
+        /* @__PURE__ */ import_react51.default.createElement(
           "div",
           {
             style: {
@@ -49638,7 +49643,7 @@ function TableCell({
               flex: direction === "left" ? "1 0 0" : void 0
             }
           },
-          /* @__PURE__ */ import_react46.default.createElement(
+          /* @__PURE__ */ import_react51.default.createElement(
             "span",
             {
               style: {
@@ -49649,7 +49654,7 @@ function TableCell({
             },
             title
           ),
-          resolvedShowCaption ? /* @__PURE__ */ import_react46.default.createElement(
+          resolvedShowCaption ? /* @__PURE__ */ import_react51.default.createElement(
             "span",
             {
               style: {
@@ -49661,14 +49666,14 @@ function TableCell({
             caption
           ) : null
         )
-      ), showTailButton ? /* @__PURE__ */ import_react46.default.createElement(
+      ), showTailButton ? /* @__PURE__ */ import_react51.default.createElement(
         IconButton,
         {
           padding: config.iconButtonPadding,
           radiusValue: config.iconButtonRadius,
           disabled,
           onClick: void 0,
-          icon: tailIcon ?? /* @__PURE__ */ import_react46.default.createElement(VerticalDotsIcon, { size: config.iconSize, color: textBase28.staticDarkSecondary }),
+          icon: tailIcon ?? /* @__PURE__ */ import_react51.default.createElement(VerticalDotsIcon, { size: config.iconSize, color: textBase28.staticDarkSecondary }),
           gap: config.iconButtonGap
         }
       ) : null);
@@ -49683,20 +49688,20 @@ function TableCell({
       });
     }
     if (type === "button") {
-      return /* @__PURE__ */ import_react46.default.createElement(
+      return /* @__PURE__ */ import_react51.default.createElement(
         IconButton,
         {
           padding: config.iconButtonPadding,
           radiusValue: config.iconButtonRadius,
           disabled,
           onClick: void 0,
-          icon: buttonIcon ?? /* @__PURE__ */ import_react46.default.createElement(VerticalDotsIcon, { size: config.iconSize, color: textBase28.staticDarkSecondary }),
+          icon: buttonIcon ?? /* @__PURE__ */ import_react51.default.createElement(VerticalDotsIcon, { size: config.iconSize, color: textBase28.staticDarkSecondary }),
           gap: config.iconButtonGap
         }
       );
     }
     if (type === "circleCheckbox") {
-      return /* @__PURE__ */ import_react46.default.createElement(
+      return /* @__PURE__ */ import_react51.default.createElement(
         "button",
         {
           type: "button",
@@ -49719,11 +49724,11 @@ function TableCell({
             cursor: disabled || !onCheckedChange ? "default" : "pointer"
           }
         },
-        /* @__PURE__ */ import_react46.default.createElement(CircleCheckboxIcon, { size: spacing.scale["20"], checked })
+        /* @__PURE__ */ import_react51.default.createElement(CircleCheckboxIcon, { size: spacing.scale["20"], checked })
       );
     }
     if (type === "checkbox") {
-      return /* @__PURE__ */ import_react46.default.createElement(
+      return /* @__PURE__ */ import_react51.default.createElement(
         "span",
         {
           style: {
@@ -49735,7 +49740,7 @@ function TableCell({
             flexShrink: spacing.scale["0"]
           }
         },
-        /* @__PURE__ */ import_react46.default.createElement(
+        /* @__PURE__ */ import_react51.default.createElement(
           Checkbox,
           {
             size: "sm",
@@ -49748,7 +49753,7 @@ function TableCell({
       );
     }
     if (type === "radioButton") {
-      return /* @__PURE__ */ import_react46.default.createElement(
+      return /* @__PURE__ */ import_react51.default.createElement(
         "span",
         {
           style: {
@@ -49760,7 +49765,7 @@ function TableCell({
             flexShrink: spacing.scale["0"]
           }
         },
-        /* @__PURE__ */ import_react46.default.createElement(
+        /* @__PURE__ */ import_react51.default.createElement(
           Radio,
           {
             size: "sm",
@@ -49773,24 +49778,24 @@ function TableCell({
       );
     }
     if (type === "buttonGroup") {
-      return /* @__PURE__ */ import_react46.default.createElement(import_react46.default.Fragment, null, /* @__PURE__ */ import_react46.default.createElement(
+      return /* @__PURE__ */ import_react51.default.createElement(import_react51.default.Fragment, null, /* @__PURE__ */ import_react51.default.createElement(
         IconButton,
         {
           padding: config.iconButtonPadding,
           radiusValue: config.iconButtonRadius,
           disabled,
           onClick: void 0,
-          icon: buttonGroupPrimaryIcon ?? /* @__PURE__ */ import_react46.default.createElement(RefreshIcon, { size: config.iconSize, color: textBase28.staticDarkSecondary }),
+          icon: buttonGroupPrimaryIcon ?? /* @__PURE__ */ import_react51.default.createElement(RefreshIcon, { size: config.iconSize, color: textBase28.staticDarkSecondary }),
           gap: config.iconButtonGap
         }
-      ), /* @__PURE__ */ import_react46.default.createElement(
+      ), /* @__PURE__ */ import_react51.default.createElement(
         IconButton,
         {
           padding: config.iconButtonPadding,
           radiusValue: config.iconButtonRadius,
           disabled,
           onClick: void 0,
-          icon: buttonGroupSecondaryIcon ?? /* @__PURE__ */ import_react46.default.createElement(TrashIcon, { size: config.iconSize, color: textBase28.staticDarkSecondary }),
+          icon: buttonGroupSecondaryIcon ?? /* @__PURE__ */ import_react51.default.createElement(TrashIcon, { size: config.iconSize, color: textBase28.staticDarkSecondary }),
           gap: config.iconButtonGap
         }
       ));
@@ -49800,7 +49805,7 @@ function TableCell({
       const trackPaddingStart = spacing.scale["2"];
       const trackPaddingEnd = spacing.scale["14"];
       const trackPaddingBlock = spacing.scale["2"];
-      return /* @__PURE__ */ import_react46.default.createElement(
+      return /* @__PURE__ */ import_react51.default.createElement(
         "button",
         {
           type: "button",
@@ -49823,7 +49828,7 @@ function TableCell({
             cursor: disabled || !onToggleCheckedChange ? "default" : "pointer"
           }
         },
-        /* @__PURE__ */ import_react46.default.createElement(
+        /* @__PURE__ */ import_react51.default.createElement(
           "span",
           {
             "aria-hidden": "true",
@@ -49842,7 +49847,7 @@ function TableCell({
     }
     if (type === "badge") {
       const badgeTone = getBadgeToneStyle("blue");
-      return /* @__PURE__ */ import_react46.default.createElement(
+      return /* @__PURE__ */ import_react51.default.createElement(
         "span",
         {
           style: {
@@ -49856,14 +49861,14 @@ function TableCell({
             color: badgeTone.color
           }
         },
-        /* @__PURE__ */ import_react46.default.createElement("span", { style: toTypographyStyle15(typography.scale.captionM.medium) }, badgeLabel)
+        /* @__PURE__ */ import_react51.default.createElement("span", { style: toTypographyStyle15(typography.scale.captionM.medium) }, badgeLabel)
       );
     }
     if (type === "badgeGroup") {
       const items = badges && badges.length > 0 ? badges : DEFAULT_BADGES;
-      return /* @__PURE__ */ import_react46.default.createElement(import_react46.default.Fragment, null, items.map((item, index) => {
+      return /* @__PURE__ */ import_react51.default.createElement(import_react51.default.Fragment, null, items.map((item, index) => {
         const toneStyle = getBadgeToneStyle(item.tone ?? "blue");
-        return /* @__PURE__ */ import_react46.default.createElement(
+        return /* @__PURE__ */ import_react51.default.createElement(
           "span",
           {
             key: `${item.label}-${index}`,
@@ -49878,12 +49883,12 @@ function TableCell({
               color: toneStyle.color
             }
           },
-          /* @__PURE__ */ import_react46.default.createElement("span", { style: toTypographyStyle15(typography.scale.captionM.medium) }, item.label)
+          /* @__PURE__ */ import_react51.default.createElement("span", { style: toTypographyStyle15(typography.scale.captionM.medium) }, item.label)
         );
       }));
     }
     if (type === "avatar") {
-      return /* @__PURE__ */ import_react46.default.createElement(
+      return /* @__PURE__ */ import_react51.default.createElement(
         AvatarItem,
         {
           size: config.avatarSize,
@@ -49895,7 +49900,7 @@ function TableCell({
     }
     if (type === "avatarGroup") {
       const items = avatars && avatars.length > 0 ? avatars : DEFAULT_AVATARS;
-      return /* @__PURE__ */ import_react46.default.createElement(
+      return /* @__PURE__ */ import_react51.default.createElement(
         "div",
         {
           style: {
@@ -49906,7 +49911,7 @@ function TableCell({
             paddingBlock: spacing.scale["0"]
           }
         },
-        items.map((item) => /* @__PURE__ */ import_react46.default.createElement(
+        items.map((item) => /* @__PURE__ */ import_react51.default.createElement(
           "span",
           {
             key: item.id,
@@ -49925,7 +49930,7 @@ function TableCell({
               flexShrink: spacing.scale["0"]
             }
           },
-          /* @__PURE__ */ import_react46.default.createElement(
+          /* @__PURE__ */ import_react51.default.createElement(
             AvatarItem,
             {
               size: config.avatarSize,
@@ -49935,7 +49940,7 @@ function TableCell({
             }
           )
         )),
-        /* @__PURE__ */ import_react46.default.createElement(
+        /* @__PURE__ */ import_react51.default.createElement(
           "span",
           {
             style: {
@@ -49954,13 +49959,13 @@ function TableCell({
               flexShrink: spacing.scale["0"]
             }
           },
-          /* @__PURE__ */ import_react46.default.createElement("span", { style: toTypographyStyle15(config.avatarOverflowTypography) }, avatarOverflowLabel)
+          /* @__PURE__ */ import_react51.default.createElement("span", { style: toTypographyStyle15(config.avatarOverflowTypography) }, avatarOverflowLabel)
         )
       );
     }
     if (type === "progress") {
       const resolvedLabel = progressLabel ?? `${Math.round(resolvedProgress)}%`;
-      return /* @__PURE__ */ import_react46.default.createElement(
+      return /* @__PURE__ */ import_react51.default.createElement(
         "div",
         {
           style: {
@@ -49972,7 +49977,7 @@ function TableCell({
             flex: "1 0 0"
           }
         },
-        /* @__PURE__ */ import_react46.default.createElement(
+        /* @__PURE__ */ import_react51.default.createElement(
           "span",
           {
             "aria-hidden": "true",
@@ -49985,7 +49990,7 @@ function TableCell({
               flex: "1 0 0"
             }
           },
-          /* @__PURE__ */ import_react46.default.createElement(
+          /* @__PURE__ */ import_react51.default.createElement(
             "span",
             {
               style: {
@@ -49998,7 +50003,7 @@ function TableCell({
             }
           )
         ),
-        /* @__PURE__ */ import_react46.default.createElement(
+        /* @__PURE__ */ import_react51.default.createElement(
           "span",
           {
             style: {
@@ -50010,14 +50015,14 @@ function TableCell({
               paddingBlock: spacing.scale["2"]
             }
           },
-          /* @__PURE__ */ import_react46.default.createElement("span", { style: { ...toTypographyStyle15(typography.scale.captionL.regular), color: textBase28.staticDark } }, resolvedLabel),
-          /* @__PURE__ */ import_react46.default.createElement(SpinnerIcon, { size: spacing.scale["16"] })
+          /* @__PURE__ */ import_react51.default.createElement("span", { style: { ...toTypographyStyle15(typography.scale.captionL.regular), color: textBase28.staticDark } }, resolvedLabel),
+          /* @__PURE__ */ import_react51.default.createElement(SpinnerIcon, { size: spacing.scale["16"] })
         )
       );
     }
-    return /* @__PURE__ */ import_react46.default.createElement("div", { style: { width: "100%", height: "100%", minWidth: spacing.scale["0"], minHeight: spacing.scale["0"] } }, renderChart(chartPoints ?? DEFAULT_CHART_POINTS));
+    return /* @__PURE__ */ import_react51.default.createElement("div", { style: { width: "100%", height: "100%", minWidth: spacing.scale["0"], minHeight: spacing.scale["0"] } }, renderChart(chartPoints ?? DEFAULT_CHART_POINTS));
   })();
-  return /* @__PURE__ */ import_react46.default.createElement(
+  return /* @__PURE__ */ import_react51.default.createElement(
     "div",
     {
       id,
@@ -50098,25 +50103,25 @@ function toTypography(token) {
   };
 }
 function TableCellPreviewPage() {
-  const [type, setType] = (0, import_react47.useState)("leadPrimary");
-  const [size, setSize] = (0, import_react47.useState)("md");
-  const [direction, setDirection] = (0, import_react47.useState)("left");
-  const [disabled, setDisabled] = (0, import_react47.useState)(false);
-  const [showLeadIcon, setShowLeadIcon] = (0, import_react47.useState)(false);
-  const [showAvatar, setShowAvatar] = (0, import_react47.useState)(true);
-  const [showTailButton, setShowTailButton] = (0, import_react47.useState)(true);
-  const [showCaption, setShowCaption] = (0, import_react47.useState)(true);
-  const [checked, setChecked] = (0, import_react47.useState)(false);
-  const [radioChecked, setRadioChecked] = (0, import_react47.useState)(false);
-  const [toggleChecked, setToggleChecked] = (0, import_react47.useState)(false);
-  const [progressValue, setProgressValue] = (0, import_react47.useState)(spacing.scale["48"] + spacing.scale["2"]);
+  const [type, setType] = (0, import_react52.useState)("leadPrimary");
+  const [size, setSize] = (0, import_react52.useState)("md");
+  const [direction, setDirection] = (0, import_react52.useState)("left");
+  const [disabled, setDisabled] = (0, import_react52.useState)(false);
+  const [showLeadIcon, setShowLeadIcon] = (0, import_react52.useState)(false);
+  const [showAvatar, setShowAvatar] = (0, import_react52.useState)(true);
+  const [showTailButton, setShowTailButton] = (0, import_react52.useState)(true);
+  const [showCaption, setShowCaption] = (0, import_react52.useState)(true);
+  const [checked, setChecked] = (0, import_react52.useState)(false);
+  const [radioChecked, setRadioChecked] = (0, import_react52.useState)(false);
+  const [toggleChecked, setToggleChecked] = (0, import_react52.useState)(false);
+  const [progressValue, setProgressValue] = (0, import_react52.useState)(spacing.scale["48"] + spacing.scale["2"]);
   const showLeadOptions = type === "leadPrimary";
   const showTextOptions = type === "text";
   const showCheckboxOptions = type === "checkbox" || type === "circleCheckbox";
   const showRadioOptions = type === "radioButton";
   const showToggleOptions = type === "toggle";
   const showProgressOptions = type === "progress";
-  return /* @__PURE__ */ import_react47.default.createElement(
+  return /* @__PURE__ */ import_react52.default.createElement(
     "main",
     {
       style: {
@@ -50127,7 +50132,7 @@ function TableCellPreviewPage() {
         fontFamily: typography.scale.bodyM.medium.fontFamily
       }
     },
-    /* @__PURE__ */ import_react47.default.createElement(
+    /* @__PURE__ */ import_react52.default.createElement(
       "section",
       {
         style: {
@@ -50137,7 +50142,7 @@ function TableCellPreviewPage() {
           gap: spacing.scale["24"]
         }
       },
-      /* @__PURE__ */ import_react47.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react47.default.createElement(
+      /* @__PURE__ */ import_react52.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react52.default.createElement(
         "h1",
         {
           style: {
@@ -50146,7 +50151,7 @@ function TableCellPreviewPage() {
           }
         },
         "Table Cell Preview"
-      ), /* @__PURE__ */ import_react47.default.createElement(
+      ), /* @__PURE__ */ import_react52.default.createElement(
         "p",
         {
           style: {
@@ -50157,7 +50162,7 @@ function TableCellPreviewPage() {
         },
         "Figma Variant(Type/Size/Direction)\uC640 \uC140 \uB0B4\uBD80 \uD1A0\uD070 \uAD6C\uC131\uC744 \uAC80\uC99D\uD569\uB2C8\uB2E4."
       )),
-      /* @__PURE__ */ import_react47.default.createElement(
+      /* @__PURE__ */ import_react52.default.createElement(
         "section",
         {
           style: {
@@ -50172,7 +50177,7 @@ function TableCellPreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react47.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react47.default.createElement("span", null, "Type"), /* @__PURE__ */ import_react47.default.createElement(
+        /* @__PURE__ */ import_react52.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react52.default.createElement("span", null, "Type"), /* @__PURE__ */ import_react52.default.createElement(
           "select",
           {
             value: type,
@@ -50188,9 +50193,9 @@ function TableCellPreviewPage() {
               color: textBase29.staticDark
             }
           },
-          TYPES12.map((item) => /* @__PURE__ */ import_react47.default.createElement("option", { key: item, value: item }, toTitle24(item)))
+          TYPES12.map((item) => /* @__PURE__ */ import_react52.default.createElement("option", { key: item, value: item }, toTitle24(item)))
         )),
-        /* @__PURE__ */ import_react47.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react47.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react47.default.createElement(
+        /* @__PURE__ */ import_react52.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react52.default.createElement("span", null, "Size"), /* @__PURE__ */ import_react52.default.createElement(
           "select",
           {
             value: size,
@@ -50206,9 +50211,9 @@ function TableCellPreviewPage() {
               color: textBase29.staticDark
             }
           },
-          SIZES20.map((item) => /* @__PURE__ */ import_react47.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
+          SIZES20.map((item) => /* @__PURE__ */ import_react52.default.createElement("option", { key: item, value: item }, item.toUpperCase()))
         )),
-        /* @__PURE__ */ import_react47.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react47.default.createElement("span", null, "Direction"), /* @__PURE__ */ import_react47.default.createElement(
+        /* @__PURE__ */ import_react52.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react52.default.createElement("span", null, "Direction"), /* @__PURE__ */ import_react52.default.createElement(
           "select",
           {
             value: direction,
@@ -50224,9 +50229,9 @@ function TableCellPreviewPage() {
               color: textBase29.staticDark
             }
           },
-          DIRECTIONS3.map((item) => /* @__PURE__ */ import_react47.default.createElement("option", { key: item, value: item }, toTitle24(item)))
+          DIRECTIONS3.map((item) => /* @__PURE__ */ import_react52.default.createElement("option", { key: item, value: item }, toTitle24(item)))
         )),
-        /* @__PURE__ */ import_react47.default.createElement(
+        /* @__PURE__ */ import_react52.default.createElement(
           "label",
           {
             style: {
@@ -50243,8 +50248,8 @@ function TableCellPreviewPage() {
               backgroundColor: palette32.base.white
             }
           },
-          /* @__PURE__ */ import_react47.default.createElement("span", null, "Disabled"),
-          /* @__PURE__ */ import_react47.default.createElement(
+          /* @__PURE__ */ import_react52.default.createElement("span", null, "Disabled"),
+          /* @__PURE__ */ import_react52.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -50253,7 +50258,7 @@ function TableCellPreviewPage() {
             }
           )
         ),
-        showLeadOptions ? /* @__PURE__ */ import_react47.default.createElement(import_react47.default.Fragment, null, /* @__PURE__ */ import_react47.default.createElement(
+        showLeadOptions ? /* @__PURE__ */ import_react52.default.createElement(import_react52.default.Fragment, null, /* @__PURE__ */ import_react52.default.createElement(
           "label",
           {
             style: {
@@ -50270,8 +50275,8 @@ function TableCellPreviewPage() {
               backgroundColor: palette32.base.white
             }
           },
-          /* @__PURE__ */ import_react47.default.createElement("span", null, "Lead Icon"),
-          /* @__PURE__ */ import_react47.default.createElement(
+          /* @__PURE__ */ import_react52.default.createElement("span", null, "Lead Icon"),
+          /* @__PURE__ */ import_react52.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -50279,7 +50284,7 @@ function TableCellPreviewPage() {
               onChange: (event) => setShowLeadIcon(event.target.checked)
             }
           )
-        ), /* @__PURE__ */ import_react47.default.createElement(
+        ), /* @__PURE__ */ import_react52.default.createElement(
           "label",
           {
             style: {
@@ -50296,8 +50301,8 @@ function TableCellPreviewPage() {
               backgroundColor: palette32.base.white
             }
           },
-          /* @__PURE__ */ import_react47.default.createElement("span", null, "Avatar"),
-          /* @__PURE__ */ import_react47.default.createElement(
+          /* @__PURE__ */ import_react52.default.createElement("span", null, "Avatar"),
+          /* @__PURE__ */ import_react52.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -50305,7 +50310,7 @@ function TableCellPreviewPage() {
               onChange: (event) => setShowAvatar(event.target.checked)
             }
           )
-        ), /* @__PURE__ */ import_react47.default.createElement(
+        ), /* @__PURE__ */ import_react52.default.createElement(
           "label",
           {
             style: {
@@ -50322,8 +50327,8 @@ function TableCellPreviewPage() {
               backgroundColor: palette32.base.white
             }
           },
-          /* @__PURE__ */ import_react47.default.createElement("span", null, "Tail Button"),
-          /* @__PURE__ */ import_react47.default.createElement(
+          /* @__PURE__ */ import_react52.default.createElement("span", null, "Tail Button"),
+          /* @__PURE__ */ import_react52.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -50331,7 +50336,7 @@ function TableCellPreviewPage() {
               onChange: (event) => setShowTailButton(event.target.checked)
             }
           )
-        ), /* @__PURE__ */ import_react47.default.createElement(
+        ), /* @__PURE__ */ import_react52.default.createElement(
           "label",
           {
             style: {
@@ -50348,8 +50353,8 @@ function TableCellPreviewPage() {
               backgroundColor: palette32.base.white
             }
           },
-          /* @__PURE__ */ import_react47.default.createElement("span", null, "Caption"),
-          /* @__PURE__ */ import_react47.default.createElement(
+          /* @__PURE__ */ import_react52.default.createElement("span", null, "Caption"),
+          /* @__PURE__ */ import_react52.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -50358,7 +50363,7 @@ function TableCellPreviewPage() {
             }
           )
         )) : null,
-        showTextOptions ? /* @__PURE__ */ import_react47.default.createElement(
+        showTextOptions ? /* @__PURE__ */ import_react52.default.createElement(
           "label",
           {
             style: {
@@ -50375,8 +50380,8 @@ function TableCellPreviewPage() {
               backgroundColor: palette32.base.white
             }
           },
-          /* @__PURE__ */ import_react47.default.createElement("span", null, "Caption"),
-          /* @__PURE__ */ import_react47.default.createElement(
+          /* @__PURE__ */ import_react52.default.createElement("span", null, "Caption"),
+          /* @__PURE__ */ import_react52.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -50385,7 +50390,7 @@ function TableCellPreviewPage() {
             }
           )
         ) : null,
-        showCheckboxOptions ? /* @__PURE__ */ import_react47.default.createElement(
+        showCheckboxOptions ? /* @__PURE__ */ import_react52.default.createElement(
           "label",
           {
             style: {
@@ -50402,8 +50407,8 @@ function TableCellPreviewPage() {
               backgroundColor: palette32.base.white
             }
           },
-          /* @__PURE__ */ import_react47.default.createElement("span", null, "Checked"),
-          /* @__PURE__ */ import_react47.default.createElement(
+          /* @__PURE__ */ import_react52.default.createElement("span", null, "Checked"),
+          /* @__PURE__ */ import_react52.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -50412,7 +50417,7 @@ function TableCellPreviewPage() {
             }
           )
         ) : null,
-        showRadioOptions ? /* @__PURE__ */ import_react47.default.createElement(
+        showRadioOptions ? /* @__PURE__ */ import_react52.default.createElement(
           "label",
           {
             style: {
@@ -50429,8 +50434,8 @@ function TableCellPreviewPage() {
               backgroundColor: palette32.base.white
             }
           },
-          /* @__PURE__ */ import_react47.default.createElement("span", null, "Checked"),
-          /* @__PURE__ */ import_react47.default.createElement(
+          /* @__PURE__ */ import_react52.default.createElement("span", null, "Checked"),
+          /* @__PURE__ */ import_react52.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -50439,7 +50444,7 @@ function TableCellPreviewPage() {
             }
           )
         ) : null,
-        showToggleOptions ? /* @__PURE__ */ import_react47.default.createElement(
+        showToggleOptions ? /* @__PURE__ */ import_react52.default.createElement(
           "label",
           {
             style: {
@@ -50456,8 +50461,8 @@ function TableCellPreviewPage() {
               backgroundColor: palette32.base.white
             }
           },
-          /* @__PURE__ */ import_react47.default.createElement("span", null, "Checked"),
-          /* @__PURE__ */ import_react47.default.createElement(
+          /* @__PURE__ */ import_react52.default.createElement("span", null, "Checked"),
+          /* @__PURE__ */ import_react52.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -50466,7 +50471,7 @@ function TableCellPreviewPage() {
             }
           )
         ) : null,
-        showProgressOptions ? /* @__PURE__ */ import_react47.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react47.default.createElement("span", null, "Progress (", Math.round(progressValue), "%)"), /* @__PURE__ */ import_react47.default.createElement(
+        showProgressOptions ? /* @__PURE__ */ import_react52.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react52.default.createElement("span", null, "Progress (", Math.round(progressValue), "%)"), /* @__PURE__ */ import_react52.default.createElement(
           "input",
           {
             type: "range",
@@ -50478,7 +50483,7 @@ function TableCellPreviewPage() {
           }
         )) : null
       ),
-      /* @__PURE__ */ import_react47.default.createElement(
+      /* @__PURE__ */ import_react52.default.createElement(
         "section",
         {
           style: {
@@ -50493,7 +50498,7 @@ function TableCellPreviewPage() {
             justifyItems: "start"
           }
         },
-        /* @__PURE__ */ import_react47.default.createElement(
+        /* @__PURE__ */ import_react52.default.createElement(
           "h2",
           {
             style: {
@@ -50503,7 +50508,7 @@ function TableCellPreviewPage() {
           },
           "Selected Variant"
         ),
-        /* @__PURE__ */ import_react47.default.createElement(
+        /* @__PURE__ */ import_react52.default.createElement(
           TableCell,
           {
             type,
@@ -50524,7 +50529,7 @@ function TableCellPreviewPage() {
           }
         )
       ),
-      /* @__PURE__ */ import_react47.default.createElement(
+      /* @__PURE__ */ import_react52.default.createElement(
         "section",
         {
           style: {
@@ -50538,7 +50543,7 @@ function TableCellPreviewPage() {
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react47.default.createElement(
+        /* @__PURE__ */ import_react52.default.createElement(
           "h2",
           {
             style: {
@@ -50548,7 +50553,7 @@ function TableCellPreviewPage() {
           },
           "Direction Matrix"
         ),
-        /* @__PURE__ */ import_react47.default.createElement(
+        /* @__PURE__ */ import_react52.default.createElement(
           "div",
           {
             style: {
@@ -50556,7 +50561,7 @@ function TableCellPreviewPage() {
               gap: spacing.scale["12"]
             }
           },
-          DIRECTIONS3.map((item) => /* @__PURE__ */ import_react47.default.createElement(
+          DIRECTIONS3.map((item) => /* @__PURE__ */ import_react52.default.createElement(
             "div",
             {
               key: item,
@@ -50565,8 +50570,8 @@ function TableCellPreviewPage() {
                 gap: spacing.scale["4"]
               }
             },
-            /* @__PURE__ */ import_react47.default.createElement("span", { style: { ...toTypography(typography.scale.captionM.medium), color: textBase29.staticDarkSecondary } }, toTitle24(item)),
-            /* @__PURE__ */ import_react47.default.createElement(
+            /* @__PURE__ */ import_react52.default.createElement("span", { style: { ...toTypography(typography.scale.captionM.medium), color: textBase29.staticDarkSecondary } }, toTitle24(item)),
+            /* @__PURE__ */ import_react52.default.createElement(
               TableCell,
               {
                 type,
@@ -50594,10 +50599,10 @@ function TableCellPreviewPage() {
 }
 
 // components/TableHeader/TableHeader.preview.tsx
-var import_react49 = __toESM(require_react());
+var import_react54 = __toESM(require_react());
 
 // components/TableHeader/TableHeader.tsx
-var import_react48 = __toESM(require_react());
+var import_react53 = __toESM(require_react());
 var palette33 = colors.primitive.palette;
 var textBase30 = colors.semantic.theme.text.base;
 var HEADER_WIDTH = spacing.scale["224"] + spacing.scale["56"];
@@ -50611,7 +50616,7 @@ function toTypographyStyle16(token) {
   };
 }
 function SortIcon({ size, color }) {
-  return /* @__PURE__ */ import_react48.default.createElement("svg", { "aria-hidden": "true", viewBox: "0 0 20 20", style: { width: size, height: size, display: "block" } }, /* @__PURE__ */ import_react48.default.createElement(
+  return /* @__PURE__ */ import_react53.default.createElement("svg", { "aria-hidden": "true", viewBox: "0 0 20 20", style: { width: size, height: size, display: "block" } }, /* @__PURE__ */ import_react53.default.createElement(
     "path",
     {
       d: "M6.5 8L10 4.5L13.5 8",
@@ -50621,7 +50626,7 @@ function SortIcon({ size, color }) {
       strokeLinecap: "round",
       strokeLinejoin: "round"
     }
-  ), /* @__PURE__ */ import_react48.default.createElement(
+  ), /* @__PURE__ */ import_react53.default.createElement(
     "path",
     {
       d: "M6.5 12L10 15.5L13.5 12",
@@ -50677,7 +50682,7 @@ function TableHeader({
   onCheckboxCheckedChange,
   onSortClick
 }) {
-  return /* @__PURE__ */ import_react48.default.createElement(
+  return /* @__PURE__ */ import_react53.default.createElement(
     "div",
     {
       id,
@@ -50696,7 +50701,7 @@ function TableHeader({
       },
       "aria-disabled": disabled || void 0
     },
-    showCheckbox ? /* @__PURE__ */ import_react48.default.createElement(
+    showCheckbox ? /* @__PURE__ */ import_react53.default.createElement(
       "span",
       {
         style: {
@@ -50708,7 +50713,7 @@ function TableHeader({
           flexShrink: spacing.scale["0"]
         }
       },
-      /* @__PURE__ */ import_react48.default.createElement(
+      /* @__PURE__ */ import_react53.default.createElement(
         Checkbox,
         {
           size: "sm",
@@ -50719,7 +50724,7 @@ function TableHeader({
         }
       )
     ) : null,
-    /* @__PURE__ */ import_react48.default.createElement("div", { style: getTextContainerStyle(direction) }, /* @__PURE__ */ import_react48.default.createElement(
+    /* @__PURE__ */ import_react53.default.createElement("div", { style: getTextContainerStyle(direction) }, /* @__PURE__ */ import_react53.default.createElement(
       "span",
       {
         style: {
@@ -50729,7 +50734,7 @@ function TableHeader({
         }
       },
       title
-    ), showSortIcon ? /* @__PURE__ */ import_react48.default.createElement(
+    ), showSortIcon ? /* @__PURE__ */ import_react53.default.createElement(
       "button",
       {
         type: "button",
@@ -50751,7 +50756,7 @@ function TableHeader({
         },
         "aria-label": "Sort column"
       },
-      /* @__PURE__ */ import_react48.default.createElement(SortIcon, { size: spacing.scale["16"], color: textBase30.staticDarkSecondary })
+      /* @__PURE__ */ import_react53.default.createElement(SortIcon, { size: spacing.scale["16"], color: textBase30.staticDarkSecondary })
     ) : null)
   );
 }
@@ -50773,13 +50778,13 @@ function toTypography2(token) {
   };
 }
 function TableHeaderPreviewPage() {
-  const [direction, setDirection] = (0, import_react49.useState)("left");
-  const [disabled, setDisabled] = (0, import_react49.useState)(false);
-  const [showCheckbox, setShowCheckbox] = (0, import_react49.useState)(true);
-  const [checkboxChecked, setCheckboxChecked] = (0, import_react49.useState)(false);
-  const [showSortIcon, setShowSortIcon] = (0, import_react49.useState)(false);
-  const [title, setTitle] = (0, import_react49.useState)("Header");
-  return /* @__PURE__ */ import_react49.default.createElement(
+  const [direction, setDirection] = (0, import_react54.useState)("left");
+  const [disabled, setDisabled] = (0, import_react54.useState)(false);
+  const [showCheckbox, setShowCheckbox] = (0, import_react54.useState)(true);
+  const [checkboxChecked, setCheckboxChecked] = (0, import_react54.useState)(false);
+  const [showSortIcon, setShowSortIcon] = (0, import_react54.useState)(false);
+  const [title, setTitle] = (0, import_react54.useState)("Header");
+  return /* @__PURE__ */ import_react54.default.createElement(
     "main",
     {
       style: {
@@ -50790,7 +50795,7 @@ function TableHeaderPreviewPage() {
         fontFamily: typography.scale.bodyM.medium.fontFamily
       }
     },
-    /* @__PURE__ */ import_react49.default.createElement(
+    /* @__PURE__ */ import_react54.default.createElement(
       "section",
       {
         style: {
@@ -50800,7 +50805,7 @@ function TableHeaderPreviewPage() {
           gap: spacing.scale["24"]
         }
       },
-      /* @__PURE__ */ import_react49.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react49.default.createElement(
+      /* @__PURE__ */ import_react54.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react54.default.createElement(
         "h1",
         {
           style: {
@@ -50809,7 +50814,7 @@ function TableHeaderPreviewPage() {
           }
         },
         "Table Header Preview"
-      ), /* @__PURE__ */ import_react49.default.createElement(
+      ), /* @__PURE__ */ import_react54.default.createElement(
         "p",
         {
           style: {
@@ -50820,7 +50825,7 @@ function TableHeaderPreviewPage() {
         },
         "Figma Variant(Direction) \uBC0F \uD5E4\uB354 \uBCF4\uC870 \uC694\uC18C(checkbox/sort icon) \uAD6C\uC131\uC744 \uAC80\uC99D\uD569\uB2C8\uB2E4."
       )),
-      /* @__PURE__ */ import_react49.default.createElement(
+      /* @__PURE__ */ import_react54.default.createElement(
         "section",
         {
           style: {
@@ -50835,7 +50840,7 @@ function TableHeaderPreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react49.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react49.default.createElement("span", null, "Direction"), /* @__PURE__ */ import_react49.default.createElement(
+        /* @__PURE__ */ import_react54.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react54.default.createElement("span", null, "Direction"), /* @__PURE__ */ import_react54.default.createElement(
           "select",
           {
             value: direction,
@@ -50851,9 +50856,9 @@ function TableHeaderPreviewPage() {
               color: textBase31.staticDark
             }
           },
-          DIRECTIONS4.map((item) => /* @__PURE__ */ import_react49.default.createElement("option", { key: item, value: item }, toTitle25(item)))
+          DIRECTIONS4.map((item) => /* @__PURE__ */ import_react54.default.createElement("option", { key: item, value: item }, toTitle25(item)))
         )),
-        /* @__PURE__ */ import_react49.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react49.default.createElement("span", null, "Title"), /* @__PURE__ */ import_react49.default.createElement(
+        /* @__PURE__ */ import_react54.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react54.default.createElement("span", null, "Title"), /* @__PURE__ */ import_react54.default.createElement(
           "input",
           {
             type: "text",
@@ -50871,7 +50876,7 @@ function TableHeaderPreviewPage() {
             }
           }
         )),
-        /* @__PURE__ */ import_react49.default.createElement(
+        /* @__PURE__ */ import_react54.default.createElement(
           "label",
           {
             style: {
@@ -50888,8 +50893,8 @@ function TableHeaderPreviewPage() {
               backgroundColor: palette34.base.white
             }
           },
-          /* @__PURE__ */ import_react49.default.createElement("span", null, "Disabled"),
-          /* @__PURE__ */ import_react49.default.createElement(
+          /* @__PURE__ */ import_react54.default.createElement("span", null, "Disabled"),
+          /* @__PURE__ */ import_react54.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -50898,7 +50903,7 @@ function TableHeaderPreviewPage() {
             }
           )
         ),
-        /* @__PURE__ */ import_react49.default.createElement(
+        /* @__PURE__ */ import_react54.default.createElement(
           "label",
           {
             style: {
@@ -50915,8 +50920,8 @@ function TableHeaderPreviewPage() {
               backgroundColor: palette34.base.white
             }
           },
-          /* @__PURE__ */ import_react49.default.createElement("span", null, "Show Checkbox"),
-          /* @__PURE__ */ import_react49.default.createElement(
+          /* @__PURE__ */ import_react54.default.createElement("span", null, "Show Checkbox"),
+          /* @__PURE__ */ import_react54.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -50925,7 +50930,7 @@ function TableHeaderPreviewPage() {
             }
           )
         ),
-        /* @__PURE__ */ import_react49.default.createElement(
+        /* @__PURE__ */ import_react54.default.createElement(
           "label",
           {
             style: {
@@ -50942,8 +50947,8 @@ function TableHeaderPreviewPage() {
               backgroundColor: showCheckbox ? palette34.base.white : palette34.gray["2"]
             }
           },
-          /* @__PURE__ */ import_react49.default.createElement("span", null, "Checkbox Checked"),
-          /* @__PURE__ */ import_react49.default.createElement(
+          /* @__PURE__ */ import_react54.default.createElement("span", null, "Checkbox Checked"),
+          /* @__PURE__ */ import_react54.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -50953,7 +50958,7 @@ function TableHeaderPreviewPage() {
             }
           )
         ),
-        /* @__PURE__ */ import_react49.default.createElement(
+        /* @__PURE__ */ import_react54.default.createElement(
           "label",
           {
             style: {
@@ -50970,8 +50975,8 @@ function TableHeaderPreviewPage() {
               backgroundColor: palette34.base.white
             }
           },
-          /* @__PURE__ */ import_react49.default.createElement("span", null, "Show Sort Icon"),
-          /* @__PURE__ */ import_react49.default.createElement(
+          /* @__PURE__ */ import_react54.default.createElement("span", null, "Show Sort Icon"),
+          /* @__PURE__ */ import_react54.default.createElement(
             "input",
             {
               type: "checkbox",
@@ -50981,7 +50986,7 @@ function TableHeaderPreviewPage() {
           )
         )
       ),
-      /* @__PURE__ */ import_react49.default.createElement(
+      /* @__PURE__ */ import_react54.default.createElement(
         "section",
         {
           style: {
@@ -50996,7 +51001,7 @@ function TableHeaderPreviewPage() {
             justifyItems: "start"
           }
         },
-        /* @__PURE__ */ import_react49.default.createElement(
+        /* @__PURE__ */ import_react54.default.createElement(
           "h2",
           {
             style: {
@@ -51006,7 +51011,7 @@ function TableHeaderPreviewPage() {
           },
           "Selected Variant"
         ),
-        /* @__PURE__ */ import_react49.default.createElement(
+        /* @__PURE__ */ import_react54.default.createElement(
           TableHeader,
           {
             direction,
@@ -51020,7 +51025,7 @@ function TableHeaderPreviewPage() {
           }
         )
       ),
-      /* @__PURE__ */ import_react49.default.createElement(
+      /* @__PURE__ */ import_react54.default.createElement(
         "section",
         {
           style: {
@@ -51034,7 +51039,7 @@ function TableHeaderPreviewPage() {
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react49.default.createElement(
+        /* @__PURE__ */ import_react54.default.createElement(
           "h2",
           {
             style: {
@@ -51044,7 +51049,7 @@ function TableHeaderPreviewPage() {
           },
           "Direction Matrix"
         ),
-        /* @__PURE__ */ import_react49.default.createElement("div", { style: { display: "grid", gap: spacing.scale["12"] } }, DIRECTIONS4.map((item) => /* @__PURE__ */ import_react49.default.createElement("div", { key: item, style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react49.default.createElement("span", { style: { ...toTypography2(typography.scale.captionM.medium), color: textBase31.staticDarkSecondary } }, toTitle25(item)), /* @__PURE__ */ import_react49.default.createElement(
+        /* @__PURE__ */ import_react54.default.createElement("div", { style: { display: "grid", gap: spacing.scale["12"] } }, DIRECTIONS4.map((item) => /* @__PURE__ */ import_react54.default.createElement("div", { key: item, style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react54.default.createElement("span", { style: { ...toTypography2(typography.scale.captionM.medium), color: textBase31.staticDarkSecondary } }, toTitle25(item)), /* @__PURE__ */ import_react54.default.createElement(
           TableHeader,
           {
             direction: item,
@@ -51063,10 +51068,10 @@ function TableHeaderPreviewPage() {
 }
 
 // components/TaskCard/TaskCard.preview.tsx
-var import_react51 = __toESM(require_react());
+var import_react56 = __toESM(require_react());
 
 // components/TaskCard/TaskCard.tsx
-var import_react50 = __toESM(require_react());
+var import_react55 = __toESM(require_react());
 var palette35 = colors.primitive.palette;
 var textTokens7 = colors.semantic.theme.text.base;
 function getTypographyStyle3(token) {
@@ -51088,7 +51093,7 @@ function resolveState5(forcedState, hovered, interactive) {
   return "default";
 }
 function Badge2({ label }) {
-  return /* @__PURE__ */ import_react50.default.createElement(
+  return /* @__PURE__ */ import_react55.default.createElement(
     "div",
     {
       style: {
@@ -51101,7 +51106,7 @@ function Badge2({ label }) {
         backgroundColor: palette35.gray["2"]
       }
     },
-    /* @__PURE__ */ import_react50.default.createElement(
+    /* @__PURE__ */ import_react55.default.createElement(
       "span",
       {
         style: {
@@ -51134,7 +51139,7 @@ function TaskCard({
   onKeyDown,
   ...props
 }) {
-  const [hovered, setHovered] = (0, import_react50.useState)(false);
+  const [hovered, setHovered] = (0, import_react55.useState)(false);
   const resolvedState = resolveState5(state, hovered, interactive);
   const isInteractive = Boolean(onClick) || interactive;
   const handleKeyDown = (event) => {
@@ -51148,7 +51153,7 @@ function TaskCard({
     }
     onKeyDown?.(event);
   };
-  return /* @__PURE__ */ import_react50.default.createElement(
+  return /* @__PURE__ */ import_react55.default.createElement(
     "article",
     {
       className,
@@ -51187,7 +51192,7 @@ function TaskCard({
       },
       ...props
     },
-    /* @__PURE__ */ import_react50.default.createElement(
+    /* @__PURE__ */ import_react55.default.createElement(
       "div",
       {
         style: {
@@ -51198,7 +51203,7 @@ function TaskCard({
           gap: spacing.scale["4"]
         }
       },
-      /* @__PURE__ */ import_react50.default.createElement(
+      /* @__PURE__ */ import_react55.default.createElement(
         "h3",
         {
           style: {
@@ -51210,7 +51215,7 @@ function TaskCard({
         },
         headline
       ),
-      /* @__PURE__ */ import_react50.default.createElement(
+      /* @__PURE__ */ import_react55.default.createElement(
         "p",
         {
           style: {
@@ -51222,7 +51227,7 @@ function TaskCard({
         },
         description
       ),
-      /* @__PURE__ */ import_react50.default.createElement(
+      /* @__PURE__ */ import_react55.default.createElement(
         "p",
         {
           style: {
@@ -51235,7 +51240,7 @@ function TaskCard({
         caption
       )
     ),
-    /* @__PURE__ */ import_react50.default.createElement(
+    /* @__PURE__ */ import_react55.default.createElement(
       "div",
       {
         style: {
@@ -51246,7 +51251,7 @@ function TaskCard({
           gap: spacing.scale["8"]
         }
       },
-      tags.map((tag) => /* @__PURE__ */ import_react50.default.createElement(Badge2, { key: tag, label: tag }))
+      tags.map((tag) => /* @__PURE__ */ import_react55.default.createElement(Badge2, { key: tag, label: tag }))
     )
   );
 }
@@ -51259,14 +51264,14 @@ function toTitle26(value) {
   return value.charAt(0).toUpperCase() + value.slice(1);
 }
 function TaskCardPreviewPage() {
-  const [state, setState] = (0, import_react51.useState)("auto");
-  const [interactive, setInteractive] = (0, import_react51.useState)(true);
-  const [showDescription, setShowDescription] = (0, import_react51.useState)(true);
-  const [showSecondTag, setShowSecondTag] = (0, import_react51.useState)(true);
-  const tags = (0, import_react51.useMemo)(() => {
+  const [state, setState] = (0, import_react56.useState)("auto");
+  const [interactive, setInteractive] = (0, import_react56.useState)(true);
+  const [showDescription, setShowDescription] = (0, import_react56.useState)(true);
+  const [showSecondTag, setShowSecondTag] = (0, import_react56.useState)(true);
+  const tags = (0, import_react56.useMemo)(() => {
     return showSecondTag ? ["Design", "Hiring"] : ["Design"];
   }, [showSecondTag]);
-  return /* @__PURE__ */ import_react51.default.createElement(
+  return /* @__PURE__ */ import_react56.default.createElement(
     "main",
     {
       style: {
@@ -51277,7 +51282,7 @@ function TaskCardPreviewPage() {
         fontFamily: typography.scale.bodyM.medium.fontFamily
       }
     },
-    /* @__PURE__ */ import_react51.default.createElement(
+    /* @__PURE__ */ import_react56.default.createElement(
       "section",
       {
         style: {
@@ -51287,7 +51292,7 @@ function TaskCardPreviewPage() {
           gap: spacing.scale["24"]
         }
       },
-      /* @__PURE__ */ import_react51.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react51.default.createElement(
+      /* @__PURE__ */ import_react56.default.createElement("header", { style: { display: "grid", gap: spacing.scale["8"] } }, /* @__PURE__ */ import_react56.default.createElement(
         "h1",
         {
           style: {
@@ -51300,7 +51305,7 @@ function TaskCardPreviewPage() {
           }
         },
         "Task Card Preview"
-      ), /* @__PURE__ */ import_react51.default.createElement(
+      ), /* @__PURE__ */ import_react56.default.createElement(
         "p",
         {
           style: {
@@ -51315,7 +51320,7 @@ function TaskCardPreviewPage() {
         },
         "Figma state(Default/Hover) \uBC0F hover \uC0C1\uD638\uC791\uC6A9 \uAC80\uC99D"
       )),
-      /* @__PURE__ */ import_react51.default.createElement(
+      /* @__PURE__ */ import_react56.default.createElement(
         "section",
         {
           style: {
@@ -51330,7 +51335,7 @@ function TaskCardPreviewPage() {
             gap: spacing.scale["12"]
           }
         },
-        /* @__PURE__ */ import_react51.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react51.default.createElement("span", null, "State"), /* @__PURE__ */ import_react51.default.createElement(
+        /* @__PURE__ */ import_react56.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react56.default.createElement("span", null, "State"), /* @__PURE__ */ import_react56.default.createElement(
           "select",
           {
             value: state,
@@ -51346,9 +51351,9 @@ function TaskCardPreviewPage() {
               color: textTokens8.staticDark
             }
           },
-          STATES15.map((item) => /* @__PURE__ */ import_react51.default.createElement("option", { key: item, value: item }, toTitle26(item)))
+          STATES15.map((item) => /* @__PURE__ */ import_react56.default.createElement("option", { key: item, value: item }, toTitle26(item)))
         )),
-        /* @__PURE__ */ import_react51.default.createElement(
+        /* @__PURE__ */ import_react56.default.createElement(
           "label",
           {
             style: {
@@ -51365,10 +51370,10 @@ function TaskCardPreviewPage() {
               backgroundColor: palette36.base.white
             }
           },
-          /* @__PURE__ */ import_react51.default.createElement("span", null, "Interactive"),
-          /* @__PURE__ */ import_react51.default.createElement("input", { type: "checkbox", checked: interactive, onChange: (event) => setInteractive(event.target.checked) })
+          /* @__PURE__ */ import_react56.default.createElement("span", null, "Interactive"),
+          /* @__PURE__ */ import_react56.default.createElement("input", { type: "checkbox", checked: interactive, onChange: (event) => setInteractive(event.target.checked) })
         ),
-        /* @__PURE__ */ import_react51.default.createElement(
+        /* @__PURE__ */ import_react56.default.createElement(
           "label",
           {
             style: {
@@ -51385,10 +51390,10 @@ function TaskCardPreviewPage() {
               backgroundColor: palette36.base.white
             }
           },
-          /* @__PURE__ */ import_react51.default.createElement("span", null, "Description"),
-          /* @__PURE__ */ import_react51.default.createElement("input", { type: "checkbox", checked: showDescription, onChange: (event) => setShowDescription(event.target.checked) })
+          /* @__PURE__ */ import_react56.default.createElement("span", null, "Description"),
+          /* @__PURE__ */ import_react56.default.createElement("input", { type: "checkbox", checked: showDescription, onChange: (event) => setShowDescription(event.target.checked) })
         ),
-        /* @__PURE__ */ import_react51.default.createElement(
+        /* @__PURE__ */ import_react56.default.createElement(
           "label",
           {
             style: {
@@ -51405,11 +51410,11 @@ function TaskCardPreviewPage() {
               backgroundColor: palette36.base.white
             }
           },
-          /* @__PURE__ */ import_react51.default.createElement("span", null, "Second Tag"),
-          /* @__PURE__ */ import_react51.default.createElement("input", { type: "checkbox", checked: showSecondTag, onChange: (event) => setShowSecondTag(event.target.checked) })
+          /* @__PURE__ */ import_react56.default.createElement("span", null, "Second Tag"),
+          /* @__PURE__ */ import_react56.default.createElement("input", { type: "checkbox", checked: showSecondTag, onChange: (event) => setShowSecondTag(event.target.checked) })
         )
       ),
-      /* @__PURE__ */ import_react51.default.createElement(
+      /* @__PURE__ */ import_react56.default.createElement(
         "section",
         {
           style: {
@@ -51423,7 +51428,7 @@ function TaskCardPreviewPage() {
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react51.default.createElement(
+        /* @__PURE__ */ import_react56.default.createElement(
           "h2",
           {
             style: {
@@ -51437,7 +51442,7 @@ function TaskCardPreviewPage() {
           },
           "Active Selection"
         ),
-        /* @__PURE__ */ import_react51.default.createElement(
+        /* @__PURE__ */ import_react56.default.createElement(
           TaskCard,
           {
             state: state === "auto" ? void 0 : state,
@@ -51447,7 +51452,7 @@ function TaskCardPreviewPage() {
           }
         )
       ),
-      /* @__PURE__ */ import_react51.default.createElement(
+      /* @__PURE__ */ import_react56.default.createElement(
         "section",
         {
           style: {
@@ -51461,7 +51466,7 @@ function TaskCardPreviewPage() {
             gap: spacing.scale["16"]
           }
         },
-        /* @__PURE__ */ import_react51.default.createElement(
+        /* @__PURE__ */ import_react56.default.createElement(
           "h2",
           {
             style: {
@@ -51475,7 +51480,7 @@ function TaskCardPreviewPage() {
           },
           "Variant Matrix"
         ),
-        /* @__PURE__ */ import_react51.default.createElement("div", { style: { display: "grid", gap: spacing.scale["12"] } }, /* @__PURE__ */ import_react51.default.createElement(TaskCard, { state: "default", interactive: false }), /* @__PURE__ */ import_react51.default.createElement(TaskCard, { state: "hover", interactive: false }))
+        /* @__PURE__ */ import_react56.default.createElement("div", { style: { display: "grid", gap: spacing.scale["12"] } }, /* @__PURE__ */ import_react56.default.createElement(TaskCard, { state: "default", interactive: false }), /* @__PURE__ */ import_react56.default.createElement(TaskCard, { state: "hover", interactive: false }))
       )
     )
   );
@@ -51711,12 +51716,12 @@ function textStyle2(token) {
   };
 }
 function StatsChips({ label, values }) {
-  return /* @__PURE__ */ import_react52.default.createElement("div", { style: { display: "grid", gap: spacing.scale["6"] } }, /* @__PURE__ */ import_react52.default.createElement("div", { style: { ...textStyle2(typography.scale.captionM.medium), color: textBase32.staticDarkSecondary } }, label), /* @__PURE__ */ import_react52.default.createElement("div", { className: "chip-wrap" }, values.length > 0 ? values.map((value) => /* @__PURE__ */ import_react52.default.createElement("span", { key: `${label}-${value}`, className: "chip" }, value)) : /* @__PURE__ */ import_react52.default.createElement("span", { className: "chip" }, "\uC5C6\uC74C")));
+  return /* @__PURE__ */ import_react57.default.createElement("div", { style: { display: "grid", gap: spacing.scale["6"] } }, /* @__PURE__ */ import_react57.default.createElement("div", { style: { ...textStyle2(typography.scale.captionM.medium), color: textBase32.staticDarkSecondary } }, label), /* @__PURE__ */ import_react57.default.createElement("div", { className: "chip-wrap" }, values.length > 0 ? values.map((value) => /* @__PURE__ */ import_react57.default.createElement("span", { key: `${label}-${value}`, className: "chip" }, value)) : /* @__PURE__ */ import_react57.default.createElement("span", { className: "chip" }, "\uC5C6\uC74C")));
 }
 function ExplorerApp() {
-  const [keyword, setKeyword] = (0, import_react52.useState)("");
-  const [selectedId, setSelectedId] = (0, import_react52.useState)(COMPONENTS[0].id);
-  const filteredComponents = (0, import_react52.useMemo)(() => {
+  const [keyword, setKeyword] = (0, import_react57.useState)("");
+  const [selectedId, setSelectedId] = (0, import_react57.useState)(COMPONENTS[0].id);
+  const filteredComponents = (0, import_react57.useMemo)(() => {
     const normalized = keyword.trim().toLowerCase();
     if (!normalized) {
       return COMPONENTS;
@@ -51725,7 +51730,7 @@ function ExplorerApp() {
       return component.label.toLowerCase().includes(normalized) || component.id.toLowerCase().includes(normalized);
     });
   }, [keyword]);
-  const activeId = (0, import_react52.useMemo)(() => {
+  const activeId = (0, import_react57.useMemo)(() => {
     const hasSelected = filteredComponents.some((component) => component.id === selectedId);
     if (hasSelected) {
       return selectedId;
@@ -51735,7 +51740,7 @@ function ExplorerApp() {
   const selectedComponent = COMPONENTS.find((component) => component.id === activeId) ?? COMPONENTS[0];
   const SelectedPreview = selectedComponent.Preview;
   const metadata = componentMetadata[selectedComponent.id];
-  return /* @__PURE__ */ import_react52.default.createElement(import_react52.default.Fragment, null, /* @__PURE__ */ import_react52.default.createElement("style", null, APP_CSS), /* @__PURE__ */ import_react52.default.createElement("div", { className: "explorer-layout" }, /* @__PURE__ */ import_react52.default.createElement("aside", { className: "panel left-panel" }, /* @__PURE__ */ import_react52.default.createElement("header", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react52.default.createElement(
+  return /* @__PURE__ */ import_react57.default.createElement(import_react57.default.Fragment, null, /* @__PURE__ */ import_react57.default.createElement("style", null, APP_CSS), /* @__PURE__ */ import_react57.default.createElement("div", { className: "explorer-layout" }, /* @__PURE__ */ import_react57.default.createElement("aside", { className: "panel left-panel" }, /* @__PURE__ */ import_react57.default.createElement("header", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react57.default.createElement(
     "h1",
     {
       style: {
@@ -51745,7 +51750,7 @@ function ExplorerApp() {
       }
     },
     "309 Design Explorer"
-  ), /* @__PURE__ */ import_react52.default.createElement(
+  ), /* @__PURE__ */ import_react57.default.createElement(
     "p",
     {
       style: {
@@ -51757,7 +51762,7 @@ function ExplorerApp() {
     "\uCEF4\uD3EC\uB10C\uD2B8 ",
     COMPONENTS.length,
     "\uAC1C"
-  )), /* @__PURE__ */ import_react52.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react52.default.createElement("span", { style: { ...textStyle2(typography.scale.captionM.medium), color: textBase32.staticDarkSecondary } }, "\uAC80\uC0C9"), /* @__PURE__ */ import_react52.default.createElement(
+  )), /* @__PURE__ */ import_react57.default.createElement("label", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react57.default.createElement("span", { style: { ...textStyle2(typography.scale.captionM.medium), color: textBase32.staticDarkSecondary } }, "\uAC80\uC0C9"), /* @__PURE__ */ import_react57.default.createElement(
     "input",
     {
       type: "text",
@@ -51777,9 +51782,9 @@ function ExplorerApp() {
         ...textStyle2(typography.scale.captionL.regular)
       }
     }
-  )), /* @__PURE__ */ import_react52.default.createElement("div", { className: "component-list" }, filteredComponents.length > 0 ? filteredComponents.map((component) => {
+  )), /* @__PURE__ */ import_react57.default.createElement("div", { className: "component-list" }, filteredComponents.length > 0 ? filteredComponents.map((component) => {
     const active = component.id === activeId;
-    return /* @__PURE__ */ import_react52.default.createElement(
+    return /* @__PURE__ */ import_react57.default.createElement(
       "button",
       {
         key: component.id,
@@ -51787,10 +51792,10 @@ function ExplorerApp() {
         className: `component-item${active ? " active" : ""}`,
         onClick: () => setSelectedId(component.id)
       },
-      /* @__PURE__ */ import_react52.default.createElement("span", { style: { ...textStyle2(typography.scale.captionL.medium) } }, component.label),
-      /* @__PURE__ */ import_react52.default.createElement("span", { style: { ...textStyle2(typography.scale.captionM.regular), opacity: 0.75 } }, component.id)
+      /* @__PURE__ */ import_react57.default.createElement("span", { style: { ...textStyle2(typography.scale.captionL.medium) } }, component.label),
+      /* @__PURE__ */ import_react57.default.createElement("span", { style: { ...textStyle2(typography.scale.captionM.regular), opacity: 0.75 } }, component.id)
     );
-  }) : /* @__PURE__ */ import_react52.default.createElement(
+  }) : /* @__PURE__ */ import_react57.default.createElement(
     "div",
     {
       style: {
@@ -51805,7 +51810,7 @@ function ExplorerApp() {
       }
     },
     "\uAC80\uC0C9 \uACB0\uACFC\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4."
-  ))), /* @__PURE__ */ import_react52.default.createElement("main", { className: "panel main-panel" }, /* @__PURE__ */ import_react52.default.createElement(
+  ))), /* @__PURE__ */ import_react57.default.createElement("main", { className: "panel main-panel" }, /* @__PURE__ */ import_react57.default.createElement(
     "header",
     {
       style: {
@@ -51819,7 +51824,7 @@ function ExplorerApp() {
         gap: spacing.scale["4"]
       }
     },
-    /* @__PURE__ */ import_react52.default.createElement(
+    /* @__PURE__ */ import_react57.default.createElement(
       "h2",
       {
         style: {
@@ -51831,7 +51836,7 @@ function ExplorerApp() {
       selectedComponent.label,
       " Preview"
     ),
-    /* @__PURE__ */ import_react52.default.createElement(
+    /* @__PURE__ */ import_react57.default.createElement(
       "p",
       {
         style: {
@@ -51842,7 +51847,7 @@ function ExplorerApp() {
       },
       "\uC88C\uCE21 \uBAA9\uB85D\uC5D0\uC11C \uCEF4\uD3EC\uB10C\uD2B8\uB97C \uC120\uD0DD\uD558\uBA74 \uD504\uB9AC\uBDF0\uC640 \uBA54\uD0C0\uB370\uC774\uD130\uAC00 \uB3D9\uAE30\uD654\uB429\uB2C8\uB2E4."
     )
-  ), /* @__PURE__ */ import_react52.default.createElement("section", { className: "preview-shell" }, /* @__PURE__ */ import_react52.default.createElement(SelectedPreview, null))), /* @__PURE__ */ import_react52.default.createElement("aside", { className: "panel right-panel" }, /* @__PURE__ */ import_react52.default.createElement("header", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react52.default.createElement(
+  ), /* @__PURE__ */ import_react57.default.createElement("section", { className: "preview-shell" }, /* @__PURE__ */ import_react57.default.createElement(SelectedPreview, null))), /* @__PURE__ */ import_react57.default.createElement("aside", { className: "panel right-panel" }, /* @__PURE__ */ import_react57.default.createElement("header", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react57.default.createElement(
     "h3",
     {
       style: {
@@ -51852,7 +51857,7 @@ function ExplorerApp() {
       }
     },
     "Token & Style Inspector"
-  ), /* @__PURE__ */ import_react52.default.createElement(
+  ), /* @__PURE__ */ import_react57.default.createElement(
     "p",
     {
       style: {
@@ -51863,7 +51868,7 @@ function ExplorerApp() {
     },
     selectedComponent.id,
     " \uAE30\uC900 \uCD94\uCD9C \uC815\uBCF4"
-  )), /* @__PURE__ */ import_react52.default.createElement("div", { className: "meta-scroll" }, /* @__PURE__ */ import_react52.default.createElement("section", { className: "meta-card" }, /* @__PURE__ */ import_react52.default.createElement("div", { style: { ...textStyle2(typography.scale.captionM.medium), color: textBase32.staticDarkSecondary } }, "\uD30C\uC77C \uACBD\uB85C"), /* @__PURE__ */ import_react52.default.createElement("div", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react52.default.createElement("div", { className: "token-item" }, "Source: ", metadata.sourcePath), /* @__PURE__ */ import_react52.default.createElement("div", { className: "token-item" }, "Docs: ", metadata.docsPath))), /* @__PURE__ */ import_react52.default.createElement("section", { className: "meta-card" }, /* @__PURE__ */ import_react52.default.createElement("div", { style: { ...textStyle2(typography.scale.captionM.medium), color: textBase32.staticDarkSecondary } }, "\uC0AC\uC6A9 \uD1A0\uD070 (", metadata.tokens.length, ")"), /* @__PURE__ */ import_react52.default.createElement("ul", { className: "token-list" }, metadata.tokens.length > 0 ? metadata.tokens.map((token) => /* @__PURE__ */ import_react52.default.createElement("li", { key: token, className: "token-item" }, token)) : /* @__PURE__ */ import_react52.default.createElement("li", { className: "token-item" }, "\uD1A0\uD070 \uC815\uBCF4\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4."))), /* @__PURE__ */ import_react52.default.createElement("section", { className: "meta-card" }, /* @__PURE__ */ import_react52.default.createElement("div", { style: { ...textStyle2(typography.scale.captionM.medium), color: textBase32.staticDarkSecondary } }, "\uC2A4\uD0C0\uC77C \uC218\uCE58"), /* @__PURE__ */ import_react52.default.createElement(StatsChips, { label: "Spacing Scale", values: metadata.styleNumbers.spacingScale }), /* @__PURE__ */ import_react52.default.createElement(StatsChips, { label: "Spacing Primitive", values: metadata.styleNumbers.spacingPrimitive }), /* @__PURE__ */ import_react52.default.createElement(StatsChips, { label: "Border Width", values: metadata.styleNumbers.borderWidths }), /* @__PURE__ */ import_react52.default.createElement(StatsChips, { label: "Radius Scale", values: metadata.styleNumbers.radiusScale }), /* @__PURE__ */ import_react52.default.createElement(StatsChips, { label: "Typography Scale", values: metadata.styleNumbers.typographyScale }))))));
+  )), /* @__PURE__ */ import_react57.default.createElement("div", { className: "meta-scroll" }, /* @__PURE__ */ import_react57.default.createElement("section", { className: "meta-card" }, /* @__PURE__ */ import_react57.default.createElement("div", { style: { ...textStyle2(typography.scale.captionM.medium), color: textBase32.staticDarkSecondary } }, "\uD30C\uC77C \uACBD\uB85C"), /* @__PURE__ */ import_react57.default.createElement("div", { style: { display: "grid", gap: spacing.scale["4"] } }, /* @__PURE__ */ import_react57.default.createElement("div", { className: "token-item" }, "Source: ", metadata.sourcePath), /* @__PURE__ */ import_react57.default.createElement("div", { className: "token-item" }, "Docs: ", metadata.docsPath))), /* @__PURE__ */ import_react57.default.createElement("section", { className: "meta-card" }, /* @__PURE__ */ import_react57.default.createElement("div", { style: { ...textStyle2(typography.scale.captionM.medium), color: textBase32.staticDarkSecondary } }, "\uC0AC\uC6A9 \uD1A0\uD070 (", metadata.tokens.length, ")"), /* @__PURE__ */ import_react57.default.createElement("ul", { className: "token-list" }, metadata.tokens.length > 0 ? metadata.tokens.map((token) => /* @__PURE__ */ import_react57.default.createElement("li", { key: token, className: "token-item" }, token)) : /* @__PURE__ */ import_react57.default.createElement("li", { className: "token-item" }, "\uD1A0\uD070 \uC815\uBCF4\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4."))), /* @__PURE__ */ import_react57.default.createElement("section", { className: "meta-card" }, /* @__PURE__ */ import_react57.default.createElement("div", { style: { ...textStyle2(typography.scale.captionM.medium), color: textBase32.staticDarkSecondary } }, "\uC2A4\uD0C0\uC77C \uC218\uCE58"), /* @__PURE__ */ import_react57.default.createElement(StatsChips, { label: "Spacing Scale", values: metadata.styleNumbers.spacingScale }), /* @__PURE__ */ import_react57.default.createElement(StatsChips, { label: "Spacing Primitive", values: metadata.styleNumbers.spacingPrimitive }), /* @__PURE__ */ import_react57.default.createElement(StatsChips, { label: "Border Width", values: metadata.styleNumbers.borderWidths }), /* @__PURE__ */ import_react57.default.createElement(StatsChips, { label: "Radius Scale", values: metadata.styleNumbers.radiusScale }), /* @__PURE__ */ import_react57.default.createElement(StatsChips, { label: "Typography Scale", values: metadata.styleNumbers.typographyScale }))))));
 }
 var rootElement = document.getElementById("root");
 if (!rootElement) {
@@ -51871,7 +51876,7 @@ if (!rootElement) {
 }
 var root = (0, import_client.createRoot)(rootElement);
 root.render(
-  /* @__PURE__ */ import_react52.default.createElement(import_react52.default.StrictMode, null, /* @__PURE__ */ import_react52.default.createElement(ExplorerApp, null))
+  /* @__PURE__ */ import_react57.default.createElement(import_react57.default.StrictMode, null, /* @__PURE__ */ import_react57.default.createElement(ExplorerApp, null))
 );
 /*! Bundled license information:
 

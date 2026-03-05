@@ -1,3 +1,4 @@
+import React from 'react';
 import type { CSSProperties, ReactNode } from 'react';
 
 import { border, colors, radius, shadows, spacing, typography } from '../../style-tokens';
@@ -835,4 +836,3 @@ export function NavigationBar({
     </header>
   );
 }
-
