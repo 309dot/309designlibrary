@@ -27412,11 +27412,11 @@ function PreviewSlot() {
         borderWidth: border.width["1"],
         borderColor: border.color.theme.action.focus,
         borderRadius: radius.scale.xl,
-        backgroundColor: colors.primitive.palette.purple["2"],
+        backgroundColor: colors.primitive.palette.base.white,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        color: colors.primitive.palette.purple["11"],
+        color: colors.semantic.theme.text.base.staticDark,
         fontFamily: typography.scale.h6.medium.fontFamily,
         fontSize: typography.scale.h6.medium.fontSize,
         fontWeight: typography.scale.h6.medium.fontWeight,
@@ -31477,10 +31477,10 @@ function Calendar({
             gridTemplateColumns: `repeat(${WEEKDAY_LABELS.length}, minmax(0, 1fr))`
           }
         },
-        WEEKDAY_LABELS.map((label) => /* @__PURE__ */ import_react13.default.createElement(
+        WEEKDAY_LABELS.map((label, index) => /* @__PURE__ */ import_react13.default.createElement(
           "div",
           {
-            key: label,
+            key: `${label}-${index}`,
             style: {
               display: "flex",
               flex: "1 0 0",
@@ -34510,8 +34510,8 @@ function PreviewCustomSlot() {
         borderWidth: border.width["1"],
         borderColor: palette13.purple["8"],
         borderRadius: radius.scale.xl,
-        backgroundColor: palette13.purple["2"],
-        color: palette13.purple["11"],
+        backgroundColor: palette13.base.white,
+        color: textTokens6.staticDark,
         ...{
           fontFamily: typography.scale.h6.medium.fontFamily,
           fontSize: typography.scale.h6.medium.fontSize,
@@ -39988,12 +39988,12 @@ var import_react25 = __toESM(require_react());
 var palette15 = colors.primitive.palette;
 var textBase10 = colors.semantic.theme.text.base;
 var textStatus = colors.semantic.theme.text.status;
-var FLAG_BASE_SRC = "/components/Input/assets/flag-base.png";
-var FLAG_GROUP_SRC = "/components/Input/assets/flag-group.png";
-var FLAG_OVERLAY_SRC = "/components/Input/assets/flag-overlay.png";
-var EARTH_ICON_SRC = "/components/Input/assets/earth-line.png";
-var INFO_ICON_SRC = "/components/Input/assets/info-line.png";
-var CHEVRON_ICON_SRC = "/components/Input/assets/chevron-down.png";
+var FLAG_BASE_SRC = "/components/Input/assets/flag-base.svg";
+var FLAG_GROUP_SRC = "/components/Input/assets/flag-group.svg";
+var FLAG_OVERLAY_SRC = "/components/Input/assets/flag-overlay.svg";
+var EARTH_ICON_SRC = "/components/Input/assets/earth-line.svg";
+var INFO_ICON_SRC = "/components/Input/assets/info-line.svg";
+var CHEVRON_ICON_SRC = "/components/Input/assets/chevron-down.svg";
 var SIZE_STYLES = {
   md: {
     fieldPaddingX: spacing.scale["12"],
@@ -40901,9 +40901,9 @@ var import_react28 = __toESM(require_react());
 
 // components/NavigationBar/NavigationBar.tsx
 var import_react27 = __toESM(require_react());
-var LOGO_SRC = "/components/NavigationBar/assets/logo.png";
-var CHEVRON_DOWN_SRC = "/components/NavigationBar/assets/chevron-down.png";
-var PRO_ACCESS_ICON_SRC = "/components/NavigationBar/assets/pro-access.png";
+var LOGO_SRC = "/components/NavigationBar/assets/logo.svg";
+var CHEVRON_DOWN_SRC = "/components/NavigationBar/assets/chevron-down.svg";
+var PRO_ACCESS_ICON_SRC = "/components/NavigationBar/assets/pro-access.svg";
 var DEFAULT_AVATAR_SRC = "/components/NavigationBar/assets/avatar.png";
 var palette17 = colors.primitive.palette;
 var textBase12 = colors.semantic.theme.text.base;
@@ -42514,7 +42514,14 @@ var TYPES9 = ["arrows", "numbers", "buttons"];
 var SIZES10 = ["md", "sm"];
 var INTERACTION_STATES2 = ["default", "hover", "focus", "disabled"];
 var PAGE_OPTIONS = ["1", "56", "57", "58", "100"];
-var DOT_OPTIONS = [spacing.scale["0"], spacing.scale["1"], spacing.scale["2"], spacing.scale["3"], spacing.scale["4"], spacing.scale["5"]];
+var DOT_OPTIONS = [
+  spacing.primitive["0"],
+  spacing.primitive["1"],
+  spacing.primitive["2"],
+  spacing.primitive["3"],
+  spacing.primitive["4"],
+  spacing.primitive["5"]
+];
 function toTitle13(value) {
   return value.replace(/^./, (first) => first.toUpperCase());
 }
@@ -42534,7 +42541,7 @@ function PagenationPreviewPage() {
   const [size, setSize] = (0, import_react30.useState)("md");
   const [interactionState, setInteractionState] = (0, import_react30.useState)("default");
   const [showDots, setShowDots] = (0, import_react30.useState)(true);
-  const [activeDotIndex, setActiveDotIndex] = (0, import_react30.useState)(spacing.scale["0"]);
+  const [activeDotIndex, setActiveDotIndex] = (0, import_react30.useState)(spacing.primitive["0"]);
   const [activePage, setActivePage] = (0, import_react30.useState)("57");
   const [lastAction, setLastAction] = (0, import_react30.useState)("None");
   const numberItems = (0, import_react30.useMemo)(() => buildNumberItems(activePage), [activePage]);
@@ -42693,7 +42700,7 @@ function PagenationPreviewPage() {
               color: colors.semantic.theme.text.base.staticDark
             }
           },
-          DOT_OPTIONS.map((item) => /* @__PURE__ */ import_react30.default.createElement("option", { key: item, value: item }, item + spacing.scale["1"]))
+          DOT_OPTIONS.map((item) => /* @__PURE__ */ import_react30.default.createElement("option", { key: `dot-${item}`, value: item }, item + spacing.primitive["1"]))
         )),
         /* @__PURE__ */ import_react30.default.createElement(
           "label",
@@ -42761,7 +42768,7 @@ function PagenationPreviewPage() {
             size,
             interactionState,
             showDots,
-            dotCount: spacing.scale["6"],
+            dotCount: DOT_OPTIONS.length,
             activeDotIndex,
             numberItems,
             onPrevClick: () => setLastAction("Prev"),
@@ -42811,6 +42818,7 @@ var textBase14 = colors.semantic.theme.text.base;
 var textStatus2 = colors.semantic.theme.text.status;
 var PROGRESS_MIN = spacing.scale["0"];
 var PROGRESS_MAX = spacing.scale["10"] * spacing.scale["10"];
+var PROGRESS_DEFAULT = PROGRESS_MAX / spacing.scale["2"];
 var SIZE_TO_LINE_HEIGHT = {
   sm: spacing.scale["4"],
   md: spacing.scale["8"],
@@ -42925,7 +42933,7 @@ function ProgressBar({
   size = "md",
   color,
   interactionState = "default",
-  progressValue = spacing.scale["50"],
+  progressValue = PROGRESS_DEFAULT,
   width = spacing.scale["400"],
   label = "Label",
   optionalLabel = "(optional)",
@@ -43188,6 +43196,7 @@ var INTERACTION_STATES3 = ["default", "hover", "focus", "disabled"];
 var PROGRESS_MIN2 = spacing.scale["0"];
 var PROGRESS_MAX2 = spacing.scale["10"] * spacing.scale["10"];
 var PROGRESS_STEP = spacing.scale["2"];
+var PROGRESS_DEFAULT2 = PROGRESS_MAX2 / spacing.scale["2"];
 function toTitle14(value) {
   return value.replace(/^./, (char) => char.toUpperCase());
 }
@@ -43197,7 +43206,7 @@ function ProgressBarPreviewPage() {
   const [size, setSize] = (0, import_react32.useState)("md");
   const [color, setColor] = (0, import_react32.useState)("green");
   const [interactionState, setInteractionState] = (0, import_react32.useState)("default");
-  const [progressValue, setProgressValue] = (0, import_react32.useState)(spacing.scale["50"]);
+  const [progressValue, setProgressValue] = (0, import_react32.useState)(PROGRESS_DEFAULT2);
   const [showLabel, setShowLabel] = (0, import_react32.useState)(true);
   const [showOptionalLabel, setShowOptionalLabel] = (0, import_react32.useState)(true);
   const [showProgressState, setShowProgressState] = (0, import_react32.useState)(true);
@@ -43515,6 +43524,7 @@ var palette20 = colors.primitive.palette;
 var textBase15 = colors.semantic.theme.text.base;
 var PROGRESS_MIN3 = spacing.scale["0"];
 var PROGRESS_MAX3 = spacing.scale["10"] * spacing.scale["10"];
+var PROGRESS_DEFAULT3 = PROGRESS_MAX3 / spacing.scale["2"];
 var SIZE_CONFIG9 = {
   xs: {
     circleSize: spacing.scale["32"],
@@ -43559,7 +43569,7 @@ function ProgressCircle({
   size = "md",
   color = "green",
   interactionState = "default",
-  progressValue = spacing.scale["50"],
+  progressValue = PROGRESS_DEFAULT3,
   showLabel,
   label,
   className,
@@ -43671,6 +43681,7 @@ var COLORS3 = ["green", "purple", "red"];
 var INTERACTION_STATES4 = ["default", "hover", "focus", "disabled"];
 var PROGRESS_MIN4 = spacing.scale["0"];
 var PROGRESS_MAX4 = spacing.scale["10"] * spacing.scale["10"];
+var PROGRESS_DEFAULT4 = PROGRESS_MAX4 / spacing.scale["2"];
 function toTitle15(value) {
   return value.replace(/^./, (char) => char.toUpperCase());
 }
@@ -43678,7 +43689,7 @@ function ProgressCirclePreviewPage() {
   const [size, setSize] = (0, import_react34.useState)("md");
   const [color, setColor] = (0, import_react34.useState)("green");
   const [interactionState, setInteractionState] = (0, import_react34.useState)("default");
-  const [progressValue, setProgressValue] = (0, import_react34.useState)(spacing.scale["50"]);
+  const [progressValue, setProgressValue] = (0, import_react34.useState)(PROGRESS_DEFAULT4);
   const [showLabel, setShowLabel] = (0, import_react34.useState)(true);
   return /* @__PURE__ */ import_react34.default.createElement(
     "main",
@@ -45555,8 +45566,8 @@ var import_react42 = __toESM(require_react());
 var import_react41 = __toESM(require_react());
 var palette25 = colors.primitive.palette;
 var textBase20 = colors.semantic.theme.text.base;
-var SEARCH_ICON_SRC = "/components/SearchInput/assets/search-line.png";
-var INFO_ICON_SRC2 = "/components/SearchInput/assets/info-line.png";
+var SEARCH_ICON_SRC = "/components/SearchInput/assets/search-line.svg";
+var INFO_ICON_SRC2 = "/components/SearchInput/assets/info-line.svg";
 function toTypographyStyle10(token) {
   return {
     fontFamily: token.fontFamily,

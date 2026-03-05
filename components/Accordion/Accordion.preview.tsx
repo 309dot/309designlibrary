@@ -22,11 +22,11 @@ function PreviewSlot() {
         borderWidth: border.width['1'],
         borderColor: border.color.theme.action.focus,
         borderRadius: radius.scale.xl,
-        backgroundColor: colors.primitive.palette.purple['2'],
+        backgroundColor: colors.primitive.palette.base.white,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        color: colors.primitive.palette.purple['11'],
+        color: colors.semantic.theme.text.base.staticDark,
         fontFamily: typography.scale.h6.medium.fontFamily,
         fontSize: typography.scale.h6.medium.fontSize,
         fontWeight: typography.scale.h6.medium.fontWeight,
@@ -380,4 +380,3 @@ export default function AccordionPreviewPage() {
     </main>
   );
 }
-

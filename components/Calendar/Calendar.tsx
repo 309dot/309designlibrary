@@ -790,9 +790,9 @@ export function Calendar({
             gridTemplateColumns: `repeat(${WEEKDAY_LABELS.length}, minmax(0, 1fr))`,
           }}
         >
-          {WEEKDAY_LABELS.map((label) => (
+          {WEEKDAY_LABELS.map((label, index) => (
             <div
-              key={label}
+              key={`${label}-${index}`}
               style={{
                 display: 'flex',
                 flex: '1 0 0',

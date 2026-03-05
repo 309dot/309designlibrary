@@ -11,6 +11,7 @@ const INTERACTION_STATES: ProgressCircleInteractionState[] = ['default', 'hover'
 
 const PROGRESS_MIN = spacing.scale['0'];
 const PROGRESS_MAX = spacing.scale['10'] * spacing.scale['10'];
+const PROGRESS_DEFAULT = PROGRESS_MAX / spacing.scale['2'];
 
 function toTitle(value: string): string {
   return value.replace(/^./, (char) => char.toUpperCase());
@@ -20,7 +21,7 @@ export default function ProgressCirclePreviewPage() {
   const [size, setSize] = useState<ProgressCircleSize>('md');
   const [color, setColor] = useState<ProgressCircleColor>('green');
   const [interactionState, setInteractionState] = useState<ProgressCircleInteractionState>('default');
-  const [progressValue, setProgressValue] = useState<number>(spacing.scale['50']);
+  const [progressValue, setProgressValue] = useState<number>(PROGRESS_DEFAULT);
   const [showLabel, setShowLabel] = useState(true);
 
   return (
@@ -281,4 +282,3 @@ export default function ProgressCirclePreviewPage() {
     </main>
   );
 }
-

@@ -15,6 +15,7 @@ const textBase = colors.semantic.theme.text.base;
 
 const PROGRESS_MIN = spacing.scale['0'];
 const PROGRESS_MAX = spacing.scale['10'] * spacing.scale['10'];
+const PROGRESS_DEFAULT = PROGRESS_MAX / spacing.scale['2'];
 
 const SIZE_CONFIG: Record<ProgressCircleSize, SizeConfig> = {
   xs: {
@@ -65,7 +66,7 @@ export function ProgressCircle({
   size = 'md',
   color = 'green',
   interactionState = 'default',
-  progressValue = spacing.scale['50'],
+  progressValue = PROGRESS_DEFAULT,
   showLabel,
   label,
   className,

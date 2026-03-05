@@ -28,6 +28,7 @@ const textStatus = colors.semantic.theme.text.status;
 
 const PROGRESS_MIN = spacing.scale['0'];
 const PROGRESS_MAX = spacing.scale['10'] * spacing.scale['10'];
+const PROGRESS_DEFAULT = PROGRESS_MAX / spacing.scale['2'];
 
 const SIZE_TO_LINE_HEIGHT: Record<ProgressBarSize, number> = {
   sm: spacing.scale['4'],
@@ -165,7 +166,7 @@ export function ProgressBar({
   size = 'md',
   color,
   interactionState = 'default',
-  progressValue = spacing.scale['50'],
+  progressValue = PROGRESS_DEFAULT,
   width = spacing.scale['400'],
   label = 'Label',
   optionalLabel = '(optional)',

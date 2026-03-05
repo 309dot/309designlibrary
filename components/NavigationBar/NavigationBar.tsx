@@ -13,9 +13,9 @@ type TypographyToken = {
   letterSpacing: number;
 };
 
-const LOGO_SRC = '/components/NavigationBar/assets/logo.png';
-const CHEVRON_DOWN_SRC = '/components/NavigationBar/assets/chevron-down.png';
-const PRO_ACCESS_ICON_SRC = '/components/NavigationBar/assets/pro-access.png';
+const LOGO_SRC = '/components/NavigationBar/assets/logo.svg';
+const CHEVRON_DOWN_SRC = '/components/NavigationBar/assets/chevron-down.svg';
+const PRO_ACCESS_ICON_SRC = '/components/NavigationBar/assets/pro-access.svg';
 const DEFAULT_AVATAR_SRC = '/components/NavigationBar/assets/avatar.png';
 
 const palette = colors.primitive.palette;

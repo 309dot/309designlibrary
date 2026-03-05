@@ -27,8 +27,8 @@ function PreviewCustomSlot() {
         borderWidth: border.width['1'],
         borderColor: palette.purple['8'],
         borderRadius: radius.scale.xl,
-        backgroundColor: palette.purple['2'],
-        color: palette.purple['11'],
+        backgroundColor: palette.base.white,
+        color: textTokens.staticDark,
         ...{
           fontFamily: typography.scale.h6.medium.fontFamily,
           fontSize: typography.scale.h6.medium.fontSize,

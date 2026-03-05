@@ -20,6 +20,7 @@ const INTERACTION_STATES: ProgressBarInteractionState[] = ['default', 'hover', '
 const PROGRESS_MIN = spacing.scale['0'];
 const PROGRESS_MAX = spacing.scale['10'] * spacing.scale['10'];
 const PROGRESS_STEP = spacing.scale['2'];
+const PROGRESS_DEFAULT = PROGRESS_MAX / spacing.scale['2'];
 
 function toTitle(value: string): string {
   return value.replace(/^./, (char) => char.toUpperCase());
@@ -31,7 +32,7 @@ export default function ProgressBarPreviewPage() {
   const [size, setSize] = useState<ProgressBarSize>('md');
   const [color, setColor] = useState<ProgressBarColor>('green');
   const [interactionState, setInteractionState] = useState<ProgressBarInteractionState>('default');
-  const [progressValue, setProgressValue] = useState<number>(spacing.scale['50']);
+  const [progressValue, setProgressValue] = useState<number>(PROGRESS_DEFAULT);
   const [showLabel, setShowLabel] = useState(true);
   const [showOptionalLabel, setShowOptionalLabel] = useState(true);
   const [showProgressState, setShowProgressState] = useState(true);
@@ -365,4 +366,3 @@ export default function ProgressBarPreviewPage() {
     </main>
   );
 }
-

@@ -8,12 +8,12 @@ const palette = colors.primitive.palette;
 const textBase = colors.semantic.theme.text.base;
 const textStatus = colors.semantic.theme.text.status;
 
-const FLAG_BASE_SRC = '/components/Input/assets/flag-base.png';
-const FLAG_GROUP_SRC = '/components/Input/assets/flag-group.png';
-const FLAG_OVERLAY_SRC = '/components/Input/assets/flag-overlay.png';
-const EARTH_ICON_SRC = '/components/Input/assets/earth-line.png';
-const INFO_ICON_SRC = '/components/Input/assets/info-line.png';
-const CHEVRON_ICON_SRC = '/components/Input/assets/chevron-down.png';
+const FLAG_BASE_SRC = '/components/Input/assets/flag-base.svg';
+const FLAG_GROUP_SRC = '/components/Input/assets/flag-group.svg';
+const FLAG_OVERLAY_SRC = '/components/Input/assets/flag-overlay.svg';
+const EARTH_ICON_SRC = '/components/Input/assets/earth-line.svg';
+const INFO_ICON_SRC = '/components/Input/assets/info-line.svg';
+const CHEVRON_ICON_SRC = '/components/Input/assets/chevron-down.svg';
 
 type TypographyToken = {
   fontFamily: string;

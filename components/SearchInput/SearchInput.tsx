@@ -7,8 +7,8 @@ import type { SearchInputProps, SearchInputState } from './SearchInput.types';
 const palette = colors.primitive.palette;
 const textBase = colors.semantic.theme.text.base;
 
-const SEARCH_ICON_SRC = '/components/SearchInput/assets/search-line.png';
-const INFO_ICON_SRC = '/components/SearchInput/assets/info-line.png';
+const SEARCH_ICON_SRC = '/components/SearchInput/assets/search-line.svg';
+const INFO_ICON_SRC = '/components/SearchInput/assets/info-line.svg';
 
 type TypographyToken = {
   fontFamily: string;

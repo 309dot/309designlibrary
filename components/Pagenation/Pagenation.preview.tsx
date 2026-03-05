@@ -9,7 +9,14 @@ const TYPES: PagenationType[] = ['arrows', 'numbers', 'buttons'];
 const SIZES: PagenationSize[] = ['md', 'sm'];
 const INTERACTION_STATES: PagenationInteractionState[] = ['default', 'hover', 'focus', 'disabled'];
 const PAGE_OPTIONS = ['1', '56', '57', '58', '100'] as const;
-const DOT_OPTIONS = [spacing.scale['0'], spacing.scale['1'], spacing.scale['2'], spacing.scale['3'], spacing.scale['4'], spacing.scale['5']] as const;
+const DOT_OPTIONS = [
+  spacing.primitive['0'],
+  spacing.primitive['1'],
+  spacing.primitive['2'],
+  spacing.primitive['3'],
+  spacing.primitive['4'],
+  spacing.primitive['5'],
+] as const;
 
 function toTitle(value: string): string {
   return value.replace(/^./, (first) => first.toUpperCase());
@@ -32,7 +39,7 @@ export default function PagenationPreviewPage() {
   const [size, setSize] = useState<PagenationSize>('md');
   const [interactionState, setInteractionState] = useState<PagenationInteractionState>('default');
   const [showDots, setShowDots] = useState(true);
-  const [activeDotIndex, setActiveDotIndex] = useState<number>(spacing.scale['0']);
+  const [activeDotIndex, setActiveDotIndex] = useState<number>(spacing.primitive['0']);
   const [activePage, setActivePage] = useState<(typeof PAGE_OPTIONS)[number]>('57');
   const [lastAction, setLastAction] = useState('None');
 
@@ -213,8 +220,8 @@ export default function PagenationPreviewPage() {
               }}
             >
               {DOT_OPTIONS.map((item) => (
-                <option key={item} value={item}>
-                  {item + spacing.scale['1']}
+                <option key={`dot-${item}`} value={item}>
+                  {item + spacing.primitive['1']}
                 </option>
               ))}
             </select>
@@ -277,7 +284,7 @@ export default function PagenationPreviewPage() {
             size={size}
             interactionState={interactionState}
             showDots={showDots}
-            dotCount={spacing.scale['6']}
+            dotCount={DOT_OPTIONS.length}
             activeDotIndex={activeDotIndex}
             numberItems={numberItems}
             onPrevClick={() => setLastAction('Prev')}
@@ -311,4 +318,3 @@ export default function PagenationPreviewPage() {
     </main>
   );
 }
-
